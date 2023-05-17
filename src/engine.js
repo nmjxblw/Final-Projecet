@@ -186,7 +186,7 @@ class SettingScene extends Phaser.Scene {
         this.VolumeText = this.add.text(
             this.cx,
             this.cy - 50,
-            `Volume:${Math.floor(this.game.globals.Volume * 100)}%`
+            `Volume:${Math.floor(Volume * 100)}%`
         )
             .setColor("#000000")
             .setOrigin(0.5)
@@ -196,9 +196,9 @@ class SettingScene extends Phaser.Scene {
 
         //设置音量调节栏
         this.VolumeSlider = this.add.rectangle(this.cx, this.cy + 50, 300, 12.5).setFillStyle(0x444444).setOrigin(0.5).setInteractive();
-        this.VolumeBar = this.add.rectangle(200 * this.game.globals.Volume + this.cx - 100, this.cy + 50, 20, 40).setFillStyle(0x444444).setOrigin(0.5);
+        this.VolumeBar = this.add.rectangle(200 * Volume + this.cx - 100, this.cy + 50, 20, 40).setFillStyle(0x444444).setOrigin(0.5);
         //音量设置公式
-        this.game.globals.Volume = (this.VolumeBar.x - this.cx + 100) / 200;
+        Volume = (this.VolumeBar.x - this.cx + 100) / 200;
 
         this.VolumeBar.setInteractive({ draggable: true });
         this.input.setDraggable(this.VolumeBar);
@@ -212,8 +212,8 @@ class SettingScene extends Phaser.Scene {
             }
 
             this.VolumeBar.setPosition(dragX, this.cy + 50);
-            this.game.globals.Volume = (dragX - this.cx + 100) / 200;
-            this.VolumeText.setText(`Volume:${Math.floor(this.game.globals.Volume * 100)}%`);
+            Volume = (dragX - this.cx + 100) / 200;
+            this.VolumeText.setText(`Volume:${Math.floor(Volume * 100)}%`);
         });
 
         this.VolumeSlider.on("pointerdown", (pointer) => {
@@ -227,8 +227,8 @@ class SettingScene extends Phaser.Scene {
                 this.VolumeBar.x = pointer.x;
             }
 
-            this.game.globals.Volume = (this.VolumeBar.x - this.cx + 100) / 200;
-            this.VolumeText.setText(`Volume:${Math.floor(this.game.globals.Volume * 100)}%`);
+            Volume = (this.VolumeBar.x - this.cx + 100) / 200;
+            this.VolumeText.setText(`Volume:${Math.floor(Volume * 100)}%`);
         });
 
         //设置返回按钮
