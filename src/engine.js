@@ -88,6 +88,7 @@ class GameScene extends Phaser.Scene {
             .pause();
     }
 
+    //计时器函数，在离开当前游戏场景时暂停或重置
     loadTimer() {
         this.timer = this.time.addEvent({
             delay: 1000,
@@ -104,6 +105,7 @@ class GameScene extends Phaser.Scene {
         this.game.globals.timer = 0;
     }
 
+    //当子类没有excreate（）时报错
     exCreate() {
         console.warn(`${this.sceneKey}没有设置exCreate()`);
     }
