@@ -22,6 +22,10 @@ class GameScene extends Phaser.Scene {
 
         //调用加载游戏内UI函数
         this.loadUI();
+
+
+        //加载额外函数
+        this.exCreate();
     }
 
     //设置编写游戏时常用的数据
@@ -86,7 +90,6 @@ class GameScene extends Phaser.Scene {
                     this.scene.add("setting", SettingScene, true, { currentScene: this.sceneKey, });
                 }
                 else {
-                    //console.log("second time");
                     this.scene.launch("setting", { currentScene: this.sceneKey });
                 }
             });
@@ -100,6 +103,10 @@ class GameScene extends Phaser.Scene {
 
         })
             .pause();
+    }
+
+    exCreate(){
+        console.warn(`${this.sceneKey}没有设置exCreate()`);
     }
 }
 
