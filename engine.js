@@ -131,6 +131,7 @@ class SettingScene extends Phaser.Scene {
             .setColor("#000000")
             .setOrigin(0.5)
             .setAlpha(0.8)
+            .setFontFamily("Century Gothic")
             .setFontSize(30)
             .setInteractive()
             .on("pointerover", () => {
