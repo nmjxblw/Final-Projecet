@@ -1,4 +1,3 @@
-
 class testScene extends GameScene{
     constructor(){
         super("testScene","test scene");
@@ -25,6 +24,7 @@ class testScene2 extends GameScene{
     }
 }
 
+
 let Timer = 0;
 let Volume = 0.5;
 let GameOver = false;
@@ -41,3 +41,4 @@ const game = new Phaser.Game({
     backgroundColor: 0x000000,
     title: "Game",
 });
+
