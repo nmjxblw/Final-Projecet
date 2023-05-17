@@ -38,9 +38,7 @@ class GameScene extends Phaser.Scene {
 
     //加载游戏UI
     loadUI() {
-        //加载UI背景，凸显UI
-        this.UIBar = this.add.rectangle(this.w / 2, 10, this.w, 20).setFillStyle(0Xaaaaaa);
-        //放置全屏按钮
+        //放置全屏按钮//废弃->整合进设置
         this.FullScreen = this.add.text(
             this.w * 0.05,
             12,
@@ -65,10 +63,10 @@ class GameScene extends Phaser.Scene {
                 }
             });
 
-        //放置设置按钮并具有如下功能：1.返回游戏 2.返回标题 3.转到游戏设置 （可选：4.保存进度 5.加载进度） 
+        //放置设置按钮并具有如下功能：1.返回游戏 2.返回标题 3.转到游戏设置 4.全屏（可选：5.保存进度 6.加载进度） 
         this.settingGear = this.add.sprite(
             this.w * 0.98,
-            this.h * 0.05,
+            this.h * 0.03,
             "gear"
         )
             .setInteractive()
@@ -85,6 +83,7 @@ class GameScene extends Phaser.Scene {
 
             });
 
+        //齿轮转动动画
         this.gearSpin = this.tweens.add({
             targets: this.settingGear,
             angle: "+=360",
@@ -93,7 +92,5 @@ class GameScene extends Phaser.Scene {
 
         })
             .pause();
-
-        //放置音量按钮：鼠标单击打开音量调节（bar）和静音功能
     }
 }
