@@ -120,7 +120,8 @@ class SettingScene extends Phaser.Scene {
         this.cx = this.cameras.main.centerX;
         this.cy = this.cameras.main.centerY;
 
-        this.backgroundRec = this.add.rectangle(this.cx, this.cy, 400, 600).setFillStyle(0xffffff).setOrigin(0.5);
+        this.backgroundRec1 = this.add.rectangle(this.cx, this.cy, 420, 620).setFillStyle(0x444444).setOrigin(0.5);
+        this.backgroundRec2 = this.add.rectangle(this.cx, this.cy, 400, 600).setFillStyle(0xffffff).setOrigin(0.5);
 
         //放置全屏按钮
         var fullScreenText = this.scale.isFullscreen ? "Quit FullScreen" : "Full Screen";
@@ -150,8 +151,82 @@ class SettingScene extends Phaser.Scene {
                 }
             });
 
+        //放置返回标题按钮
+        this.BackTitle = this.add.text(
+            this.cx,
+            this.cy - 150,
+            `Go Title`)
+            .setColor("#000000")
+            .setOrigin(0.5)
+            .setAlpha(0.8)
+            .setFontFamily("Century Gothic")
+            .setFontSize(30)
+            .setInteractive()
+            .on("pointerover", () => {
+                this.BackTitle.setAlpha(1).setScale(1.1).setColor("#444444");
+            })
+            .on("pointerout", () => {
+                this.BackTitle.setAlpha(0.8).setScale(1).setColor("#000000");
+            })
+            .on("pointerup", () => {
+                if (!this.scene.get('title')) {
+                    console.warn("没有场景的key是title")
+                }
+                else {
+                    this.scene.start("title");
+                }
+            });
+
+        //音量文本
+        this.VolumeText = this.add.text(
+            this.cx,
+            this.cy - 50,
+            `Volume:${Math.floor(this.game.globals.Volume * 100)}%`
+        )
+            .setColor("#000000")
+            .setOrigin(0.5)
+            .setAlpha(1)
+            .setFontFamily("Century Gothic")
+            .setFontSize(30);
+
+        //设置音量调节栏
+        this.VolumeSlider = this.add.rectangle(this.cx, this.cy + 50, 300, 12.5).setFillStyle(0x444444).setOrigin(0.5).setInteractive();
+        this.VolumeBar = this.add.rectangle(200 * this.game.globals.Volume + this.cx - 100, this.cy + 50, 20, 40).setFillStyle(0x444444).setOrigin(0.5);
+        this.game.globals.Volume = (this.VolumeBar.x - this.cx + 100) / 200;
+
+        this.VolumeBar.setInteractive({ draggable: true });
+        this.input.setDraggable(this.VolumeBar);
+
+        this.VolumeBar.on('drag', (pointer, dragX) => {
+            // 限制滑块的拖动范围在音量调节栏内部
+            if (dragX < this.cx - 100) {
+                dragX = this.cx - 100;
+            } else if (dragX > this.cx + 100) {
+                dragX = this.cx + 100;
+            }
+
+            this.VolumeBar.setPosition(dragX, this.cy + 50);
+            this.game.globals.Volume = (dragX - this.cx + 100) / 200;
+            this.VolumeText.setText(`Volume:${Math.floor(this.game.globals.Volume * 100)}%`);
+        });
+
+        this.VolumeSlider.on("pointerdown", (pointer) => {
+            if (pointer.x < this.cx - 100) {
+                this.VolumeBar.x = this.cx - 100;
+            }
+            else if (pointer.x > this.cx + 100) {
+                this.VolumeBar.x = this.cx + 100;
+            }
+            else {
+                this.VolumeBar.x = pointer.x;
+            }
+
+            this.game.globals.Volume = (this.VolumeBar.x - this.cx + 100) / 200;
+            this.VolumeText.setText(`Volume:${Math.floor(this.game.globals.Volume * 100)}%`);
+        });
+
         this.input.on("pointerup", (pointer) => {
-            if (!this.backgroundRec.getBounds().contains(pointer.x, pointer.y)) {
+            if (!this.backgroundRec1.getBounds().contains(pointer.x, pointer.y)) {
                 this.scene.stop("setting");
                 this.scene.resume(data.currentScene);
             }

@@ -40,6 +40,7 @@ const game = new Phaser.Game({
 game.globals = {
     TestVar: 100,//调用全局值示例：console.log(this.game.globals.TestVar);
     Timer: 0,
+    Volume:0.5,
 
     GameOver: false,
 };
