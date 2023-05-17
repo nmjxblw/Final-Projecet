@@ -23,6 +23,8 @@ class GameScene extends Phaser.Scene {
         //调用加载游戏内UI函数
         this.loadUI();
 
+        //加载计时器函数，当访问场景时自动计时，离开当前场景后清零
+        this.loadTimer();
 
         //加载额外函数
         this.exCreate();
@@ -84,12 +86,17 @@ class GameScene extends Phaser.Scene {
                 this.gearSpin.pause();
             })
             .on('pointerup', () => {
-                console.log(this.sceneKey);
+                //console.log(this.sceneKey);
+
+                //暂停当前场景并跳转至setting场景，
                 this.scene.pause(this.sceneKey);
+
+                //如果setting不存在则创建并插入setting场景
                 if (!this.scene.get("setting")) {
                     this.scene.add("setting", SettingScene, true, { currentScene: this.sceneKey, });
                 }
                 else {
+                    //如果setting场景存在，则直接访问setting
                     this.scene.launch("setting", { currentScene: this.sceneKey });
                 }
             });
@@ -105,7 +112,23 @@ class GameScene extends Phaser.Scene {
             .pause();
     }
 
-    exCreate(){
+    loadTimer() {
+        this.timer = this.time.addEvent({
+            delay: 1000,
+            callback: () => {
+                if (this.scene.isActive(this.currentScene)) {
+                    console.log(this.game.globals.timer);
+                    this.game.globals.timer += 1;
+                }
+            },
+            callbackScope: this,
+            loop: true,
+        });
+
+        this.game.globals.timer = 0;
+    }
+
+    exCreate() {
         console.warn(`${this.sceneKey}没有设置exCreate()`);
     }
 }
