@@ -122,15 +122,16 @@ class SettingScene extends Phaser.Scene {
 
         this.backgroundRec = this.add.rectangle(this.cx, this.cy, 400, 600).setFillStyle(0xffffff).setOrigin(0.5);
 
-        //放置全屏按钮//废弃->整合进设置
+        //放置全屏按钮
+        var fullScreenText = this.scale.isFullscreen ? "Quit FullScreen" : "Full Screen";
         this.FullScreen = this.add.text(
             this.cx,
-            this.cy,
-            "Full Screen")
+            this.cy - 250,
+            `${fullScreenText}`)
             .setColor("#000000")
             .setOrigin(0.5)
             .setAlpha(0.8)
-            .setFontSize(25)
+            .setFontSize(30)
             .setInteractive()
             .on("pointerover", () => {
                 this.FullScreen.setAlpha(1).setScale(1.1).setColor("#444444");
