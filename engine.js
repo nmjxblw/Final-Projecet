@@ -1,18 +1,21 @@
-class GameScene extends Phaser.Scene{
-    init(){}
+class GameScene extends Phaser.Scene {
+    init() { }
 
-    constructor(key,name){
+    constructor(key, name) {
         super(key);
         this.name = name;
         //提取name中的数字转化为int，并用this.level存储
-        this.level = parseInt(this.name.replace(/[^0-9]/ig,""));
+        this.level = parseInt(this.name.replace(/[^0-9]/ig, ""));
     }
 
-    preload(){
+    preload() {
         this.load.path = "./assets/";
+        this.load.image("gear", "gear.png");
     }
 
-    create(){
+    create() {
+
+        this.graphics = this.add.graphics();
 
         //设置编写游戏时常用的数据
         this.setShortCut();
@@ -22,7 +25,7 @@ class GameScene extends Phaser.Scene{
     }
 
     //设置编写游戏时常用的数据
-    setShortCut(){
+    setShortCut() {
 
         //以config为标准获得游戏画布的长和宽
         this.w = this.game.config.width;
@@ -34,10 +37,62 @@ class GameScene extends Phaser.Scene{
     }
 
     //加载游戏UI
-    loadUI(){
+    loadUI() {
         //加载UI背景，凸显UI
+        this.UIBar = this.add.rectangle(this.w / 2, 10, this.w, 20).setFillStyle(0Xaaaaaa);
         //放置全屏按钮
+        this.FullScreen = this.add.text(
+            this.w * 0.05,
+            12,
+            "Full Screen" )
+            .setOrigin(0.5)
+            .setAlpha(0.8)
+            .setFontSize(25)
+            .setInteractive()
+            .on("pointerover",()=>{
+                this.FullScreen.setAlpha(1).setScale(1.1).setColor("#ffff00");
+            })
+            .on("pointerout",()=>{
+                this.FullScreen.setAlpha(0.8).setScale(1).setColor("#ffffff");
+            })
+            .on("pointerup",()=>{
+                if (this.scale.isFullscreen) {
+                    this.scale.stopFullscreen();
+                    this.FullScreen.setText("Full Screen").setPosition(this.w * 0.05, 12);
+                } else {
+                    this.scale.startFullscreen();
+                    this.FullScreen.setText("Quit FullScreen").setPosition(this.w * 0.065, 12);
+                }
+            });
+            
         //放置设置按钮并具有如下功能：1.返回游戏 2.返回标题 3.转到游戏设置 （可选：4.保存进度 5.加载进度） 
+        this.settingGear = this.add.sprite(
+            this.w / 2,
+            this.h / 2,
+            "gear"
+            )
+            .setInteractive()
+            .on('pointerover',()=>{
+                this.settingGear.setScale(1.1);
+                this.gearSpin.play();
+            })
+            .on('pointerout',()=>{
+                this.settingGear.setScale(1);
+                this.gearSpin.pause();
+            })
+            .on('pointerup',()=>{
+                
+            });
+
+        this.gearSpin = this.tweens.add({
+            targets:this.settingGear,
+            angle:"+=360",
+            duration:4000,
+            repeat:-1
+
+        })
+        .pause();
+
         //放置音量按钮：鼠标单击打开音量调节（bar）和静音功能
     }
 }
