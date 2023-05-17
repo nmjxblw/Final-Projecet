@@ -118,6 +118,8 @@ class SettingScene extends Phaser.Scene {
     }
 
     create(data) {
+        this.cameras.main.fadeIn(1000, 0, 0, 0);
+
         //console.log(this.currentScene + "from create()");
         this.cx = this.cameras.main.centerX;
         this.cy = this.cameras.main.centerY;
@@ -175,6 +177,7 @@ class SettingScene extends Phaser.Scene {
                     console.warn("没有场景的key是title")
                 }
                 else {
+                    this.cameras.main.fade(500, 0, 0, 0);
                     this.scene.start("title");
                 }
             });
@@ -246,15 +249,21 @@ class SettingScene extends Phaser.Scene {
                 this.BackGame.setAlpha(0.8).setScale(1).setColor("#000000");
             })
             .on("pointerup", () => {
-                this.scene.stop("setting");
-                this.scene.resume(data.currentScene);
+                this.cameras.main.fade(500, 0, 0, 0);
+                this.time.delayedCall(500, () => {
+                    this.scene.stop("setting");
+                    this.scene.resume(data.currentScene);
+                });
             });
 
         //当玩家点击菜单外时自动关闭菜单
         this.input.on("pointerup", (pointer) => {
             if (!this.backgroundRec1.getBounds().contains(pointer.x, pointer.y)) {
-                this.scene.stop("setting");
-                this.scene.resume(data.currentScene);
+                this.cameras.main.fade(500, 0, 0, 0);
+                this.time.delayedCall(500, () => {
+                    this.scene.stop("setting");
+                    this.scene.resume(data.currentScene);
+                });
             }
         });
     }
