@@ -44,18 +44,18 @@ class GameScene extends Phaser.Scene {
         this.FullScreen = this.add.text(
             this.w * 0.05,
             12,
-            "Full Screen" )
+            "Full Screen")
             .setOrigin(0.5)
             .setAlpha(0.8)
             .setFontSize(25)
             .setInteractive()
-            .on("pointerover",()=>{
+            .on("pointerover", () => {
                 this.FullScreen.setAlpha(1).setScale(1.1).setColor("#ffff00");
             })
-            .on("pointerout",()=>{
+            .on("pointerout", () => {
                 this.FullScreen.setAlpha(0.8).setScale(1).setColor("#ffffff");
             })
-            .on("pointerup",()=>{
+            .on("pointerup", () => {
                 if (this.scale.isFullscreen) {
                     this.scale.stopFullscreen();
                     this.FullScreen.setText("Full Screen").setPosition(this.w * 0.05, 12);
@@ -64,34 +64,35 @@ class GameScene extends Phaser.Scene {
                     this.FullScreen.setText("Quit FullScreen").setPosition(this.w * 0.065, 12);
                 }
             });
-            
+
         //放置设置按钮并具有如下功能：1.返回游戏 2.返回标题 3.转到游戏设置 （可选：4.保存进度 5.加载进度） 
         this.settingGear = this.add.sprite(
-            this.w / 2,
-            this.h / 2,
+            this.w * 0.98,
+            this.h * 0.05,
             "gear"
-            )
+        )
             .setInteractive()
-            .on('pointerover',()=>{
+            .setOrigin(0.5)
+            .on('pointerover', () => {
                 this.settingGear.setScale(1.1);
                 this.gearSpin.play();
             })
-            .on('pointerout',()=>{
+            .on('pointerout', () => {
                 this.settingGear.setScale(1);
                 this.gearSpin.pause();
             })
-            .on('pointerup',()=>{
-                
+            .on('pointerup', () => {
+
             });
 
         this.gearSpin = this.tweens.add({
-            targets:this.settingGear,
-            angle:"+=360",
-            duration:4000,
-            repeat:-1
+            targets: this.settingGear,
+            angle: "+=360",
+            duration: 4000,
+            repeat: -1
 
         })
-        .pause();
+            .pause();
 
         //放置音量按钮：鼠标单击打开音量调节（bar）和静音功能
     }
