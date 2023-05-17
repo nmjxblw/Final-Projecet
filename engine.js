@@ -192,6 +192,7 @@ class SettingScene extends Phaser.Scene {
         //设置音量调节栏
         this.VolumeSlider = this.add.rectangle(this.cx, this.cy + 50, 300, 12.5).setFillStyle(0x444444).setOrigin(0.5).setInteractive();
         this.VolumeBar = this.add.rectangle(200 * this.game.globals.Volume + this.cx - 100, this.cy + 50, 20, 40).setFillStyle(0x444444).setOrigin(0.5);
+        //音量设置公式
         this.game.globals.Volume = (this.VolumeBar.x - this.cx + 100) / 200;
 
         this.VolumeBar.setInteractive({ draggable: true });
@@ -225,6 +226,29 @@ class SettingScene extends Phaser.Scene {
             this.VolumeText.setText(`Volume:${Math.floor(this.game.globals.Volume * 100)}%`);
         });
 
+        //设置返回按钮
+        this.BackGame = this.add.text(
+            this.cx,
+            this.cy + 150,
+            `Back`)
+            .setColor("#000000")
+            .setOrigin(0.5)
+            .setAlpha(0.8)
+            .setFontFamily("Century Gothic")
+            .setFontSize(30)
+            .setInteractive()
+            .on("pointerover", () => {
+                this.BackGame.setAlpha(1).setScale(1.1).setColor("#444444");
+            })
+            .on("pointerout", () => {
+                this.BackGame.setAlpha(0.8).setScale(1).setColor("#000000");
+            })
+            .on("pointerup", () => {
+                this.scene.stop("setting");
+                this.scene.resume(data.currentScene);
+            });
+
+        //当玩家点击菜单外时自动关闭菜单
         this.input.on("pointerup", (pointer) => {
             if (!this.backgroundRec1.getBounds().contains(pointer.x, pointer.y)) {
                 this.scene.stop("setting");
