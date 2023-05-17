@@ -14,7 +14,7 @@ const game = new Phaser.Game({
     },
     scene: [testScene],
     backgroundColor: 0x000000,
-    title: "Physic Game",
+    title: "Game",
 });
 
 game.globals = {

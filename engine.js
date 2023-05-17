@@ -1,8 +1,8 @@
 class GameScene extends Phaser.Scene {
-    init() { }
 
     constructor(key, name) {
         super(key);
+        this.sceneKey = key
         this.name = name;
         //提取name中的数字转化为int，并用this.level存储
         this.level = parseInt(this.name.replace(/[^0-9]/ig, ""));
@@ -80,7 +80,8 @@ class GameScene extends Phaser.Scene {
                 this.gearSpin.pause();
             })
             .on('pointerup', () => {
-
+                console.log(this.sceneKey);
+                //this.scene.pause(this.sceneKey);
             });
 
         //齿轮转动动画
