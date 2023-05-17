@@ -1,6 +1,8 @@
 # Final-Projecet
 for the final project.
 
+ARTG 
+
 DUE 6/4 by 11:59PM
 
 In your final project you will be making a game that focuses on one of the following three dimensions of how narrative can be forged into the design of our games:
@@ -57,3 +59,41 @@ Title: (Theme): At most a two-word distillation of your theme's title. It must b
 Meaning: Imagine you are writing a passage for a dictionary on your theme's meaning. Please write out a definition of your theme.
 Values: The values of your design team and how they align with this theme.
 Design Goals: What type of experience you are hoping to generate for a player that makes this particular theme unique or important as a means to execute that feel.
+
+
+CMPM
+
+Theme
+Nearby in space,
+but distant in time.
+
+
+Integration:
+- Narrative or visual art (~time travel story)
+- Mechanics (~time travel puzzles)
+- Technical implementation (~geolocation/clock)
+- Audience (~relates to a deep memory of someone close to you)
+
+Core Requirements
+1. Smooth experience of full-screen play in a mobile browser.
+2. User is capable of learning to play from within the game (not consulting outside instructions).
+3. User is capable of toggling background music from within the game, and this preference is saved across sessions.
+4. Core gameplay can be reached within 1 minute, and an experienced player can complete the experience within 10 minutes (3-5 preferred).
+
+Example Core Gameplay requirements
+Audio: 2+ kinds (looping background sound versus triggered event sounds)
+Visual: 2+ kinds (sprite/sheet/atlas versus Graphics/mesh/video/tilemap/etc.)
+Motion: Used as part of a core mechanic, either based on either kinematic (tweens) or dynamic (physics) movement.
+Progression: There is some kind of progression across instances of core gameplay (e.g. narrative/difficulty/aesthetics).
+Prefabs: 2+ techniques used in your code (GameObject subclasses, Scene subclasses, presets in code, or presets in external data file)
+
+Example Scene Flow requirements
+Includes at least main title and credits scenes, along with at least two more kinds of gameplay and/or menu scenes.
+Some data must be communicated between scenes (how you perform in one scene impacts what is possible in another).
+All narrative endings or levels in progression are reachable within the scene flow prototype.
+Prototype demonstrates at least one kind of fancy transition between scenes.
+
+Example Cinematic requirements
+The main title / menu screen must appear and disappear using animations and use animations to present a feeling of liveness even when the user is not interacting with it.
+Prototype includes one or more of: splash screen (before the title screen), introduction (start of story after title screen), ending (end of story), etc.
+Must use a tween chain, timeline, or equivalent container for multiple animations.
