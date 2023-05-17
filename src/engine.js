@@ -94,15 +94,15 @@ class GameScene extends Phaser.Scene {
             delay: 1000,
             callback: () => {
                 if (this.scene.isActive(this.currentScene)) {
-                    console.log(this.game.globals.timer);
-                    this.game.globals.timer += 1;
+                    console.log(Timer);
+                    Timer += 1;
                 }
             },
             callbackScope: this,
             loop: true,
         });
 
-        this.game.globals.timer = 0;
+        Timer = 0;
     }
 
     //当子类没有excreate（）时报错

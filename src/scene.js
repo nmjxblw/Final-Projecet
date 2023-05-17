@@ -1,3 +1,4 @@
+let Timer = 0;
 class testScene extends GameScene{
     constructor(){
         super("testScene","test scene");
