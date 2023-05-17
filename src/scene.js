@@ -1,4 +1,4 @@
-let Timer = 0;
+
 class testScene extends GameScene{
     constructor(){
         super("testScene","test scene");
@@ -25,7 +25,6 @@ class testScene2 extends GameScene{
     }
 }
 
-let TestVar = 100;//调用全局值示例：console.log(this.game.globals.TestVar);
 let Timer = 0;
 let Volume = 0.5;
 let GameOver = false;
@@ -42,11 +41,3 @@ const game = new Phaser.Game({
     backgroundColor: 0x000000,
     title: "Game",
 });
-
-// game.globals = {
-//     TestVar: 100,//调用全局值示例：console.log(this.game.globals.TestVar);
-//     Timer: 0,
-//     Volume:0.5,
-
-//     GameOver: false,
-// };
