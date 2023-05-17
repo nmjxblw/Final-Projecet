@@ -44,30 +44,6 @@ class GameScene extends Phaser.Scene {
 
     //加载游戏UI
     loadUI() {
-        //放置全屏按钮//废弃->整合进设置
-        this.FullScreen = this.add.text(
-            this.w * 0.05,
-            12,
-            "Full Screen")
-            .setOrigin(0.5)
-            .setAlpha(0.8)
-            .setFontSize(25)
-            .setInteractive()
-            .on("pointerover", () => {
-                this.FullScreen.setAlpha(1).setScale(1.1).setColor("#ffff00");
-            })
-            .on("pointerout", () => {
-                this.FullScreen.setAlpha(0.8).setScale(1).setColor("#ffffff");
-            })
-            .on("pointerup", () => {
-                if (this.scale.isFullscreen) {
-                    this.scale.stopFullscreen();
-                    this.FullScreen.setText("Full Screen").setPosition(this.w * 0.05, 12);
-                } else {
-                    this.scale.startFullscreen();
-                    this.FullScreen.setText("Quit FullScreen").setPosition(this.w * 0.065, 12);
-                }
-            });
 
         //放置设置按钮并具有如下功能：1.返回游戏 2.返回标题 3.转到游戏设置 4.全屏（可选：5.保存进度 6.加载进度） 
         this.settingGear = this.add.sprite(
@@ -145,6 +121,32 @@ class SettingScene extends Phaser.Scene {
         this.cy = this.cameras.main.centerY;
 
         this.backgroundRec = this.add.rectangle(this.cx, this.cy, 400, 600).setFillStyle(0xffffff).setOrigin(0.5);
+
+        //放置全屏按钮//废弃->整合进设置
+        this.FullScreen = this.add.text(
+            this.cx,
+            this.cy,
+            "Full Screen")
+            .setColor("#000000")
+            .setOrigin(0.5)
+            .setAlpha(0.8)
+            .setFontSize(25)
+            .setInteractive()
+            .on("pointerover", () => {
+                this.FullScreen.setAlpha(1).setScale(1.1).setColor("#444444");
+            })
+            .on("pointerout", () => {
+                this.FullScreen.setAlpha(0.8).setScale(1).setColor("#000000");
+            })
+            .on("pointerup", () => {
+                if (this.scale.isFullscreen) {
+                    this.scale.stopFullscreen();
+                    this.FullScreen.setText("Full Screen");
+                } else {
+                    this.scale.startFullscreen();
+                    this.FullScreen.setText("Quit FullScreen");
+                }
+            });
 
         this.input.on("pointerup", (pointer) => {
             if (!this.backgroundRec.getBounds().contains(pointer.x, pointer.y)) {
