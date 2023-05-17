@@ -81,7 +81,14 @@ class GameScene extends Phaser.Scene {
             })
             .on('pointerup', () => {
                 console.log(this.sceneKey);
-                //this.scene.pause(this.sceneKey);
+                this.scene.pause(this.sceneKey);
+                if (!this.scene.get("setting")) {
+                    this.scene.add("setting", SettingScene, true, { currentScene: this.sceneKey, });
+                }
+                else {
+                    //console.log("second time");
+                    this.scene.launch("setting", { currentScene: this.sceneKey });
+                }
             });
 
         //齿轮转动动画
@@ -93,5 +100,27 @@ class GameScene extends Phaser.Scene {
 
         })
             .pause();
+    }
+}
+
+class SettingScene extends Phaser.Scene {
+
+    init(data) {
+        this.currentScene = data.currentScene || "";
+    }
+
+    create(data) {
+        //console.log(this.currentScene + "from create()");
+        this.cx = this.cameras.main.centerX;
+        this.cy = this.cameras.main.centerY;
+
+        this.backgroundRec = this.add.rectangle(this.cx, this.cy, 400, 600).setFillStyle(0xffffff).setOrigin(0.5);
+
+        this.input.on("pointerup", (pointer) => {
+            if (!this.backgroundRec.getBounds().contains(pointer.x, pointer.y)) {
+                this.scene.stop("setting");
+                this.scene.resume(data.currentScene);
+            }
+        });
     }
 }

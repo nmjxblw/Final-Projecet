@@ -4,6 +4,7 @@ class testScene extends GameScene{
     }
 }
 
+
 const game = new Phaser.Game({
     type: Phaser.AUTO,
     scale: {
