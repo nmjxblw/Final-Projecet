@@ -4,7 +4,7 @@ class testScene extends GameScene {
     }
 
     exCreate() {
-        console.log(this.sceneKey);
+       // console.log(this.sceneKey);
         this.time.delayedCall(5000, () => {
             this.scene.start("testScene2");
         });
@@ -17,7 +17,7 @@ class testScene2 extends GameScene {
     }
 
     exCreate() {
-        console.log(this.sceneKey);
+        //console.log(this.sceneKey);
         this.time.delayedCall(5000, () => {
             this.scene.start("testScene");
         });
