@@ -12,7 +12,6 @@ class GameScene extends Phaser.Scene {
         this.load.path = "./assets/";
         this.load.image("gear", "gear.png");
         this.load.json("gameData", "InGameData.json");
-        this.load.json("saveData", "SaveData.json");
 
         this.exPreload();
     }
@@ -24,8 +23,7 @@ class GameScene extends Phaser.Scene {
         //设置编写游戏时常用的数据
         this.setShortCut();
 
-        //测试代码，从json中读取数据并存入localStorage中
-        //this.testFunction();
+        loadSaveData();
 
         //调用加载游戏内UI函数
         this.loadUI();
@@ -36,50 +34,6 @@ class GameScene extends Phaser.Scene {
         //加载额外函数
         this.exCreate();
     }
-
-    /* //从localStorage中读取数据，如果数据不存在则从json中读取数据
-    testFunction() {
-        // 尝试从 localStorage 中读取数据
-        //localStorage.clear();
-        var data = localStorage.getItem('saveData');
-
-        if (data) {
-            // localStorage 中有数据，进行处理
-            console.log('从 localStorage 中读取数据:', data);
-        } else {
-            // localStorage 中没有数据，从 JSON 文件中读取数据
-            fetch('./assets/SaveData.json')
-                .then(function (response) {
-                    if (response.ok) {
-                        return response.json();
-                    }
-                    throw new Error('Network response was not ok.');
-                })
-                .then(function (jsonData) {
-                    // 从 JSON 文件中读取数据
-
-                    localStorage.setItem('saveData', JSON.stringify(jsonData));
-
-                    // 进行处理
-                    console.log('从 JSON 文件中读取数据:', jsonData);
-                })
-                .catch(function (error) {
-                    console.log('Error:', error.message);
-                });
-        }
-
-        // 尝试从 localStorage 中读取数据
-        var saveData = JSON.parse(localStorage.getItem('saveData'));
-
-        if (saveData) {
-            // localStorage 中有数据，访问 hp 数据
-            var hp = saveData.Hp;
-            console.log('从 localStorage 中读取的 hp 数据:', hp);
-        } else {
-            // localStorage 中没有数据
-            console.log('localStorage 中没有保存的数据');
-        }
-    } */
 
     //设置编写游戏时常用的数据
     setShortCut() {
@@ -93,8 +47,7 @@ class GameScene extends Phaser.Scene {
         this.cy = this.cameras.main.centerY;
 
         //获得json中的数据,并存储
-        this.gameData = this.cache.json.get('gameData');
-        this.saveData = this.cache.json.get('saveData');
+        gameData = this.cache.json.get('gameData');
 
         //更多的shortcut
         this.exShortCut();
@@ -186,9 +139,7 @@ class SettingScene extends Phaser.Scene {
     }
 
     create(data) {
-        this.cameras.main.fadeIn(1000, 0, 0, 0);
 
-        //console.log(this.currentScene + "from create()");
         this.cx = this.cameras.main.centerX;
         this.cy = this.cameras.main.centerY;
 
@@ -242,7 +193,7 @@ class SettingScene extends Phaser.Scene {
             })
             .on("pointerup", () => {
                 if (!this.scene.get('title')) {
-                    console.warn("没有场景的key是title")
+                    console.warn("没有场景的键是'title'")
                 }
                 else {
                     this.cameras.main.fade(500, 0, 0, 0);
@@ -263,7 +214,7 @@ class SettingScene extends Phaser.Scene {
             .setFontSize(30);
 
         //设置音量调节栏
-        this.VolumeSlider = this.add.rectangle(this.cx, this.cy + 50, 300, 12.5).setFillStyle(0x444444).setOrigin(0.5).setInteractive();
+        this.VolumeSlider = this.add.rectangle(this.cx, this.cy + 50, 250, 12.5).setFillStyle(0x444444).setOrigin(0.5).setInteractive();
         this.VolumeBar = this.add.rectangle(200 * Volume + this.cx - 100, this.cy + 50, 20, 40).setFillStyle(0x444444).setOrigin(0.5);
         //音量设置公式
         Volume = (this.VolumeBar.x - this.cx + 100) / 200;
@@ -317,21 +268,15 @@ class SettingScene extends Phaser.Scene {
                 this.BackGame.setAlpha(0.8).setScale(1).setColor("#000000");
             })
             .on("pointerup", () => {
-                this.cameras.main.fade(500, 0, 0, 0);
-                this.time.delayedCall(500, () => {
-                    this.scene.stop("setting");
-                    this.scene.resume(data.currentScene);
-                });
+                this.scene.stop("setting");
+                this.scene.resume(data.currentScene);
             });
 
         //当玩家点击菜单外时自动关闭菜单
         this.input.on("pointerup", (pointer) => {
             if (!this.backgroundRec1.getBounds().contains(pointer.x, pointer.y)) {
-                this.cameras.main.fade(500, 0, 0, 0);
-                this.time.delayedCall(500, () => {
-                    this.scene.stop("setting");
-                    this.scene.resume(data.currentScene);
-                });
+                this.scene.stop("setting");
+                this.scene.resume(data.currentScene);
             }
         });
     }
