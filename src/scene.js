@@ -1,24 +1,24 @@
-class testScene extends GameScene{
-    constructor(){
-        super("testScene","test scene");
+class testScene extends GameScene {
+    constructor() {
+        super("testScene", "test scene");
     }
 
-    exCreate(){
+    exCreate() {
         console.log(this.sceneKey);
-        this.time.delayedCall(5000,()=>{
+        this.time.delayedCall(5000, () => {
             this.scene.start("testScene2");
         });
     }
 }
 
-class testScene2 extends GameScene{
-    constructor(){
-        super("testScene2","test scene 2")
+class testScene2 extends GameScene {
+    constructor() {
+        super("testScene2", "test scene 2")
     }
 
-    exCreate(){
+    exCreate() {
         console.log(this.sceneKey);
-        this.time.delayedCall(5000,()=>{
+        this.time.delayedCall(5000, () => {
             this.scene.start("testScene");
         });
     }
@@ -37,7 +37,7 @@ const game = new Phaser.Game({
         width: 1920,
         height: 1080
     },
-    scene: [testScene,testScene2],
+    scene: [testScene, testScene2],
     backgroundColor: 0x000000,
     title: "Game",
 });
