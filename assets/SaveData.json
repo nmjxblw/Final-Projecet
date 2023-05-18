@@ -1,5 +1,4 @@
 {
-    "File":"for saving player data.",
-    "CurrentLoop":0,
+    "//文件描述":"用于存放玩家数据",
     "Hp":1
 }

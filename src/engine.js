@@ -23,8 +23,6 @@ class GameScene extends Phaser.Scene {
         //设置编写游戏时常用的数据
         this.setShortCut();
 
-        loadSaveData();
-
         //调用加载游戏内UI函数
         this.loadUI();
 

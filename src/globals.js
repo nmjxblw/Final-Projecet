@@ -87,6 +87,6 @@ function saveDataCheck() {
 //删除玩家本地数据并初始化
 function initializeLocal(){
     localStorage.clear();
-    loadSaveData()
+    loadSaveData();
     return;
 }

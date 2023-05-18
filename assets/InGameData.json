@@ -1,3 +1,11 @@
 {
-    "title":"final project."
+    "//文件用途": "这个文件用于存储游戏中的固定数据。访问方式例子:gameData.floor.one.enemy1.hp",
+    "//注":"Josn文件不支持用纯数字做key",
+    "floor": {
+        "one": {
+            "enemy1": {
+                "hp": 3
+            }
+        }
+    }
 }
