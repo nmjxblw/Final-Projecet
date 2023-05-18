@@ -11,6 +11,10 @@ class GameScene extends Phaser.Scene {
     preload() {
         this.load.path = "./assets/";
         this.load.image("gear", "gear.png");
+        this.load.json("gameData", "InGameData.json");
+        this.load.json("saveData", "SaveData.json");
+
+        this.exPreload();
     }
 
     create() {
@@ -19,6 +23,9 @@ class GameScene extends Phaser.Scene {
 
         //设置编写游戏时常用的数据
         this.setShortCut();
+
+        //测试代码，从json中读取数据并存入localStorage中
+        //this.testFunction();
 
         //调用加载游戏内UI函数
         this.loadUI();
@@ -30,6 +37,50 @@ class GameScene extends Phaser.Scene {
         this.exCreate();
     }
 
+    /* //从localStorage中读取数据，如果数据不存在则从json中读取数据
+    testFunction() {
+        // 尝试从 localStorage 中读取数据
+        //localStorage.clear();
+        var data = localStorage.getItem('saveData');
+
+        if (data) {
+            // localStorage 中有数据，进行处理
+            console.log('从 localStorage 中读取数据:', data);
+        } else {
+            // localStorage 中没有数据，从 JSON 文件中读取数据
+            fetch('./assets/SaveData.json')
+                .then(function (response) {
+                    if (response.ok) {
+                        return response.json();
+                    }
+                    throw new Error('Network response was not ok.');
+                })
+                .then(function (jsonData) {
+                    // 从 JSON 文件中读取数据
+
+                    localStorage.setItem('saveData', JSON.stringify(jsonData));
+
+                    // 进行处理
+                    console.log('从 JSON 文件中读取数据:', jsonData);
+                })
+                .catch(function (error) {
+                    console.log('Error:', error.message);
+                });
+        }
+
+        // 尝试从 localStorage 中读取数据
+        var saveData = JSON.parse(localStorage.getItem('saveData'));
+
+        if (saveData) {
+            // localStorage 中有数据，访问 hp 数据
+            var hp = saveData.Hp;
+            console.log('从 localStorage 中读取的 hp 数据:', hp);
+        } else {
+            // localStorage 中没有数据
+            console.log('localStorage 中没有保存的数据');
+        }
+    } */
+
     //设置编写游戏时常用的数据
     setShortCut() {
 
@@ -40,10 +91,19 @@ class GameScene extends Phaser.Scene {
         //以镜头为准，获得镜头的中心
         this.cx = this.cameras.main.centerX;
         this.cy = this.cameras.main.centerY;
+
+        //获得json中的数据,并存储
+        this.gameData = this.cache.json.get('gameData');
+        this.saveData = this.cache.json.get('saveData');
+
+        //更多的shortcut
+        this.exShortCut();
     }
 
     //加载游戏UI
     loadUI() {
+
+        //console.log(this.gameData.title);
 
         //放置设置按钮并具有如下功能：1.返回游戏 2.返回标题 3.转到游戏设置 4.全屏（可选：5.保存进度 6.加载进度） 
         this.settingGear = this.add.sprite(
@@ -105,9 +165,17 @@ class GameScene extends Phaser.Scene {
         Timer = 0;
     }
 
-    //当子类没有excreate（）时报错
+    //当子类没有ex函数时报错
     exCreate() {
         console.warn(`${this.sceneKey}没有设置exCreate()`);
+    }
+
+    exPreload() {
+        console.warn(`${this.sceneKey}没有设置exPreload()`);
+    }
+
+    exShortCut() {
+        console.warn(`${this.sceneKey}没有设置exShortCut()`);
     }
 }
 
