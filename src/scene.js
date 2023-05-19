@@ -37,7 +37,17 @@ const game = new Phaser.Game({
         width: 1920,
         height: 1080
     },
-    scene: [testScene,testScene2],
+    physics: {
+        default: 'matter',
+        matter: {
+            gravity: {
+                y: 0
+            },
+            debug: true
+        }
+    },
+    //scene: [testScene,testScene2],
+    scene: [Base],
     backgroundColor: 0x000000,
     title: "Game",
 });
