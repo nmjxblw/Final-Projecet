@@ -46,7 +46,7 @@ class Base extends GameScene {
         this.dragrotate(card1);
 
         //调用覆盖检测
-        this.CollisionDetection(card1);
+        this.CollisionDetection('card');
 
 
 
@@ -77,6 +77,7 @@ class Base extends GameScene {
         this.title.setDepth(2);
     }
 
+    //创建卡片，第一个参数为卡片使用的图片名称，第二个参数为卡片的标签
     creatcard(name,label)
     {
         let card = this.matter.add.sprite(this.w * 0.5, this.h * 0.83, name);
@@ -96,6 +97,7 @@ class Base extends GameScene {
         return card;
     }
 
+    //调用此函数使得参数中的卡片可以旋转
     dragrotate(card)
     {
         function dragRotateObject(pointer)
@@ -152,12 +154,13 @@ class Base extends GameScene {
     
     }
 
-    CollisionDetection(card)
+    //调用此参数判断卡片的碰撞效果，参数为卡片的标签
+    CollisionDetection(cardLabel)
     {
         this.matter.world.on('collisionstart', (event,o1,o2) =>
         {
 
-            if([o1.label, o2.label].indexOf('card') != -1 && [o1.label, o2.label].indexOf('testpoint1') != -1)
+            if([o1.label, o2.label].indexOf(cardLabel) != -1 && [o1.label, o2.label].indexOf('testpoint1') != -1)
             {
                 console.log(1);
             }
@@ -167,7 +170,7 @@ class Base extends GameScene {
         this.matter.world.on('collisionstart', (event,o1,o2) =>
         {
 
-            if([o1.label, o2.label].indexOf('card') != -1 && [o1.label, o2.label].indexOf('testpoint2') != -1)
+            if([o1.label, o2.label].indexOf(cardLabel) != -1 && [o1.label, o2.label].indexOf('testpoint2') != -1)
             {
                 console.log(2);
             }
