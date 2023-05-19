@@ -11,7 +11,7 @@ class GameScene extends Phaser.Scene {
     preload() {
         this.load.path = "./assets/";
         this.load.image("gear", "gear.png");
-        this.load.json("gameData", "InGameData.json");
+        this.load.json("gameData", "../json/InGameData.json");
 
         this.exPreload();
     }
@@ -104,9 +104,9 @@ class GameScene extends Phaser.Scene {
         this.timer = this.time.addEvent({
             delay: 1000,
             callback: () => {
-                if (this.scene.isActive(this.currentScene)) {
-                    console.log(Timer);
+                if (this.scene.isActive(this.sceneKey)) {
                     Timer += 1;
+                    console.log(`已在${this.sceneKey}待机了${Timer}秒`);
                 }
             },
             callbackScope: this,
