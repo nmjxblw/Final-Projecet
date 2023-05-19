@@ -93,12 +93,89 @@ class openning extends Phaser.Scene {
             repeat: -1
         });
 
+        this.time.delayedCall(5000, () => {
+            this.cameras.main.fade(500, 0, 0, 0);
+            this.time.delayedCall(500, () => { this.scene.start("warnning") });
+        });
+
         this.input.on("pointerdown", () => {
             this.cameras.main.fade(500, 0, 0, 0);
-            this.time.delayedCall(500, () => { this.scene.start("testScene") });
+            this.time.delayedCall(500, () => { this.scene.start("warnning") });
         });
     }
 }
+
+class warnning extends GameScene {
+    constructor() {
+        super('warnning', 'warnning')
+    }
+
+    exPreload() { }
+
+    exShortCut() { }
+
+    exCreate() {
+
+        this.cameras.main.fadeIn(1000, 0, 0, 0);
+
+        this.warnningTitle = this.add.text(
+            this.cx,
+            this.cy - 300,
+            "Game Warnning"
+        )
+            .setOrigin(0.5)
+            .setColor("#ffffff")
+            .setFontSize(150)
+            .setFontFamily('Gabriola');
+
+        this.warnningContent = this.add.text(
+            this.cx,
+            this.cy, `This game contains fantasy, violence and other elements.\n If you feel uncomfortable, please exit the game.`
+        )
+            .setOrigin(0.5)
+            .setColor("#ffffff")
+            .setFontSize(75)
+            .setFontFamily('Gabriola');;
+
+
+        this.time.delayedCall(8000, () => {
+            this.cameras.main.fade(500, 0, 0, 0);
+            this.time.delayedCall(500, () => { this.scene.start("title") });
+        });
+
+        this.input.on("pointerdown", () => {
+            this.cameras.main.fade(500, 0, 0, 0);
+            this.time.delayedCall(500, () => { this.scene.start("title") });
+        });
+    }
+}
+
+class title extends GameScene {
+    constructor() {
+        super("title", "title");
+    }
+
+    exPreload() { }
+
+    exShortCut() { }
+
+    exCreate() {
+
+        this.cameras.main.fadeIn(1000, 0, 0, 0);
+
+        var titleText = this.add.text(
+            this.cx,
+            this.cy - 300,
+            "Game Title"
+        )
+            .setOrigin(0.5)
+            .setColor("#ffffff")
+            .setFontSize(150)
+            .setFontFamily('Gabriola');
+
+    }
+}
+
 
 const game = new Phaser.Game({
     type: Phaser.AUTO,
@@ -109,7 +186,7 @@ const game = new Phaser.Game({
         width: 1920,
         height: 1080
     },
-    scene: [openning, testScene, testScene2],
+    scene: [openning, warnning, testScene, testScene2, title],
     backgroundColor: 0x000000,
     title: "Game",
 });
