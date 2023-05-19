@@ -11,6 +11,9 @@ class GameScene extends Phaser.Scene {
     preload() {
         this.load.path = "./assets/";
         this.load.image("gear", "gear.png");
+        this.load.json("gameData", "../json/InGameData.json");
+
+        this.exPreload();
     }
 
     create() {
@@ -40,10 +43,18 @@ class GameScene extends Phaser.Scene {
         //以镜头为准，获得镜头的中心
         this.cx = this.cameras.main.centerX;
         this.cy = this.cameras.main.centerY;
+
+        //获得json中的数据,并存储
+        gameData = this.cache.json.get('gameData');
+
+        //更多的shortcut
+        this.exShortCut();
     }
 
     //加载游戏UI
     loadUI() {
+
+        //console.log(this.gameData.title);
 
         //放置设置按钮并具有如下功能：1.返回游戏 2.返回标题 3.转到游戏设置 4.全屏（可选：5.保存进度 6.加载进度） 
         this.settingGear = this.add.sprite(
@@ -93,9 +104,9 @@ class GameScene extends Phaser.Scene {
         this.timer = this.time.addEvent({
             delay: 1000,
             callback: () => {
-                if (this.scene.isActive(this.currentScene)) {
-                    console.log(Timer);
+                if (this.scene.isActive(this.sceneKey)) {
                     Timer += 1;
+                    console.log(`已在${this.sceneKey}待机了${Timer}秒`);
                 }
             },
             callbackScope: this,
@@ -105,9 +116,17 @@ class GameScene extends Phaser.Scene {
         Timer = 0;
     }
 
-    //当子类没有excreate（）时报错
+    //当子类没有ex函数时报错
     exCreate() {
         console.warn(`${this.sceneKey}没有设置exCreate()`);
+    }
+
+    exPreload() {
+        console.warn(`${this.sceneKey}没有设置exPreload()`);
+    }
+
+    exShortCut() {
+        console.warn(`${this.sceneKey}没有设置exShortCut()`);
     }
 }
 
@@ -118,9 +137,7 @@ class SettingScene extends Phaser.Scene {
     }
 
     create(data) {
-        this.cameras.main.fadeIn(1000, 0, 0, 0);
 
-        //console.log(this.currentScene + "from create()");
         this.cx = this.cameras.main.centerX;
         this.cy = this.cameras.main.centerY;
 
@@ -174,7 +191,7 @@ class SettingScene extends Phaser.Scene {
             })
             .on("pointerup", () => {
                 if (!this.scene.get('title')) {
-                    console.warn("没有场景的key是title")
+                    console.warn("没有场景的键是'title'")
                 }
                 else {
                     this.cameras.main.fade(500, 0, 0, 0);
@@ -195,7 +212,7 @@ class SettingScene extends Phaser.Scene {
             .setFontSize(30);
 
         //设置音量调节栏
-        this.VolumeSlider = this.add.rectangle(this.cx, this.cy + 50, 300, 12.5).setFillStyle(0x444444).setOrigin(0.5).setInteractive();
+        this.VolumeSlider = this.add.rectangle(this.cx, this.cy + 50, 250, 12.5).setFillStyle(0x444444).setOrigin(0.5).setInteractive();
         this.VolumeBar = this.add.rectangle(200 * Volume + this.cx - 100, this.cy + 50, 20, 40).setFillStyle(0x444444).setOrigin(0.5);
         //音量设置公式
         Volume = (this.VolumeBar.x - this.cx + 100) / 200;
@@ -249,21 +266,15 @@ class SettingScene extends Phaser.Scene {
                 this.BackGame.setAlpha(0.8).setScale(1).setColor("#000000");
             })
             .on("pointerup", () => {
-                this.cameras.main.fade(500, 0, 0, 0);
-                this.time.delayedCall(500, () => {
-                    this.scene.stop("setting");
-                    this.scene.resume(data.currentScene);
-                });
+                this.scene.stop("setting");
+                this.scene.resume(data.currentScene);
             });
 
         //当玩家点击菜单外时自动关闭菜单
         this.input.on("pointerup", (pointer) => {
             if (!this.backgroundRec1.getBounds().contains(pointer.x, pointer.y)) {
-                this.cameras.main.fade(500, 0, 0, 0);
-                this.time.delayedCall(500, () => {
-                    this.scene.stop("setting");
-                    this.scene.resume(data.currentScene);
-                });
+                this.scene.stop("setting");
+                this.scene.resume(data.currentScene);
             }
         });
     }
