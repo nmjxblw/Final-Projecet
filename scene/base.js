@@ -1,16 +1,16 @@
-class Base extends Phaser.Scene {
+class Base extends GameScene {
 
-    constructor(key) {
-        super(key);
+    constructor() {
+        super("Base", "Base");
     }
 
-    preload()
+    exPreload()
     {
-        this.load.image("card", "assets/card.png");
-        this.load.image("testPoint", "assets/testpoint.png");
+        this.load.image("card", "card.png");
+        this.load.image("testPoint", "testpoint.png");
     }
 
-    create() {
+    exCreate() {
         this.transitionDuration = 1000;
 
         this.w = this.game.config.width;
