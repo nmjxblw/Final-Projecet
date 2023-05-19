@@ -5,10 +5,14 @@ class testScene extends GameScene {
 
     exCreate() {
         // console.log(this.sceneKey);
-        /* this.time.delayedCall(5000, () => {
+        this.time.delayedCall(5000, () => {
             this.scene.start("testScene2");
-        }); */
+        });
     }
+
+    exPreload(){}
+
+    exShortCut(){}
 }
 
 class testScene2 extends GameScene {
@@ -22,6 +26,10 @@ class testScene2 extends GameScene {
             this.scene.start("testScene");
         });
     }
+
+    exPreload(){}
+
+    exShortCut(){}
 }
 
 const game = new Phaser.Game({
