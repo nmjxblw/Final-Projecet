@@ -22,7 +22,7 @@ class Base extends Phaser.Scene {
 
         //两种背景图片，暂时为占位资源
         this.background1 = this.add.rectangle(this.w * 0.5 , this.h * 0.5, 600, 800, 0xF0E68C);
-        this.background2 = this.add.rectangle(this.w * 0.5 , this.h * 0.6, 450, 450, 0x00FF00);
+        this.background2 = this.add.rectangle(this.w * 0.5 , this.h * 0.6, 490, 490, 0x00FF00);
         //两个触发点
         this.testpoint1 = this.matter.add.sprite(this.w * 0.335, this.h * 0.6,'testPoint');
         this.testpoint2 = this.matter.add.sprite(this.w * 0.665, this.h * 0.6,'testPoint');
@@ -40,7 +40,7 @@ class Base extends Phaser.Scene {
         this.testpoint2.body.isSensor = true;
         
         //创建卡片
-        let card1 = this.creatcard('card');
+        let card1 = this.creatcard('card','card');
 
         //调用旋转函数
         this.dragrotate(card1);
@@ -66,9 +66,9 @@ class Base extends Phaser.Scene {
     }
 
 
-    showtitle()
+    showtitle(Levelname)
     {
-        this.title = this.add.text(this.w / 2, 30, 'Level ' + level,
+        this.title = this.add.text(this.w / 2, 30, Levelname,
         {
             font: "28px Arial",
             color: "#ffffff",    
@@ -77,7 +77,7 @@ class Base extends Phaser.Scene {
         this.title.setDepth(2);
     }
 
-    creatcard(name)
+    creatcard(name,label)
     {
         let card = this.matter.add.sprite(this.w * 0.5, this.h * 0.83, name);
 
@@ -88,7 +88,7 @@ class Base extends Phaser.Scene {
           });
 
         this.matter.body.setStatic(card.body, true);
-        card.body.label = 'card';
+        card.body.label = label;
 
         card.setOrigin(0.5, 1.0);
        
