@@ -32,6 +32,14 @@ class testScene2 extends GameScene {
     exShortCut(){}
 }
 
+class openning extends Phaser.scene{
+    constructor(){
+        super("openning");
+    }
+
+    create()
+}
+
 const game = new Phaser.Game({
     type: Phaser.AUTO,
     scale: {
