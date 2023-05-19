@@ -26,8 +26,14 @@ class Base extends Phaser.Scene {
         //两个触发点
         this.testpoint1 = this.matter.add.sprite(this.w * 0.335, this.h * 0.6,'testPoint');
         this.testpoint2 = this.matter.add.sprite(this.w * 0.665, this.h * 0.6,'testPoint');
+
+        //添加标签
         this.testpoint1.body.label = 'testpoint1';
         this.testpoint2.body.label = 'testpoint2';
+
+        //添加设置不透明
+        this.testpoint1.alpha = 0;
+        this.testpoint2.alpha = 0;
 
         //设置两个触发点的属性为传感器
         this.testpoint1.body.isSensor = true;
