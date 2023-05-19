@@ -21,11 +21,11 @@ class Base extends GameScene {
         this.cameras.main.fadeIn(this.transitionDuration, 0, 0, 0);
 
         //两种背景图片，暂时为占位资源
-        this.background1 = this.add.rectangle(this.w * 0.5 , this.h * 0.5, 600, 800, 0xF0E68C);
+        this.background1 = this.add.rectangle(this.w * 0.5 , this.h * 0.5, 650, 900, 0xF0E68C);
         this.background2 = this.add.rectangle(this.w * 0.5 , this.h * 0.6, 490, 490, 0x00FF00);
         //两个触发点
-        this.testpoint1 = this.matter.add.sprite(this.w * 0.335, this.h * 0.6,'testPoint');
-        this.testpoint2 = this.matter.add.sprite(this.w * 0.665, this.h * 0.6,'testPoint');
+        this.testpoint1 = this.matter.add.sprite(this.w * 0.32, this.h * 0.65,'testPoint');
+        this.testpoint2 = this.matter.add.sprite(this.w * 0.68, this.h * 0.65,'testPoint');
 
         //添加标签
         this.testpoint1.body.label = 'testpoint1';
