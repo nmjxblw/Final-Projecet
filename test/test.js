@@ -33,14 +33,18 @@ class baseTest extends GameScene {
         //设置文本框，在用户互动后再设置其他参数
         let showText = this.add.text(0, 0, "")
             .setAlpha(0)
-            .setFontSize(50)
             .setOrigin(0.5)
+            .setFontSize(50)
             .setFontFamily("Century Gothic")
             .setWordWrapWidth(300);
 
         //设置文本框锚点,用于标记文本框位置
-        let textCircle = this.add.circle(showText.x, showText.y, 10, 0xff00ff).setAlpha(0.5);
+        let textCircle = this.add.circle(showText.x, showText.y, 10, 0xff00ff).setAlpha(0);
 
+        //设置文本框大小
+        let textRect = this.add.rectangle(showText.x, showText.y, 700, 200).setFillStyle(0xffffff).setOrigin(0.5).setAlpha(0);
+
+        //鼠标移动监听
         this.input.on("pointermove", (pointer) => {
 
             //通过改变旋转锚点的坐标来实现拖动效果
@@ -79,8 +83,8 @@ class baseTest extends GameScene {
             }
 
             //将角度转化为度数制用于debug
-            var angleBetweenRotatePointD = Phaser.Math.Wrap(Phaser.Math.RadToDeg(angleBetweenRotatePoint), 0, 360);
-            console.log(angleBetweenRotatePointD);
+            var angleBetweenRotatePointD = Phaser.Math.Wrap(Phaser.Math.RadToDeg(angleBetweenRotatePoint), -360, 360);
+            console.log(`当前卡牌的中心与锚点连线与y轴的夹角：${Math.round(angleBetweenRotatePointD)}°`);
 
             //先设置测试锚点的位置
             testCircle.x = distance * Math.cos(initAngle + angleBetweenRotatePoint) + routatePointX;
@@ -98,19 +102,32 @@ class baseTest extends GameScene {
             showText.y = (distance + 150) * Math.sin(initAngle + angleBetweenRotatePoint) + routatePointY;
             textCircle.x = showText.x;
             textCircle.y = showText.y;
+            textRect.x = showText.x;
+            textRect.y = showText.y;
+            textRect.setAlpha(0.5);
 
             var choice = "";
             var alphaD = 6 * Math.abs(angleBetweenRotatePoint / Math.PI);
-            console.log(alphaD);
+            console.log(`文本框Alpha:${alphaD.toFixed(3)}`);
             let callDescribion = this.time.delayedCall(500, (pointer) => {
-                if (angleBetweenRotatePoint >= 15 / 180 * Math.PI) {
-                    choice = "This is right choice.";
+                if (angleBetweenRotatePoint >= 5 / 180 * Math.PI) {
+                    choice = "This is the right choice. You should choose this without a doubt.";
                 }
-                else if (angleBetweenRotatePoint <= -15 / 180 * Math.PI) {
-                    choice = "This is left choice.";
+                else if (angleBetweenRotatePoint <= -5 / 180 * Math.PI) {
+                    choice = "This is the left choice.";
                 }
+                //设置文本内容
                 showText.setText(choice).setAlpha(alphaD);
             });
+
+            //设置字体参数，用于之后自动调整字体大小
+            var showTextSize = 50;
+            showText.setFontSize(showTextSize);
+            while(showText.height > textRect.height){
+                showTextSize--;
+                showText.setFontSize(showTextSize);
+            }
+            console.log(showText.style.fontSize);
         });
     }
 }
