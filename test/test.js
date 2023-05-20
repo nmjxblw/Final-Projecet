@@ -110,24 +110,32 @@ class baseTest extends GameScene {
             textRect.x = showText.x;
             textRect.y = showText.y;
 
+            //设置选项初始值为空
             var choice = "";
+
+            //根据角度大小调整透明度（文本和文本背景）
             var alphaD = 6 * Math.abs(angleBetweenRotatePoint / Math.PI);
+            //将透明度赋予文本背景
             textRect.setAlpha(0.5 * alphaD);
             console.log(`文本框Alpha:${alphaD.toFixed(3)}`);
-            let callDescribion = this.time.delayedCall(500, (pointer) => {
-                if (angleBetweenRotatePoint >= 5 / 180 * Math.PI) {
-                    choice = "This is the right choice. You should choose this without a doubt.";
-                }
-                else if (angleBetweenRotatePoint <= -5 / 180 * Math.PI) {
-                    choice = "This is the left choice.";
-                }
-                //设置文本内容
-                showText.setText(choice).setAlpha(alphaD);
-            });
 
-            //设置字体参数，用于之后自动调整字体大小
+            //添加动画效果和设置选项内容
+            if (angleBetweenRotatePoint >= 5 / 180 * Math.PI) {
+                choice = "This is the right choice. You should choose this without a doubt.";
+            }
+            else if (angleBetweenRotatePoint <= -5 / 180 * Math.PI) {
+                choice = "This is the left choice.";
+            }
+            //设置文本内容和透明度
+            showText.setText(choice).setAlpha(alphaD);
+
+
+            //设置字体参数，用于自动调整字体大小
             var showTextSize = 50;
             showText.setFontSize(showTextSize);
+
+            //用while loop实现自动调整字体大小
+            //showText已经设定过文本的最大宽度了,因此根据文本高度调整字体大小
             while (showText.height > textRect.height) {
                 showTextSize--;
                 showText.setFontSize(showTextSize);
