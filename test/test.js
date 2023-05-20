@@ -10,13 +10,21 @@ class baseTest extends GameScene {
 
     exCreate() {
 
+        //假定卡牌大小为400*600
         var rectW = 400;
         var rectH = 600;
+
+        //卡牌中心位置在屏幕正中间
         var cardRectX = this.cx;
         var cardRectY = this.cy;
+
+        //设置旋转锚点初始位置，位于屏幕正中间往下0.75倍卡牌长度
         var routatePointX = this.cx;
         var routatePointY = this.cy + rectH * 0.75;
+
+        //用distance表示卡牌中心到旋转锚点的距离（虽然没啥用）
         var distance = Phaser.Math.Distance.Between(routatePointX, routatePointY, cardRectX, cardRectY);
+        //以及卡牌中心和旋转锚点连线与x轴的夹角（没用*2）
         var initAngle = Phaser.Math.Angle.Between(routatePointX, routatePointY, cardRectX, cardRectY);
 
         console.log(distance);
