@@ -173,6 +173,25 @@ class title extends GameScene {
             .setFontSize(150)
             .setFontFamily('Gabriola');
 
+        let startText = this.add.text(
+            this.cx,
+            this.cy + 200,
+            "Start"
+            )
+            .setOrigin(0.5)
+            .setFontSize(50)
+            .setAlpha(0.8)
+            .setFontFamily("Century Gothic")
+            .setInteractive()
+            .on("pointerover", () => {
+                startText.setText("· Start").setAlpha(1).setScale(1.1).setColor("#ffff00");
+            })
+            .on("pointerout", () => {
+                startText.setText("Start").setAlpha(0.8).setScale(1).setColor("#ffffff");
+            })
+            .on("pointerup", () => {
+            });
+
     }
 }
 

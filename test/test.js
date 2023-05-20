@@ -25,10 +25,21 @@ class baseTest extends GameScene {
         let routatePoint = this.add.circle(routatePointX, routatePointY, 10, 0xffffff).setAlpha(0.5);
 
         // 设置图片的位置和大小
-        var card = this.add.image(this.cx, this.cy, 'card').setOrigin(0.5);
+        var card = this.add.sprite(this.cx, this.cy, 'card').setOrigin(0.5);
 
         //测试锚点，用于标记图像的位置
-        let testCicle = this.add.circle(distance * Math.cos(initAngle) + routatePointX, distance * Math.sin(initAngle) + routatePointY, 20, 0x00ff00).setAlpha(0);
+        let testCircle = this.add.circle(distance * Math.cos(initAngle) + routatePointX, distance * Math.sin(initAngle) + routatePointY, 20, 0x00ff00).setAlpha(0);
+
+        //设置文本框，在用户互动后再设置其他参数
+        let showText = this.add.text(0, 0, "")
+            .setAlpha(0)
+            .setFontSize(50)
+            .setOrigin(0.5)
+            .setFontFamily("Century Gothic")
+            .setWordWrapWidth(300);
+
+        //设置文本框锚点,用于标记文本框位置
+        let textCircle = this.add.circle(showText.x, showText.y, 10, 0xff00ff).setAlpha(0.5);
 
         this.input.on("pointermove", (pointer) => {
 
@@ -72,15 +83,34 @@ class baseTest extends GameScene {
             console.log(angleBetweenRotatePointD);
 
             //先设置测试锚点的位置
-            testCicle.x = distance * Math.cos(initAngle + angleBetweenRotatePoint) + routatePointX;
-            testCicle.y = distance * Math.sin(initAngle + angleBetweenRotatePoint) + routatePointY;
+            testCircle.x = distance * Math.cos(initAngle + angleBetweenRotatePoint) + routatePointX;
+            testCircle.y = distance * Math.sin(initAngle + angleBetweenRotatePoint) + routatePointY;
 
             //再将测试锚点的坐标赋予卡牌
-            card.x = testCicle.x;
-            card.y = testCicle.y;
+            card.x = testCircle.x;
+            card.y = testCircle.y;
 
             //设置卡牌的旋转角度
             card.setAngle(angleBetweenRotatePointD);
+
+            //设置文本位置和内容
+            showText.x = (distance + 150) * Math.cos(initAngle + angleBetweenRotatePoint) + routatePointX;
+            showText.y = (distance + 150) * Math.sin(initAngle + angleBetweenRotatePoint) + routatePointY;
+            textCircle.x = showText.x;
+            textCircle.y = showText.y;
+
+            var choice = "";
+            var alphaD = 6 * Math.abs(angleBetweenRotatePoint / Math.PI);
+            console.log(alphaD);
+            let callDescribion = this.time.delayedCall(500, (pointer) => {
+                if (angleBetweenRotatePoint >= 15 / 180 * Math.PI) {
+                    choice = "This is right choice.";
+                }
+                else if (angleBetweenRotatePoint <= -15 / 180 * Math.PI) {
+                    choice = "This is left choice.";
+                }
+                showText.setText(choice).setAlpha(alphaD);
+            });
         });
     }
 }

@@ -163,18 +163,20 @@ class SettingScene extends Phaser.Scene {
             .setFontSize(30)
             .setInteractive()
             .on("pointerover", () => {
-                this.FullScreen.setAlpha(1).setScale(1.1).setColor("#444444");
+                this.FullScreen.setText(`· ${fullScreenText}`).setAlpha(1).setScale(1.1).setColor("#444444");
             })
             .on("pointerout", () => {
-                this.FullScreen.setAlpha(0.8).setScale(1).setColor("#000000");
+                this.FullScreen.setText(`${fullScreenText}`).setAlpha(0.8).setScale(1).setColor("#000000");
             })
             .on("pointerup", () => {
                 if (this.scale.isFullscreen) {
                     this.scale.stopFullscreen();
                     this.FullScreen.setText("Full Screen");
+                    fullScreenText = "Full Screen";
                 } else {
                     this.scale.startFullscreen();
                     this.FullScreen.setText("Quit FullScreen");
+                    fullScreenText = "Quit FullScreen";
                 }
             });
 
@@ -190,10 +192,10 @@ class SettingScene extends Phaser.Scene {
             .setFontSize(30)
             .setInteractive()
             .on("pointerover", () => {
-                this.BackTitle.setAlpha(1).setScale(1.1).setColor("#444444");
+                this.BackTitle.setText(`· Go Title`).setAlpha(1).setScale(1.1).setColor("#444444");
             })
             .on("pointerout", () => {
-                this.BackTitle.setAlpha(0.8).setScale(1).setColor("#000000");
+                this.BackTitle.setText(`Go Title`).setAlpha(0.8).setScale(1).setColor("#000000");
             })
             .on("pointerup", () => {
                 if (!this.scene.get('title')) {
@@ -266,10 +268,10 @@ class SettingScene extends Phaser.Scene {
             .setFontSize(30)
             .setInteractive()
             .on("pointerover", () => {
-                this.BackGame.setAlpha(1).setScale(1.1).setColor("#444444");
+                this.BackGame.setText(`· Back`).setAlpha(1).setScale(1.1).setColor("#444444");
             })
             .on("pointerout", () => {
-                this.BackGame.setAlpha(0.8).setScale(1).setColor("#000000");
+                this.BackGame.setText(`Back`).setAlpha(0.8).setScale(1).setColor("#000000");
             })
             .on("pointerup", () => {
                 this.scene.stop("setting");
