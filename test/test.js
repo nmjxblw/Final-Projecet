@@ -106,11 +106,20 @@ class baseTest extends GameScene {
             var angleBetweenRotatePoint = Phaser.Math.Angle.Between(routatePointX, routatePointY, pointer.x, pointer.y) + Math.PI / 2;
             //以锚点为坐标原点，向上和向右为正方向，判断鼠标与y轴的夹角绝对值是否大于30度，如果是则将角度设为30度且方向相同
             if (angleBetweenRotatePoint > Math.PI / 6) {
-                angleBetweenRotatePoint = Math.PI / 6
+                angleBetweenRotatePoint = Math.PI / 6;
             }
             else if (angleBetweenRotatePoint < - Math.PI / 6) {
                 angleBetweenRotatePoint = - Math.PI / 6;
             }
+
+            //设置文本位移，使得文本显示时不超过卡片范围。
+            var textOffsetDirection = 1;
+            if (angleBetweenRotatePoint > 0) {
+                textOffsetDirection = -1;
+            }
+
+            //根据角度大小调整透明度（文本和文本背景）
+            var alphaD = 6 * Math.abs(angleBetweenRotatePoint / Math.PI);
 
             //将角度转化为度数制
             var angleBetweenRotatePointD = Phaser.Math.Wrap(Phaser.Math.RadToDeg(angleBetweenRotatePoint), -360, 360);
@@ -128,18 +137,16 @@ class baseTest extends GameScene {
             card.setAngle(angleBetweenRotatePointD);
 
             //设置文本位置和内容
-            showText.x = (distance + 150) * Math.cos(initAngle + angleBetweenRotatePoint) + routatePointX;
+            showText.x = (distance + 150) * Math.cos(initAngle + angleBetweenRotatePoint) + routatePointX + textOffsetDirection * alphaD * 100;
             showText.y = (distance + 150) * Math.sin(initAngle + angleBetweenRotatePoint) + routatePointY;
             textCircle.x = showText.x;
             textCircle.y = showText.y;
-            textRect.x = showText.x;
+            textRect.x = showText.x - textOffsetDirection * alphaD * 50;
             textRect.y = showText.y;
 
             //设置选项初始值为空
             var choice = "";
 
-            //根据角度大小调整透明度（文本和文本背景）
-            var alphaD = 6 * Math.abs(angleBetweenRotatePoint / Math.PI);
             //将透明度赋予文本背景
             textRect.setAlpha(0.5 * alphaD);
             console.log(`文本框Alpha:${alphaD.toFixed(3)}`);
