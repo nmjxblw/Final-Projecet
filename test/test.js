@@ -24,16 +24,26 @@ class baseTest extends GameScene {
 
         //用distance表示卡牌中心到旋转锚点的距离（虽然没啥用）
         var distance = Phaser.Math.Distance.Between(routatePointX, routatePointY, cardRectX, cardRectY);
-        //以及卡牌中心和旋转锚点连线与x轴的夹角（没用*2）
+        //以及卡牌中心和旋转锚点连线与x轴的夹角
         var initAngle = Phaser.Math.Angle.Between(routatePointX, routatePointY, cardRectX, cardRectY);
 
         console.log(distance);
 
         //显示旋转锚点
-        let routatePoint = this.add.circle(routatePointX, routatePointY, 10, 0xffffff).setAlpha(0.5);
+        let routatePoint = this.add.circle(
+            routatePointX,
+            routatePointY,
+            10,
+            0xffffff)
+            .setAlpha(0.5);
 
         //测试锚点，用于标记图像的位置
-        let testCircle = this.add.circle(distance * Math.cos(initAngle) + routatePointX, distance * Math.sin(initAngle) + routatePointY, 20, 0x00ff00).setAlpha(0);
+        let testCircle = this.add.circle(
+            distance * Math.cos(initAngle) + routatePointX,
+            distance * Math.sin(initAngle) + routatePointY,
+            20,
+            0x00ff00)
+            .setAlpha(0);
 
         //设置文本框，在用户互动后再设置其他参数
         let showText = this.add.text(0, 0, "")
@@ -45,17 +55,24 @@ class baseTest extends GameScene {
             .setWordWrapWidth(300);
 
         //设置文本框锚点,用于标记文本框位置
-        let textCircle = this.add.circle(showText.x, showText.y, 10, 0xff00ff).setAlpha(0);
+        let textCircle = this.add.circle(
+            showText.x,
+            showText.y,
+            10,
+            0xff00ff)
+            .setAlpha(0);
 
-        //设置文本框大小
+        //设置文本背景位置、大小以及深度（位于文本下方）
         let textRect = this.add.rectangle(showText.x, showText.y, 600, 200)
             .setFillStyle(0xffffff)
             .setOrigin(0.5)
             .setAlpha(0)
             .setDepth(showText.depth - 1);
 
-        // 设置图片的位置和大小
-        var card = this.add.sprite(this.cx, this.cy, 'card').setOrigin(0.5).setDepth(textRect.depth - 1);
+        // 设置图片的位置、大小以及深度（位于文本背景的下方）
+        var card = this.add.sprite(this.cx, this.cy, 'card')
+            .setOrigin(0.5)
+            .setDepth(textRect.depth - 1);
 
         //鼠标移动监听
         this.input.on("pointermove", (pointer) => {
@@ -95,7 +112,7 @@ class baseTest extends GameScene {
                 angleBetweenRotatePoint = - Math.PI / 6;
             }
 
-            //将角度转化为度数制用于debug
+            //将角度转化为度数制
             var angleBetweenRotatePointD = Phaser.Math.Wrap(Phaser.Math.RadToDeg(angleBetweenRotatePoint), -360, 360);
             console.log(`当前卡牌的中心与锚点连线与y轴的夹角：${Math.round(angleBetweenRotatePointD)}°`);
 
