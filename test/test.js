@@ -24,14 +24,12 @@ class baseTest extends GameScene {
         //显示旋转锚点
         let routatePoint = this.add.circle(routatePointX, routatePointY, 10, 0xffffff).setAlpha(0.5);
 
-        // 设置图片的位置和大小
-        var card = this.add.sprite(this.cx, this.cy, 'card').setOrigin(0.5);
-
         //测试锚点，用于标记图像的位置
         let testCircle = this.add.circle(distance * Math.cos(initAngle) + routatePointX, distance * Math.sin(initAngle) + routatePointY, 20, 0x00ff00).setAlpha(0);
 
         //设置文本框，在用户互动后再设置其他参数
         let showText = this.add.text(0, 0, "")
+            .setColor("#000")
             .setAlpha(0)
             .setOrigin(0.5)
             .setFontSize(50)
@@ -42,7 +40,14 @@ class baseTest extends GameScene {
         let textCircle = this.add.circle(showText.x, showText.y, 10, 0xff00ff).setAlpha(0);
 
         //设置文本框大小
-        let textRect = this.add.rectangle(showText.x, showText.y, 700, 200).setFillStyle(0xffffff).setOrigin(0.5).setAlpha(0);
+        let textRect = this.add.rectangle(showText.x, showText.y, 600, 200)
+            .setFillStyle(0xffffff)
+            .setOrigin(0.5)
+            .setAlpha(0)
+            .setDepth(showText.depth - 1);
+
+        // 设置图片的位置和大小
+        var card = this.add.sprite(this.cx, this.cy, 'card').setOrigin(0.5).setDepth(textRect.depth - 1);
 
         //鼠标移动监听
         this.input.on("pointermove", (pointer) => {
@@ -104,10 +109,10 @@ class baseTest extends GameScene {
             textCircle.y = showText.y;
             textRect.x = showText.x;
             textRect.y = showText.y;
-            textRect.setAlpha(0.5);
 
             var choice = "";
             var alphaD = 6 * Math.abs(angleBetweenRotatePoint / Math.PI);
+            textRect.setAlpha(0.5 * alphaD);
             console.log(`文本框Alpha:${alphaD.toFixed(3)}`);
             let callDescribion = this.time.delayedCall(500, (pointer) => {
                 if (angleBetweenRotatePoint >= 5 / 180 * Math.PI) {
@@ -123,7 +128,7 @@ class baseTest extends GameScene {
             //设置字体参数，用于之后自动调整字体大小
             var showTextSize = 50;
             showText.setFontSize(showTextSize);
-            while(showText.height > textRect.height){
+            while (showText.height > textRect.height) {
                 showTextSize--;
                 showText.setFontSize(showTextSize);
             }
