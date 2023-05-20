@@ -29,10 +29,25 @@ class baseTest extends GameScene {
 
         var card = this.add.image(this.cx, this.cy, 'card').setOrigin(0.5); // 设置图片的位置和大小
 
+        //测试锚点，用于标记图像的位置
         let testCicle = this.add.circle(distance * Math.cos(initAngle) + routatePointX, distance * Math.sin(initAngle) + routatePointY, 20, 0x00ff00);
 
         this.input.on("pointermove", (pointer) => {
+
+            //通过改变旋转锚点的坐标来实现拖动效果
+            if (pointer.x > this.cx + 10) {
+                routatePointX = this.cx + 10;
+            }
+            else if (pointer.x < this.cx - 10) {
+                routatePointX = this.cx + 10;
+            }
+            else {
+                routatePointX = pointer.x;
+            }
+
+            //angleBetweenRotatePoint用于记录鼠标和锚点之间的角度，正数表示鼠标在旋转锚点右侧，负数表示在旋转锚点左侧
             var angleBetweenRotatePoint = Phaser.Math.Angle.Between(routatePointX, routatePointY, pointer.x, pointer.y) + Math.PI / 2;
+            //以锚点为坐标原点，向上和向右为正方向，判断鼠标与y轴的夹角绝对值是否大于30度，如果是则将角度设为30度且方向相同
             if (angleBetweenRotatePoint > Math.PI / 6) {
                 angleBetweenRotatePoint = Math.PI / 6
             }
@@ -40,14 +55,19 @@ class baseTest extends GameScene {
                 angleBetweenRotatePoint = - Math.PI / 6;
             }
 
+            //将角度转化为度数制用于debug
             var angleBetweenRotatePointD = Phaser.Math.Wrap(Phaser.Math.RadToDeg(angleBetweenRotatePoint), 0, 360);
-            console.log(angleBetweenRotatePoint);
+            console.log(angleBetweenRotatePointD);
+
+            //先设置测试锚点的位置
             testCicle.x = distance * Math.cos(initAngle + angleBetweenRotatePoint) + routatePointX;
             testCicle.y = distance * Math.sin(initAngle + angleBetweenRotatePoint) + routatePointY;
 
+            //再将测试锚点的坐标赋予卡牌
             card.x = testCicle.x;
             card.y = testCicle.y;
 
+            //设置卡牌的旋转角度
             card.setAngle(angleBetweenRotatePointD);
         });
     }
