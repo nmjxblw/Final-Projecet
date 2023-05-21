@@ -5,7 +5,8 @@ function getGameDataExample() {
 
 class baseTest extends GameScene {
     exPreload() {
-        this.load.image("card", "card.png");
+        this.load.image("card1", "card1.png");
+        this.load.image("card2", "card2.png");
     }
 
     exCreate() {
@@ -70,9 +71,39 @@ class baseTest extends GameScene {
             .setDepth(showText.depth - 1);
 
         // 设置图片的位置、大小以及深度（位于文本背景的下方）
-        var card = this.add.sprite(this.cx, this.cy, 'card')
+        var card = this.add.sprite(this.cx, this.cy, 'card1')
             .setOrigin(0.5)
             .setDepth(textRect.depth - 1);
+
+        var backgroundCard = this.add.sprite(this.cx, this.cy, 'card1')
+            .setOrigin(0.5)
+            .setDepth(card.depth - 1);
+
+
+
+        //模拟卡片翻转动画，用于场景过度
+        this.input.on("pointerup", () => {
+            this.tweens.add({
+                targets: card,
+                x: "-= 350",
+                yoyo: true,
+                duration: 400,
+            });
+
+            this.tweens.add({
+                targets: card,
+                scaleX: { from: 1, to: 0 },
+                yoyo: true,
+                duration: 250,
+                repeat: 0,
+                oncompleted: () => {
+                   this.time.delayedCall(250,()=>{
+                    card.setTexture("card2");
+                });
+                },
+            });
+        });
+
 
         //鼠标移动监听
         this.input.on("pointermove", (pointer) => {
@@ -137,11 +168,11 @@ class baseTest extends GameScene {
             card.setAngle(angleBetweenRotatePointD);
 
             //设置文本位置和内容
-            showText.x = (distance + 150) * Math.cos(initAngle + angleBetweenRotatePoint) + routatePointX + textOffsetDirection * alphaD * 100;
+            showText.x = (distance + 150) * Math.cos(initAngle + angleBetweenRotatePoint) + routatePointX + textOffsetDirection * alphaD * 25;
             showText.y = (distance + 150) * Math.sin(initAngle + angleBetweenRotatePoint) + routatePointY;
             textCircle.x = showText.x;
             textCircle.y = showText.y;
-            textRect.x = showText.x - textOffsetDirection * alphaD * 50;
+            textRect.x = showText.x - textOffsetDirection * alphaD * 25;
             textRect.y = showText.y;
 
             //设置选项初始值为空
