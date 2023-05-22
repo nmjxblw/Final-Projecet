@@ -23,7 +23,7 @@ class baseTest extends GameScene {
         var routatePointX = this.cx;
         var routatePointY = this.cy + rectH * 0.75;
 
-        //用distance表示卡牌中心到旋转锚点的距离（虽然没啥用）
+        //用distance表示卡牌中心到旋转锚点的距离
         var distance = Phaser.Math.Distance.Between(routatePointX, routatePointY, cardRectX, cardRectY);
         //以及卡牌中心和旋转锚点连线与x轴的夹角
         var initAngle = Phaser.Math.Angle.Between(routatePointX, routatePointY, cardRectX, cardRectY);
