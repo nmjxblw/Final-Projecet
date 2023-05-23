@@ -141,9 +141,6 @@ class SettingScene extends Phaser.Scene {
         this.cx = this.cameras.main.centerX;
         this.cy = this.cameras.main.centerY;
 
-        //this.backgroundRec1 = this.add.rectangle(this.cx, this.cy, 420, 620).setFillStyle(0x444444).setOrigin(0.5);
-        //this.backgroundRec2 = this.add.rectangle(this.cx, this.cy, 400, 600).setFillStyle(0xffffff).setOrigin(0.5);
-
         this.backgroundRec1 = this.add.graphics();
         this.backgroundRec1.fillStyle(0x444444).fillRoundedRect(this.cx - 210, this.cy - 310, 420, 620);
         this.backgroundBound = this.add.rectangle(this.cx, this.cy, 420, 620).setAlpha(0);
