@@ -28,7 +28,7 @@ class baseTest extends GameScene {
         //以及卡牌中心和旋转锚点连线与x轴的夹角
         var initAngle = Phaser.Math.Angle.Between(routatePointX, routatePointY, cardRectX, cardRectY);
 
-        console.log(distance);
+        //console.log(distance);
 
         //显示旋转锚点
         let routatePoint = this.add.circle(
@@ -97,11 +97,103 @@ class baseTest extends GameScene {
                 duration: 250,
                 repeat: 0,
                 oncompleted: () => {
-                   this.time.delayedCall(250,()=>{
-                    card.setTexture("card2");
-                });
+                    this.time.delayedCall(250, () => {
+                        card.setTexture("card2");
+                    });
                 },
             });
+        });
+
+        //测试按键监听
+        this.input.keyboard.on("keyup", (event) => {
+            if (event.key === 'q') {
+                card.setTexture("card1");
+            }
+            else if (event.key === 'w') {
+                let eventRect = this.add.rectangle(this.cx, this.cy - this.h, 600, 400, 0xf0f0f0).setOrigin(0.5).setAlpha(0.8);
+
+                let eventShow = this.tweens.chain({
+                    targets: eventRect,
+                    tweens: [
+                        {
+                            y: { from: this.cy - this.h, to: this.cy },
+                            ease: 'Back.Out',
+                            duration: 500,
+                        },
+                        {
+                            x: this.cx,
+                            y: this.cy,
+                            duration: 2000,
+                        },
+                        {
+                            y: this.cy + this.h,
+                            ease: "back.in",
+                            duration: 500,
+                        }
+                    ],
+                });
+
+                let eventText = this.add.text(this.cx, this.cy - this.h, 'Event')
+                    .setAlpha(0)
+                    .setOrigin(0.5)
+                    .setFontFamily('Century Gothic')
+                    .setFontSize(50)
+                    .setColor("0x000000")
+                    .setDepth(event.depth + 1);
+
+                let textShow = this.tweens.chain({
+                    targets: eventText,
+                    tweens: [
+                        {
+                            y: { from: this.cy - this.h, to: this.cy },
+                            alpha: { from: 0, to: 1 },
+                            ease: 'Back.Out',
+                            duration: 500,
+                        },
+                        {
+                            x: this.cx,
+                            y: this.cy,
+                            duration: 2000,
+                        },
+                        {
+                            y: this.cy + this.h,
+                            ease: "back.in",
+                            duration: 500,
+                        },
+                    ],
+                });
+
+                let eventStar = this.star(eventText.x - 100, this.cy).setDepth(eventText.depth + 1).setAlpha(0);
+
+                let starShow = this.tweens.chain({
+                    targets: eventStar,
+                    tweens: [
+                        {
+                            y: { from: this.cy - this.h, to: this.cy },
+                            alpha: { from: 0, to: 1 },
+                            ease: 'Back.Out',
+                            duration: 500,
+                        },
+                        {
+                            x: eventText.x - 100,
+                            y: this.cy,
+                            duration: 2000,
+                        },
+                        {
+                            y: this.cy + this.h,
+                            alpha: { from: 1, to: 0 },
+                            ease: "back.in",
+                            duration: 500,
+                        },
+                    ],
+                });
+
+                this.time.delayedCall(3000, () => {
+                    eventRect.destroy();
+                    eventText.destroy();
+                    eventStar.destroy();
+                });
+            }
         });
 
 
@@ -154,7 +246,7 @@ class baseTest extends GameScene {
 
             //将角度转化为度数制
             var angleBetweenRotatePointD = Phaser.Math.Wrap(Phaser.Math.RadToDeg(angleBetweenRotatePoint), -360, 360);
-            console.log(`当前卡牌的中心与锚点连线与y轴的夹角：${Math.round(angleBetweenRotatePointD)}°`);
+            //console.log(`当前卡牌的中心与锚点连线与y轴的夹角：${Math.round(angleBetweenRotatePointD)}°`);
 
             //先设置测试锚点的位置
             testCircle.x = distance * Math.cos(initAngle + angleBetweenRotatePoint) + routatePointX;
@@ -179,8 +271,8 @@ class baseTest extends GameScene {
             var choice = "";
 
             //将透明度赋予文本背景
-            textRect.setAlpha(0.5 * alphaD);
-            console.log(`文本框Alpha:${alphaD.toFixed(3)}`);
+            textRect.setAlpha(0.1 * alphaD);
+            //console.log(`文本框Alpha:${alphaD.toFixed(3)}`);
 
             //添加动画效果和设置选项内容
             if (angleBetweenRotatePoint >= 5 / 180 * Math.PI) {
@@ -203,8 +295,40 @@ class baseTest extends GameScene {
                 showTextSize--;
                 showText.setFontSize(showTextSize);
             }
-            console.log(showText.style.fontSize);
+            //console.log(showText.style.fontSize);
         });
+    }
+
+    star(sx, sy) {
+
+        var pointList = [];
+        var points = 5;
+        var innerAngle = Math.PI / points;
+        var radius = 8;
+        var innerRadius = radius / 2;
+
+        for (var i = 0; i < points * 2; i++) {
+            var radiusToUse = i % 2 === 0 ? radius : innerRadius;
+            var x = radiusToUse * Math.cos(innerAngle * i);
+            var y = radiusToUse * Math.sin(innerAngle * i);
+            pointList.push(x);
+            pointList.push(y);
+        }
+
+        var star = this.add.polygon(sx, sy, pointList, 0xffff00);
+        star.setOrigin(0.5);
+
+        console.log(star);
+
+        // 添加旋转动画
+        this.tweens.add({
+            targets: star,
+            angle: 360,
+            duration: 2000,
+            repeat: -1
+        });
+
+        return star;
     }
 }
 

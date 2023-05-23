@@ -106,7 +106,7 @@ class GameScene extends Phaser.Scene {
             callback: () => {
                 if (this.scene.isActive(this.sceneKey)) {
                     Timer += 1;
-                    console.log(`已在${this.sceneKey}待机了${Timer}秒`);
+                    //console.log(`已在${this.sceneKey}待机了${Timer}秒`);
                 }
             },
             callbackScope: this,
