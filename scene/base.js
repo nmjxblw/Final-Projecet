@@ -154,7 +154,7 @@ class Base extends GameScene {
     
     }
 
-    //调用此参数判断卡片的碰撞效果，参数为卡片的标签
+    //调用此函数判断卡片的碰撞效果，参数为卡片的标签
     CollisionDetection(cardLabel)
     {
         this.matter.world.on('collisionstart', (event,o1,o2) =>
