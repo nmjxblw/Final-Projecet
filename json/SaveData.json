@@ -1,8 +1,8 @@
 {
     "//文件描述":"用于存放玩家数据",
-    "//调用方式":"例子:saveData.Status.Hp",
-    "Status":{
-        "Hp:":1,
-        "Mana":5
+    "//调用方式":"例子:saveData.status.hp",
+    "status":{
+        "hp:":1,
+        "mana":5
     }
 }

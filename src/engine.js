@@ -106,7 +106,7 @@ class GameScene extends Phaser.Scene {
             callback: () => {
                 if (this.scene.isActive(this.sceneKey)) {
                     Timer += 1;
-                    console.log(`已在${this.sceneKey}待机了${Timer}秒`);
+                    //console.log(`已在${this.sceneKey}待机了${Timer}秒`);
                 }
             },
             callbackScope: this,
@@ -141,8 +141,11 @@ class SettingScene extends Phaser.Scene {
         this.cx = this.cameras.main.centerX;
         this.cy = this.cameras.main.centerY;
 
-        this.backgroundRec1 = this.add.rectangle(this.cx, this.cy, 420, 620).setFillStyle(0x444444).setOrigin(0.5);
-        this.backgroundRec2 = this.add.rectangle(this.cx, this.cy, 400, 600).setFillStyle(0xffffff).setOrigin(0.5);
+        this.backgroundRec1 = this.add.graphics();
+        this.backgroundRec1.fillStyle(0x444444).fillRoundedRect(this.cx - 210, this.cy - 310, 420, 620);
+        this.backgroundBound = this.add.rectangle(this.cx, this.cy, 420, 620).setAlpha(0);
+        this.backgroundRec2 = this.add.graphics();
+        this.backgroundRec2.fillStyle(0xffffff).fillRoundedRect(this.cx - 200, this.cy - 300, 400, 600);
 
         //放置全屏按钮
         var fullScreenText = this.scale.isFullscreen ? "Quit FullScreen" : "Full Screen";
@@ -157,18 +160,20 @@ class SettingScene extends Phaser.Scene {
             .setFontSize(30)
             .setInteractive()
             .on("pointerover", () => {
-                this.FullScreen.setAlpha(1).setScale(1.1).setColor("#444444");
+                this.FullScreen.setText(`· ${fullScreenText}`).setAlpha(1).setScale(1.1).setColor("#444444");
             })
             .on("pointerout", () => {
-                this.FullScreen.setAlpha(0.8).setScale(1).setColor("#000000");
+                this.FullScreen.setText(`${fullScreenText}`).setAlpha(0.8).setScale(1).setColor("#000000");
             })
             .on("pointerup", () => {
                 if (this.scale.isFullscreen) {
                     this.scale.stopFullscreen();
                     this.FullScreen.setText("Full Screen");
+                    fullScreenText = "Full Screen";
                 } else {
                     this.scale.startFullscreen();
                     this.FullScreen.setText("Quit FullScreen");
+                    fullScreenText = "Quit FullScreen";
                 }
             });
 
@@ -184,10 +189,10 @@ class SettingScene extends Phaser.Scene {
             .setFontSize(30)
             .setInteractive()
             .on("pointerover", () => {
-                this.BackTitle.setAlpha(1).setScale(1.1).setColor("#444444");
+                this.BackTitle.setText(`· Go Title`).setAlpha(1).setScale(1.1).setColor("#444444");
             })
             .on("pointerout", () => {
-                this.BackTitle.setAlpha(0.8).setScale(1).setColor("#000000");
+                this.BackTitle.setText(`Go Title`).setAlpha(0.8).setScale(1).setColor("#000000");
             })
             .on("pointerup", () => {
                 if (!this.scene.get('title')) {
@@ -260,10 +265,10 @@ class SettingScene extends Phaser.Scene {
             .setFontSize(30)
             .setInteractive()
             .on("pointerover", () => {
-                this.BackGame.setAlpha(1).setScale(1.1).setColor("#444444");
+                this.BackGame.setText(`· Back`).setAlpha(1).setScale(1.1).setColor("#444444");
             })
             .on("pointerout", () => {
-                this.BackGame.setAlpha(0.8).setScale(1).setColor("#000000");
+                this.BackGame.setText(`Back`).setAlpha(0.8).setScale(1).setColor("#000000");
             })
             .on("pointerup", () => {
                 this.scene.stop("setting");
@@ -272,7 +277,7 @@ class SettingScene extends Phaser.Scene {
 
         //当玩家点击菜单外时自动关闭菜单
         this.input.on("pointerup", (pointer) => {
-            if (!this.backgroundRec1.getBounds().contains(pointer.x, pointer.y)) {
+            if (!this.backgroundBound.getBounds().contains(pointer.x, pointer.y)) {
                 this.scene.stop("setting");
                 this.scene.resume(data.currentScene);
             }

@@ -4,21 +4,19 @@ class Base extends GameScene {
         super("Base", "Base");
     }
 
-    exPreload()
-    {
+    exPreload() {
         this.load.image("card", "card.png");
         this.load.image("testPoint", "testpoint.png");
     }
 
-    exCreate() {
-        this.transitionDuration = 1000;
-
-        this.w = this.game.config.width;
-        this.h = this.game.config.height;
+    exShortCut() {
         this.s = this.game.config.width * 0.01;
+    }
+
+    exCreate() {
 
         this.cameras.main.setBackgroundColor('#000');
-        this.cameras.main.fadeIn(this.transitionDuration, 0, 0, 0);
+        this.cameras.main.fadeIn(transitionDuration, 0, 0, 0);
 
         //两种背景图片，暂时为占位资源
         this.background1 = this.add.rectangle(this.w * 0.5 , this.h * 0.5, 650, 900, 0xF0E68C);
@@ -38,9 +36,9 @@ class Base extends GameScene {
         //设置两个触发点的属性为传感器
         this.testpoint1.body.isSensor = true;
         this.testpoint2.body.isSensor = true;
-        
+
         //创建卡片
-        let card1 = this.creatcard('card','card');
+        let card1 = this.creatcard('card', 'card');
 
         //调用旋转函数
         this.dragrotate(card1);
@@ -55,84 +53,75 @@ class Base extends GameScene {
     }
 
     onEnter() {
-        
+        console.warn(`${this.sceneKey}没有设置onEnter()`);
     }
 
     gotoScene(key) {
-        this.cameras.main.fade(this.transitionDuration, 0, 0, 0);
-        this.time.delayedCall(this.transitionDuration, () => {
+        this.cameras.main.fade(transitionDuration, 0, 0, 0);
+        this.time.delayedCall(transitionDuration, () => {
             this.scene.start(key);
         });
     }
 
 
-    showtitle(Levelname)
-    {
+    showtitle(Levelname) {
         this.title = this.add.text(this.w / 2, 30, Levelname,
-        {
-            font: "28px Arial",
-            color: "#ffffff",    
-        });
+            {
+                font: "28px Arial",
+                color: "#ffffff",
+            });
         this.title.setOrigin(0.5);
         this.title.setDepth(2);
     }
 
     //创建卡片，第一个参数为卡片使用的图片名称，第二个参数为卡片的标签
-    creatcard(name,label)
-    {
+    creatcard(name, label) {
         let card = this.matter.add.sprite(this.w * 0.5, this.h * 0.83, name);
 
         card.setBody({
             type: 'rectangle',
             width: 500,
             height: 800,
-          });
+        });
 
         this.matter.body.setStatic(card.body, true);
         card.body.label = label;
 
         card.setOrigin(0.5, 1.0);
-       
+
 
         return card;
     }
 
     //调用此函数使得参数中的卡片可以旋转
-    dragrotate(card)
-    {
-        function dragRotateObject(pointer)
-    {
-        //设置角度和偏移量
-        let angle = Phaser.Math.Angle.Between(pointer.x, pointer.y, card.x, card.y) * Phaser.Math.RAD_TO_DEG;
-        angle += Phaser.Math.RadToDeg(30);
+    dragrotate(card) {
+        function dragRotateObject(pointer) {
+            //设置角度和偏移量
+            let angle = Phaser.Math.Angle.Between(pointer.x, pointer.y, card.x, card.y) * Phaser.Math.RAD_TO_DEG;
+            angle += Phaser.Math.RadToDeg(30);
 
-        //旋转
-        card.rotation = Phaser.Math.DegToRad(angle);
+            //旋转
+            card.rotation = Phaser.Math.DegToRad(angle);
 
-        
-        
-        //添加一些轻微的移动效果
-        if(pointer.x > this.w * 0.5)
-        {
-            if(card.x < this.w * 0.5 + 30)
-            {
-                card.x += 2;
-  
+
+
+            //添加一些轻微的移动效果
+            if (pointer.x > this.w * 0.5) {
+                if (card.x < this.w * 0.5 + 30) {
+                    card.x += 2;
+
+                }
+
             }
-            
-        }
-        else if(pointer.x < this.w * 0.5 )
-        {
-            if(card.x > this.w * 0.5 - 30)
-            {
-                card.x -= 2;
-  
+            else if (pointer.x < this.w * 0.5) {
+                if (card.x > this.w * 0.5 - 30) {
+                    card.x -= 2;
+
+                }
             }
         }
-    }
         //鼠标点下时，如果点击卡片则旋转
-        this.input.on('pointerdown', (pointer) =>
-        {
+        this.input.on('pointerdown', (pointer) => {
             if (pointer.leftButtonDown()) {
                 // 判断点击的是卡片
                 if (card.getBounds().contains(pointer.x, pointer.y)) {
@@ -143,15 +132,14 @@ class Base extends GameScene {
         });
 
         //鼠标抬起时结束旋转回到原位
-        this.input.on('pointerup', (pointer) =>
-        {
+        this.input.on('pointerup', (pointer) => {
             // 停止拖动旋转操作
             this.input.off('pointermove', dragRotateObject, this);
             //回到原位置
             card.setAngle(0);
             card.x = this.w * 0.5;
         });
-    
+
     }
 
     //调用此函数判断卡片的碰撞效果，参数为卡片的标签
@@ -160,18 +148,15 @@ class Base extends GameScene {
         this.matter.world.on('collisionstart', (event,o1,o2) =>
         {
 
-            if([o1.label, o2.label].indexOf(cardLabel) != -1 && [o1.label, o2.label].indexOf('testpoint1') != -1)
-            {
+            if ([o1.label, o2.label].indexOf(cardLabel) != -1 && [o1.label, o2.label].indexOf('testpoint1') != -1) {
                 console.log(1);
             }
 
         });
 
-        this.matter.world.on('collisionstart', (event,o1,o2) =>
-        {
+        this.matter.world.on('collisionstart', (event, o1, o2) => {
 
-            if([o1.label, o2.label].indexOf(cardLabel) != -1 && [o1.label, o2.label].indexOf('testpoint2') != -1)
-            {
+            if ([o1.label, o2.label].indexOf(cardLabel) != -1 && [o1.label, o2.label].indexOf('testpoint2') != -1) {
                 console.log(2);
             }
 
@@ -180,23 +165,19 @@ class Base extends GameScene {
     }
 
 
-    timer(time)
-    {
+    timer(time) {
 
     }
 
-    finish(target_num)
-    {
-        if(target_num < 1)
-        {
-            this.gotoScene('Level'+ level + 'settlement')
+    finish(target_num) {
+        if (target_num < 1) {
+            this.gotoScene('Level' + level + 'settlement')
         }
     }
 
 
-    update()
-    {
-        
+    update() {
+
     }
 
 }
