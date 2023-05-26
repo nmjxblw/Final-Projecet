@@ -84,6 +84,12 @@ class Base extends GameScene {
             .setOrigin(0.5)
             .setAlpha(0)
             .setDepth(3);
+
+        this.textRect2 = this.add.rectangle(this.w * 0.5, this.h * 0.2, 650, 240)
+            .setFillStyle(0xffffff)
+            .setOrigin(0.5)
+            .setAlpha(0.4)
+            .setDepth(3);
  
         // 设置图片的位置、大小以及深度（位于文本背景的下方)
         // let text1 = "This is the right choice. You should choose this without a doubt."
@@ -129,19 +135,44 @@ class Base extends GameScene {
         .setOrigin(0.5)
         .setDepth(1)
 
-        card.live = true;
-        //card.body.label = label;
-
-        
-
+        //card.live = true;
+        card.label = true;
 
         return card;
     }
 
-    //调用此函数使得参数中的卡片可以旋转
+    //调用此函数快速创建一个最上方的text文本框
+    createtext(text)
+    {
+        let textsize = 25;
+
+        let temp = this.add.text(this.textRect2.x, this.textRect2.y, text)
+        .setColor("#000")
+        .setAlpha(0)
+        .setOrigin(0.5)
+        .setDepth(4)
+        .setFontSize(textsize)
+        .setFontFamily("Century Gothic")
+        .setWordWrapWidth(500);       
+
+        while (temp.height > this.textRect2.height) {
+            textsize--;
+            temp.setFontSize(textsize);
+        }
+
+        this.tweens.add({
+            targets: temp,
+            alpha:{from: 0, to: 1},
+            delay:500,
+            duration: 500,
+            ease: 'Linear',
+        })
+
+        return temp;
+    }
+
+    //调用此函数使得参数中的卡片可以旋转，text1,2分别为左右旋转时显示的文本，choose1,2分别为左右松开时选择的选项
     dragrotate(card,text1,text2,choose1,choose2) {
-        if(card.live = true)
-        {
             function dragRotateObject(pointer) {
                 if (pointer.x > this.cardRectX + 20) {
                     this.routatePointX = this.cardRectX + 20;
@@ -218,10 +249,10 @@ class Base extends GameScene {
     
                 //添加动画效果和设置选项内容
                 if (angleBetweenRotatePoint >= 5 / 180 * Math.PI) {
-                    choice = text1;
+                    choice = text2;
                 }
                 else if (angleBetweenRotatePoint <= -5 / 180 * Math.PI) {
-                    choice = text2;
+                    choice = text1;
                 }
                 //设置文本内容和透明度
                 this.showText.setText(choice).setAlpha(alphaD);
@@ -244,7 +275,7 @@ class Base extends GameScene {
             this.input.on('pointerdown', (pointer) => {
                 if (pointer.leftButtonDown()) {
                     // 判断点击的是卡片
-                    if (card.getBounds().contains(pointer.x, pointer.y)) {
+                    if (card.getBounds().contains(pointer.x, pointer.y) && card.label) {
                         // 启用拖动旋转操作
                         this.input.on('pointermove', dragRotateObject, this);
                     }
@@ -253,6 +284,19 @@ class Base extends GameScene {
     
             //鼠标抬起时结束旋转回到原位
             this.input.on('pointerup', (pointer) => {
+                //angleBetweenRotatePoint用于记录鼠标和锚点之间的角度，正数表示鼠标在旋转锚点右侧，负数表示在旋转锚点左侧
+                let angleBetweenRotatePoint = Phaser.Math.Angle.Between(this.routatePointX, this.routatePointY, pointer.x, pointer.y) + Math.PI / 2;
+
+                //以锚点为坐标原点，向上和向右为正方向，判断鼠标与y轴的夹角绝对值是否大于30度，大于正30度选择选项2，小于负30度选择选项以，之后将卡片设置为不可移动
+                if (angleBetweenRotatePoint > Math.PI / 6 && card.label) {
+                    this.events.emit(choose2);
+                    card.label = false;
+                }
+                else if (angleBetweenRotatePoint < - Math.PI / 6 && card.label) {
+                    this.events.emit(choose1);
+                    card.label = false;
+                }
+
                 // 停止拖动旋转操作
                 this.input.off('pointermove', dragRotateObject, this);
                 //回到原位置
@@ -267,7 +311,7 @@ class Base extends GameScene {
                 this.textRect.setAlpha(0);
 
             });
-        }
+        
 
 
     }
@@ -294,6 +338,16 @@ class Base extends GameScene {
 
     }
 
+    //调用此函数快速将一个无用的文本隐藏
+    destorytext(text)
+    {
+        this.tweens.add({
+            targets: text,
+            alpha:{from: 1, to: 0},
+            duration: 300,
+            ease: 'Linear',
+        })
+    }
 
     timer(time) {
 
