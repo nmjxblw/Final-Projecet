@@ -1,6 +1,6 @@
-class testlevel extends Base{
+class testlevel extends Base {
 
-    eventload(){
+    eventload() {
         this.events.once('choose1-1Complete', this.action1, this);
         this.events.once('choose1-2Complete', this.action2, this);
     }
@@ -19,24 +19,18 @@ class testlevel extends Base{
 
 
         //this.card2 = this.creatcard("card1");
-        if(this.card.label == true)
-        {
-            this.dragrotate(this.card,text1,text2,this.choose1_1,this.choose1_2);
+        if (this.card.label == true) {
+            this.dragrotate(this.card, text1, text2, this.choose1_1, this.choose1_2);
         }
-        
+
         //this.dragrotate(card2,text1,text2,this.choose1,this.choose2);
     }
 
-    action1()
-    {
-        this.destorytext(this.choose1_text1);
-        this.choose1_result1 = this.createtext("你死了");
-        
+    action1() {
+        this.changeText(this.choose1_text1, "你死了");
     }
 
-    action2()
-    {
-        this.destorytext(this.choose1_text1);
-        this.choose1_result2 = this.createtext("你也死了");
+    action2() {
+        this.changeText(this.choose1_text1, "你也死了");
     }
 }
