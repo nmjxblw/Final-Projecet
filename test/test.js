@@ -9,6 +9,8 @@ class baseTest extends GameScene {
         this.load.image("card2", "card2.png");
     }
 
+
+
     exCreate() {
 
         //假定卡牌大小为400*600
@@ -39,7 +41,7 @@ class baseTest extends GameScene {
             .setAlpha(0.5);
 
         //测试锚点，用于标记图像的位置
-        let testCircle = this.add.circle(
+        this.testCircle = this.add.circle(
             distance * Math.cos(initAngle) + routatePointX,
             distance * Math.sin(initAngle) + routatePointY,
             20,
@@ -104,6 +106,15 @@ class baseTest extends GameScene {
             });
         });
 
+
+        this.testText = this.add.text(this.cx, this.cy - 200, "test")
+            .setColor("#000")
+            .setAlpha(1)
+            .setOrigin(0.5)
+            .setFontSize(50)
+            .setFontFamily("Century Gothic")
+            .setDepth(card.depth + 1)
+            .setWordWrapWidth(300);
 
         //测试按键监听
         this.input.keyboard.on("keyup", (event) => {
@@ -200,8 +211,23 @@ class baseTest extends GameScene {
                 this.tweens.add({
                     targets: card,
                     angle: "+=90",
-                    x: { from: card.x, to: card.x + distance * Math.cos(90) },
-                    y: { from: card.y, to: card.y + distance * Math.sin(90) },
+                    x: { from: card.x, to: routatePoint.x + distance * Math.cos(90 * Math.PI / 180) },
+                    y: { from: card.y, to: routatePoint.y + distance * Math.sin(90 * Math.PI / 180) },
+                });
+            }
+
+            else if (event.key === 'r') {
+                this.tweens.add({
+                    targets:this.testText,
+                    alpha: { from: 1, to: 0 },
+                    yoyo: true,
+                    repeat: false,
+                    duration: 500,
+                    oncompleted: () => {
+                        this.time.delayedCall(500, () => {
+                            this.testText.setText("good");
+                        });
+                    },
                 });
             }
         });
@@ -259,12 +285,12 @@ class baseTest extends GameScene {
             //console.log(`当前卡牌的中心与锚点连线与y轴的夹角：${Math.round(angleBetweenRotatePointD)}°`);
 
             //先设置测试锚点的位置
-            testCircle.x = distance * Math.cos(initAngle + angleBetweenRotatePoint) + routatePointX;
-            testCircle.y = distance * Math.sin(initAngle + angleBetweenRotatePoint) + routatePointY;
+            this.testCircle.x = distance * Math.cos(initAngle + angleBetweenRotatePoint) + routatePointX;
+            this.testCircle.y = distance * Math.sin(initAngle + angleBetweenRotatePoint) + routatePointY;
 
             //再将测试锚点的坐标赋予卡牌
-            card.x = testCircle.x;
-            card.y = testCircle.y;
+            card.x = this.testCircle.x;
+            card.y = this.testCircle.y;
 
             //设置卡牌的旋转角度
             card.setAngle(angleBetweenRotatePointD);
