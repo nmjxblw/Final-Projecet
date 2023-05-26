@@ -5,7 +5,8 @@ class Base extends GameScene {
     }
 
     exPreload() {
-        this.load.image("card", "card.png");
+        this.load.image("card1", "card1.png");
+        this.load.image("card2", "card2.png");
         this.load.image("testPoint", "testpoint.png");
     }
 
@@ -18,42 +19,84 @@ class Base extends GameScene {
         this.cameras.main.setBackgroundColor('#000');
         this.cameras.main.fadeIn(transitionDuration, 0, 0, 0);
 
-        //两种背景图片，暂时为占位资源
         this.background1 = this.add.rectangle(this.w * 0.5 , this.h * 0.5, 650, 900, 0xF0E68C);
-        this.background2 = this.add.rectangle(this.w * 0.5 , this.h * 0.6, 490, 490, 0x00FF00);
-        //两个触发点
-        this.testpoint1 = this.matter.add.sprite(this.w * 0.32, this.h * 0.65,'testPoint');
-        this.testpoint2 = this.matter.add.sprite(this.w * 0.68, this.h * 0.65,'testPoint');
+        this.background1.setDepth(1);
 
-        //添加标签
-        this.testpoint1.body.label = 'testpoint1';
-        this.testpoint2.body.label = 'testpoint2';
+         //假定卡牌大小为400*600
+         this.rectW = 400;
+         this.rectH = 600;
+ 
+         //卡牌中心位置在屏幕正中间
+         this.cardRectX = this.cx;
+         this.cardRectY = this.h * 0.58;
+ 
+         //设置旋转锚点初始位置，位于屏幕正中间往下0.75倍卡牌长度
+         this.routatePointX = this.cardRectX;
+         this.routatePointY = this.cardRectY + this.rectH * 0.75;
+ 
+         //用distance表示卡牌中心到旋转锚点的距离
+         this.distance = Phaser.Math.Distance.Between(this.routatePointX, this.routatePointY, this.cardRectX, this.cardRectY);
+         //以及卡牌中心和旋转锚点连线与x轴的夹角
+         this.initAngle = Phaser.Math.Angle.Between(this.routatePointX, this.routatePointY, this.cardRectX, this.cardRectY);
+ 
+         //console.log(distance);
+ 
+         //显示旋转锚点
+         this.routatePoint = this.add.circle(
+            this.routatePointX,
+            this.routatePointY,
+             10,
+             0xffffff)
+             .setAlpha(1);
+ 
+         //测试锚点，用于标记图像的位置
+         this.testCircle = this.add.circle(
+            this.distance * Math.cos(this.initAngle) + this.routatePointX,
+            this.distance * Math.sin(this.initAngle) + this.routatePointY,
+             20,
+             0x00ff00)
+             .setAlpha(0.5);
+ 
+         //设置文本框，在用户互动后再设置其他参数
+         this.showText = this.add.text(0, 0, "")
+             .setColor("#000")
+             .setAlpha(0)
+             .setOrigin(0.5)
+             .setDepth(4)
+             .setFontSize(50)
+             .setFontFamily("Century Gothic")
+             .setWordWrapWidth(300);
+             
+ 
+         //设置文本框锚点,用于标记文本框位置
+         this.textCircle = this.add.circle(
+            this.showText.x,
+            this.showText.y,
+             10,
+             0xff00ff)
+             .setAlpha(0.5);
+ 
+         //设置文本背景位置、大小以及深度（位于文本下方）
+         this.textRect = this.add.rectangle(this.showText.x, this.showText.y, 600, 200)
+             .setFillStyle(0xffffff)
+             .setOrigin(0.5)
+             .setAlpha(0)
+             .setDepth(3);
+ 
+         // 设置图片的位置、大小以及深度（位于文本背景的下方)
+        let text1 = "This is the right choice. You should choose this without a doubt."
+        let text2 = "This is the left choice."
+        let card = this.creatcard("card1");
 
-        //添加设置不透明
-        this.testpoint1.alpha = 0;
-        this.testpoint2.alpha = 0;
 
-        //设置两个触发点的属性为传感器
-        this.testpoint1.body.isSensor = true;
-        this.testpoint2.body.isSensor = true;
-
-        //创建卡片
-        let card1 = this.creatcard('card', 'card');
-
-        //调用旋转函数
-        this.dragrotate(card1);
-
-        //调用覆盖检测
-        this.CollisionDetection('card');
-
-
+        this.dragrotate(card,text1,text2);
 
         this.onEnter();
 
     }
 
     onEnter() {
-        console.warn(`${this.sceneKey}没有设置onEnter()`);
+        //console.warn(`${this.sceneKey}没有设置onEnter()`);
     }
 
     gotoScene(key) {
@@ -75,70 +118,151 @@ class Base extends GameScene {
     }
 
     //创建卡片，第一个参数为卡片使用的图片名称，第二个参数为卡片的标签
-    creatcard(name, label) {
-        let card = this.matter.add.sprite(this.w * 0.5, this.h * 0.83, name);
+    creatcard(name) {
+        let card = this.add.sprite(this.cardRectX, this.cardRectY, name)
+        .setOrigin(0.5)
+        .setDepth(1)
 
-        card.setBody({
-            type: 'rectangle',
-            width: 500,
-            height: 800,
-        });
+        card.live = true;
+        //card.body.label = label;
 
-        this.matter.body.setStatic(card.body, true);
-        card.body.label = label;
-
-        card.setOrigin(0.5, 1.0);
+        
 
 
         return card;
     }
 
     //调用此函数使得参数中的卡片可以旋转
-    dragrotate(card) {
-        function dragRotateObject(pointer) {
-            //设置角度和偏移量
-            let angle = Phaser.Math.Angle.Between(pointer.x, pointer.y, card.x, card.y) * Phaser.Math.RAD_TO_DEG;
-            angle += Phaser.Math.RadToDeg(30);
-
-            //旋转
-            card.rotation = Phaser.Math.DegToRad(angle);
-
-
-
-            //添加一些轻微的移动效果
-            if (pointer.x > this.w * 0.5) {
-                if (card.x < this.w * 0.5 + 30) {
-                    card.x += 2;
-
+    dragrotate(card,text1,text2) {
+        if(card.live = true)
+        {
+            function dragRotateObject(pointer) {
+                if (pointer.x > this.cardRectX + 20) {
+                    this.routatePointX = this.cardRectX + 20;
                 }
-
-            }
-            else if (pointer.x < this.w * 0.5) {
-                if (card.x > this.w * 0.5 - 30) {
-                    card.x -= 2;
-
+                else if (pointer.x < this.cardRectX - 20) {
+                    this.routatePointX = this.cardRectX - 20;
                 }
+                else {
+                    this.routatePointX = pointer.x;
+                }
+    
+                this.routatePoint.x = this.routatePointX;
+    
+                if (pointer.y > this.cardRectY + 10) {
+                    this.routatePointY = this.cardRectY + this.rectH * 0.75 + 10;
+                }
+                else if (pointer.y < this.cardRectY - 10) {
+                    this.routatePointY = this.cardRectY + this.rectH * 0.75 - 10;
+                }
+                else {
+                    this.routatePointY = pointer.y + this.rectH * 0.75;
+                }
+    
+                this.routatePoint.y = this.routatePointY;
+    
+                //angleBetweenRotatePoint用于记录鼠标和锚点之间的角度，正数表示鼠标在旋转锚点右侧，负数表示在旋转锚点左侧
+                var angleBetweenRotatePoint = Phaser.Math.Angle.Between(this.routatePointX, this.routatePointY, pointer.x, pointer.y) + Math.PI / 2;
+                //以锚点为坐标原点，向上和向右为正方向，判断鼠标与y轴的夹角绝对值是否大于30度，如果是则将角度设为30度且方向相同
+                if (angleBetweenRotatePoint > Math.PI / 6) {
+                    angleBetweenRotatePoint = Math.PI / 6;
+                }
+                else if (angleBetweenRotatePoint < - Math.PI / 6) {
+                    angleBetweenRotatePoint = - Math.PI / 6;
+                }
+    
+                //设置文本位移，使得文本显示时不超过卡片范围。
+                var textOffsetDirection = 1;
+                if (angleBetweenRotatePoint > 0) {
+                    textOffsetDirection = -1;
+                }
+    
+                //根据角度大小调整透明度（文本和文本背景）
+                var alphaD = 6 * Math.abs(angleBetweenRotatePoint / Math.PI);
+    
+                //将角度转化为度数制
+                var angleBetweenRotatePointD = Phaser.Math.Wrap(Phaser.Math.RadToDeg(angleBetweenRotatePoint), -360, 360);
+                //console.log(`当前卡牌的中心与锚点连线与y轴的夹角：${Math.round(angleBetweenRotatePointD)}°`);
+    
+                //先设置测试锚点的位置
+                this.testCircle.x = this.distance * Math.cos(this.initAngle + angleBetweenRotatePoint) + this.routatePointX;
+                this.testCircle.y = this.distance * Math.sin(this.initAngle + angleBetweenRotatePoint) + this.routatePointY;
+    
+                //再将测试锚点的坐标赋予卡牌
+                card.x = this.testCircle.x;
+                card.y = this.testCircle.y;
+    
+                //设置卡牌的旋转角度
+                card.setAngle(angleBetweenRotatePointD);
+    
+                //设置文本位置和内容
+                this.showText.x = (this.distance + 150) * Math.cos(this.initAngle + angleBetweenRotatePoint) + this.routatePointX + textOffsetDirection * alphaD * 25;
+                this.showText.y = (this.distance + 150) * Math.sin(this.initAngle + angleBetweenRotatePoint) + this.routatePointY;
+                this.textCircle.x = this.showText.x;
+                this.textCircle.y = this.showText.y;
+                this.textRect.x = this.showText.x - textOffsetDirection * alphaD * 25;
+                this.textRect.y = this.showText.y;
+    
+                //设置选项初始值为空
+                var choice = "";
+    
+                //将透明度赋予文本背景
+                this.textRect.setAlpha(0.1 * alphaD);
+                //console.log(`文本框Alpha:${alphaD.toFixed(3)}`);
+    
+                //添加动画效果和设置选项内容
+                if (angleBetweenRotatePoint >= 5 / 180 * Math.PI) {
+                    choice = text1;
+                }
+                else if (angleBetweenRotatePoint <= -5 / 180 * Math.PI) {
+                    choice = text2;
+                }
+                //设置文本内容和透明度
+                this.showText.setText(choice).setAlpha(alphaD);
+    
+    
+                //设置字体参数，用于自动调整字体大小
+                var showTextSize = 50;
+                this.showText.setFontSize(showTextSize);
+    
+                //用while loop实现自动调整字体大小
+                //showText已经设定过文本的最大宽度了,因此根据文本高度调整字体大小
+                while (this.showText.height > this.textRect.height) {
+                    showTextSize--;
+                    this.showText.setFontSize(showTextSize);
+                }
+                
             }
+    
+            //鼠标点下时，如果点击卡片则旋转
+            this.input.on('pointerdown', (pointer) => {
+                if (pointer.leftButtonDown()) {
+                    // 判断点击的是卡片
+                    if (card.getBounds().contains(pointer.x, pointer.y)) {
+                        // 启用拖动旋转操作
+                        this.input.on('pointermove', dragRotateObject, this);
+                    }
+                }
+            });
+    
+            //鼠标抬起时结束旋转回到原位
+            this.input.on('pointerup', (pointer) => {
+                // 停止拖动旋转操作
+                this.input.off('pointermove', dragRotateObject, this);
+                //回到原位置
+                card.setAngle(0);
+                card.x = this.cardRectX;
+                card.y = this.cardRectY;
+                this.routatePointX = this.cardRectX;
+                this.routatePointY = this.cardRectY + this.rectH * 0.75;
+                this.routatePoint.x = this.routatePointX;
+                this.routatePoint.y = this.routatePointY;
+                this.showText.setAlpha(0);
+                this.textRect.setAlpha(0);
+    
+            });
         }
-        //鼠标点下时，如果点击卡片则旋转
-        this.input.on('pointerdown', (pointer) => {
-            if (pointer.leftButtonDown()) {
-                // 判断点击的是卡片
-                if (card.getBounds().contains(pointer.x, pointer.y)) {
-                    // 启用拖动旋转操作
-                    this.input.on('pointermove', dragRotateObject, this);
-                }
-            }
-        });
 
-        //鼠标抬起时结束旋转回到原位
-        this.input.on('pointerup', (pointer) => {
-            // 停止拖动旋转操作
-            this.input.off('pointermove', dragRotateObject, this);
-            //回到原位置
-            card.setAngle(0);
-            card.x = this.w * 0.5;
-        });
 
     }
 
