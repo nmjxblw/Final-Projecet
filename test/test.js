@@ -44,7 +44,7 @@ class baseTest extends GameScene {
             distance * Math.sin(initAngle) + routatePointY,
             20,
             0x00ff00)
-            .setAlpha(0);
+            .setAlpha(1);
 
         //设置文本框，在用户互动后再设置其他参数
         let showText = this.add.text(0, 0, "")
@@ -103,6 +103,7 @@ class baseTest extends GameScene {
                 },
             });
         });
+
 
         //测试按键监听
         this.input.keyboard.on("keyup", (event) => {
@@ -192,6 +193,15 @@ class baseTest extends GameScene {
                     eventRect.destroy();
                     eventText.destroy();
                     eventStar.destroy();
+                });
+            }
+
+            else if (event.key === 'e') {
+                this.tweens.add({
+                    targets: card,
+                    angle: "+=90",
+                    x: { from: card.x, to: card.x + distance * Math.cos(90) },
+                    y: { from: card.y, to: card.y + distance * Math.sin(90) },
                 });
             }
         });

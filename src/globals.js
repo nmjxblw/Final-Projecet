@@ -94,3 +94,47 @@ function initializeLocal() {
     localStorage.clear();
     loadSaveData();
 }
+
+// 监听全屏事件
+document.addEventListener("fullscreenchange", handleFullscreenChange);
+document.addEventListener("webkitfullscreenchange", handleFullscreenChange);
+document.addEventListener("mozfullscreenchange", handleFullscreenChange);
+document.addEventListener("MSFullscreenChange", handleFullscreenChange);
+
+// 全屏事件处理函数
+function handleFullscreenChange() {
+  if (document.fullscreenElement || document.webkitFullscreenElement ||
+    document.mozFullScreenElement || document.msFullscreenElement) {
+    // 进入全屏时设置为横屏
+    setLandscapeOrientation();
+  } else {
+    // 退出全屏时恢复默认方向（如纵向）
+    setDefaultOrientation();
+  }
+}
+
+// 设置横屏
+function setLandscapeOrientation() {
+  if (screen.orientation && screen.orientation.lock) {
+    screen.orientation.lock("landscape");
+  } else if (screen.lockOrientation) {
+    screen.lockOrientation("landscape");
+  } else if (screen.mozLockOrientation) {
+    screen.mozLockOrientation("landscape");
+  } else if (screen.msLockOrientation) {
+    screen.msLockOrientation("landscape");
+  }
+}
+
+// 设置默认方向（如纵向）
+function setDefaultOrientation() {
+  if (screen.orientation && screen.orientation.unlock) {
+    screen.orientation.unlock();
+  } else if (screen.unlockOrientation) {
+    screen.unlockOrientation();
+  } else if (screen.mozUnlockOrientation) {
+    screen.mozUnlockOrientation();
+  } else if (screen.msUnlockOrientation) {
+    screen.msUnlockOrientation();
+  }
+}

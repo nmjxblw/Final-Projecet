@@ -296,7 +296,7 @@ class Base extends GameScene {
 
 
     timer(time) {
-
+        
     }
 
     finish(target_num) {

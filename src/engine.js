@@ -200,6 +200,7 @@ class SettingScene extends Phaser.Scene {
                 }
                 else {
                     this.cameras.main.fade(500, 0, 0, 0);
+                    this.scene.stop(data.currentScene);
                     this.scene.start("title");
                 }
             });
