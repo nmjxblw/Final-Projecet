@@ -190,8 +190,34 @@ class title extends GameScene {
                 startText.setText("Start").setAlpha(0.8).setScale(1).setColor("#ffffff");
             })
             .on("pointerup", () => {
+                this.camera.main.fade(1000,0,0,0);
+                this.time.delayedCall(1000,()=>{
+                    this.scene.start("intro");
+                });
             });
 
+        this.creditText = this.add.this.add.text(
+            this.cx,
+            this.cy + 300,
+            "Credit"
+            )
+            .setOrigin(0.5)
+            .setFontSize(50)
+            .setAlpha(0.8)
+            .setFontFamily("Century Gothic")
+            .setInteractive()
+            .on("pointerover", () => {
+                creditText.setText("· Credit").setAlpha(1).setScale(1.1).setColor("#ffff00");
+            })
+            .on("pointerout", () => {
+                creditText.setText("Credit").setAlpha(0.8).setScale(1).setColor("#ffffff");
+            })
+            .on("pointerup", () => {
+                this.camera.main.fade(1000,0,0,0);
+                this.time.delayedCall(1000,()=>{
+                    this.scene.start("credit");
+                });
+            });
     }
 }
 
@@ -214,8 +240,8 @@ const game = new Phaser.Game({
             debug: true
         }
     },
-    //scene: [openning, warnning, testScene, testScene2, title],
-    scene: [Base],
+    //scene: [openning, warnning, testScene, testScene2, title, intro],
+    scene: [testlevel],
     //scene: [baseTest1, baseTest2],
     backgroundColor: 0x000000,
     title: "Game",

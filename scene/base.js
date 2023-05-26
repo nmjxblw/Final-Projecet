@@ -8,6 +8,8 @@ class Base extends GameScene {
         this.load.image("card1", "card1.png");
         this.load.image("card2", "card2.png");
         this.load.image("testPoint", "testpoint.png");
+
+        this.eventload();
     }
 
     exShortCut() {
@@ -22,74 +24,74 @@ class Base extends GameScene {
         this.background1 = this.add.rectangle(this.w * 0.5 , this.h * 0.5, 650, 900, 0xF0E68C);
         this.background1.setDepth(1);
 
-         //假定卡牌大小为400*600
-         this.rectW = 400;
-         this.rectH = 600;
+        //假定卡牌大小为400*600
+        this.rectW = 400;
+        this.rectH = 600;
  
-         //卡牌中心位置在屏幕正中间
-         this.cardRectX = this.cx;
-         this.cardRectY = this.h * 0.58;
+        //卡牌中心位置在屏幕正中间
+        this.cardRectX = this.cx;
+        this.cardRectY = this.h * 0.59;
  
-         //设置旋转锚点初始位置，位于屏幕正中间往下0.75倍卡牌长度
-         this.routatePointX = this.cardRectX;
-         this.routatePointY = this.cardRectY + this.rectH * 0.75;
+        //设置旋转锚点初始位置，位于屏幕正中间往下0.75倍卡牌长度
+        this.routatePointX = this.cardRectX;
+        this.routatePointY = this.cardRectY + this.rectH * 0.75;
  
-         //用distance表示卡牌中心到旋转锚点的距离
-         this.distance = Phaser.Math.Distance.Between(this.routatePointX, this.routatePointY, this.cardRectX, this.cardRectY);
-         //以及卡牌中心和旋转锚点连线与x轴的夹角
-         this.initAngle = Phaser.Math.Angle.Between(this.routatePointX, this.routatePointY, this.cardRectX, this.cardRectY);
+        //用distance表示卡牌中心到旋转锚点的距离
+        this.distance = Phaser.Math.Distance.Between(this.routatePointX, this.routatePointY, this.cardRectX, this.cardRectY);
+        //以及卡牌中心和旋转锚点连线与x轴的夹角
+        this.initAngle = Phaser.Math.Angle.Between(this.routatePointX, this.routatePointY, this.cardRectX, this.cardRectY);
  
-         //console.log(distance);
+        //console.log(distance);
  
-         //显示旋转锚点
-         this.routatePoint = this.add.circle(
+        //显示旋转锚点
+        this.routatePoint = this.add.circle(
             this.routatePointX,
             this.routatePointY,
              10,
              0xffffff)
              .setAlpha(1);
  
-         //测试锚点，用于标记图像的位置
-         this.testCircle = this.add.circle(
+        //测试锚点，用于标记图像的位置
+        this.testCircle = this.add.circle(
             this.distance * Math.cos(this.initAngle) + this.routatePointX,
             this.distance * Math.sin(this.initAngle) + this.routatePointY,
-             20,
-             0x00ff00)
-             .setAlpha(0.5);
+            20,
+            0x00ff00)
+            .setAlpha(0.5);
  
-         //设置文本框，在用户互动后再设置其他参数
-         this.showText = this.add.text(0, 0, "")
-             .setColor("#000")
-             .setAlpha(0)
-             .setOrigin(0.5)
-             .setDepth(4)
-             .setFontSize(50)
-             .setFontFamily("Century Gothic")
-             .setWordWrapWidth(300);
+        //设置文本框，在用户互动后再设置其他参数
+        this.showText = this.add.text(0, 0, "")
+            .setColor("#000")
+            .setAlpha(0)
+            .setOrigin(0.5)
+            .setDepth(4)
+            .setFontSize(50)
+            .setFontFamily("Century Gothic")
+            .setWordWrapWidth(300);
              
  
-         //设置文本框锚点,用于标记文本框位置
-         this.textCircle = this.add.circle(
+        //设置文本框锚点,用于标记文本框位置
+        this.textCircle = this.add.circle(
             this.showText.x,
             this.showText.y,
-             10,
-             0xff00ff)
-             .setAlpha(0.5);
+            10,
+            0xff00ff)
+            .setAlpha(0.5);
  
-         //设置文本背景位置、大小以及深度（位于文本下方）
-         this.textRect = this.add.rectangle(this.showText.x, this.showText.y, 600, 200)
-             .setFillStyle(0xffffff)
-             .setOrigin(0.5)
-             .setAlpha(0)
-             .setDepth(3);
+        //设置文本背景位置、大小以及深度（位于文本下方）
+        this.textRect = this.add.rectangle(this.showText.x, this.showText.y, 600, 200)
+            .setFillStyle(0xffffff)
+            .setOrigin(0.5)
+            .setAlpha(0)
+            .setDepth(3);
  
-         // 设置图片的位置、大小以及深度（位于文本背景的下方)
-        let text1 = "This is the right choice. You should choose this without a doubt."
-        let text2 = "This is the left choice."
-        let card = this.creatcard("card1");
+        // 设置图片的位置、大小以及深度（位于文本背景的下方)
+        // let text1 = "This is the right choice. You should choose this without a doubt."
+        // let text2 = "This is the left choice."
+        // let card = this.creatcard("card1");
 
 
-        this.dragrotate(card,text1,text2);
+        // this.dragrotate(card,text1,text2);
 
         this.onEnter();
 
@@ -97,6 +99,10 @@ class Base extends GameScene {
 
     onEnter() {
         //console.warn(`${this.sceneKey}没有设置onEnter()`);
+    }
+
+    eventload(){
+
     }
 
     gotoScene(key) {
@@ -133,7 +139,7 @@ class Base extends GameScene {
     }
 
     //调用此函数使得参数中的卡片可以旋转
-    dragrotate(card,text1,text2) {
+    dragrotate(card,text1,text2,choose1,choose2) {
         if(card.live = true)
         {
             function dragRotateObject(pointer) {
@@ -259,7 +265,7 @@ class Base extends GameScene {
                 this.routatePoint.y = this.routatePointY;
                 this.showText.setAlpha(0);
                 this.textRect.setAlpha(0);
-    
+
             });
         }
 
