@@ -339,13 +339,20 @@ class Base extends GameScene {
     }
 
     //调用此函数快速将一个无用的文本隐藏
-    destorytext(text)
+    changeText(text,new_text)
     {
         this.tweens.add({
             targets: text,
             alpha:{from: 1, to: 0},
-            duration: 300,
+            duration:300,
             ease: 'Linear',
+            repeat:false,
+            yoyo:true,
+            oncomplete:()=>{
+                this.time.delayedCall(300,()=>{
+                    text.setText(new_text);
+                })
+            },
         })
     }
 

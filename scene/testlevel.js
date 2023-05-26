@@ -1,6 +1,6 @@
-class testlevel extends Base{
+class testlevel extends Base {
 
-    eventload(){
+    eventload() {
         this.events.once('choose1-1Complete', this.action1, this);
         this.events.once('choose1-2Complete', this.action2, this);
 
@@ -27,12 +27,8 @@ class testlevel extends Base{
         
     }
 
-    action1()
-    {
-
-        this.destorytext(this.choose1_text1);
-        this.choose1_result1 = this.createtext("你死了");
-        
+    action1() {
+        this.changeText(this.choose1_text1, "你死了");
     }
 
     action2()
