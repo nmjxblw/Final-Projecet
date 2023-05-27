@@ -323,6 +323,8 @@ class baseTest extends GameScene {
             card.x,
             card.y);
 
+        console.log(rotateAngle);
+
         let dToR = Math.PI / 180;//degree 1
         let rToD = 180 / Math.PI;
         let bar = this.distance;
@@ -331,14 +333,20 @@ class baseTest extends GameScene {
             loop: true,
             delay: 10,
             callback: () => {
-                if (rotateAngle <= 0) {
-                    rotateAngle += dToR * 1.8;
-                    bar += 10;
-                    card.x = this.rotatePoint.x + bar * Math.cos(rotateAngle);
-                    card.y = this.rotatePoint.y + bar * Math.sin(rotateAngle);
-                    card.angle = Phaser.Math.Wrap(Phaser.Math.RadToDeg(rotateAngle + Math.PI / 2), -360, 360);
+                if (rotateAngle <= Math.PI / 4 && rotateAngle > -Math.PI / 2) {
+                    rotateAngle += dToR * 2.7;
+
                 }
-                else {
+                else if (rotateAngle <= -Math.PI / 2 && rotateAngle >= -Math.PI * 5 / 4) {
+                    rotateAngle -= dToR * 2.7;
+                }
+
+                bar += 10;
+                card.x = this.rotatePoint.x + bar * Math.cos(rotateAngle);
+                card.y = this.rotatePoint.y + bar * Math.sin(rotateAngle);
+                card.angle = Phaser.Math.Wrap(Phaser.Math.RadToDeg(rotateAngle + Math.PI / 2), -360, 360);
+
+                if (rotateAngle > Math.PI / 4 || rotateAngle < -Math.PI * 5 / 4) {
                     this.cardReset(card);
                     rotateAnime.destroy();
                 }
