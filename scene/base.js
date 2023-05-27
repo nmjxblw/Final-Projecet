@@ -291,14 +291,25 @@ class Base extends GameScene {
                 if (angleBetweenRotatePoint > Math.PI / 6 && card.label) {
                     this.events.emit(choose2);
                     card.label = false;
+                    this.switchCard(card);
+
                 }
                 else if (angleBetweenRotatePoint < - Math.PI / 6 && card.label) {
                     this.events.emit(choose1);
                     card.label = false;
+                    this.switchCard(card);
+                }
+                else
+                {
+                    //回到原位置
+                    card.setAngle(0);
+                    card.x = this.cardRectX;
+                    card.y = this.cardRectY;
                 }
 
                 // 停止拖动旋转操作
                 this.input.off('pointermove', dragRotateObject, this);
+                
                 //回到原位置
                 card.setAngle(0);
                 card.x = this.cardRectX;
@@ -316,29 +327,7 @@ class Base extends GameScene {
 
     }
 
-    //调用此函数判断卡片的碰撞效果，参数为卡片的标签
-    CollisionDetection(cardLabel)
-    {
-        this.matter.world.on('collisionstart', (event,o1,o2) =>
-        {
-
-            if ([o1.label, o2.label].indexOf(cardLabel) != -1 && [o1.label, o2.label].indexOf('testpoint1') != -1) {
-                console.log(1);
-            }
-
-        });
-
-        this.matter.world.on('collisionstart', (event, o1, o2) => {
-
-            if ([o1.label, o2.label].indexOf(cardLabel) != -1 && [o1.label, o2.label].indexOf('testpoint2') != -1) {
-                console.log(2);
-            }
-
-        });
-
-    }
-
-    //调用此函数快速将一个无用的文本隐藏
+    //调用此函数快速将替换文本框文本
     changeText(text,new_text)
     {
         this.tweens.add({
@@ -354,6 +343,31 @@ class Base extends GameScene {
                 })
             },
         })
+    }
+
+    switchCard(card)
+    {
+        this.tweens.add({
+            targets: card,
+            x: "-= 350",
+            yoyo: true,
+            duration: 400,
+        });
+
+
+        this.tweens.add({
+            targets: card,
+            scaleX: { from: 1, to: 0 },
+            yoyo: true,
+            duration: 250,
+            repeat: 0,
+            oncompleted: () => {
+                this.time.delayedCall(250, () => {
+                    card.setTexture("card1");
+                    
+                });
+            },
+        }); 
     }
 
     timer(time) {
