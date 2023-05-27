@@ -14,36 +14,36 @@ class baseTest extends GameScene {
     exCreate() {
 
         //假定卡牌大小为400*600
-        var rectW = 400;
-        var rectH = 600;
+        this.rectW = 400;
+        this.rectH = 600;
 
         //卡牌中心位置在屏幕正中间
         var cardRectX = this.cx;
         var cardRectY = this.cy;
 
         //设置旋转锚点初始位置，位于屏幕正中间往下0.75倍卡牌长度
-        var routatePointX = this.cx;
-        var routatePointY = this.cy + rectH * 0.75;
+        this.rotatePointX = this.cx;
+        this.rotatePointY = this.cy + this.rectH * 0.75;
 
-        //用distance表示卡牌中心到旋转锚点的距离
-        var distance = Phaser.Math.Distance.Between(routatePointX, routatePointY, cardRectX, cardRectY);
+        //用this.distance表示卡牌中心到旋转锚点的距离
+        this.distance = Phaser.Math.Distance.Between(this.rotatePointX, this.rotatePointY, cardRectX, cardRectY);
         //以及卡牌中心和旋转锚点连线与x轴的夹角
-        var initAngle = Phaser.Math.Angle.Between(routatePointX, routatePointY, cardRectX, cardRectY);
+        var initAngle = Phaser.Math.Angle.Between(this.rotatePointX, this.rotatePointY, cardRectX, cardRectY);
 
-        //console.log(distance);
+        //console.log(this.distance);
 
         //显示旋转锚点
-        let routatePoint = this.add.circle(
-            routatePointX,
-            routatePointY,
+        this.rotatePoint = this.add.circle(
+            this.rotatePointX,
+            this.rotatePointY,
             10,
             0xffffff)
             .setAlpha(0.5);
 
         //测试锚点，用于标记图像的位置
         this.testCircle = this.add.circle(
-            distance * Math.cos(initAngle) + routatePointX,
-            distance * Math.sin(initAngle) + routatePointY,
+            this.distance * Math.cos(initAngle) + this.rotatePointX,
+            this.distance * Math.sin(initAngle) + this.rotatePointY,
             20,
             0x00ff00)
             .setAlpha(1);
@@ -85,25 +85,7 @@ class baseTest extends GameScene {
 
         //模拟卡片翻转动画，用于场景过度
         this.input.on("pointerup", () => {
-            this.tweens.add({
-                targets: card,
-                x: "-= 350",
-                yoyo: true,
-                duration: 400,
-            });
-
-            this.tweens.add({
-                targets: card,
-                scaleX: { from: 1, to: 0 },
-                yoyo: true,
-                duration: 250,
-                repeat: 0,
-                oncompleted: () => {
-                    this.time.delayedCall(250, () => {
-                        card.setTexture("card2");
-                    });
-                },
-            });
+            this.cardReset(card);
         });
 
 
@@ -208,17 +190,12 @@ class baseTest extends GameScene {
             }
 
             else if (event.key === 'e') {
-                this.tweens.add({
-                    targets: card,
-                    angle: "+=90",
-                    x: { from: card.x, to: routatePoint.x + distance * Math.cos(90 * Math.PI / 180) },
-                    y: { from: card.y, to: routatePoint.y + distance * Math.sin(90 * Math.PI / 180) },
-                });
+                this.rotateOutAndMakeNewCard(card);
             }
 
             else if (event.key === 'r') {
                 this.tweens.add({
-                    targets:this.testText,
+                    targets: this.testText,
                     alpha: { from: 1, to: 0 },
                     yoyo: true,
                     repeat: false,
@@ -232,37 +209,41 @@ class baseTest extends GameScene {
             }
         });
 
-
         //鼠标移动监听
         this.input.on("pointermove", (pointer) => {
 
             //通过改变旋转锚点的坐标来实现拖动效果
             if (pointer.x > this.cx + 20) {
-                routatePointX = this.cx + 20;
+                this.rotatePointX = this.cx + 20;
             }
             else if (pointer.x < this.cx - 20) {
-                routatePointX = this.cx - 20;
+                this.rotatePointX = this.cx - 20;
             }
             else {
-                routatePointX = pointer.x;
+                this.rotatePointX = pointer.x;
             }
 
-            routatePoint.x = routatePointX;
+            this.rotatePoint.x = this.rotatePointX;
 
             if (pointer.y > this.cy + 10) {
-                routatePointY = this.cy + rectH * 0.75 + 10;
+                this.rotatePointY = this.cy + this.rectH * 0.75 + 10;
             }
             else if (pointer.y < this.cy - 10) {
-                routatePointY = this.cy + rectH * 0.75 - 10;
+                this.rotatePointY = this.cy + this.rectH * 0.75 - 10;
             }
             else {
-                routatePointY = pointer.y + rectH * 0.75;
+                this.rotatePointY = pointer.y + this.rectH * 0.75;
             }
 
-            routatePoint.y = routatePointY;
+            this.rotatePoint.y = this.rotatePointY;
 
-            //angleBetweenRotatePoint用于记录鼠标和锚点之间的角度，正数表示鼠标在旋转锚点右侧，负数表示在旋转锚点左侧
-            var angleBetweenRotatePoint = Phaser.Math.Angle.Between(routatePointX, routatePointY, pointer.x, pointer.y) + Math.PI / 2;
+            //angleBetweenthis.rotatePoint用于记录鼠标和锚点之间的角度，正数表示鼠标在旋转锚点右侧，负数表示在旋转锚点左侧
+            var angleBetweenRotatePoint = Phaser.Math.Angle.Between(
+                this.rotatePoint.x,
+                this.rotatePoint.y,
+                pointer.x,
+                pointer.y)
+                + Math.PI / 2;
             //以锚点为坐标原点，向上和向右为正方向，判断鼠标与y轴的夹角绝对值是否大于30度，如果是则将角度设为30度且方向相同
             if (angleBetweenRotatePoint > Math.PI / 6) {
                 angleBetweenRotatePoint = Math.PI / 6;
@@ -282,11 +263,11 @@ class baseTest extends GameScene {
 
             //将角度转化为度数制
             var angleBetweenRotatePointD = Phaser.Math.Wrap(Phaser.Math.RadToDeg(angleBetweenRotatePoint), -360, 360);
-            //console.log(`当前卡牌的中心与锚点连线与y轴的夹角：${Math.round(angleBetweenRotatePointD)}°`);
+            //console.log(`当前卡牌的中心与锚点连线与y轴的夹角：${Math.round(angleBetweenthis.rotatePointD)}°`);
 
             //先设置测试锚点的位置
-            this.testCircle.x = distance * Math.cos(initAngle + angleBetweenRotatePoint) + routatePointX;
-            this.testCircle.y = distance * Math.sin(initAngle + angleBetweenRotatePoint) + routatePointY;
+            this.testCircle.x = this.distance * Math.cos(initAngle + angleBetweenRotatePoint) + this.rotatePointX;
+            this.testCircle.y = this.distance * Math.sin(initAngle + angleBetweenRotatePoint) + this.rotatePointY;
 
             //再将测试锚点的坐标赋予卡牌
             card.x = this.testCircle.x;
@@ -296,8 +277,8 @@ class baseTest extends GameScene {
             card.setAngle(angleBetweenRotatePointD);
 
             //设置文本位置和内容
-            showText.x = (distance + 150) * Math.cos(initAngle + angleBetweenRotatePoint) + routatePointX + textOffsetDirection * alphaD * 25;
-            showText.y = (distance + 150) * Math.sin(initAngle + angleBetweenRotatePoint) + routatePointY;
+            showText.x = (this.distance + 150) * Math.cos(initAngle + angleBetweenRotatePoint) + this.rotatePointX + textOffsetDirection * alphaD * 25;
+            showText.y = (this.distance + 150) * Math.sin(initAngle + angleBetweenRotatePoint) + this.rotatePointY;
             textCircle.x = showText.x;
             textCircle.y = showText.y;
             textRect.x = showText.x - textOffsetDirection * alphaD * 25;
@@ -332,6 +313,65 @@ class baseTest extends GameScene {
                 showText.setFontSize(showTextSize);
             }
             //console.log(showText.style.fontSize);
+        });
+    }
+
+    rotateOutAndMakeNewCard(card) {
+        let rotateAngle = Phaser.Math.Angle.Between(
+            this.rotatePoint.x,
+            this.rotatePoint.y,
+            card.x,
+            card.y);
+
+        let dToR = Math.PI / 180;//degree 1
+        let rToD = 180 / Math.PI;
+        let bar = this.distance;
+
+        let rotateAnime = this.time.addEvent({
+            loop: true,
+            delay: 10,
+            callback: () => {
+                if (rotateAngle <= 0) {
+                    rotateAngle += dToR * 1.8;
+                    bar += 10;
+                    card.x = this.rotatePoint.x + bar * Math.cos(rotateAngle);
+                    card.y = this.rotatePoint.y + bar * Math.sin(rotateAngle);
+                    card.angle = Phaser.Math.Wrap(Phaser.Math.RadToDeg(rotateAngle + Math.PI / 2), -360, 360);
+                }
+                else {
+                    this.cardReset(card);
+                    rotateAnime.destroy();
+                }
+            },
+            callbackscope: this,
+        });
+    }
+
+    cardReset(card) {
+        card.setTexture("card1");
+        card.angle = 0;
+        this.rotatePoint.x = this.cx;
+        this.rotatePoint.y = this.cy + this.rectH * 0.75;
+        card.x = this.cx;
+        card.y = this.cy;
+        this.tweens.add({
+            targets: card,
+            x: "-= 350",
+            yoyo: true,
+            duration: 400,
+        });
+
+        this.tweens.add({
+            targets: card,
+            scaleX: { from: 1, to: 0 },
+            yoyo: true,
+            duration: 250,
+            repeat: 0,
+            oncompleted: () => {
+                this.time.delayedCall(250, () => {
+                    card.setTexture("card2");
+                });
+            },
         });
     }
 
