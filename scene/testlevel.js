@@ -13,12 +13,12 @@ class testlevel extends Base {
 
         let text1 = "点击左边的按钮"
         let text2 = "点击右边的按钮"
-        this.card = this.creatcard("card1");
+        this.card = this.createCard("card1");
 
         this.choose1_1 = "choose1-1Complete";
         this.choose1_2 = "choose1-2Complete";
 
-        this.choose1_text1 = this.createtext("开关1,你选择了: ");
+        this.choose1_text1 = this.createEventText("开关1,你选择了: ");
 
 
         
