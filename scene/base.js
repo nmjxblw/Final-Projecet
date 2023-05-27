@@ -61,6 +61,13 @@ class Base extends GameScene {
             this.rotatePoint.y,
             this.cardCenterPoint.x,
             this.cardCenterPoint.y);
+
+        //选项文本存贮
+        this.left_choice_text = "";
+        this.right_choice_text = "";
+
+        //存储玩家选项
+        this.player_choice = "";
     }
 
     exCreate() {
@@ -191,7 +198,7 @@ class Base extends GameScene {
     }
 
     //调用此函数使得参数中的卡片可以旋转，text1,2分别为左右旋转时显示的文本，choose1,2分别为左右松开时选择的选项
-    dragrotate(card, text1, text2, choose1, choose2) {
+    dragrotate(card) {
         function dragRotateObject(pointer) {
             if (pointer.x > this.initialCardCenterX + 20) {
                 this.rotatePoint.x = this.initialRotatePointX + 20;
@@ -273,10 +280,10 @@ class Base extends GameScene {
 
             //添加动画效果和设置选项内容
             if (angleBetweenRotatePoint >= 5 / 180 * Math.PI) {
-                choice = text2;
+                choice = this.right_choice_text;
             }
             else if (angleBetweenRotatePoint <= -5 / 180 * Math.PI) {
-                choice = text1;
+                choice = this.left_choice_text;
             }
             //设置文本内容和透明度
             this.cardText.setText(choice).setAlpha(alphaD);
@@ -311,52 +318,68 @@ class Base extends GameScene {
             //angleBetweenRotatePoint用于记录鼠标和锚点之间的角度，正数表示鼠标在旋转锚点右侧，负数表示在旋转锚点左侧
             let angleBetweenRotatePoint = Phaser.Math.Angle.Between(this.rotatePoint.x, this.rotatePoint.y, pointer.x, pointer.y) + Math.PI / 2;
 
-                //以锚点为坐标原点，向上和向右为正方向，判断鼠标与y轴的夹角绝对值是否大于30度，大于正30度选择选项2，小于负30度选择选项以，之后将卡片设置为不可移动
-                if (angleBetweenRotatePoint > Math.PI / 6 && card.label) {
-                    this.events.emit(choose2);
-                    card.label = false;
-                    this.switchCard(card);
-
-                }
-                else if (angleBetweenRotatePoint < - Math.PI / 6 && card.label) {
-                    this.events.emit(choose1);
-                    card.label = false;
-                    this.switchCard(card);
-                }
-                else
-                {
-                    //回到原位置
-                    card.setAngle(0);
-                    card.x = this.cardRectX;
-                    card.y = this.cardRectY;
-                }
+            //以锚点为坐标原点，向上和向右为正方向，
+            //判断鼠标与y轴的夹角绝对值是否大于10度，大于正10度选择选项2，小于负10度选择选项以，之后将卡片设置为不可移动
+            this.player_choice = "";
+            if (angleBetweenRotatePoint < -Math.PI / 18 && card.label) {
+                this.player_choice = "left";
+            }
+            else if (angleBetweenRotatePoint > Math.PI / 18 && card.label) {
+                this.player_choice = "right";
+            }
+            else {
+                this.player_choice = "";
+            }
+            console.log(`当前玩家选项为：${this.player_choice}`);
+            this.judgeChoice();
 
             // 停止拖动旋转操作
             this.input.off('pointermove', dragRotateObject, this);
+
             //回到原位置
-            card.setAngle(0);
-            card.x = this.initialCardCenterX;
-            card.y = this.initialCardCenterY;
-            this.rotatePoint.x = this.initialRotatePointX;
-            this.rotatePoint.y = this.initialRotatePointY;
-            this.cardText.setAlpha(0);
-            this.cardTextBackground.setAlpha(0);
+            if (this.player_choice === "") {
+                this.tweens.add({
+                    targets: card,
+                    duration: 500,
+                    yoyo: false,
+                    repeat: false,
+                    angle: 0,
+                    x: this.initialCardCenterX,
+                    y: this.initialCardCenterY,
+                });
+            }
 
+            this.tweens.add({
+                targets: this.rotatePoint,
+                duration: 500,
+                yoyo: false,
+                repeat: false,
+                angle: 0,
+                x: this.initialRotatePointX,
+                y: this.initialRotatePointY,
+            });
 
-
+            this.tweens.add({
+                targets: [this.cardTextBackground, this.cardText, this.cardTextCircle],
+                duration: 200,
+                yoyo: false,
+                repeat: false,
+                alpha: 0,
+                angle: 0,
+                y: "-=50",
+            });
         });
 
 
     }
 
-    rotateOutAndMakeNewCard(card) {
+    //模拟一个卡牌旋转出边框的效果，在动画完成后调用cardRest函数
+    rotateOutAndMakeNewCard(card, new_texture) {
         let rotateAngle = Phaser.Math.Angle.Between(
             this.rotatePoint.x,
             this.rotatePoint.y,
             card.x,
             card.y);
-
-        //console.log(rotateAngle);
 
         let dToR = Math.PI / 180;//degree 1
         let rToD = 180 / Math.PI;
@@ -380,7 +403,7 @@ class Base extends GameScene {
                 card.angle = Phaser.Math.Wrap(Phaser.Math.RadToDeg(rotateAngle + Math.PI / 2), -360, 360);
 
                 if (rotateAngle > Math.PI / 4 || rotateAngle < -Math.PI * 5 / 4) {
-                    this.cardReset(card);
+                    this.cardReset(card, new_texture);
                     rotateAnime.destroy();
                 }
             },
@@ -388,7 +411,8 @@ class Base extends GameScene {
         });
     }
 
-    cardReset(card) {
+    //模拟卡牌翻面效果，同时改变卡面图案
+    cardReset(card, new_texture) {
         card.setTexture("card1");
         card.angle = 0;
         this.rotatePoint.x = this.initialRotatePointX;
@@ -410,14 +434,14 @@ class Base extends GameScene {
             repeat: 0,
             oncompleted: () => {
                 this.time.delayedCall(250, () => {
-                    card.setTexture("card2");
+                    card.setTexture(new_texture);
                 });
             },
         });
     }
 
 
-    //调用此函数快速将一个无用的文本隐藏
+    //调用此函数快速将一个无用的文本隐藏并替换成新的文本
     changeText(text, new_text) {
         this.tweens.add({
             targets: text,
@@ -432,31 +456,6 @@ class Base extends GameScene {
                 })
             },
         })
-    }
-
-    switchCard(card)
-    {
-        this.tweens.add({
-            targets: card,
-            x: "-= 350",
-            yoyo: true,
-            duration: 400,
-        });
-
-
-        this.tweens.add({
-            targets: card,
-            scaleX: { from: 1, to: 0 },
-            yoyo: true,
-            duration: 250,
-            repeat: 0,
-            oncompleted: () => {
-                this.time.delayedCall(250, () => {
-                    card.setTexture("card1");
-                    
-                });
-            },
-        }); 
     }
 
     timer(time) {

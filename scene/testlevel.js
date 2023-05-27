@@ -1,61 +1,112 @@
 class testlevel extends Base {
 
     eventload() {
-        this.events.once('choose1-1Complete', this.action1, this);
-        this.events.once('choose1-2Complete', this.action2, this);
+        this.events.on('1-right', this.action1, this);
+        this.events.on('1-left', this.action2, this);
 
-        this.events.once('choose2-1Complete', this.action3, this);
-        this.events.once('choose2-2Complete', this.action4, this);
+        this.events.on('2-right', this.action3, this);
+        this.events.on('2-left', this.action4, this);
+
+        this.events.on('3-right', this.action5, this);
+        this.events.on('3-left', this.action6, this);
+
     }
 
 
     onEnter() {
 
-        let text1 = "点击左边的按钮"
-        let text2 = "点击右边的按钮"
+        this.left_choice_text = "点击左边的按钮"
+        this.right_choice_text = "点击右边的按钮"
         this.card = this.createCard("card1");
 
-        this.choose1_1 = "choose1-1Complete";
-        this.choose1_2 = "choose1-2Complete";
+        this.event_text = this.createEventText("开关1,你选择了: ");
 
-        this.choose1_text1 = this.createEventText("开关1,你选择了: ");
+        this.dragrotate(this.card);
 
+        this.scene_turn = 1;
 
-        
-        
-        this.dragrotate(this.card,text1,text2,this.choose1_1,this.choose1_2);
-        
+    }
+
+    //递归函数，用于实现while loop
+    judgeChoice() {
+        console.log(`当前场景回合数：${this.scene_turn}`);
+        if (this.scene_turn === 1) {
+            if (this.player_choice === "right") {
+                this.scene_turn++;
+                this.events.emit('1-right');
+            }
+            else if (this.player_choice === "left") {
+                this.scene_turn++;
+                this.events.emit('1-left');
+            }
+        }
+        else if (this.scene_turn === 2) {
+            if (this.player_choice === "right") {
+                this.scene_turn++;
+                this.events.emit('2-right');
+            }
+            else if (this.player_choice === "left") {
+                this.scene_turn++;
+                this.events.emit('2-left');
+            }
+        }
+        else if (this.scene_turn === 3) {
+            if (this.player_choice === "right") {
+                this.events.emit('3-right');
+            }
+            else if (this.player_choice === "left") {
+                this.events.emit('3-left');
+            }
+        }
     }
 
     action1() {
-        this.changeText(this.choose1_text1, "你死了");
+        this.rotateOutAndMakeNewCard(this.card, "card2");
+        this.changeText(this.event_text, "你死了");
+        this.card.label = false;
+
+        this.left_choice_text = "寄";
+        this.right_choice_text = "寄";
     }
 
-    action2()
-    {
-        this.changeText(this.choose1_text1, `锁打开了
+    action2() {
+        this.rotateOutAndMakeNewCard(this.card, "card2");
+        this.changeText(this.event_text, `锁打开了
 还剩一把锁，你选择：`);
 
-        this.choose2_1 = "choose2-1Complete";
-        this.choose2_2 = "choose2-2Complete";
-        let text1 = "点击左边的按钮"
-        let text2 = "点击右边的按钮"
-
-        this.card2 = this.creatcard("card2");
-        
-    
-        this.dragrotate(this.card2,text1,text2,this.choose2_1,this.choose2_2);
-        
+        this.left_choice_text = "点击左边的按钮";
+        this.right_choice_text = "点击右边的按钮";
     }
 
-    action3()
-    {
-        this.changeText(this.choose1_text1,"你死了");
+    action3() {
+        this.rotateOutAndMakeNewCard(this.card, "card2");
+        this.changeText(this.event_text, "你死了");
+        this.card.label = false;
+
+        this.left_choice_text = "寄";
+        this.right_choice_text = "寄";
     }
 
-    action4()
-    {
-        this.changeText(this.choose1_text1,`随着两把锁都打开，宝箱解锁了
+    action4() {
+        this.rotateOutAndMakeNewCard(this.card, "card2");
+        this.changeText(this.event_text, `随着两把锁都打开，宝箱解锁了
 你从宝箱里获得了神秘的盾牌`);
+        this.left_choice_text = "拿走盾牌";
+        this.right_choice_text = "拿走盾牌";
+    }
+
+    //简单的战斗while loop实例
+    action5() {
+        this.rotateOutAndMakeNewCard(this.card, "card2");
+        this.changeText(this.event_text, `这是action5`);
+        this.left_choice_text = "action5左选项";
+        this.right_choice_text = "action5右选项";
+    }
+
+    action6() {
+        this.rotateOutAndMakeNewCard(this.card, "card2");
+        this.changeText(this.event_text, `这是action6`);
+        this.left_choice_text = "action6左选项";
+        this.right_choice_text = "action6右选项";
     }
 }
