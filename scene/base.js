@@ -117,7 +117,8 @@ class Base extends GameScene {
             .setFillStyle(0xffffff)
             .setOrigin(0.5)
             .setAlpha(0.4)
-            .setDepth(3);
+            .setDepth(1
+                );
 
         this.onEnter();
 
