@@ -220,9 +220,10 @@ class Base extends GameScene {
                 this.rotatePoint.y = pointer.y + this.cardH * 0.75;
             }
 
-            //angleBetweenRotatePoint用于记录鼠标和锚点之间的角度，正数表示鼠标在旋转锚点右侧，负数表示在旋转锚点左侧
+            //this.angleBetweenRotatePoint用于记录鼠标和锚点之间的角度，正数表示鼠标在旋转锚点右侧，负数表示在旋转锚点左侧
             //注：得到的角度是弧度
-            var angleBetweenRotatePoint = Phaser.Math.Angle.Between(
+            this.angleBetweenRotatePoint = 0;
+            this.angleBetweenRotatePoint = Phaser.Math.Angle.Between(
                 this.rotatePoint.x,
                 this.rotatePoint.y,
                 pointer.x,
@@ -230,42 +231,42 @@ class Base extends GameScene {
                 + Math.PI / 2;
 
             //以锚点为坐标原点，向上和向右为正方向，判断鼠标与y轴的夹角绝对值是否大于30度，如果是则将角度设为30度且方向相同
-            if (angleBetweenRotatePoint > Math.PI / 6) {
-                angleBetweenRotatePoint = Math.PI / 6;
+            if (this.angleBetweenRotatePoint > Math.PI / 6) {
+                this.angleBetweenRotatePoint = Math.PI / 6;
             }
-            else if (angleBetweenRotatePoint < - Math.PI / 6) {
-                angleBetweenRotatePoint = - Math.PI / 6;
+            else if (this.angleBetweenRotatePoint < - Math.PI / 6) {
+                this.angleBetweenRotatePoint = - Math.PI / 6;
             }
 
             //设置卡片文本位移，使得卡片文本显示时不超过卡片范围。
             var textOffsetDirection = 1;
-            if (angleBetweenRotatePoint > 0) {
+            if (this.angleBetweenRotatePoint > 0) {
                 textOffsetDirection = -1;
             }
 
             //根据角度大小调整透明度（文本和文本背景）
             //公式：旋转角度的绝对值度数/30度角
-            // => Math.abs(angleBetweenRotatePoint) / ( Math.PI / 180 * 30)
-            var alphaD = 6 * Math.abs(angleBetweenRotatePoint / Math.PI);
+            // => Math.abs(this.angleBetweenRotatePoint) / ( Math.PI / 180 * 30)
+            var alphaD = 6 * Math.abs(this.angleBetweenRotatePoint / Math.PI);
 
             //将角度转化为度数制
-            var angleBetweenRotatePointD = Phaser.Math.Wrap(Phaser.Math.RadToDeg(angleBetweenRotatePoint), -360, 360);
-            //console.log(`当前卡牌的中心与锚点连线与y轴的夹角：${Math.round(angleBetweenRotatePointD)}°`);
+            this.angleBetweenRotatePointD = Phaser.Math.Wrap(Phaser.Math.RadToDeg(this.angleBetweenRotatePoint), -360, 360);
+            //console.log(`当前卡牌的中心与锚点连线与y轴的夹角：${Math.round(this.angleBetweenRotatePointD)}°`);
 
             //先设置卡牌中心的位置
-            this.cardCenterPoint.x = this.distance * Math.cos(this.initialAngle + angleBetweenRotatePoint) + this.rotatePoint.x;
-            this.cardCenterPoint.y = this.distance * Math.sin(this.initialAngle + angleBetweenRotatePoint) + this.rotatePoint.y;
+            this.cardCenterPoint.x = this.distance * Math.cos(this.initialAngle + this.angleBetweenRotatePoint) + this.rotatePoint.x;
+            this.cardCenterPoint.y = this.distance * Math.sin(this.initialAngle + this.angleBetweenRotatePoint) + this.rotatePoint.y;
 
             //再将卡牌中心的坐标赋予卡牌
             card.x = this.cardCenterPoint.x;
             card.y = this.cardCenterPoint.y;
 
             //设置卡牌的旋转角度
-            card.setAngle(angleBetweenRotatePointD);
+            card.setAngle(this.angleBetweenRotatePointD);
 
             //设置文本位置和内容
-            this.cardText.x = (this.distance + 150) * Math.cos(this.initialAngle + angleBetweenRotatePoint) + this.rotatePoint.x + textOffsetDirection * alphaD * 25;
-            this.cardText.y = (this.distance + 150) * Math.sin(this.initialAngle + angleBetweenRotatePoint) + this.rotatePoint.y;
+            this.cardText.x = (this.distance + 150) * Math.cos(this.initialAngle + this.angleBetweenRotatePoint) + this.rotatePoint.x + textOffsetDirection * alphaD * 25;
+            this.cardText.y = (this.distance + 150) * Math.sin(this.initialAngle + this.angleBetweenRotatePoint) + this.rotatePoint.y;
             this.cardTextCircle.x = this.cardText.x;
             this.cardTextCircle.y = this.cardText.y;
             this.cardTextBackground.x = this.cardText.x - textOffsetDirection * alphaD * 25;
@@ -279,10 +280,10 @@ class Base extends GameScene {
             //console.log(`文本框Alpha:${alphaD.toFixed(3)}`);
 
             //添加动画效果和设置选项内容
-            if (angleBetweenRotatePoint >= 5 / 180 * Math.PI) {
+            if (this.angleBetweenRotatePoint >= 5 / 180 * Math.PI) {
                 choice = this.right_choice_text;
             }
-            else if (angleBetweenRotatePoint <= -5 / 180 * Math.PI) {
+            else if (this.angleBetweenRotatePoint <= -5 / 180 * Math.PI) {
                 choice = this.left_choice_text;
             }
             //设置文本内容和透明度
@@ -315,16 +316,13 @@ class Base extends GameScene {
 
         //鼠标抬起时结束旋转回到原位
         this.input.on('pointerup', (pointer) => {
-            //angleBetweenRotatePoint用于记录鼠标和锚点之间的角度，正数表示鼠标在旋转锚点右侧，负数表示在旋转锚点左侧
-            let angleBetweenRotatePoint = Phaser.Math.Angle.Between(this.rotatePoint.x, this.rotatePoint.y, pointer.x, pointer.y) + Math.PI / 2;
-
             //以锚点为坐标原点，向上和向右为正方向，
             //判断鼠标与y轴的夹角绝对值是否大于10度，大于正10度选择选项2，小于负10度选择选项以，之后将卡片设置为不可移动
             this.player_choice = "";
-            if (angleBetweenRotatePoint < -Math.PI / 18 && card.label) {
+            if (this.angleBetweenRotatePoint < -Math.PI / 18 && card.label) {
                 this.player_choice = "left";
             }
-            else if (angleBetweenRotatePoint > Math.PI / 18 && card.label) {
+            else if (this.angleBetweenRotatePoint > Math.PI / 18 && card.label) {
                 this.player_choice = "right";
             }
             else {
@@ -335,6 +333,8 @@ class Base extends GameScene {
 
             // 停止拖动旋转操作
             this.input.off('pointermove', dragRotateObject, this);
+            this.angleBetweenRotatePoint = 0;
+            this.angleBetweenRotatePointD = 0;
 
             //回到原位置
             if (this.player_choice === "") {
