@@ -13,12 +13,12 @@ class testlevel extends Base {
 
         let text1 = "点击左边的按钮"
         let text2 = "点击右边的按钮"
-        this.card = this.creatcard("card1");
+        this.card = this.createCard("card1");
 
         this.choose1_1 = "choose1-1Complete";
         this.choose1_2 = "choose1-2Complete";
 
-        this.choose1_text1 = this.createtext("开关1,你选择了: ");
+        this.choose1_text1 = this.createEventText("开关1,你选择了: ");
 
 
         
@@ -34,7 +34,7 @@ class testlevel extends Base {
     action2()
     {
         this.destorytext(this.choose1_text1);
-        this.choose1_result2 = this.createtext(`锁打开了
+        this.choose1_result2 = this.createEventText(`锁打开了
 还剩一把锁，你选择：`);
 
         this.choose2_1 = "choose2-1Complete";
@@ -50,13 +50,13 @@ class testlevel extends Base {
     action3()
     {
         this.destorytext(this.choose1_text1);
-        this.choose1_result2 = this.createtext("你死了");
+        this.choose1_result2 = this.createEventText("你死了");
     }
 
     action4()
     {
         this.destorytext(this.choose1_text1);
-        this.choose1_result2 = this.createtext(`随着两把锁都打开，宝箱解锁了
+        this.choose1_result2 = this.createEventText(`随着两把锁都打开，宝箱解锁了
 你从宝箱里获得了神秘的盾牌`);
     }
 
