@@ -1,4 +1,7 @@
 class baseBattle extends Base {
+    constructor(){
+        super("floor one level 1","floor one level 1")
+    }
 
     onEnter() {
 
@@ -9,6 +12,7 @@ class baseBattle extends Base {
         this.right_choice_text = "开始战斗"
         this.card = this.createCard("card1");
 
+        this.eventCard("拖动卡牌以游玩");
         this.event_text = this.createEventText("骷髅兵向你袭来");
 
         this.dragrotate(this.card);
@@ -60,7 +64,7 @@ class baseBattle extends Base {
     }
 
     action3() {
-        if (this.player_choice == "left") { this.monsterHP--; PlayerHP--; }
+        if (this.player_choice == "left") { this.monsterHP--; PlayerHP--;}
         if (this.monsterHP <= 0) { this.action4(); return; }
         if (PlayerHP <= 0) { action5(); return; }
         this.rotateOutAndMakeNewCard(this.card, "card1");
