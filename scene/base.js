@@ -78,6 +78,7 @@ class Base extends GameScene {
         this.background1 = this.add.rectangle(this.w * 0.5, this.h * 0.5, 650, 900, 0xF0E68C);
         this.background1.setDepth(1);
 
+
         //设置文本框，在用户互动后再设置其他参数
         this.cardText = this.add.text(0, 0, "")
             .setColor("#000")
@@ -117,9 +118,15 @@ class Base extends GameScene {
             .setFillStyle(0xffffff)
             .setOrigin(0.5)
             .setAlpha(0.4)
-            .setDepth(1
-            );
+            .setDepth(1);
 
+        //创建牌库背景
+        this.deck = this.add.sprite(
+            this.cardCenterPoint.x,
+            this.cardCenterPoint.y,
+            "card1")
+            .setOrigin(0.5)
+            .setDepth(1)
         this.onEnter();
 
     }
@@ -336,7 +343,6 @@ class Base extends GameScene {
                 else {
                     this.player_choice = "";
                 }
-                console.log(`当前玩家选项为：${this.player_choice}`);
                 this.judgeChoice();
 
                 // 停止拖动旋转操作
@@ -639,8 +645,7 @@ class Base extends GameScene {
         return star;
     }
 
-    shakeTween(target)
-    {
+    shakeTween(target) {
         this.tweens.add({
             targets: target,
             x: "-=5",
@@ -648,7 +653,7 @@ class Base extends GameScene {
             duration: 50,
             repeat: 3,
             yoyo: true
-          });
+        });
     }
 
 
