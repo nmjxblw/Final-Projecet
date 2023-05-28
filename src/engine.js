@@ -1,10 +1,23 @@
 class GameScene extends Phaser.Scene {
 
     constructor(key, name) {
+        //统一命名规则：
+        //key: floor one level 1
+        //name: floor one level 1
+        //this.floor用于记录层数
+        //this.level用于记录当前关卡编号
         super(key);
         this.sceneKey = key
+        if (name === undefined) {
+            throw new Error("Name parameter is missing.");
+        }
         this.name = name;
-        //提取name中的数字转化为int，并用this.level存储
+        var a = ["one", "two", "three", "four"];
+        for (var i = 0; i < a.length; i++) {
+            if (name.includes(a[i])) {
+                this.floor = a[i];
+            }
+        }
         this.level = parseInt(this.name.replace(/[^0-9]/ig, ""));
     }
 

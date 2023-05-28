@@ -1,9 +1,5 @@
 class Base extends GameScene {
 
-    constructor() {
-        super("Base", "Base");
-    }
-
     exPreload() {
         this.load.image("card1", "card1.png");
         this.load.image("card2", "card2.png");
@@ -632,7 +628,7 @@ class Base extends GameScene {
         var star = this.add.polygon(sx, sy, pointList, 0xffff00);
         star.setOrigin(0.5);
 
-        console.log(star);
+        //console.log(star);
 
         // 添加旋转动画
         this.tweens.add({
