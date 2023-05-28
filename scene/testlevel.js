@@ -19,9 +19,12 @@ class testlevel extends Base {
 
     onEnter() {
 
+       
+
         this.left_choice_text = "点击左边的按钮"
         this.right_choice_text = "点击右边的按钮"
-        this.card = this.createCard("card1");
+        this.card = this.createCard("card1"); 
+        this.eventCard("Dangerous! bad!! escape!");
 
         this.event_text = this.createEventText("开关1,你选择了: ");
 

@@ -474,14 +474,169 @@ class Base extends GameScene {
         })
     }
 
-    timer(time) {
+    //添加卡片弹出动画
+    eventCard(someText) {
 
+        if (this.card.dragable) {
+            this.card.dragable = false;
+        }
+        let eventTextCenterPoint = this.add.circle(
+            this.cx,
+            this.cy - this.h,
+            10,
+            0xf88379)
+            .setDepth(this.card.depth + 1)
+            .setOrigin(0.5)
+            .setAlpha(0);
+
+        let eventTextBackground = this.add.rectangle(
+            eventTextCenterPoint.x,
+            eventTextCenterPoint.y,
+            600,
+            400,
+            0xf0f0f0)
+            .setDepth(eventTextCenterPoint.depth)
+            .setOrigin(0.5)
+            .setAlpha(0.8);
+
+        let eventText = this.add.text(
+            eventTextCenterPoint.x,
+            eventTextCenterPoint.y,
+            someText)
+            .setDepth(eventTextBackground.depth + 1)
+            .setAlpha(0)
+            .setOrigin(0.5)
+            .setFontFamily('Century Gothic')
+            .setWordWrapWidth(400)
+            .setColor("0x000000")
+
+        let eventTextFontSize = 50;
+        eventText.setFontSize(eventTextFontSize);
+        while (eventText.height >= eventTextBackground.height - 100) {
+            eventTextFontSize--;
+            eventText.setFontSize(eventTextFontSize);
+        }
+
+        let eventStar = this.star(
+            eventText.x - 250,
+            this.cy)
+            .setDepth(eventTextBackground.depth + 1)
+            .setAlpha(0);
+
+        //添加动画效果
+        let showAnimate1 = this.tweens.chain({
+            targets: [
+                eventTextCenterPoint,
+                eventTextBackground,
+            ],
+            tweens: [
+                {
+                    y: { from: this.cy - this.h, to: this.cy },
+                    ease: 'back.out',
+                    duration: 500,
+                },
+                {
+                    x: this.cx,
+                    y: this.cy,
+                    duration: 2000,
+                },
+                {
+                    y: this.cy + this.h,
+                    ease: "back.in",
+                    duration: 500,
+                }
+            ],
+        });
+
+        let showAnimate2 = this.tweens.chain({
+            targets: [
+                eventText,
+            ],
+            tweens: [
+                {
+                    alpha: 1,
+                    y: { from: this.cy - this.h, to: this.cy },
+                    ease: 'back.out',
+                    duration: 500,
+                },
+                {
+                    alpha: 1,
+                    duration: 2000,
+                },
+                {
+                    alpha: 0,
+                    y: this.cy + this.h,
+                    ease: "back.in",
+                    duration: 500,
+                }
+            ],
+        });
+
+        let showAnimate3 = this.tweens.chain({
+            targets: [
+                eventStar,
+            ],
+            tweens: [
+                {
+                    alpha: 0,
+                    duration: 400,
+                },
+                {
+                    alpha: 1,
+                    duration: 100,
+                },
+                {
+                    x: eventStar.x,
+                    y: eventStar.y,
+                    duration: 2000,
+                },
+                {
+                    alpha: 0,
+                    duration: 10,
+                }
+            ],
+        });
+
+        this.time.delayedCall(3000, () => {
+            this.card.dragable = this.card.label;
+            eventStar.destroy();
+            eventText.destroy();
+            eventTextBackground.destroy();
+            eventTextCenterPoint.destroy();
+        });
     }
 
-    finish(target_num) {
-        if (target_num < 1) {
-            this.gotoScene('Level' + level + 'settlement')
+    //添加五角星图案
+    star(sx, sy) {
+
+        var pointList = [];
+        var points = 5;
+        var innerAngle = Math.PI / points;
+        var radius = 8;
+        var innerRadius = radius / 2;
+
+        for (var i = 0; i < points * 2; i++) {
+            var radiusToUse = i % 2 === 0 ? radius : innerRadius;
+            var x = radiusToUse * Math.cos(innerAngle * i);
+            var y = radiusToUse * Math.sin(innerAngle * i);
+            pointList.push(x);
+            pointList.push(y);
         }
+
+        var star = this.add.polygon(sx, sy, pointList, 0xffff00);
+        star.setOrigin(0.5);
+
+        console.log(star);
+
+        // 添加旋转动画
+        this.tweens.add({
+            targets: star,
+            angle: 360,
+            duration: 2000,
+            repeat: -1
+        });
+
+        return star;
     }
 
     shakeTween(target)
