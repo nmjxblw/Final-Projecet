@@ -309,70 +309,79 @@ class Base extends GameScene {
         this.input.on('pointerdown', (pointer) => {
             if (pointer.leftButtonDown()) {
                 // 判断点击的是卡片
-                if (card.getBounds().contains(pointer.x, pointer.y) && card.label && card.dragable) {
-                    // 启用拖动旋转操作
-                    this.input.on('pointermove', dragRotateObject, this);
+                if (card.getBounds().contains(pointer.x, pointer.y)) {
+                    if (card.label && card.dragable) {
+                        // 启用拖动旋转操作
+                        this.input.on('pointermove', dragRotateObject, this);
+                        this.input.on('pointerdown', dragRotateObject, this);
+                    }
                 }
             }
         });
 
         //鼠标抬起时结束旋转回到原位
         this.input.on('pointerup', (pointer) => {
-            this.input.off('pointermove', dragRotateObject, this);
-            //以锚点为坐标原点，向上和向右为正方向，
-            //判断鼠标与y轴的夹角绝对值是否大于20度，大于正20度选择选项2，小于负20度选择选项以，之后将卡片设置为不可移动
-            this.player_choice = "";
-            if (this.angleBetweenRotatePoint < -Math.PI / 9 && card.label && card.dragable) {
-                this.player_choice = "left";
-            }
-            else if (this.angleBetweenRotatePoint > Math.PI / 9 && card.label && card.dragable) {
-                this.player_choice = "right";
-            }
-            else {
+            if (card.label && card.dragable) {
+                this.input.off('pointerdown', dragRotateObject, this);
+                this.input.off('pointermove', dragRotateObject, this);
+                //以锚点为坐标原点，向上和向右为正方向，
+                //判断鼠标与y轴的夹角绝对值是否大于20度，大于正20度选择选项2，小于负20度选择选项以，之后将卡片设置为不可移动
                 this.player_choice = "";
+                if (this.angleBetweenRotatePoint < -Math.PI / 9) {
+                    this.player_choice = "left";
+                }
+                else if (this.angleBetweenRotatePoint > Math.PI / 9) {
+                    this.player_choice = "right";
+                }
+                else {
+                    this.player_choice = "";
+                }
+                console.log(`当前玩家选项为：${this.player_choice}`);
+                this.judgeChoice();
+
+                // 停止拖动旋转操作
+                this.angleBetweenRotatePoint = 0;
+                this.angleBetweenRotatePointD = 0;
+
+                //回到原位置
+                this.setCardInitialPosion();
             }
-            console.log(`当前玩家选项为：${this.player_choice}`);
-            this.judgeChoice();
+        });
+    }
 
-            // 停止拖动旋转操作
-            this.angleBetweenRotatePoint = 0;
-            this.angleBetweenRotatePointD = 0;
-
-            //回到原位置
-            if (this.player_choice === "") {
-                this.tweens.add({
-                    targets: card,
-                    duration: 500,
-                    yoyo: false,
-                    repeat: false,
-                    angle: 0,
-                    x: this.initialCardCenterX,
-                    y: this.initialCardCenterY,
-                });
-            }
-
+    //设置一段动画，用于卡牌复位，不触发翻卡特效
+    setCardInitialPosion() {
+        if (this.player_choice === "") {
             this.tweens.add({
-                targets: this.rotatePoint,
+                targets: this.card,
                 duration: 500,
                 yoyo: false,
                 repeat: false,
                 angle: 0,
-                x: this.initialRotatePointX,
-                y: this.initialRotatePointY,
+                x: this.initialCardCenterX,
+                y: this.initialCardCenterY,
             });
+        }
 
-            this.tweens.add({
-                targets: [this.cardTextBackground, this.cardText, this.cardTextCircle],
-                duration: 200,
-                yoyo: false,
-                repeat: false,
-                alpha: 0,
-                angle: 0,
-                y: "-=50",
-            });
+        this.tweens.add({
+            targets: this.rotatePoint,
+            duration: 500,
+            yoyo: false,
+            repeat: false,
+            angle: 0,
+            x: this.initialRotatePointX,
+            y: this.initialRotatePointY,
         });
 
-
+        this.tweens.add({
+            targets: [this.cardTextBackground, this.cardText, this.cardTextCircle],
+            duration: 200,
+            yoyo: false,
+            repeat: false,
+            alpha: 0,
+            angle: 0,
+            y: "-=50",
+        });
     }
 
     //模拟一个卡牌旋转出边框的效果，在动画完成后调用cardRest函数
