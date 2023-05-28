@@ -487,7 +487,7 @@ class Base extends GameScene {
             0xf88379)
             .setDepth(this.card.depth + 1)
             .setOrigin(0.5)
-            .setAlpha(1);
+            .setAlpha(0);
 
         let eventTextBackground = this.add.rectangle(
             eventTextCenterPoint.x,
@@ -561,8 +561,6 @@ class Base extends GameScene {
                 },
                 {
                     alpha: 1,
-                    x: this.cx,
-                    y: this.cy,
                     duration: 2000,
                 },
                 {
@@ -581,19 +579,20 @@ class Base extends GameScene {
             tweens: [
                 {
                     alpha: 0,
-                    duration: 500,
+                    duration: 400,
                 },
                 {
                     alpha: 1,
-                    duration: 500,
+                    duration: 100,
                 },
                 {
-                    alpha: 1,
-                    duration: 1000,
+                    x: eventStar.x,
+                    y: eventStar.y,
+                    duration: 2000,
                 },
                 {
                     alpha: 0,
-                    duration: 500,
+                    duration: 10,
                 }
             ],
         });
