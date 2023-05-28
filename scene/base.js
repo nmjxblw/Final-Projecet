@@ -118,7 +118,7 @@ class Base extends GameScene {
             .setOrigin(0.5)
             .setAlpha(0.4)
             .setDepth(1
-                );
+            );
 
         this.onEnter();
 
@@ -162,6 +162,7 @@ class Base extends GameScene {
 
         //card.live = true;
         card.label = true;
+        card.dragable = true;
 
         return card;
     }
@@ -308,7 +309,7 @@ class Base extends GameScene {
         this.input.on('pointerdown', (pointer) => {
             if (pointer.leftButtonDown()) {
                 // 判断点击的是卡片
-                if (card.getBounds().contains(pointer.x, pointer.y) && card.label) {
+                if (card.getBounds().contains(pointer.x, pointer.y) && card.label && card.dragable) {
                     // 启用拖动旋转操作
                     this.input.on('pointermove', dragRotateObject, this);
                 }
@@ -317,13 +318,14 @@ class Base extends GameScene {
 
         //鼠标抬起时结束旋转回到原位
         this.input.on('pointerup', (pointer) => {
+            this.input.off('pointermove', dragRotateObject, this);
             //以锚点为坐标原点，向上和向右为正方向，
-            //判断鼠标与y轴的夹角绝对值是否大于10度，大于正10度选择选项2，小于负10度选择选项以，之后将卡片设置为不可移动
+            //判断鼠标与y轴的夹角绝对值是否大于20度，大于正20度选择选项2，小于负20度选择选项以，之后将卡片设置为不可移动
             this.player_choice = "";
-            if (this.angleBetweenRotatePoint < -Math.PI / 18 && card.label) {
+            if (this.angleBetweenRotatePoint < -Math.PI / 9 && card.label && card.dragable) {
                 this.player_choice = "left";
             }
-            else if (this.angleBetweenRotatePoint > Math.PI / 18 && card.label) {
+            else if (this.angleBetweenRotatePoint > Math.PI / 9 && card.label && card.dragable) {
                 this.player_choice = "right";
             }
             else {
@@ -333,7 +335,6 @@ class Base extends GameScene {
             this.judgeChoice();
 
             // 停止拖动旋转操作
-            this.input.off('pointermove', dragRotateObject, this);
             this.angleBetweenRotatePoint = 0;
             this.angleBetweenRotatePointD = 0;
 
@@ -376,6 +377,7 @@ class Base extends GameScene {
 
     //模拟一个卡牌旋转出边框的效果，在动画完成后调用cardRest函数
     rotateOutAndMakeNewCard(card, new_texture) {
+        card.dragable = false;
         let rotateAngle = Phaser.Math.Angle.Between(
             this.rotatePoint.x,
             this.rotatePoint.y,
@@ -438,6 +440,10 @@ class Base extends GameScene {
                     card.setTexture(new_texture);
                 });
             },
+        });
+
+        this.time.delayedCall(1000, () => {
+            card.dragable = true;
         });
     }
 
