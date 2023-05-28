@@ -45,7 +45,7 @@ class baseBattle extends Base {
 
     action1() {
         this.rotateOutAndMakeNewCard(this.card, "card1");
-        this.changeText(this.event_text, "骷髅兵准备移动: " + this.monsterHP + PlayerHP);
+        this.changeText(this.event_text, `骷髅兵准备移动: ` + this.monsterHP + PlayerHP);
 
 
         this.left_choice_text = "攻击";
@@ -53,10 +53,19 @@ class baseBattle extends Base {
     }
 
     action2() {
-        if (this.player_choice == "left") { this.monsterHP--; }
+        if (this.player_choice == "left") { 
+            this.monsterHP--; 
+            this.changeText(this.event_text, `你对骷髅兵造成了1点伤害,
+骷髅兵准备攻击: ` + this.monsterHP + PlayerHP);
+        }
+        else{
+            this.changeText(this.event_text, `你躲了个寂寞，
+骷髅兵准备攻击: ` + this.monsterHP + PlayerHP);
+        }
+
         if (this.monsterHP <= 0) { this.action4(); return; }
         this.rotateOutAndMakeNewCard(this.card, "card1");
-        this.changeText(this.event_text, "骷髅兵准备攻击: " + this.monsterHP + PlayerHP);
+        
 
 
         this.left_choice_text = "攻击";
@@ -64,13 +73,21 @@ class baseBattle extends Base {
     }
 
     action3() {
-        if (this.player_choice == "left") { this.monsterHP--; PlayerHP--;}
+        if (this.player_choice == "left") { 
+            this.monsterHP--; 
+            PlayerHP--; 
+            this.changeText(this.event_text, `你受到了1点伤害,
+你对骷髅兵造成了1点伤害
+骷髅兵准备移动: ` + this.monsterHP + PlayerHP);
+        }
+        else{
+            this.changeText(this.event_text, `你躲开了骷髅兵的攻击
+骷髅兵准备移动: ` + this.monsterHP + PlayerHP);
+        }
         if (this.monsterHP <= 0) { this.action4(); return; }
         if (PlayerHP <= 0) { action5(); return; }
         this.rotateOutAndMakeNewCard(this.card, "card1");
-        this.changeText(this.event_text, "骷髅兵准备移动: " + this.monsterHP + PlayerHP);
-
-
+        
         this.left_choice_text = "攻击";
         this.right_choice_text = "躲避";
     }
