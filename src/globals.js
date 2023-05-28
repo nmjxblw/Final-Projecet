@@ -6,6 +6,8 @@ let saveDataJsonFilePath = '../json/SaveData.json';//存储SaveData.json的路�
 let saveData = localStorage.getItem('saveData')? JSON.parse(localStorage.getItem('saveData')):{};//玩家临时存档，最终存档存储于localStorage中,JavaScript Object
 let gameData;//游戏数据（关卡数值和其他信息，在'../json/InGameData.json'中定义以后调用）
 let transitionDuration = 1000;//过渡时间1s
+let PlayerHP = 5;
+let level = 0;
 
 //全局函数
 //加载存档

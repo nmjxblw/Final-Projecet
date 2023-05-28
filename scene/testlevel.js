@@ -1,5 +1,9 @@
 class testlevel extends Base {
 
+    constructor() {
+        super("testlevel");
+    }
+
     eventload() {
         this.events.on('1-right', this.action1, this);
         this.events.on('1-left', this.action2, this);

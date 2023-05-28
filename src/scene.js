@@ -330,8 +330,9 @@ const game = new Phaser.Game({
         }
     },
     //scene: [openning, warnning, testScene, testScene2, title, credit],
-    scene: [testlevel],
+    //scene: [testlevel],
     //scene: [baseTest1, baseTest2],
+    scene: [baseBattle],
     backgroundColor: 0x000000,
     title: "Game",
 });

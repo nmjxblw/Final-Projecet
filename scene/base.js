@@ -484,6 +484,18 @@ class Base extends GameScene {
         }
     }
 
+    shakeTween(target)
+    {
+        this.tweens.add({
+            targets: target,
+            x: "-=5",
+            y: "-=5",
+            duration: 50,
+            repeat: 3,
+            yoyo: true
+          });
+    }
+
 
     update() {
 
