@@ -8,6 +8,7 @@ let gameData;//游戏数据（关卡数值和其他信息，在'../json/InGameDa
 let transitionDuration = 1000;//过渡时间1s
 let PlayerHP = 5;
 let level = 0;
+let saveHunter = false;
 
 //全局函数
 //加载存档
