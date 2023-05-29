@@ -14,6 +14,8 @@ class Base extends GameScene {
         this.cardW = 400;
         this.cardH = 600;
 
+        this.transitionDuration = 1000;
+
         //设定思路：
         //先设定旋转锚点，然后根据旋转锚点的位置设置卡牌的中心
         //旋转锚点设定在屏幕的中间偏下的位置，这样能实现卡片旋转出屏幕的效果
@@ -136,8 +138,8 @@ class Base extends GameScene {
     }
 
     gotoScene(key) {
-        this.cameras.main.fade(transitionDuration, 0, 0, 0);
-        this.time.delayedCall(transitionDuration, () => {
+        this.cameras.main.fade(this.transitionDuration, 0, 0, 0);
+        this.time.delayedCall(this.transitionDuration, () => {
             this.scene.start(key);
         });
     }
@@ -641,6 +643,7 @@ class Base extends GameScene {
         return star;
     }
 
+    //调用此函数抖动传入的目标
     shakeTween(target) {
         this.tweens.add({
             targets: target,
