@@ -9,7 +9,7 @@ class Base extends GameScene {
         this.load.image("sword", "sword.png");
         this.load.image("guardian_off_mask", "guardian_off_mask.png");
         this.load.image("guardian_with_mask", "guardian_with_mask.png");
-        this.load.image("gaint", "gaint.png");
+        this.load.image("giant", "giant.png");
     }
 
     exShortCut() {

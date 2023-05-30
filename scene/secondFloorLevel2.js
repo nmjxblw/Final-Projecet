@@ -13,12 +13,11 @@ class secondFloorLevel2 extends Base {
 
         initializeLocal();
 
-        console.log(saveData.player.hp);
+        this.card.setTexture("elf");
 
 
         this.left_choice_text = dataPath.left1
         this.right_choice_text = dataPath.right1
-        this.card = this.createCard("card1");
 
         this.changeText(this.eventText, dataPath.eventText1);
 
@@ -58,12 +57,12 @@ class secondFloorLevel2 extends Base {
             this.scene_turn++;
         }
     }
-
+    //初始行为，如果选择帮助为为移动，选择无视进入下一层
     action1() {
         if (this.player_choice == "left")
         {
             
-            this.rotateOutAndMakeNewCard(this.card, "card1");
+            this.rotateOutAndMakeNewCard("giant");
             saveData.elf = true;
             this.changeText(this.eventText, dataPath.battleText1 + this.monsterHP + saveData.player.hp);
 
@@ -77,7 +76,7 @@ class secondFloorLevel2 extends Base {
         }
         
     }
-
+    //前一行为为攻击，本行为为移动
     action2() {
         if (this.player_choice == "left") { 
             this.monsterHP--;
@@ -99,12 +98,12 @@ class secondFloorLevel2 extends Base {
         if (saveData.player.hp <= 0) { this.actionLose(); return; }
         
         
-        this.rotateOutAndMakeNewCard(this.card, "card1");
+        this.rotateOutAndMakeNewCard("giant");
 
         this.left_choice_text = dataPath.left2;
         this.right_choice_text = dataPath.right2;
     }
-
+    //前一行为移动，本行为为攻击
     action3() {
         if (this.player_choice == "left") { 
             this.monsterHP--; 
@@ -126,14 +125,14 @@ class secondFloorLevel2 extends Base {
         if (saveData.player.hp<= 0) { this.actionLose(); return; }
         
         
-        this.rotateOutAndMakeNewCard(this.card, "card1");
+        this.rotateOutAndMakeNewCard("giant");
 
         
         
         this.left_choice_text = dataPath.left2;
         this.right_choice_text = dataPath.right2;
     }
-
+    //初始暴怒行为，根据前一场景决定文本，本行为为攻击
     action4() {
 
         if(this.currentAction == "action3")
@@ -169,12 +168,12 @@ class secondFloorLevel2 extends Base {
         if (saveData.player.hp <= 0) { this.actionLose();; return; }
         if (this.monsterHP < 1) { this.actionWin(); return; }
         
-        this.rotateOutAndMakeNewCard(this.card, "card1");
+        this.rotateOutAndMakeNewCard("giant");
         
         this.left_choice_text = dataPath.left2;
         this.right_choice_text = dataPath.right2;
     }
-
+    //前一行为为攻击，本行为为移动
     action5() {
         if (this.player_choice == "left") { 
             this.monsterHP--; 
@@ -193,12 +192,12 @@ class secondFloorLevel2 extends Base {
         if (saveData.player.hp <= 0) { this.actionLose(); return; }
         if (this.monsterHP < 1) { this.actionWin(); return; }
         
-        this.rotateOutAndMakeNewCard(this.card, "card1");
+        this.rotateOutAndMakeNewCard("giant");
         
         this.left_choice_text = dataPath.left2;
         this.right_choice_text = dataPath.right2;
     }
-
+    //前一行为为移动，本行为为攻击
     action6() {
         if (this.player_choice == "left") { 
             this.monsterHP--; 
@@ -215,12 +214,12 @@ class secondFloorLevel2 extends Base {
         if (saveData.player.hp <= 0) { this.actionLose(); return; }
         if (this.monsterHP < 1) { this.actionWin(); return; }
         
-        this.rotateOutAndMakeNewCard(this.card, "card1");
+        this.rotateOutAndMakeNewCard("giant");
         
         this.left_choice_text = dataPath.left2;
         this.right_choice_text = dataPath.right2;
     }
-
+    //前一行为为攻击，本行为为攻击
     action7() {
         if (this.player_choice == "left") { 
             this.monsterHP--; 
@@ -239,14 +238,14 @@ class secondFloorLevel2 extends Base {
         if (saveData.player.hp <= 0) { this.actionLose(); return; }
         if (this.monsterHP < 1) { this.actionWin(); return; }
         
-        this.rotateOutAndMakeNewCard(this.card, "card1");
+        this.rotateOutAndMakeNewCard("giant");
         
         this.left_choice_text = dataPath.left2;
         this.right_choice_text = dataPath.right2;
     }
 
     actionWin() {
-        this.rotateOutAndMakeNewCard(this.card, "card1");
+        this.rotateOutAndMakeNewCard("giant");
         this.changeText(this.eventText, dataPath.eventText2);
 
         this.left_choice_text = dataPath.left3;
@@ -254,7 +253,7 @@ class secondFloorLevel2 extends Base {
     }
 
     actionLose() {
-        this.rotateOutAndMakeNewCard(this.card, "card1");
+        this.rotateOutAndMakeNewCard("card1");
         this.changeText(this.eventText, "你挂了……");
 
         this.left_choice_text = "离开";
