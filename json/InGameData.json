@@ -1,26 +1,75 @@
 {
     "//文件用途": "这个文件用于存储游戏中的固定数据。访问方式例子:gameData.floor.one.enemy1.hp",
-    "//注":"Josn文件不支持用纯数字做key",
+    "//注": "Josn文件不支持用纯数字做key",
     "floor": {
         "one": {
             "enemy1": {
                 "hp": 3
             }
         },
-        "two":{
-            "level1":{
-                "right":"推门",
-                "left":"拉门",
-                "eventText":"在门前",
-                "eventCard":"一扇门，门后诅咒的气息越发强烈……"
+        "two": {
+            "level1": {
+                "right": "推门",
+                "left": "拉门",
+                "eventText": "在门前",
+                "eventCard": "一扇门，门后诅咒的气息越发强烈……"
             }
         },
-        "three":{
-            "level1":{
-                "right":"推门",
-                "left":"拉门",
-                "eventText":"在门前",
-                "eventCard":"一扇门，门后诅咒的气息越发强烈……"
+        "three": {
+            "level1": {
+                "right": "Push the door",
+                "left": "Pull the door",
+                "eventText": "At the gate...",
+                "eventCard1": "When you are standing in front of the door towards the next floor...",
+                "eventCard2": "You feel a strong power behind the door."
+            },
+            "level2": {
+                "enemy":{
+                  "name":"Dragon",
+                  "hp":10,
+                  "berserk":false
+                },
+                "right1": {
+                    "shield": "Shield Defense",
+                    "no_shield": "Dodge"
+                },
+                "left1": "Attack",
+                "right2": "*SIGH*",
+                "left2": "*Tsk*",
+                "right3": "",
+                "left3": "",
+                "right4": "",
+                "left4": "",
+                "eventCard1": "You arrive at the last floor of the dungeon...",
+                "eventCard2":"...and see a dragon spiraling in the sky.",
+                "eventCard3": "Without a second thought, you head towards the dragon...",
+                "eventCard4": "The dragon becomes furious. \nIt is more likely to attack you now.",
+                "eventCard5": "The elf shot an arrow at the dragon and attracted dragon's attention.",
+                "eventCard6": "The dragon is going berserk, you cannot tell what it is doing",
+                "eventText1": "The dragon is trying to attack.",
+                "eventText2": "The dragon is trying to move toward you.",
+                "eventText3": "The dragon is trying to spit fire.",
+                "eventText4": "Elf: I cannot believe you are brave enough to challenge the dragon.",
+                "eventText5": "Elf: As you saved my life, I will come to help you now",
+                "eventText6": "The dragon attacks the elf. The elf faints.",
+                "eventText7": "The dragon spit fire at you at last action.",
+                "eventText8": "The dragon moved toward you at last action."
+            },
+            "level3": {
+                "right": "*CLANK*\n(block with the sword)",
+                "left": "*CLANG*\n(block with the sword)",
+                "eventCard1": "After a hard-fought battle, you defeat the dragon.",
+                "eventCard2": "The dragon slowly descends.",
+                "eventCard3": "Its eyes are filled with unwillingness.",
+                "eventText1": "Dragon: I will curse you, \nthat you will be as chaotic, cruel, \nand merciless as me.",
+                "eventText2": "Dragon: I will give you all my power, \nand make you become just like me.",
+                "eventText3": "The dragon's curse heads toward you, \nand you choose to..."
+            },
+            "level4": {
+                "rightt": "",
+                "left": "",
+                "eventCard1": "",
+                "eventText1": ""
             }
         }
     }

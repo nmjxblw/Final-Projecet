@@ -21,7 +21,7 @@ class battleGiant extends Base {
         this.right_choice_text = "While he lures the giant away to the next level"
         this.card = this.createCard("card1");
 
-        this.event_text = this.createEventText(`Coming to the second level, you see a hunter being chased by a giant and you choose: `);
+        this.changeText(this.eventText,`Coming to the second level, you see a hunter being chased by a giant and you choose: `);
 
         this.dragrotate(this.card);
 
@@ -65,7 +65,7 @@ class battleGiant extends Base {
         {
             
             this.rotateOutAndMakeNewCard(this.card, "card1");
-            this.changeText(this.event_text, `Giants ready to attack: ` + this.monsterHP + saveData.player.hp);
+            this.changeText(this.evenText, `Giants ready to attack: ` + this.monsterHP + saveData.player.hp);
 
             this.left_choice_text = "Attack";
             this.right_choice_text = "Dodge";
@@ -84,13 +84,13 @@ class battleGiant extends Base {
 
             if (this.monsterHP == 3) { this.giantRage = true; this.scene_turn = 1; this.action4(); return; }
 
-            this.changeText(this.event_text, `The giant hit you for 2 points of damage 
+            this.changeText(this.evenText, `The giant hit you for 2 points of damage 
 You hit the giant for 1 point of damage
 Giant ready to move: ` + this.monsterHP + saveData.player.hp);
             this.shakeTween(this.cameras.main);
         }
         else{
-            this.changeText(this.event_text, `You dodged the giant's attack
+            this.changeText(this.evenText, `You dodged the giant's attack
 Giant ready to move: ` + this.monsterHP + saveData.player.hp);
         }
 
@@ -113,11 +113,11 @@ Giant ready to move: ` + this.monsterHP + saveData.player.hp);
 
             if (this.monsterHP == 3) { this.giantRage = true; this.scene_turn = 1; this.action4();return; }
 
-            this.changeText(this.event_text, `You hit the giant for 1 point of damage
+            this.changeText(this.evenText, `You hit the giant for 1 point of damage
 Giant ready to attack: ` + this.monsterHP + saveData.player.hp);
         }
         else{
-            this.changeText(this.event_text, `The giant did not attack you
+            this.changeText(this.evenText, `The giant did not attack you
 Giant ready to attack: ` + this.monsterHP + saveData.player.hp);
         }
 
@@ -143,23 +143,23 @@ Giant ready to attack: ` + this.monsterHP + saveData.player.hp);
         if(this.currentAction == "action3")
         {
             if (this.player_choice == "left") {  
-                this.changeText(this.event_text, `The giant hit you for 2 points of damage
+                this.changeText(this.evenText, `The giant hit you for 2 points of damage
 Giant are preparing for next action` + this.monsterHP + saveData.player.hp);
                 this.shakeTween(this.cameras.main);
             }
             else{
-                this.changeText(this.event_text, `You dodged the giant's attack
+                this.changeText(this.evenText, `You dodged the giant's attack
 Giant are preparing for next action` + this.monsterHP + saveData.player.hp);
             }
         }
         else
         {
             if (this.player_choice == "left") {  
-                this.changeText(this.event_text, `You hit the giant for 1 point of damage
+                this.changeText(this.evenText, `You hit the giant for 1 point of damage
 Giant are preparing for next action` + this.monsterHP + saveData.player.hp);
             }
             else{
-                this.changeText(this.event_text, `The giant did not attack you
+                this.changeText(this.evenText, `The giant did not attack you
 Giant are preparing for next action` + this.monsterHP + saveData.player.hp);
             }
         }
@@ -181,12 +181,12 @@ try to summarize his attack pattern under the anger to deal with it`);
         if (this.player_choice == "left") { 
             this.monsterHP--; 
             saveData.player.hp-= 2; 
-            this.changeText(this.event_text, `The giant hit you for 2 points of damage
+            this.changeText(this.evenText, `The giant hit you for 2 points of damage
 Giant are preparing for next action` + this.monsterHP + saveData.player.hp);
             this.shakeTween(this.cameras.main);
         }
         else{
-            this.changeText(this.event_text, `You dodged the giant's attack
+            this.changeText(this.evenText, `You dodged the giant's attack
 Giant are preparing for next action` + this.monsterHP + saveData.player.hp);
         }
 
@@ -206,11 +206,11 @@ Giant are preparing for next action` + this.monsterHP + saveData.player.hp);
     action6() {
         if (this.player_choice == "left") { 
             this.monsterHP--; 
-            this.changeText(this.event_text, `You hit the giant for 1 point of damage
+            this.changeText(this.evenText, `You hit the giant for 1 point of damage
 Giant are preparing for next action` + this.monsterHP + saveData.player.hp);
         }
         else{
-            this.changeText(this.event_text, `The giant did not attack you
+            this.changeText(this.evenText, `The giant did not attack you
 Giant are preparing for next action` + this.monsterHP + saveData.player.hp);
         }
 
@@ -231,12 +231,12 @@ Giant are preparing for next action` + this.monsterHP + saveData.player.hp);
         if (this.player_choice == "left") { 
             this.monsterHP--; 
             saveData.player.hp-=2;
-            this.changeText(this.event_text, `The giant hit you for 2 points of damage
+            this.changeText(this.evenText, `The giant hit you for 2 points of damage
 Giant are preparing for next action` + this.monsterHP + saveData.player.hp);
             this.shakeTween(this.cameras.main);
         }
         else{
-            this.changeText(this.event_text, `You dodged the giant's attack
+            this.changeText(this.evenText, `You dodged the giant's attack
 Giant are preparing for next action` + this.monsterHP + saveData.player.hp);
         }
 
@@ -255,7 +255,7 @@ Giant are preparing for next action` + this.monsterHP + saveData.player.hp);
 
     actionWin() {
         this.rotateOutAndMakeNewCard(this.card, "card1");
-        this.changeText(this.event_text, "Congratulations! You have defeated the giant!");
+        this.changeText(this.evenText, "Congratulations! You have defeated the giant!");
 
         //代表解救了猎人
         saveData.hunter = true;
@@ -266,7 +266,7 @@ Giant are preparing for next action` + this.monsterHP + saveData.player.hp);
 
     actionLose() {
         this.rotateOutAndMakeNewCard(this.card, "card1");
-        this.changeText(this.event_text, "你挂了……");
+        this.changeText(this.evenText, "你挂了……");
 
         this.left_choice_text = "离开";
         this.right_choice_text = "离开";

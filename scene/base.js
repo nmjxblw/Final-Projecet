@@ -62,6 +62,9 @@ class Base extends GameScene {
         this.left_choice_text = "";
         this.right_choice_text = "";
 
+        //记录当前场景的回合数
+        this.scene_turn = 1;
+
         //存储玩家选项
         this.player_choice = "";
 
@@ -118,6 +121,9 @@ class Base extends GameScene {
             .setOrigin(0.5)
             .setAlpha(0.4)
             .setDepth(1);
+
+        //设置事件文本
+        this.eventText = this.createEventText("");
 
         //创建牌库背景
         this.deck = this.add.sprite(
@@ -335,14 +341,15 @@ class Base extends GameScene {
                 this.player_choice = "";
                 if (this.angleBetweenRotatePoint < -Math.PI / 9) {
                     this.player_choice = "left";
+                    this.judgeChoice();
                 }
                 else if (this.angleBetweenRotatePoint > Math.PI / 9) {
                     this.player_choice = "right";
+                    this.judgeChoice();
                 }
                 else {
                     this.player_choice = "";
                 }
-                this.judgeChoice();
 
                 // 停止拖动旋转操作
                 this.angleBetweenRotatePoint = 0;
