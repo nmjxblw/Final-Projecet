@@ -14,11 +14,11 @@ class GameScene extends Phaser.Scene {
         this.name = name;
         var a = ["one", "two", "three", "four"];
         for (var i = 0; i < a.length; i++) {
-            if (name.includes(a[i])) {
+            if (key.includes(a[i])) {
                 this.floor = a[i];
             }
         }
-        this.level = parseInt(this.name.replace(/[^0-9]/ig, ""));
+        this.level = parseInt(key.replace(/[^0-9]/ig, ""));
     }
 
     preload() {

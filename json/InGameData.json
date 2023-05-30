@@ -7,6 +7,14 @@
                 "hp": 3
             }
         },
+        "two":{
+            "level1":{
+                "right":"推门",
+                "left":"拉门",
+                "eventText":"在门前",
+                "eventCard":"一扇门，门后诅咒的气息越发强烈……"
+            }
+        },
         "three":{
             "level1":{
                 "right":"推门",

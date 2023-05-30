@@ -22,7 +22,7 @@ class baseBattle extends Base {
 
     }
 
-    //递归函数，用于实现while loop
+     //根据玩家的选择跳转到相应的action
     judgeChoice() {
         /* console.log(`当前玩家选项为：${this.player_choice}`);
         console.log(`当前场景回合数：${this.scene_turn}`); */

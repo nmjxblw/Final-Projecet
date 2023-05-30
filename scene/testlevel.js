@@ -34,7 +34,7 @@ class testlevel extends Base {
 
     }
 
-    //递归函数，用于实现while loop
+    //根据玩家的选择跳转到相应的action
     judgeChoice() {
         console.log(`当前场景回合数：${this.scene_turn}`);
         if (this.scene_turn === 1) {

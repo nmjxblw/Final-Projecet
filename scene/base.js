@@ -658,6 +658,10 @@ class Base extends GameScene {
 
 
     update() {
+        /* if(saveData.player.hp <= 0){
+            saveData.player.hp = 5;
+            saveData.sword--;
+        } */
     }
 
     shortCut1() { }
