@@ -4,8 +4,6 @@ class Base extends GameScene {
         this.load.image("card1", "card1.png");
         this.load.image("card2", "card2.png");
         this.load.image("testPoint", "testpoint.png");
-
-        this.eventload();
     }
 
     exShortCut() {
@@ -64,6 +62,9 @@ class Base extends GameScene {
 
         //存储玩家选项
         this.player_choice = "";
+
+        //定义文本路径设置的快捷路径
+        dataPath =  gameData.floor[`${this.floor}`][`level${this.level}`];
     }
 
     exCreate() {
@@ -654,7 +655,7 @@ class Base extends GameScene {
 
 
     update() {
-
     }
 
+    shortCut1() { }
 }
