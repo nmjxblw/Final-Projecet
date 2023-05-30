@@ -4,6 +4,12 @@ class Base extends GameScene {
         this.load.image("card1", "card1.png");
         this.load.image("card2", "card2.png");
         this.load.image("testPoint", "testpoint.png");
+        this.load.image("elf", "elf.png");
+        this.load.image("player", "player.jpg");
+        this.load.image("sword", "sword.png");
+        this.load.image("guardian_off_mask", "guardian_off_mask.png");
+        this.load.image("guardian_with_mask", "guardian_with_mask.png");
+        this.load.image("gaint", "gaint.png");
     }
 
     exShortCut() {
@@ -64,12 +70,18 @@ class Base extends GameScene {
 
         //记录当前场景的回合数
         this.scene_turn = 1;
+        if (saveData != {}) {
+            saveData.player.currentPosition.scene_turn = this.scene_turn;
+        }
 
         //存储玩家选项
         this.player_choice = "";
 
         //定义文本路径设置的快捷路径
-        dataPath =  gameData.floor[`${this.floor}`][`level${this.level}`];
+        dataPath = gameData.floor[`${this.floor}`][`level${this.level}`];
+
+         //创建可拖动卡片
+         this.card = this.createCard("card1");
     }
 
     exCreate() {
@@ -134,6 +146,8 @@ class Base extends GameScene {
             .setDepth(1)
         this.onEnter();
 
+       
+
     }
 
     onEnter() {
@@ -170,9 +184,8 @@ class Base extends GameScene {
             this.cardCenterPoint.y,
             name)
             .setOrigin(0.5)
-            .setDepth(1)
+            .setDepth(2);
 
-        //card.live = true;
         card.label = true;
         card.dragable = true;
 
@@ -189,7 +202,7 @@ class Base extends GameScene {
             eventText)
             .setColor("#000")
             .setAlpha(0)
-            .setOrigin(0.5,0.5)
+            .setOrigin(0.5, 0.5)
             .setDepth(4)
             .setFontSize(textsize)
             .setFontFamily("Century Gothic")
@@ -397,13 +410,13 @@ class Base extends GameScene {
     }
 
     //模拟一个卡牌旋转出边框的效果，在动画完成后调用cardRest函数
-    rotateOutAndMakeNewCard(card, new_texture) {
-        card.dragable = false;
+    rotateOutAndMakeNewCard(new_texture) {
+        this.card.dragable = false;
         let rotateAngle = Phaser.Math.Angle.Between(
             this.rotatePoint.x,
             this.rotatePoint.y,
-            card.x,
-            card.y);
+            this.card.x,
+            this.card.y);
 
         let dToR = Math.PI / 180;//degree 1
         let rToD = 180 / Math.PI;
@@ -422,12 +435,12 @@ class Base extends GameScene {
                 }
 
                 bar += 10;
-                card.x = this.rotatePoint.x + bar * Math.cos(rotateAngle);
-                card.y = this.rotatePoint.y + bar * Math.sin(rotateAngle);
-                card.angle = Phaser.Math.Wrap(Phaser.Math.RadToDeg(rotateAngle + Math.PI / 2), -360, 360);
+                this.card.x = this.rotatePoint.x + bar * Math.cos(rotateAngle);
+                this.card.y = this.rotatePoint.y + bar * Math.sin(rotateAngle);
+                this.card.angle = Phaser.Math.Wrap(Phaser.Math.RadToDeg(rotateAngle + Math.PI / 2), -360, 360);
 
                 if (rotateAngle > Math.PI / 4 || rotateAngle < -Math.PI * 5 / 4) {
-                    this.cardReset(card, new_texture);
+                    this.cardReset(new_texture);
                     rotateAnime.destroy();
                 }
             },
@@ -436,35 +449,35 @@ class Base extends GameScene {
     }
 
     //模拟卡牌翻面效果，同时改变卡面图案
-    cardReset(card, new_texture) {
-        card.setTexture("card1");
-        card.angle = 0;
+    cardReset(new_texture) {
+        this.card.setTexture("card1");
+        this.card.angle = 0;
         this.rotatePoint.x = this.initialRotatePointX;
         this.rotatePoint.y = this.initialRotatePointY;
-        card.x = this.initialCardCenterX;
-        card.y = this.initialCardCenterY;
+        this.card.x = this.initialCardCenterX;
+        this.card.y = this.initialCardCenterY;
         this.tweens.add({
-            targets: card,
+            targets: this.card,
             x: "-= 350",
             yoyo: true,
             duration: 400,
         });
 
         this.tweens.add({
-            targets: card,
+            targets: this.card,
             scaleX: { from: 1, to: 0 },
             yoyo: true,
             duration: 250,
             repeat: 0,
             oncompleted: () => {
                 this.time.delayedCall(250, () => {
-                    card.setTexture(new_texture);
+                    this.card.setTexture(new_texture);
                 });
             },
         });
 
         this.time.delayedCall(1000, () => {
-            card.dragable = true;
+            this.card.dragable = true;
         });
     }
 

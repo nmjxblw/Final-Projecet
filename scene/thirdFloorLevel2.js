@@ -1,86 +1,41 @@
-class thirdFloorLevel1 extends Base {
-    constructor() {
-        //当前场景为第三层大门前
-        super("floor three level 1", "at the door")
-    }
-
-    exPreload() {
-        this.load.image("door", "card1.png");
-        this.load.image("card1", "card1.png");
-        this.load.image("card2", "card2.png");
-    }
-
-    onEnter() {
-
-        console.log(this.scene_turn);
-
-        this.left_choice_text = dataPath["left"];
-        this.right_choice_text = dataPath["right"];
-
-        this.createEventText(dataPath["eventText"]);
-
-        this.card = this.createCard("door");
-
-        this.time.delayedCall(500, () => {
-            this.eventCard(dataPath["eventCard1"]);
-        });
-
-        this.time.delayedCall(3500, () => {
-            this.eventCard(dataPath["eventCard2"]);
-        });
-
-        this.dragrotate(this.card);
-    }
-
-    judgeChoice() {
-        this.action();
-    }
-
-    action() {
-        this.gotoScene("floor three level 2")
-    }
-}
-
 class thirdFloorLevel2 extends Base {
     constructor() {
-        //当前场景为第三层大门前
+        //当前场景为第三层龙
         super("floor three level 2", "the dragon")
     }
 
-    exPreload() {
-        this.load.image("dragon", "card1.png");
-        this.load.image("card1", "card1.png");
-        this.load.image("card2", "card2.png");
-    }
-
     onEnter() {
 
+        console.log(saveData);
         initializeLocal();
 
         //先初始化第一轮的左右选项
-        this.left_choice_text = dataPath["left1"];
+        this.left_choice_text = dataPath.left1;
         //根据玩家是否有盾牌来切换防御词条
         this.def_type = saveData.player.shield ? "shield" : "no_shield";
-        this.right_choice_text = dataPath["right1"][this.def_type];
+        this.right_choice_text = dataPath.right1[this.def_type];
         //加载敌人血量
         this.enemy_hp = dataPath.enemy.hp;
         //加载敌人狂暴状态
         this.enemy_berserk = dataPath.enemy.berserk;
-        //创建卡片
-        this.card = this.createCard("dragon");
+        //设置卡片的图案
+        this.card.setTexture(dataPath.enemy.name);
+        //设置卡片不可转动
+        this.card.label = false;
 
         //播放事件卡片
         this.time.delayedCall(500, () => {
-            this.eventCard(dataPath["eventCard1"]);
+            this.eventCard(dataPath.eventCard1);
         });
 
         this.time.delayedCall(3500, () => {
-            this.eventCard(dataPath["eventCard2"]);
+            this.eventCard(dataPath.eventCard2);
         });
 
         this.time.delayedCall(6500, () => {
-            this.eventCard(dataPath["eventCard3"]);
-            this.changeText(this.eventText, dataPath["eventText1"]);
+            this.eventCard(dataPath.eventCard3);
+            this.changeText(this.eventText, dataPath.eventText1);
+            this.card.label = true;
         })
 
         //设置拖动效果
@@ -88,11 +43,15 @@ class thirdFloorLevel2 extends Base {
     }
 
     judgeChoice() {
-        //console.log(`当前回合数：${this.scene_turn}`);
-        if (this.enemy_hp <= 0) {
+        if (this.from_elf_scene) {
+            this.action4();
+        }
+        else if (this.enemy_hp <= 0) {
+            this.rotateOutAndMakeNewCard("card1");
             this.gotoScene("floor three level 1");
         }
         else if (saveData.player.hp <= 0) {
+            this.rotateOutAndMakeNewCard("card1");
             this.gotoScene("floor three level 1");
         }
         //根据回合数判断行动
@@ -105,12 +64,15 @@ class thirdFloorLevel2 extends Base {
         else {
             this.action3();
         }
-        //console.log(`当前玩家血量:${saveData.player.hp}`);
         this.scene_turn++;
+        if (saveData != {}) {
+            saveData.player.currentPosition.scene_turn = this.scene_turn;
+        }
+        //console.log(saveData);
     }
 
     action1() {
-        this.rotateOutAndMakeNewCard(this.card, "dragon");
+        this.rotateOutAndMakeNewCard(dataPath.enemy.name);
         //根据玩家的选择先判断龙是否掉血
         //玩家上个选择是攻击，龙的上个行为为攻击/吐火
         if (this.player_choice == "left") {
@@ -121,6 +83,16 @@ class thirdFloorLevel2 extends Base {
                 //狂暴情况下，龙的攻击为吐火，且伤害为3
                 saveData.player.hp -= 3;
                 this.changeText(this.eventText, "You took 3 damges!\nAnd you dealt 1 damge!");
+                //玩家血量小于等于0，挑战失败
+                if (saveData.player.hp <= 0) {
+                    this.lost();
+                    return;
+                }
+                //敌人血量小于等于0，挑战成功
+                if (this.enemy_hp <= 0) {
+                    this.win();
+                    return;
+                }
                 this.time.delayedCall(2000, () => {
                     this.changeText(this.eventText, dataPath.eventText7);
                 });
@@ -129,19 +101,19 @@ class thirdFloorLevel2 extends Base {
                 //非狂暴情况下为攻击，伤害为2
                 saveData.player.hp -= 2;
                 this.changeText(this.eventText, "You took 2 damges!\nAnd you dealt 1 damge!");
+                //玩家血量小于等于0，挑战失败
+                if (saveData.player.hp <= 0) {
+                    this.lost();
+                    return;
+                }
+                //敌人血量小于等于0，挑战成功
+                if (this.enemy_hp <= 0) {
+                    this.win();
+                    return;
+                }
                 this.time.delayedCall(2000, () => {
                     this.changeText(this.eventText, dataPath.eventText2);
                 });
-            }
-            //玩家血量小于等于0，挑战失败
-            if (saveData.player.hp <= 0) {
-                this.lost();
-                return;
-            }
-            //敌人血量小于等于0，挑战成功
-            if (this.enemy_hp <= 0) {
-                this.win();
-                return;
             }
             //狂暴提示
             if (this.enemy_hp <= 5 && !this.enemy_berserk) {
@@ -150,7 +122,7 @@ class thirdFloorLevel2 extends Base {
             }
             //判断是否触发精灵事件
             if (saveData.elf && this.enemy_hp <= 5) {
-                this.elf_scene();
+                this.time.delayedCall(3000, () => { this.elf_scene(); });
             }
         }
         //玩家上个选择是防御，龙的上个行为为攻击/吐火
@@ -163,17 +135,17 @@ class thirdFloorLevel2 extends Base {
                     //无盾且躲避失败
                     saveData.player.hp -= 3;
                     this.changeText(this.eventText, "You didn't dodge the fireball!\nYou took 3 damges.");
+                    //玩家血量小于0，挑战失败
+                    if (saveData.player.hp <= 0) {
+                        this.lost();
+                        return;
+                    }
                 }
                 else if (saveData.player.shield) {
                     this.changeText(this.eventText, "You successfully parry the fireball.");
                 }
                 else {
                     this.changeText(this.eventText, "You dodged the fireball!");
-                }
-                //玩家血量小于0，挑战失败
-                if (saveData.player.hp <= 0) {
-                    this.lost();
-                    return;
                 }
                 this.time.delayedCall(2000, () => {
                     this.changeText(this.eventText, dataPath.eventText7 + "\nWhat are you going to do next?");
@@ -195,12 +167,17 @@ class thirdFloorLevel2 extends Base {
     }
 
     action2() {
-        this.rotateOutAndMakeNewCard(this.card, "dragon");
+        this.rotateOutAndMakeNewCard(dataPath.enemy.name);
         //根据玩家的选择先判断龙是否掉血
         //玩家上个选择是攻击，龙的上个行为为移动
         if (this.player_choice == "left") {
             this.enemy_hp--;
             this.changeText(this.eventText, "You dealt 1 damge!");
+            //敌人血量小于等于0，挑战成功
+            if (this.enemy_hp <= 0) {
+                this.win();
+                return;
+            }
             if (this.enemy_berserk) {
                 this.time.delayedCall(2000, () => {
                     this.changeText(this.eventText, dataPath.eventText8 + "\nWhat are you going to do next?");
@@ -211,11 +188,6 @@ class thirdFloorLevel2 extends Base {
                     this.changeText(this.eventText, dataPath.eventText3);
                 });
             }
-            //敌人血量小于等于0，挑战成功
-            if (this.enemy_hp <= 0) {
-                this.win();
-                return;
-            }
             //狂暴提示
             if (this.enemy_hp <= 5 && !this.enemy_berserk) {
                 this.eventCard(dataPath.eventCard6);
@@ -223,7 +195,7 @@ class thirdFloorLevel2 extends Base {
             }
             //判断是否触发精灵事件
             if (saveData.elf && this.enemy_hp <= 5) {
-                this.elf_scene();
+                this.time.delayedCall(3000, () => { this.elf_scene(); });
             }
 
         }
@@ -237,7 +209,7 @@ class thirdFloorLevel2 extends Base {
                 this.changeText(this.eventText, dataPath.eventText8 + "\nWhat are you going to do next?");
             });
         }
-        else{
+        else {
             this.time.delayedCall(2000, () => {
                 this.changeText(this.eventText, dataPath.eventText3);
             });
@@ -245,7 +217,7 @@ class thirdFloorLevel2 extends Base {
     }
 
     action3() {
-        this.rotateOutAndMakeNewCard(this.card, "dragon");
+        this.rotateOutAndMakeNewCard(dataPath.enemy.name);
         //根据玩家的选择先判断龙是否掉血
         //玩家上个选择是攻击，龙的上个行为为吐火
         if (this.player_choice == "left") {
@@ -255,16 +227,6 @@ class thirdFloorLevel2 extends Base {
             //龙的攻击为吐火，且伤害为3
             saveData.player.hp -= 3;
             this.changeText(this.eventText, "You took 3 damges!\nAnd you dealt 1 damge!");
-            if (this.enemy_berserk) {
-                this.time.delayedCall(2000, () => {
-                    this.changeText(this.eventText, dataPath.eventText7 + "\nWhat are you going to do next?");
-                });
-            }
-            else {
-                this.time.delayedCall(2000, () => {
-                    this.changeText(this.eventText, dataPath.eventText1);
-                });
-            }
             //玩家血量小于等于0，挑战失败
             if (saveData.player.hp <= 0) {
                 this.lost();
@@ -275,6 +237,16 @@ class thirdFloorLevel2 extends Base {
                 this.win();
                 return;
             }
+            if (this.enemy_berserk) {
+                this.time.delayedCall(2000, () => {
+                    this.changeText(this.eventText, dataPath.eventText7 + "\nWhat are you going to do next?");
+                });
+            }
+            else {
+                this.time.delayedCall(2000, () => {
+                    this.changeText(this.eventText, dataPath.eventText1);
+                });
+            }
             //狂暴提示
             if (this.enemy_hp <= 5 && !this.enemy_berserk) {
                 this.eventCard(dataPath.eventCard6);
@@ -282,7 +254,7 @@ class thirdFloorLevel2 extends Base {
             }
             //判断是否触发精灵事件
             if (saveData.elf && this.enemy_hp <= 5) {
-                this.elf_scene();
+                this.time.delayedCall(3000, () => { this.elf_scene(); });
             }
         }
         //玩家上个选择是攻击，龙的上个行为为吐火
@@ -293,6 +265,11 @@ class thirdFloorLevel2 extends Base {
                 //无盾且躲避失败
                 saveData.player.hp -= 3;
                 this.changeText(this.eventText, "You didn't dodge the fireball!\nYou took 3 damges!");
+                //玩家血量小于0，挑战失败
+                if (saveData.player.hp <= 0) {
+                    this.lost();
+                    return;
+                }
             }
             else if (saveData.player.shield) {
                 this.changeText(this.eventText, "You successfully parry the fireball.");
@@ -300,11 +277,7 @@ class thirdFloorLevel2 extends Base {
             else {
                 this.changeText(this.eventText, "You dodged the fireball!");
             }
-            //玩家血量小于0，挑战失败
-            if (saveData.player.hp <= 0) {
-                this.lost();
-                return;
-            }
+
             //提示文本
             if (this.enemy_berserk) {
                 this.time.delayedCall(2000, () => {
@@ -319,22 +292,63 @@ class thirdFloorLevel2 extends Base {
         }
     }
 
+    //加载精灵退场后画面
+    action4() {
+        this.from_elf_scene = false;
+        this.rotateOutAndMakeNewCard( dataPath.enemy.name);
+        this.changeText(this.eventText, dataPath.eventText9);
+        this.left_choice_text = dataPath.left1;
+        this.right_choice_text = dataPath.right1[this.def_type];
+    }
+
+    //加载精灵登场画面
     elf_scene() {
         saveData.elf = false;
-        this.cardReset(this.card,"elf");
+        this.from_elf_scene = true
+        this.cardReset("elf");
+        this.card.label = false;
+        this.left_choice_text = dataPath.left2;
+        this.right_choice_text = dataPath.right2;
+        //设置卡牌不可拖动
+        //当剧情结束后才能拖动
+        this.time.delayedCall(1000, () => {
+            this.changeText(this.eventText, dataPath.eventText4);
+        });
+        this.time.delayedCall(4000, () => {
+            this.changeText(this.eventText, dataPath.eventText5);
+        });
+        this.time.delayedCall(7000, () => {
+            this.eventCard(dataPath.eventCard5);
+            this.enemy_hp -= 1;
+        });
+        this.time.delayedCall(10000, () => {
+            this.changeText(this.eventText, dataPath.eventText6);
+        });
+
+        this.time.delayedCall(12000, () => {
+            this.cardReset("player");
+            this.card.label = true;
+        });
+        this.scene_turn--;
     }
 
     win() {
-        this.changeText(this.eventText, "You win.");
-        this.left_choice_text = "next";
-        this.right_choice_text = "next";
+        this.time.delayedCall(1000, () => {
+            this.rotateOutAndMakeNewCard("player");
+            this.changeText(this.eventText, "You win.");
+        });
+        this.left_choice_text = "I got this...";
+        this.right_choice_text = "I got this!!!";
         console.log("win");
     }
 
     lost() {
-        this.changeText(this.eventText, "You lost.");
-        this.left_choice_text = "next";
-        this.right_choice_text = "next";
+        this.time.delayedCall(1000, () => {
+            this.rotateOutAndMakeNewCard("player");
+            this.changeText(this.eventText, "You lost.");
+        });
+        this.left_choice_text = "wait...";
+        this.right_choice_text = "what?!";
         console.log("lost");
     }
 }

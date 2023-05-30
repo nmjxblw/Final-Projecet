@@ -44,10 +44,10 @@
                 "eventCard2": "You feel a strong power behind the door."
             },
             "level2": {
-                "enemy":{
-                  "name":"Dragon",
-                  "hp":10,
-                  "berserk":false
+                "enemy": {
+                    "name": "dragon",
+                    "hp": 10,
+                    "berserk": false
                 },
                 "right1": {
                     "shield": "Shield Defense",
@@ -55,13 +55,9 @@
                 },
                 "left1": "Attack",
                 "right2": "*SIGH*",
-                "left2": "*Tsk*",
-                "right3": "",
-                "left3": "",
-                "right4": "",
-                "left4": "",
+                "left2": "Well...",
                 "eventCard1": "You arrive at the last floor of the dungeon...",
-                "eventCard2":"...and see a dragon spiraling in the sky.",
+                "eventCard2": "...and see a dragon spiraling in the sky.",
                 "eventCard3": "Without a second thought, you head towards the dragon...",
                 "eventCard4": "The dragon becomes furious. \nIt is more likely to attack you now.",
                 "eventCard5": "The elf shot an arrow at the dragon and attracted dragon's attention.",
@@ -73,7 +69,8 @@
                 "eventText5": "Elf: As you saved my life, I will come to help you now",
                 "eventText6": "The dragon attacks the elf. The elf faints.",
                 "eventText7": "The dragon spit fire at you at last action.",
-                "eventText8": "The dragon moved toward you at last action."
+                "eventText8": "The dragon moved toward you at last action.",
+                "eventText9": "The dragon stares at you with anger in its eyes."
             },
             "level3": {
                 "right": "*CLANK*\n(block with the sword)",
