@@ -128,7 +128,7 @@ class firstFloorLevel2 extends Base {
     }
 
     onEnter(){
-        this.createEventText("maze");
+        this.changeText(this.eventText, "The maze");
         this.left_choice_text = "enter the maze";
         this.right_choice_text = "enter the maze";
 
@@ -210,7 +210,8 @@ class firstFloorLevel3 extends Base{
     }
 
     lose(){
-        if(deathCount==0){
+        console.log(death);
+        if(!death){
             this.time.delayedCall(500, () => {
                 this.eventCard("The power of the great sword is to go back in time.");
             });
@@ -228,18 +229,18 @@ class firstFloorLevel3 extends Base{
             });
 
             this.time.delayedCall(12500, () => {
-                this.gotoScene("floor one level 1");
+                this.gotoScene("floor one level 0");
             });
+            death = true;
         }
         else{
-            this.time.delayedCall(500, () => {
+            this.time.delayedCall(1000, () => {
                 this.eventCard("Returning to the beginning of the stage...");
             });
 
-            this.time.delayedCall(3500, () => {
+            this.time.delayedCall(4000, () => {
                 this.gotoScene("floor one level 0");
             });
         }
-        deathCount++;
     }
 }
