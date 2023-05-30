@@ -4,12 +4,12 @@
     "player": {
         "hp": 5,
         "shield": false,
-        "sword": true,
+        "sword": false,
         "currentPosition": {
             "floor": "one",
             "scene": 1,
             "scene_turn": 1
         }
     },
-    "elf": false
+    "elf": true
 }

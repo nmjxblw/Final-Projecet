@@ -64,6 +64,9 @@ class Base extends GameScene {
 
         //记录当前场景的回合数
         this.scene_turn = 1;
+        if(saveData != {}){
+            saveData.player.currentPosition.scene_turn = this.scene_turn;
+        }
 
         //存储玩家选项
         this.player_choice = "";

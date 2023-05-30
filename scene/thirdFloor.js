@@ -62,6 +62,7 @@ class thirdFloorLevel2 extends Base {
 
     onEnter() {
 
+        console.log(saveData);
         initializeLocal();
 
         //先初始化第一轮的左右选项
@@ -97,7 +98,6 @@ class thirdFloorLevel2 extends Base {
     }
 
     judgeChoice() {
-        //console.log(`当前回合数：${this.scene_turn}`);
         if (this.from_elf_scene) {
             this.action4();
         }
@@ -117,8 +117,11 @@ class thirdFloorLevel2 extends Base {
         else {
             this.action3();
         }
-        //console.log(`当前玩家血量:${saveData.player.hp}`);
         this.scene_turn++;
+        if(saveData != {}){
+            saveData.player.currentPosition.scene_turn = this.scene_turn;
+        }
+        console.log(saveData);
     }
 
     action1() {
