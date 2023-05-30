@@ -69,10 +69,11 @@ class secondFloorLevel2 extends Base {
 
             this.left_choice_text = dataPath.left2;
             this.right_choice_text = dataPath.right2;
+            
         }
         else
         {
-            this.gotoScene("testlevel");
+            this.gotoScene("floor three level 1");
         }
         
     }

@@ -31,7 +31,7 @@ class secondFloorLevel1 extends Base {
     }
 
     action1() {
-        this.gotoScene("floor two level 2");
-        
+        this.rotateOutAndMakeNewCard(this.card, "card1");
+        this.gotoScene("floor two level 2");    
     }
 }
