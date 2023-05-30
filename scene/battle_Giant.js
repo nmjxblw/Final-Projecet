@@ -73,8 +73,6 @@ class battleGiant extends Base {
     }
 
     action2() {
-        this.currentAction = "action2";
-
         if (this.player_choice == "left") { 
             this.monsterHP--;
             PlayerHP-= 2; 
@@ -91,6 +89,8 @@ Giant ready to move: ` + this.monsterHP + PlayerHP);
 Giant ready to move: ` + this.monsterHP + PlayerHP);
         }
 
+        this.currentAction = "action2";
+
         console.log(this.currentAction);
 
         if (PlayerHP <= 0) { this.actionLose(); return; }
@@ -103,8 +103,6 @@ Giant ready to move: ` + this.monsterHP + PlayerHP);
     }
 
     action3() {
-        this.currentAction = "action3";
-
         if (this.player_choice == "left") { 
             this.monsterHP--; 
 
@@ -117,6 +115,8 @@ Giant ready to attack: ` + this.monsterHP + PlayerHP);
             this.changeText(this.event_text, `The giant did not attack you
 Giant ready to attack: ` + this.monsterHP + PlayerHP);
         }
+
+        this.currentAction = "action3";
         console.log(this.currentAction);
 
 
@@ -135,30 +135,26 @@ Giant ready to attack: ` + this.monsterHP + PlayerHP);
 
     action4() {
 
-        if(this.currentAction = "action2")
+        if(this.currentAction == "action3")
         {
             if (this.player_choice == "left") {  
                 this.changeText(this.event_text, `The giant hit you for 2 points of damage
-The giant starts to get angry 
-You can't tell what he's going to do next: ` + this.monsterHP + PlayerHP);
+Giant are preparing for next action` + this.monsterHP + PlayerHP);
             }
             else{
                 this.changeText(this.event_text, `You dodged the giant's attack
-The giant starts to get angry 
-You can't tell what he's going to do next: ` + this.monsterHP + PlayerHP);
+Giant are preparing for next action` + this.monsterHP + PlayerHP);
             }
         }
         else
         {
             if (this.player_choice == "left") {  
                 this.changeText(this.event_text, `You hit the giant for 1 point of damage
-The giant starts to get angry 
-You can't tell what he's going to do next: ` + this.monsterHP + PlayerHP);
+Giant are preparing for next action` + this.monsterHP + PlayerHP);
             }
             else{
                 this.changeText(this.event_text, `The giant did not attack you
-The giant starts to get angry 
-You can't tell what he's going to do next: ` + this.monsterHP + PlayerHP);
+Giant are preparing for next action` + this.monsterHP + PlayerHP);
             }
         }
         
@@ -178,16 +174,17 @@ try to summarize his attack pattern under the anger to deal with it`);
     action5() {
         if (this.player_choice == "left") { 
             this.monsterHP--; 
-            PlayerHP--; 
+            PlayerHP-= 2; 
             this.changeText(this.event_text, `The giant hit you for 2 points of damage
-Since the giant is in a state of rage 
-You can't tell what his next move will be ` + this.monsterHP + PlayerHP);
+Giant are preparing for next action` + this.monsterHP + PlayerHP);
         }
         else{
             this.changeText(this.event_text, `You dodged the giant's attack
-Since the giant is in a state of rage 
-You can't tell what his next move will be ` + this.monsterHP + PlayerHP);
+Giant are preparing for next action` + this.monsterHP + PlayerHP);
         }
+
+        this.currentAction = "action5";
+        console.log(this.currentAction);
 
         
         if (PlayerHP <= 0) { this.actionLose(); return; }
@@ -202,16 +199,16 @@ You can't tell what his next move will be ` + this.monsterHP + PlayerHP);
     action6() {
         if (this.player_choice == "left") { 
             this.monsterHP--; 
-            PlayerHP--; 
-            this.changeText(this.event_text, `The giant hit you for 2 points of damage
-Since the giant is in a state of rage 
-You can't tell what his next move will be ` + this.monsterHP + PlayerHP);
+            this.changeText(this.event_text, `You hit the giant for 1 point of damage
+Giant are preparing for next action` + this.monsterHP + PlayerHP);
         }
         else{
-            this.changeText(this.event_text, `You dodged the giant's attack
-Since the giant is in a state of rage 
-You can't tell what his next move will be ` + this.monsterHP + PlayerHP);
+            this.changeText(this.event_text, `The giant did not attack you
+Giant are preparing for next action` + this.monsterHP + PlayerHP);
         }
+
+        this.currentAction = "action6";
+        console.log(this.currentAction);
 
         
         if (PlayerHP <= 0) { this.actionLose(); return; }
@@ -226,15 +223,17 @@ You can't tell what his next move will be ` + this.monsterHP + PlayerHP);
     action7() {
         if (this.player_choice == "left") { 
             this.monsterHP--; 
-            this.changeText(this.event_text, `You hit the giant for 1 point of damage
-Since the giant is in a state of rage 
-You can't tell what his next move will be ` + this.monsterHP + PlayerHP);
+            PlayerHP-=2;
+            this.changeText(this.event_text, `The giant hit you for 2 points of damage
+Giant are preparing for next action` + this.monsterHP + PlayerHP);
         }
         else{
-            this.changeText(this.event_text, `The giant did not attack you
-Since the giant is in a state of rage 
-You can't tell what his next move will be ` + this.monsterHP + PlayerHP);
+            this.changeText(this.event_text, `You dodged the giant's attack
+Giant are preparing for next action` + this.monsterHP + PlayerHP);
         }
+
+        this.currentAction = "action7";
+        console.log(this.currentAction);
 
         
         if (PlayerHP <= 0) { this.actionLose(); return; }
