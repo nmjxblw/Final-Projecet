@@ -8,6 +8,8 @@ class thirdFloorLevel1 extends Base {
         this.load.image("door", "card1.png");
         this.load.image("card1", "card1.png");
         this.load.image("card2", "card2.png");
+        this.load.image("elf", "elf.png");
+        this.load.image("player","player.png");
     }
 
     onEnter() {
@@ -237,7 +239,7 @@ class thirdFloorLevel2 extends Base {
                 this.changeText(this.eventText, dataPath.eventText8 + "\nWhat are you going to do next?");
             });
         }
-        else{
+        else {
             this.time.delayedCall(2000, () => {
                 this.changeText(this.eventText, dataPath.eventText3);
             });
@@ -321,7 +323,24 @@ class thirdFloorLevel2 extends Base {
 
     elf_scene() {
         saveData.elf = false;
-        this.cardReset(this.card,"elf");
+        this.cardReset(this.card, "elf");
+        this.left_choice_text = dataPath.left2;
+        this.right_choice_text = dataPath.right2;
+        //设置卡牌不可拖动
+        //当剧情结束后才能拖动
+        this.card.dragable = false;
+        this.changeText(this.eventText, dataPath.eventText4);
+        this.time.delayedCall(3000, () => {
+            this.changeText(this.eventText, dataPath.eventText5);
+        });
+        this.time.delayedCall(6000, () => {
+            this.eventCard(dataPath.eventCard5);
+            this.enemy_hp -= 1;
+        });
+        this.time.delayedCall(9000,()=>{
+            this.changeText(this.eventText,dataPath.eventText6);
+            this.cardReset(this.card,"player");
+        });
     }
 
     win() {
