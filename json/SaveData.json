@@ -3,12 +3,12 @@
     "//调用方式":"例子:saveData.player.hp",
     "player":{
         "hp":5,
-        "shield":true,
-        "sword":10,
+        "shield":false,
+        "sword":true,
         "currentPosition":{
             "floor":1,
             "scene":1,
-            "sceneTurn":1
+            "scene_turn":1
         }
     },
     "elf":false

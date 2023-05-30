@@ -19,6 +19,11 @@ class GameScene extends Phaser.Scene {
             }
         }
         this.level = parseInt(key.replace(/[^0-9]/ig, ""));
+        //同时自动更新当前玩家位置信息
+        if(saveData != {}){
+            saveData.currentPosition.floor = this.floor;
+            saveData.currentPosition.level = this.level;
+        }
     }
 
     preload() {
