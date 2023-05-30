@@ -19,7 +19,7 @@ class Base extends GameScene {
         //旋转锚点设定在屏幕的中间偏下的位置，这样能实现卡片旋转出屏幕的效果
         this.rotatePoint = this.add.circle(
             this.cx,
-            this.h - 50,
+            this.h + 25,
             10,
             0xffffff)
             .setAlpha(1);
@@ -33,7 +33,7 @@ class Base extends GameScene {
         //在debug后记得把透明度设置为0.
         this.cardCenterPoint = this.add.circle(
             this.cx,
-            this.h - 50 - this.cardH * 0.75,
+            this.h + 25 - this.cardH * 0.75,
             10,
             0xffff00)
             .setAlpha(0.8);
