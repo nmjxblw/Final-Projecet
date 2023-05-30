@@ -1,63 +1,7 @@
-class thirdFloorLevel1 extends Base {
-    constructor() {
-        //当前场景为第三层大门前
-        super("floor three level 1", "at the door")
-    }
-
-    exPreload() {
-        this.load.image("door", "card1.png");
-        this.load.image("card1", "card1.png");
-        this.load.image("card2", "card2.png");
-        this.load.image("elf", "elf.png");
-        this.load.image("player", "player.jpg");
-    }
-
-    onEnter() {
-
-        console.log(this.scene_turn);
-
-        this.left_choice_text = dataPath["left"];
-        this.right_choice_text = dataPath["right"];
-
-        this.createEventText(dataPath["eventText"]);
-
-        this.card = this.createCard("door");
-        this.card.label = false;
-
-        this.time.delayedCall(500, () => {
-            this.eventCard(dataPath["eventCard1"]);
-        });
-
-        this.time.delayedCall(3500, () => {
-            this.eventCard(dataPath["eventCard2"]);
-            this.card.label = true;
-        });
-
-        this.dragrotate(this.card);
-    }
-
-    judgeChoice() {
-        this.action();
-    }
-
-    action() {
-        this.rotateOutAndMakeNewCard(this.card, "door");
-        this.gotoScene("floor three level 2")
-    }
-}
-
 class thirdFloorLevel2 extends Base {
     constructor() {
-        //当前场景为第三层大门前
+        //当前场景为第三层龙
         super("floor three level 2", "the dragon")
-    }
-
-    exPreload() {
-        this.load.image("dragon", "card1.png");
-        this.load.image("card1", "card1.png");
-        this.load.image("card2", "card2.png");
-        this.load.image("elf", "elf.png");
-        this.load.image("player", "player.jpg");
     }
 
     onEnter() {
@@ -66,30 +10,31 @@ class thirdFloorLevel2 extends Base {
         initializeLocal();
 
         //先初始化第一轮的左右选项
-        this.left_choice_text = dataPath["left1"];
+        this.left_choice_text = dataPath.left1;
         //根据玩家是否有盾牌来切换防御词条
         this.def_type = saveData.player.shield ? "shield" : "no_shield";
-        this.right_choice_text = dataPath["right1"][this.def_type];
+        this.right_choice_text = dataPath.right1[this.def_type];
         //加载敌人血量
         this.enemy_hp = dataPath.enemy.hp;
         //加载敌人狂暴状态
         this.enemy_berserk = dataPath.enemy.berserk;
-        //创建卡片
-        this.card = this.createCard("dragon");
+        //设置卡片的图案
+        this.card.setTexture(dataPath.enemy.name);
+        //设置卡片不可转动
         this.card.label = false;
 
         //播放事件卡片
         this.time.delayedCall(500, () => {
-            this.eventCard(dataPath["eventCard1"]);
+            this.eventCard(dataPath.eventCard1);
         });
 
         this.time.delayedCall(3500, () => {
-            this.eventCard(dataPath["eventCard2"]);
+            this.eventCard(dataPath.eventCard2);
         });
 
         this.time.delayedCall(6500, () => {
-            this.eventCard(dataPath["eventCard3"]);
-            this.changeText(this.eventText, dataPath["eventText1"]);
+            this.eventCard(dataPath.eventCard3);
+            this.changeText(this.eventText, dataPath.eventText1);
             this.card.label = true;
         })
 
@@ -102,9 +47,11 @@ class thirdFloorLevel2 extends Base {
             this.action4();
         }
         else if (this.enemy_hp <= 0) {
+            this.rotateOutAndMakeNewCard("card1");
             this.gotoScene("floor three level 1");
         }
         else if (saveData.player.hp <= 0) {
+            this.rotateOutAndMakeNewCard("card1");
             this.gotoScene("floor three level 1");
         }
         //根据回合数判断行动
@@ -118,14 +65,14 @@ class thirdFloorLevel2 extends Base {
             this.action3();
         }
         this.scene_turn++;
-        if(saveData != {}){
+        if (saveData != {}) {
             saveData.player.currentPosition.scene_turn = this.scene_turn;
         }
-        console.log(saveData);
+        //console.log(saveData);
     }
 
     action1() {
-        this.rotateOutAndMakeNewCard(this.card, "dragon");
+        this.rotateOutAndMakeNewCard(dataPath.enemy.name);
         //根据玩家的选择先判断龙是否掉血
         //玩家上个选择是攻击，龙的上个行为为攻击/吐火
         if (this.player_choice == "left") {
@@ -220,7 +167,7 @@ class thirdFloorLevel2 extends Base {
     }
 
     action2() {
-        this.rotateOutAndMakeNewCard(this.card, "dragon");
+        this.rotateOutAndMakeNewCard(dataPath.enemy.name);
         //根据玩家的选择先判断龙是否掉血
         //玩家上个选择是攻击，龙的上个行为为移动
         if (this.player_choice == "left") {
@@ -270,7 +217,7 @@ class thirdFloorLevel2 extends Base {
     }
 
     action3() {
-        this.rotateOutAndMakeNewCard(this.card, "dragon");
+        this.rotateOutAndMakeNewCard(dataPath.enemy.name);
         //根据玩家的选择先判断龙是否掉血
         //玩家上个选择是攻击，龙的上个行为为吐火
         if (this.player_choice == "left") {
@@ -345,18 +292,20 @@ class thirdFloorLevel2 extends Base {
         }
     }
 
+    //加载精灵退场后画面
     action4() {
         this.from_elf_scene = false;
-        this.rotateOutAndMakeNewCard(this.card, "dragon");
+        this.rotateOutAndMakeNewCard( dataPath.enemy.name);
         this.changeText(this.eventText, dataPath.eventText9);
         this.left_choice_text = dataPath.left1;
-        this.right_choice_text = dataPath["right1"][this.def_type];
+        this.right_choice_text = dataPath.right1[this.def_type];
     }
 
+    //加载精灵登场画面
     elf_scene() {
         saveData.elf = false;
         this.from_elf_scene = true
-        this.cardReset(this.card, "elf");
+        this.cardReset("elf");
         this.card.label = false;
         this.left_choice_text = dataPath.left2;
         this.right_choice_text = dataPath.right2;
@@ -377,7 +326,7 @@ class thirdFloorLevel2 extends Base {
         });
 
         this.time.delayedCall(12000, () => {
-            this.cardReset(this.card, "player");
+            this.cardReset("player");
             this.card.label = true;
         });
         this.scene_turn--;
@@ -385,6 +334,7 @@ class thirdFloorLevel2 extends Base {
 
     win() {
         this.time.delayedCall(1000, () => {
+            this.rotateOutAndMakeNewCard("player");
             this.changeText(this.eventText, "You win.");
         });
         this.left_choice_text = "I got this...";
@@ -394,6 +344,7 @@ class thirdFloorLevel2 extends Base {
 
     lost() {
         this.time.delayedCall(1000, () => {
+            this.rotateOutAndMakeNewCard("player");
             this.changeText(this.eventText, "You lost.");
         });
         this.left_choice_text = "wait...";

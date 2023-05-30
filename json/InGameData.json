@@ -45,7 +45,7 @@
             },
             "level2": {
                 "enemy": {
-                    "name": "Dragon",
+                    "name": "dragon",
                     "hp": 10,
                     "berserk": false
                 },
