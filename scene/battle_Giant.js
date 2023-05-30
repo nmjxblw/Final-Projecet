@@ -140,6 +140,7 @@ Giant ready to attack: ` + this.monsterHP + PlayerHP);
             if (this.player_choice == "left") {  
                 this.changeText(this.event_text, `The giant hit you for 2 points of damage
 Giant are preparing for next action` + this.monsterHP + PlayerHP);
+                this.shakeTween(this.cameras.main);
             }
             else{
                 this.changeText(this.event_text, `You dodged the giant's attack
@@ -177,6 +178,7 @@ try to summarize his attack pattern under the anger to deal with it`);
             PlayerHP-= 2; 
             this.changeText(this.event_text, `The giant hit you for 2 points of damage
 Giant are preparing for next action` + this.monsterHP + PlayerHP);
+            this.shakeTween(this.cameras.main);
         }
         else{
             this.changeText(this.event_text, `You dodged the giant's attack
@@ -226,6 +228,7 @@ Giant are preparing for next action` + this.monsterHP + PlayerHP);
             PlayerHP-=2;
             this.changeText(this.event_text, `The giant hit you for 2 points of damage
 Giant are preparing for next action` + this.monsterHP + PlayerHP);
+            this.shakeTween(this.cameras.main);
         }
         else{
             this.changeText(this.event_text, `You dodged the giant's attack
