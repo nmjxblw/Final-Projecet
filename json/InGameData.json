@@ -9,10 +9,30 @@
         },
         "two": {
             "level1": {
-                "right": "推门",
-                "left": "拉门",
-                "eventText": "在门前",
-                "eventCard": "一扇门，门后诅咒的气息越发强烈……"
+                "right": "Open the Gate",
+                "left": "Open the Gate",
+                "eventText": "At the gate\n\nA monster's roar came from behind the gate"
+            },
+            "level2": {
+                "left1": "Help him",
+                "right1": "While he lures the giant away to the next level",
+                "left2": "Attack",
+                "right2": "Dodge",
+                "left3": "Leaving the fight",
+                "right3": "Leaving the fight",
+                "eventText1": "Coming to the second level, you see a hunter being chased by a giant and you choose: ",
+                "eventText2": "Congratulations! You have defeated the giant!",
+                "battleText1": "Giants ready to attack",
+                "battleText2": "The giant hit you for 2 points of damage\nYou hit the giant for 1 point of damage\nGiant ready to move",
+                "battleText3": "You dodged the giant's attack\nGiant ready to move",
+                "battleText4": "You hit the giant for 1 point of damage\nGiant ready to attack",
+                "battleText5": "The giant did not attack you\nGiant ready to attack",
+                "battleText6": "The giant hit you for 2 points of damage\nYou hit the giant for 1 point of damage\nGiant are preparing for next action",
+                "battleText7": "You dodged the giant's attack\nGiant are preparing for next action",
+                "battleText8": "You hit the giant for 1 point of damage\nGiant are preparing for next action",
+                "battleText9": "The giant did not attack you\nGiant are preparing for next action",
+                "eventCard1": "When some powerful enemies are continuously attacked will enter the rage state.",
+                "eventCard2": "You cannot judge the actions of enemies in a state of rage."
             }
         },
         "three": {

@@ -333,7 +333,7 @@ const game = new Phaser.Game({
     //scene: [testlevel],
     //scene: [baseTest1, baseTest2],
     ////scene: [baseBattle],
-    scene: [battleGiant],
+    scene: [secondFloorLevel1, secondFloorLevel2],
     // scene: [
     //     thirdFloorLevel1,
     //     thirdFloorLevel2,

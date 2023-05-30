@@ -1,4 +1,4 @@
-class battleGiant extends Base {
+class secondFloorLevel2 extends Base {
     constructor(){
         super("floor two level 2","battle with the giant")
     }
@@ -16,11 +16,11 @@ class battleGiant extends Base {
         console.log(saveData.player.hp);
 
 
-        this.left_choice_text = "Help him"
-        this.right_choice_text = "While he lures the giant away to the next level"
+        this.left_choice_text = dataPath.left1
+        this.right_choice_text = dataPath.right1
         this.card = this.createCard("card1");
 
-        this.changeText(this.eventText, `Coming to the second level, you see a hunter being chased by a giant and you choose: `);
+        this.changeText(this.eventText, dataPath.eventText1);
 
         this.dragrotate(this.card);
 
@@ -65,10 +65,10 @@ class battleGiant extends Base {
             
             this.rotateOutAndMakeNewCard(this.card, "card1");
             saveData.elf = true;
-            this.changeText(this.eventText, `Giants ready to attack: ` + this.monsterHP + saveData.player.hp);
+            this.changeText(this.eventText, dataPath.battleText1 + this.monsterHP + saveData.player.hp);
 
-            this.left_choice_text = "Attack";
-            this.right_choice_text = "Dodge";
+            this.left_choice_text = dataPath.left2;
+            this.right_choice_text = dataPath.right2;
         }
         else
         {
@@ -84,14 +84,11 @@ class battleGiant extends Base {
 
             if (this.monsterHP == 3) { this.giantRage = true; this.scene_turn = 1; this.action4(); return; }
 
-            this.changeText(this.eventText, `The giant hit you for 2 points of damage 
-You hit the giant for 1 point of damage
-Giant ready to move: ` + this.monsterHP +saveData.player.hp);
+            this.changeText(this.eventText, dataPath.battleText2 + this.monsterHP +saveData.player.hp);
             this.shakeTween(this.cameras.main);
         }
         else{
-            this.changeText(this.eventText, `You dodged the giant's attack
-Giant ready to move: ` + this.monsterHP + saveData.player.hp);
+            this.changeText(this.eventText, dataPath.battleText3 + this.monsterHP + saveData.player.hp);
         }
 
         this.currentAction = "action2";
@@ -103,8 +100,8 @@ Giant ready to move: ` + this.monsterHP + saveData.player.hp);
         
         this.rotateOutAndMakeNewCard(this.card, "card1");
 
-        this.left_choice_text = "Attack";
-        this.right_choice_text = "Dodge";
+        this.left_choice_text = dataPath.left2;
+        this.right_choice_text = dataPath.right2;
     }
 
     action3() {
@@ -113,12 +110,10 @@ Giant ready to move: ` + this.monsterHP + saveData.player.hp);
 
             if (this.monsterHP == 3) { this.giantRage = true; this.scene_turn = 1; this.action4();return; }
 
-            this.changeText(this.eventText, `You hit the giant for 1 point of damage
-Giant ready to attack: ` + this.monsterHP + saveData.player.hp);
+            this.changeText(this.eventText, dataPath.battleText4 + this.monsterHP + saveData.player.hp);
         }
         else{
-            this.changeText(this.eventText, `The giant did not attack you
-Giant ready to attack: ` + this.monsterHP + saveData.player.hp);
+            this.changeText(this.eventText, dataPath.battleText5 + this.monsterHP + saveData.player.hp);
         }
 
         this.currentAction = "action3";
@@ -134,8 +129,8 @@ Giant ready to attack: ` + this.monsterHP + saveData.player.hp);
 
         
         
-        this.left_choice_text = "Attack";
-        this.right_choice_text = "Dodge";
+        this.left_choice_text = dataPath.left2;
+        this.right_choice_text = dataPath.right2;
     }
 
     action4() {
@@ -143,51 +138,51 @@ Giant ready to attack: ` + this.monsterHP + saveData.player.hp);
         if(this.currentAction == "action3")
         {
             if (this.player_choice == "left") {  
-                this.changeText(this.eventText, `The giant hit you for 2 points of damage
-Giant are preparing for next action` + this.monsterHP + saveData.player.hp);
+                this.changeText(this.eventText, dataPath.battleText6 + this.monsterHP + saveData.player.hp);
                 this.shakeTween(this.cameras.main);
             }
             else{
-                this.changeText(this.eventText, `You dodged the giant's attack
-Giant are preparing for next action` + this.monsterHP + saveData.player.hp);
+                this.changeText(this.eventText, dataPath.battleText7 + this.monsterHP + saveData.player.hp);
             }
         }
         else
         {
             if (this.player_choice == "left") {  
-                this.changeText(this.eventText, `You hit the giant for 1 point of damage
-Giant are preparing for next action` + this.monsterHP + saveData.player.hp);
+                this.changeText(this.eventText, dataPath.battleText8 + this.monsterHP + saveData.player.hp);
             }
             else{
-                this.changeText(this.eventText, `The giant did not attack you
-Giant are preparing for next action` + this.monsterHP + saveData.player.hp);
+                this.changeText(this.eventText, dataPath.battleText9 + this.monsterHP + saveData.player.hp);
             }
         }
+
+        this.time.delayedCall(500, () => {
+            this.eventCard(dataPath["eventCard1"]);
+        });
+
+        this.time.delayedCall(3500, () => {
+            this.eventCard(dataPath["eventCard2"]);
+        });
         
-        this.eventCard(`When some powerful enemies will become angry after a certain level of attack, 
-then you can't judge his behavior, 
-try to summarize his attack pattern under the anger to deal with it`);
+        
         
         if (saveData.player.hp <= 0) { this.actionLose();; return; }
         if (this.monsterHP < 1) { this.actionWin(); return; }
         
         this.rotateOutAndMakeNewCard(this.card, "card1");
         
-        this.left_choice_text = "Attack";
-        this.right_choice_text = "Dodge";
+        this.left_choice_text = dataPath.left2;
+        this.right_choice_text = dataPath.right2;
     }
 
     action5() {
         if (this.player_choice == "left") { 
             this.monsterHP--; 
             saveData.player.hp-= 2; 
-            this.changeText(this.eventText, `The giant hit you for 2 points of damage
-Giant are preparing for next action` + this.monsterHP + saveData.player.hp);
+            this.changeText(this.eventText, dataPath.battleText6 + this.monsterHP + saveData.player.hp);
             this.shakeTween(this.cameras.main);
         }
         else{
-            this.changeText(this.eventText, `You dodged the giant's attack
-Giant are preparing for next action` + this.monsterHP + saveData.player.hp);
+            this.changeText(this.eventText, dataPath.battleText7 + this.monsterHP + saveData.player.hp);
         }
 
         this.currentAction = "action5";
@@ -199,19 +194,17 @@ Giant are preparing for next action` + this.monsterHP + saveData.player.hp);
         
         this.rotateOutAndMakeNewCard(this.card, "card1");
         
-        this.left_choice_text = "Attack";
-        this.right_choice_text = "Dodge";
+        this.left_choice_text = dataPath.left2;
+        this.right_choice_text = dataPath.right2;
     }
 
     action6() {
         if (this.player_choice == "left") { 
             this.monsterHP--; 
-            this.changeText(this.eventText, `You hit the giant for 1 point of damage
-Giant are preparing for next action` + this.monsterHP + saveData.player.hp);
+            this.changeText(this.eventText, dataPath.battleText8 + this.monsterHP + saveData.player.hp);
         }
         else{
-            this.changeText(this.eventText, `The giant did not attack you
-Giant are preparing for next action` + this.monsterHP + saveData.player.hp);
+            this.changeText(this.eventText, dataPath.battleText9 + this.monsterHP + saveData.player.hp);
         }
 
         this.currentAction = "action6";
@@ -223,21 +216,19 @@ Giant are preparing for next action` + this.monsterHP + saveData.player.hp);
         
         this.rotateOutAndMakeNewCard(this.card, "card1");
         
-        this.left_choice_text = "Attack";
-        this.right_choice_text = "Dodge";
+        this.left_choice_text = dataPath.left2;
+        this.right_choice_text = dataPath.right2;
     }
 
     action7() {
         if (this.player_choice == "left") { 
             this.monsterHP--; 
             saveData.player.hp-=2;
-            this.changeText(this.eventText `The giant hit you for 2 points of damage
-Giant are preparing for next action` + this.monsterHP + saveData.player.hp);
+            this.changeText(this.eventText, dataPath.battleText6 + this.monsterHP + saveData.player.hp);
             this.shakeTween(this.cameras.main);
         }
         else{
-            this.changeText(this.eventText, `You dodged the giant's attack
-Giant are preparing for next action` + this.monsterHP + saveData.player.hp);
+            this.changeText(this.eventText, dataPath.battleText7 + this.monsterHP + saveData.player.hp);
         }
 
         this.currentAction = "action7";
@@ -249,16 +240,16 @@ Giant are preparing for next action` + this.monsterHP + saveData.player.hp);
         
         this.rotateOutAndMakeNewCard(this.card, "card1");
         
-        this.left_choice_text = "Attack";
-        this.right_choice_text = "Dodge";
+        this.left_choice_text = dataPath.left2;
+        this.right_choice_text = dataPath.right2;
     }
 
     actionWin() {
         this.rotateOutAndMakeNewCard(this.card, "card1");
-        this.changeText(this.eventText, "Congratulations! You have defeated the giant!");
+        this.changeText(this.eventText, dataPath.eventText2);
 
-        this.left_choice_text = "Leaving the fight";
-        this.right_choice_text = "Leaving the fight";
+        this.left_choice_text = dataPath.left3;
+        this.right_choice_text = dataPath.right3;
     }
 
     actionLose() {
