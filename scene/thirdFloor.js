@@ -88,7 +88,7 @@ class thirdFloorLevel2 extends Base {
     }
 
     judgeChoice() {
-        console.log(`当前回合数：${this.scene_turn}`);
+        //console.log(`当前回合数：${this.scene_turn}`);
         if (this.enemy_hp <= 0) {
             this.gotoScene("floor three level 1");
         }
@@ -105,7 +105,7 @@ class thirdFloorLevel2 extends Base {
         else {
             this.action3();
         }
-        console.log(`当前玩家血量:${saveData.player.hp}`);
+        //console.log(`当前玩家血量:${saveData.player.hp}`);
         this.scene_turn++;
     }
 
