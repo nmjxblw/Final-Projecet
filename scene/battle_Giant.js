@@ -14,8 +14,8 @@ class battleGiant extends Base {
         initializeLocal();
 
         //console.log(saveData.player); 
-        console.log(`当前玩家血量:${saveData.player.hp}`);
-        console.log(`当前猎人是否被解救：${saveData.hunter}`);
+        /* console.log(`当前玩家血量:${saveData.player.hp}`);
+        console.log(`当前猎人是否被解救：${saveData.elf}`); */
 
         this.left_choice_text = "Help him"
         this.right_choice_text = "While he lures the giant away to the next level"
