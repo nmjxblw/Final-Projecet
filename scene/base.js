@@ -192,7 +192,7 @@ class Base extends GameScene {
             eventText)
             .setColor("#000")
             .setAlpha(0)
-            .setOrigin(0.5)
+            .setOrigin(0.5,0.5)
             .setDepth(4)
             .setFontSize(textsize)
             .setFontFamily("Century Gothic")
