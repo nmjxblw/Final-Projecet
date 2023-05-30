@@ -321,6 +321,7 @@ class thirdFloorLevel2 extends Base {
 
     elf_scene() {
         saveData.elf = false;
+        this.cardReset(this.card,"elf");
     }
 
     win() {
