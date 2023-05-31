@@ -6,8 +6,6 @@ class thirdFloorLevel1 extends Base {
 
     onEnter() {
 
-        console.log(this.scene_turn);
-
         this.left_choice_text = dataPath["left"];
         this.right_choice_text = dataPath["right"];
 

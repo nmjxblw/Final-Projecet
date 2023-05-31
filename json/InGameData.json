@@ -73,6 +73,9 @@
                 "eventText9": "The dragon stares at you with anger in its eyes."
             },
             "level3": {
+                "enemy": {
+                    "name": "dragon"
+                },
                 "right": "*CLANK*\n(block with the sword)",
                 "left": "*CLANG*\n(block with the sword)",
                 "eventCard1": "After a hard-fought battle, you defeat the dragon.",
@@ -80,13 +83,35 @@
                 "eventCard3": "Its eyes are filled with unwillingness.",
                 "eventText1": "Dragon: I will curse you, \nthat you will be as chaotic, cruel, \nand merciless as me.",
                 "eventText2": "Dragon: I will give you all my power, \nand make you become just like me.",
-                "eventText3": "The dragon's curse heads toward you, \nand you choose to..."
+                "eventText3": "The dragon's curse heads toward you, \nand you choose to...",
+                "eventText4": "A faint light emanated from the sword...",
+                "eventText5": "A strong light emanated from the sword!"
             },
             "level4": {
-                "rightt": "",
-                "left": "",
-                "eventCard1": "",
-                "eventText1": ""
+                "right1": "(...)",
+                "left1": "(...)",
+                "right2": "Continue the time loop...",
+                "left2": "Continue the time loop...",
+                "eventCard1": "Ending:\nThe Curse",
+                "eventCard2": "",
+                "eventCard3": "",
+                "eventCard4": "",
+                "eventCard5": "",
+                "eventCard6": "",
+                "eventCard7": "",
+                "eventCard8": "",
+                "eventCard9": "",
+                "eventCard10": "",
+                "eventText1": "You try to block the curse with the power of the sword... ",
+                "eventText2": "...but the curse is too strong",
+                "eventText3": "The power within the sword emptied.",
+                "eventText4": "",
+                "eventText5": "",
+                "eventText6": ""
+            },
+            "level5":{
+                "right":"",
+                "left":""
             }
         }
     }

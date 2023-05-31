@@ -335,8 +335,10 @@ const game = new Phaser.Game({
     ////scene: [baseBattle],
     //scene: [secondFloorLevel1, secondFloorLevel2],
      scene: [
-         thirdFloorLevel1,
-         thirdFloorLevel2,
+        //  thirdFloorLevel1,
+        //  thirdFloorLevel2,
+        //  thirdFloorLevel3,
+         thirdFloorLevel4,
      ],
     backgroundColor: 0x000000,
     title: "Game",

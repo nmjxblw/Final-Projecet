@@ -1,27 +1,38 @@
-class thirdFloorLevel1 extends Base {
+class thirdFloorLevel3 extends Base {
     constructor() {
-        //当前场景为第三层大门前
-        super("floor three level 1", "at the door")
+        //打败巨龙后
+        super("floor three level 3", "after defend dragon")
     }
 
     onEnter() {
 
-        console.log(this.scene_turn);
+        this.left_choice_text = dataPath.left;
+        this.right_choice_text = dataPath.right;
 
-        this.left_choice_text = dataPath["left"];
-        this.right_choice_text = dataPath["right"];
-
-        this.createEventText(dataPath["eventText"]);
-
-        //this.card.setTexture("door");
         this.card.label = false;
 
-        this.time.delayedCall(500, () => {
-            this.eventCard(dataPath["eventCard1"]);
+        this.eventCard(dataPath.eventCard1);
+
+        this.time.delayedCall(3000, () => {
+            this.eventCard(dataPath.eventCard2);
         });
 
-        this.time.delayedCall(3500, () => {
-            this.eventCard(dataPath["eventCard2"]);
+        this.time.delayedCall(6000, () => {
+            this.eventCard(dataPath.eventCard3);
+        });
+
+        this.card.setTextrue(dataPath.enemy.name);
+
+        this.time.delayedCall(9000, () => {
+            this.changeText(this.eventText, dataPath.eventText1);
+        });
+
+        this.time.delayedCall(12000, () => {
+            this.changeText(this.eventText, dataPath.eventText2);
+        });
+
+        this.time.delayedCall(15000, () => {
+            this.changeText(this.eventText, dataPath.eventText3);
             this.card.label = true;
         });
 
@@ -33,7 +44,20 @@ class thirdFloorLevel1 extends Base {
     }
 
     action() {
-        this.rotateOutAndMakeNewCard(this.card, "door");
-        this.gotoScene("floor three level 2")
+        this.card.label = false;
+        this.rotateOutAndMakeNewCard("sword");
+        if (!saveData.player.sword) {
+            this.changeText(this.eventText, dataPath.eventText4);
+            this.time.delayedCall(3000, () => {
+                this.gotoScene("floor three level 4");
+            });
+        }
+        else {
+            this.changeText(this.eventText, dataPath.eventText5);
+            this.time.delayedCall(3000, () => {
+                this.gotoScene("floor three level 5");
+            });
+        }
+
     }
 }

@@ -65,8 +65,6 @@ class GameScene extends Phaser.Scene {
         //获得json中的数据,并存储
         gameData = this.cache.json.get('gameData');
 
-        
-
         //更多的shortcut
         this.exShortCut();
     }
