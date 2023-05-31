@@ -80,8 +80,8 @@ class Base extends GameScene {
         //定义文本路径设置的快捷路径
         dataPath = gameData.floor[`${this.floor}`][`level${this.level}`];
 
-         //创建可拖动卡片
-         this.card = this.createCard("card1");
+        //创建可拖动卡片
+        this.card = this.createCard("card1");
     }
 
     exCreate() {
@@ -146,7 +146,7 @@ class Base extends GameScene {
             .setDepth(1)
         this.onEnter();
 
-       
+
 
     }
 
@@ -483,16 +483,17 @@ class Base extends GameScene {
 
 
     //调用此函数快速将一个无用的文本隐藏并替换成新的文本
-    changeText(text, new_text) {
+    changeText(text, new_text, t) {
+        var durationTime = t ? t : 300;
         this.tweens.add({
             targets: text,
             alpha: { from: 1, to: 0 },
-            duration: 300,
+            duration: durationTime,
             ease: 'Linear',
             repeat: false,
             yoyo: true,
             oncomplete: () => {
-                this.time.delayedCall(300, () => {
+                this.time.delayedCall(durationTime, () => {
                     text.setText(new_text);
                 })
             },
@@ -500,8 +501,9 @@ class Base extends GameScene {
     }
 
     //添加卡片弹出动画
-    eventCard(someText) {
-
+    //参数顺序：事件卡片的文本，延迟消失时间（可以为空）
+    eventCard(someText,t) {
+        var extendTime = t? t: 0;
         if (this.card.dragable) {
             this.card.dragable = false;
         }
@@ -563,7 +565,7 @@ class Base extends GameScene {
                 {
                     x: this.cx,
                     y: this.cy,
-                    duration: 2000,
+                    duration: 2000 + extendTime,
                 },
                 {
                     y: this.cy + this.h,
@@ -586,7 +588,7 @@ class Base extends GameScene {
                 },
                 {
                     alpha: 1,
-                    duration: 2000,
+                    duration: 2000 + extendTime,
                 },
                 {
                     alpha: 0,
@@ -613,7 +615,7 @@ class Base extends GameScene {
                 {
                     x: eventStar.x,
                     y: eventStar.y,
-                    duration: 2000,
+                    duration: 2000 + extendTime,
                 },
                 {
                     alpha: 0,
@@ -622,7 +624,7 @@ class Base extends GameScene {
             ],
         });
 
-        this.time.delayedCall(3000, () => {
+        this.time.delayedCall(3000 + extendTime, () => {
             this.card.dragable = this.card.label;
             eventStar.destroy();
             eventText.destroy();
@@ -676,12 +678,32 @@ class Base extends GameScene {
         });
     }
 
+    //创建卡牌闪烁效果，使其在老材质和新材质之间切换。
+    //参数顺序：材质key，1/4周期，最小透明度，最大透明度
+    cardTwinkling(new_texture, t, a, b) {
+        var old_texture = this.card.texture.key;
+        var durationTime = t ? t : 1000;
+        var twinklingAlphaA = a ? a : 0;
+        var twinklingAlphaB = b ? b : 1;
+        this.card.alpha = twinklingAlphaA;
+        this.tweens.add({
+            targets: this.card,
+            duration: durationTime,
+            alpha: twinklingAlphaB,
+            repeat: -1,
+            yoyo: true,
+            oncompleted: () => {
+                if (this.card.texture.key != new_texture) {
+                    this.card.setTexture(new_texture);
+                }
+                else {
+                    this.card.setTexture(old_texture);
+                }
+            }
+        });
+    }
 
     update() {
-        /* if(saveData.player.hp <= 0){
-            saveData.player.hp = 5;
-            saveData.sword--;
-        } */
     }
 
     shortCut1() { }

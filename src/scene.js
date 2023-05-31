@@ -337,7 +337,16 @@ const game = new Phaser.Game({
     //  scene: [
     //      thirdFloorLevel1,
     //      thirdFloorLevel2,
+    //      thirdFloorLevel3,
+    //      thirdFloorLevel4,
     //  ],
+    scene: [
+        firstFloorLevel1,
+        firstFloorLevel2,
+        firstFloorLevel3,
+        firstFloorLevel4,
+        firstFloorLevel5
+    ],
     backgroundColor: 0x000000,
     title: "Game",
 });

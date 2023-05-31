@@ -48,7 +48,7 @@ class thirdFloorLevel2 extends Base {
         }
         else if (this.enemy_hp <= 0) {
             this.rotateOutAndMakeNewCard("card1");
-            this.gotoScene("floor three level 1");
+            this.gotoScene("floor three level 3");
         }
         else if (saveData.player.hp <= 0) {
             this.rotateOutAndMakeNewCard("card1");
