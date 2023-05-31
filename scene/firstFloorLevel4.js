@@ -20,6 +20,7 @@ class firstFloorLevel4 extends Base {
     }
 
     judgeChoice(){
+        this.rotateOutAndMakeNewCard("giant");
         this.gotoScene("floor one level 5");
     }
 }
@@ -114,7 +115,7 @@ class firstFloorLevel5 extends Base{
             });
 
             this.time.delayedCall(12500, () => {
-                this.gotoScene("floor one level 0");
+                this.gotoScene("floor one level 2");
             });
             death = true;
         }

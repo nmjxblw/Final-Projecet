@@ -3,8 +3,22 @@
     "//注": "Josn文件不支持用纯数字做key",
     "floor": {
         "one": {
-            "enemy1": {
-                "hp": 3
+            "level1":{
+                "right": "...",
+                "left": "Got it",
+                "eventText": "You have arrived at the dungeon.\nIn front of you, a guardian appears with a sword.",
+                "eventCard1":"Congrats on completing the trial of the great sword.",
+                "eventCard2":"I will now let you handle the responsibility of obtaining it.",
+                "eventCard3":"Remember, the great sword comes with fascinating power, but it would only activate during times of danger."
+            },
+            "level2":{
+
+            },
+            "level3":{
+
+            },
+            "level4":{
+
             }
         },
         "two": {

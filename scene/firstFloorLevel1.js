@@ -1,24 +1,43 @@
-class firstFloorLevel2 extends Base {
+class firstFloorLevel1 extends Base {
     constructor(){
-        super("floor one level 2", "door")
+        super("floor one level 1", "guardian")
     }
 
     exPreload(){
-        this.load.image("door","card1.png");
+        this.load.image("guardian","guardian_with_mask.png");
         this.load.image("card1", "card1.png");
         this.load.image("card2", "card2.png");
 
     }
 
     onEnter(){
-        this.changeText(this.eventText,`You have arrived at the first floor of the dungeon.\nImmediately, you are attacked by a monster.`);
-        this.left_choice_text = "Attack the monster";
-        this.right_choice_text = "Attack the monster";
-        this.card = this.createCard("door");
-        this.dragrotate(this.card); 
+        initializeLocal();
+
+        this.left_choice_text = dataPath.left;
+        this.right_choice_text = dataPath.right;
+        this.card = this.createCard("guardian");        
+        this.changeText(this.eventText, dataPath.eventText);
+        
+        this.time.delayedCall(500, () => {
+            this.eventCard(dataPath.eventCard1);
+        });
+
+        this.time.delayedCall(3500, () => {
+            this.eventCard(dataPath.eventCard2);
+        });
+    
+
+        this.time.delayedCall(6500, () => {
+            this.eventCard(dataPath.eventCard3, 1000);
+        });
+    
+    
+        this.dragrotate(this.card);
+
     }
 
     judgeChoice(){
-        this.gotoScene("floor one level 3");
+        this.rotateOutAndMakeNewCard("guardian");
+        this.gotoScene("floor one level 2");
     }
 }

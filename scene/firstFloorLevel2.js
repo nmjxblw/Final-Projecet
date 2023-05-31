@@ -19,6 +19,7 @@ class firstFloorLevel2 extends Base {
     }
 
     judgeChoice(){
+        this.rotateOutAndMakeNewCard("door");
         this.gotoScene("floor one level 3");
     }
 }
