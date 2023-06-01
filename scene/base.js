@@ -718,6 +718,7 @@ class Base extends GameScene {
         }
     }
 
+    //添加闪光效果
     cardSpotLight(s) {
         this.card.setPipeline('Light2D');
         this.lights.enable();
@@ -767,6 +768,12 @@ class Base extends GameScene {
                 for (var i = 0; i < spotlights.length; i++) {
                     spotlights[i].x = this.card.x - this.cardW / 2 + Phaser.Math.Between(100, this.cardW - 100);
                     spotlights[i].y = this.card.y - this.cardH / 2 + Phaser.Math.Between(100, this.cardH - 100);
+                }
+                if (this.stopSpotLight) {
+                    this.card.resetPipeline();
+                    changeIntensity.remove();
+                    changePosition.remove();
+                    return;
                 }
             },
             callbackscope: this,

@@ -56,7 +56,6 @@ class thirdFloorLevel4 extends Base {
             if (this.scene_turn == 16) {
                 this.left_choice_text = dataPath.left2;
                 this.right_choice_text = dataPath.right2;
-
             }
             else if (this.scene_turn == 17) {
                 this.card.label = false
