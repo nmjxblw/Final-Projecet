@@ -17,13 +17,13 @@ const game = new Phaser.Game({
         }
     },
     ////scene: [baseBattle],
-    scene: [secondFloorLevel3],
-    //  scene: [
-    //      thirdFloorLevel1,
-    //      thirdFloorLevel2,
-    //      thirdFloorLevel3,
-    //      thirdFloorLevel4,
-    //  ],
+    //scene: [secondFloorLevel3],
+     scene: [
+        // thirdFloorLevel1,
+         thirdFloorLevel2,
+         //thirdFloorLevel3,
+         //thirdFloorLevel4,
+     ],
     // scene: [
     //     firstFloorLevel1,
     //     firstFloorLevel2,
