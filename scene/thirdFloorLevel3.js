@@ -5,11 +5,13 @@ class thirdFloorLevel3 extends Base {
     }
 
     onEnter() {
+        initializeLocal();
 
         this.left_choice_text = dataPath.left;
         this.right_choice_text = dataPath.right;
 
         this.card.label = false;
+        this.card.setTexture(dataPath.enemy.name);
 
         this.eventCard(dataPath.eventCard1);
 
@@ -21,8 +23,6 @@ class thirdFloorLevel3 extends Base {
             this.eventCard(dataPath.eventCard3);
         });
 
-        this.card.setTextrue(dataPath.enemy.name);
-
         this.time.delayedCall(9000, () => {
             this.changeText(this.eventText, dataPath.eventText1);
         });
@@ -33,6 +33,7 @@ class thirdFloorLevel3 extends Base {
 
         this.time.delayedCall(15000, () => {
             this.changeText(this.eventText, dataPath.eventText3);
+            this.card.dragable = true;
             this.card.label = true;
         });
 
@@ -44,18 +45,23 @@ class thirdFloorLevel3 extends Base {
     }
 
     action() {
+        this.shakeTween(this.cameras.main);
         this.card.label = false;
         this.rotateOutAndMakeNewCard("sword");
         if (!saveData.player.sword) {
+            this.cardSpotLight();
             this.changeText(this.eventText, dataPath.eventText4);
             this.time.delayedCall(3000, () => {
                 this.gotoScene("floor three level 4");
+                this.stopSpotLight = false;
             });
         }
         else {
+            this.cardSpotLight(true);
             this.changeText(this.eventText, dataPath.eventText5);
             this.time.delayedCall(3000, () => {
                 this.gotoScene("floor three level 5");
+                this.stopSpotLight = false;
             });
         }
 

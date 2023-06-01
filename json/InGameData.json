@@ -3,23 +3,17 @@
     "//注": "Josn文件不支持用纯数字做key",
     "floor": {
         "one": {
-            "level1":{
+            "level1": {
                 "right": "...",
                 "left": "Got it",
                 "eventText": "You have arrived at the dungeon.\nIn front of you, a guardian appears with a sword.",
-                "eventCard1":"Congrats on completing the trial of the great sword.",
-                "eventCard2":"I will now let you handle the responsibility of obtaining it.",
-                "eventCard3":"Remember, the great sword comes with fascinating power, but it would only activate during times of danger."
+                "eventCard1": "Congrats on completing the trial of the great sword.",
+                "eventCard2": "I will now let you handle the responsibility of obtaining it.",
+                "eventCard3": "Remember, the great sword comes with fascinating power, but it would only activate during times of danger."
             },
-            "level2":{
-
-            },
-            "level3":{
-
-            },
-            "level4":{
-
-            }
+            "level2": {},
+            "level3": {},
+            "level4": {}
         },
         "two": {
             "level1": {
@@ -66,7 +60,6 @@
                 "eventText8": "As you click, the treasure chest suddenly explodes. \n\nYou die.",
                 "eventText9": "You clicked the right switch and both locks are open.\n\nYou have obtained a shield from a treasure chest that contains mysterious powers",
                 "eventText10": "Now, it's time to head to the next level"
-                
             }
         },
         "three": {
@@ -122,30 +115,80 @@
                 "eventText5": "A strong light emanated from the sword!"
             },
             "level4": {
-                "right1": "(...)",
-                "left1": "(...)",
+                "right1": "(Continue...)",
+                "left1": "(Continue...)",
                 "right2": "Continue the time loop...",
                 "left2": "Continue the time loop...",
                 "eventCard1": "Ending:\nThe Curse",
-                "eventCard2": "",
-                "eventCard3": "",
-                "eventCard4": "",
-                "eventCard5": "",
-                "eventCard6": "",
-                "eventCard7": "",
-                "eventCard8": "",
-                "eventCard9": "",
-                "eventCard10": "",
+                "eventCard2": "Bad Ending",
+                "eventCard3": "Thanks for Playing",
                 "eventText1": "You try to block the curse with the power of the sword... ",
                 "eventText2": "...but the curse is too strong",
                 "eventText3": "The power within the sword emptied.",
-                "eventText4": "",
-                "eventText5": "",
-                "eventText6": ""
+                "eventText4": "The curse gets into your body.",
+                "eventText5": "You feel your body start changing drastically. \nYou fainted.",
+                "eventText6": "When you are awake again, you find yourself turning into a dragon. ",
+                "eventText7": "Your brain starts to become foggy and unlogical.",
+                "eventText8": "You realize you are slowly losing your mind.",
+                "eventText9": "Before you lost all your consciousness...",
+                "eventText10": "...you used the last bit of the power within the sword...",
+                "eventText11": " ...to transport yourself within the turbulence of time to avoid dangering the world.",
+                "eventText12": "What you did not expect is that the turbulence brought you to the past.",
+                "eventText13": "Without consciousness, you destroyed your hometown...",
+                "eventText14": "The guardian appears in the past timeline...",
+                "eventText15": " ...picking up the sword that got transported back.",
+                "eventText16": "Guardian: Looks like this timeline has failed...",
+                "eventText17": "Guardian: Looks like this timeline has failed..."
             },
-            "level5":{
-                "right":"",
-                "left":""
+            "level5": {
+                "right1": "(Continue...)",
+                "left1": "(Continue...)",
+                "right2": "Finally...",
+                "left2": "My future...",
+                "eventCard1": "Ending:\nThe Truth",
+                "eventCard2": "True Ending",
+                "eventCard3": "Thanks for Playing",
+                "eventText1": "You try to block the curse with the power of the sword...",
+                "eventText2": "Even though the curse is strong... ",
+                "eventText3": "You overcome the curse ...",
+                "eventText4": "...since you have not used the power of the sword yet.",
+                "eventText5": "You defended yourself from the curse...",
+                "eventText6": "The dragon looks at you with disbelief and fascination.",
+                "eventText7": "You realize that the dragon is what it is due to the curse.",
+                "eventText8": "You decide to use the sword to cure the dragon.",
+                "eventText9": "Something miraculous happens!",
+                "eventText10": "After a while, the person gets up.",
+                "eventText11": "Men:So... this is it. I am the one who destroyed my own hometown.",
+                "eventText12": "You are shocked. \nThe person looks exactly like you.",
+                "eventText13": "Men: Hello, future me...",
+                "eventText14": "You start talking to him.",
+                "eventText15": "You realize that he shares similar experiences with you. ",
+                "eventText16": "The only difference is that he used the power of the sword to revive himself within the dungeon...",
+                "eventText17": "...which caused him to not be able to defend the curse from the dragon.",
+                "eventText18": "The curse turned him into a dragon and made him go insane.",
+                "eventText19": "The turbulence of time transported him back to the past...",
+                "eventText20": "...and he unconsciously destroyed his hometown.",
+                "eventText21": "However, after discussion, you two realize a problem.",
+                "eventText22": "Because you saved him in this timeline...",
+                "eventText23": "...and no sword is transported back to the past.",
+                "eventText24": "In this case, where did your own sword come from?",
+                "eventText25": "In this moment, the guardian appears.",
+                "eventText26": "Guardian: looks like there are a lot of questions I need to answer.",
+                "eventText27": "He takes off his mask and reveals his face.",
+                "eventText28": "You two are shocked. The guardian looks exactly the same as you two.",
+                "eventText29": "Guardian: that's right, I am you two on a different timeline.",
+                "eventText30": "He looks at the men who once was a dragon.",
+                "eventText31": "Guardian: I am the future you.",
+                "eventText32": "Guardian: To protect the logic behind the time loop, afterward, you will return to the past with the sword.",
+                "eventText33": "Guardian: You will keep giving away the sword to yourself in different timelines...",
+                "eventText34": "Guardian: ...until the timeline that breaks the loop comes.",
+                "eventText35": "He hands the sword to the men.",
+                "eventText36": "Guardian: my journey has ended, but yours has just begun.",
+                "eventText37": "Then, the guardian looks at you.",
+                "eventText38": "Guardian: About you, the special one amongst all of us... ",
+                "eventText39": "Guardian: ...the one who broke the time loop, you still have infinite possibilities.",
+                "eventText40": "Guardian: Go, go find your new future ahead of you. ",
+                "eventText41": "True Ending: The Truth"
             }
         }
     }

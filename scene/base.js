@@ -502,8 +502,8 @@ class Base extends GameScene {
 
     //添加卡片弹出动画
     //参数顺序：事件卡片的文本，延迟消失时间（可以为空）
-    eventCard(someText,t) {
-        var extendTime = t? t: 0;
+    eventCard(someText, t) {
+        var extendTime = t ? t : 0;
         if (this.card.dragable) {
             this.card.dragable = false;
         }
@@ -595,7 +595,16 @@ class Base extends GameScene {
                     y: this.cy + this.h,
                     ease: "back.in",
                     duration: 500,
-                }
+                },
+                {
+                    oncomplete: () => {
+                        this.card.dragable = this.card.label;
+                        eventStar.destroy();
+                        eventText.destroy();
+                        eventTextBackground.destroy();
+                        eventTextCenterPoint.destroy();
+                    }
+                },
             ],
         });
 
@@ -622,14 +631,6 @@ class Base extends GameScene {
                     duration: 10,
                 }
             ],
-        });
-
-        this.time.delayedCall(3000 + extendTime, () => {
-            this.card.dragable = this.card.label;
-            eventStar.destroy();
-            eventText.destroy();
-            eventTextBackground.destroy();
-            eventTextCenterPoint.destroy();
         });
     }
 
@@ -680,17 +681,19 @@ class Base extends GameScene {
 
     //创建卡牌闪烁效果，使其在老材质和新材质之间切换。
     //参数顺序：材质key，1/4周期，最小透明度，最大透明度
-    cardTwinkling(new_texture, t, a, b) {
+    cardTwinkling(new_texture, t, a, b, r) {
         var old_texture = this.card.texture.key;
         var durationTime = t ? t : 1000;
         var twinklingAlphaA = a ? a : 0;
         var twinklingAlphaB = b ? b : 1;
+        var repeatTime = r ? r : -1;
+        this.card.dragable = repeatTime <= 0 ? true : false;
         this.card.alpha = twinklingAlphaA;
         this.tweens.add({
             targets: this.card,
             duration: durationTime,
             alpha: twinklingAlphaB,
-            repeat: -1,
+            repeat: repeatTime,
             yoyo: true,
             oncompleted: () => {
                 if (this.card.texture.key != new_texture) {
@@ -699,7 +702,81 @@ class Base extends GameScene {
                 else {
                     this.card.setTexture(old_texture);
                 }
-            }
+            },
+        });
+        if (repeatTime >= 0) {
+            this.time.delayedCall(2 * durationTime * (repeatTime + 1), () => {
+                this.tweens.add({
+                    targets: this.card,
+                    duration: durationTime,
+                    alpha: twinklingAlphaB,
+                    oncompleted: () => {
+                        this.card.dragable = this.card.label;
+                    }
+                });
+            });
+        }
+    }
+
+    //添加闪光效果
+    cardSpotLight(s) {
+        this.card.setPipeline('Light2D');
+        this.lights.enable();
+        this.lights.setAmbientColor(0xefefef);
+
+        var spotlight1 = this.lights.addLight(this.card.x + 50, this.card.y - 50, 90).setIntensity(0);
+        var spotlight2 = this.lights.addLight(this.card.x - 50, this.card.y, 70).setIntensity(0);
+        var spotlight3 = this.lights.addLight(this.card.x + 75, this.card.y + 25, 60).setIntensity(0);
+        var spotlight4 = this.lights.addLight(this.card.x + 50, this.card.y - 50, 90).setIntensity(0);
+        var spotlight5 = this.lights.addLight(this.card.x - 50, this.card.y, 70).setIntensity(0);
+        var spotlight6 = this.lights.addLight(this.card.x + 75, this.card.y + 25, 60).setIntensity(0);
+
+        var spotlights = [spotlight1, spotlight2, spotlight3];
+        var change = [0.5 / 25, 1 / 25, 2 / 25];
+        if (s) {
+            spotlights = spotlights.concat([spotlight4, spotlight5, spotlight6]);
+            change = change.concat(change);
+        }
+        let changePosition;
+        let changeIntensity = this.time.addEvent({
+            delay: 10,
+            loop: true,
+            callback: () => {
+                for (var i = 0; i < spotlights.length; i++) {
+                    spotlights[i].intensity += change[i];
+                    if (spotlights[i].intensity >= Math.abs(change[i]) * 25) {
+                        change[i] = -Math.abs(change[i]);
+                    }
+                    else if (spotlights[i].intensity <= 0) {
+                        change[i] = Math.abs(change[i]);
+                    }
+                }
+
+                if (this.stopSpotLight) {
+                    this.card.resetPipeline();
+                    changeIntensity.remove();
+                    changePosition.remove();
+                    return;
+                }
+            },
+            callbackscope: this,
+        });
+        changePosition = this.time.addEvent({
+            delay: 500,
+            loop: true,
+            callback: () => {
+                for (var i = 0; i < spotlights.length; i++) {
+                    spotlights[i].x = this.card.x - this.cardW / 2 + Phaser.Math.Between(100, this.cardW - 100);
+                    spotlights[i].y = this.card.y - this.cardH / 2 + Phaser.Math.Between(100, this.cardH - 100);
+                }
+                if (this.stopSpotLight) {
+                    this.card.resetPipeline();
+                    changeIntensity.remove();
+                    changePosition.remove();
+                    return;
+                }
+            },
+            callbackscope: this,
         });
     }
 
