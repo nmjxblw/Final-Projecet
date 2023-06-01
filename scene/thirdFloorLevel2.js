@@ -5,10 +5,9 @@ class thirdFloorLevel2 extends Base {
     }
 
     onEnter() {
-
+        quickSaveData();
         console.log(saveData);
-        initializeLocal();
-
+        
         //先初始化第一轮的左右选项
         this.left_choice_text = dataPath.left1;
         //根据玩家是否有盾牌来切换防御词条
@@ -300,7 +299,7 @@ class thirdFloorLevel2 extends Base {
     //加载精灵退场后画面
     action4() {
         this.from_elf_scene = false;
-        this.rotateOutAndMakeNewCard( dataPath.enemy.name);
+        this.rotateOutAndMakeNewCard(dataPath.enemy.name);
         this.changeText(this.eventText, dataPath.eventText9);
         this.left_choice_text = dataPath.left1;
         this.right_choice_text = dataPath.right1[this.def_type];
