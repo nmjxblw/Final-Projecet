@@ -30,7 +30,7 @@ You see, this may be the mysterious power of the sword that the Guardian speaks 
 
         this.time.delayedCall(10000, () => {
             
-            this.input.enabled = true;
+            
             this.changeText(this.eventText, `With the experience of the last time, this time you will not repeat the same mistake`);   
         })
 
@@ -41,7 +41,13 @@ You see, this may be the mysterious power of the sword that the Guardian speaks 
     
             this.time.delayedCall(13000, () => {
                 this.card.setTexture("elf");
+                this.input.enabled = true;
                 this.changeText(this.eventText, dataPath.eventText1);
+                this.eventCard(`When you die, the power of the sword will resurrect you.`);
+                
+                this.time.delayedCall(3500, () => {
+                    this.eventCard(`You will be reborn at the beginning of the current scene.`,2000);
+                });
             })
 
            
@@ -204,7 +210,7 @@ You see, this may be the mysterious power of the sword that the Guardian speaks 
         });
 
         this.time.delayedCall(3500, () => {
-            this.eventCard(dataPath["eventCard2"]);
+            this.eventCard(dataPath["eventCard2"],2000);
         });
         
         
