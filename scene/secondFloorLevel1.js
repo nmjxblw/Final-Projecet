@@ -11,7 +11,6 @@ class secondFloorLevel1 extends Base {
 
         this.left_choice_text = dataPath.left
         this.right_choice_text = dataPath.right
-        this.card = this.createCard("card1");
 
         this.changeText(this.eventText, dataPath.eventText);
 
@@ -32,7 +31,9 @@ class secondFloorLevel1 extends Base {
     }
 
     action1() {
-        this.rotateOutAndMakeNewCard("card1");
-        this.gotoScene("floor two level 2");    
+        this.rotateOutAndMakeNewCard("elf");
+        this.time.delayedCall(1000, () => {
+            this.gotoScene("floor two level 2");
+        })    
     }
 }

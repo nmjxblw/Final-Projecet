@@ -20,7 +20,7 @@ class secondFloorLevel2 extends Base {
         this.right_choice_text = dataPath.right1
 
         this.changeText(this.eventText, dataPath.eventText1);
-
+        
         this.dragrotate(this.card);
 
         this.scene_turn = 1;
@@ -37,7 +37,10 @@ class secondFloorLevel2 extends Base {
                 this.action1();
             }
             else if (this.monsterHP <= 0) {
-                this.gotoScene("next");
+                this.rotateOutAndMakeNewCard("elf");
+                this.time.delayedCall(1000, () => {
+                    this.gotoScene("floor two level 3");
+                })
             }
             else if(this.giantRage && this.scene_turn % 3 == 2 ){
                 this.action5();
@@ -72,7 +75,10 @@ class secondFloorLevel2 extends Base {
         }
         else
         {
-            this.gotoScene("floor three level 1");
+            this.rotateOutAndMakeNewCard("card1");
+            this.time.delayedCall(1000, () => {
+                this.gotoScene("floor three level 1");
+            })
         }
         
     }

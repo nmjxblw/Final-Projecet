@@ -4,7 +4,7 @@
     "player": {
         "hp": 5,
         "shield": false,
-        "sword": false,
+        "sword": 0,
         "currentPosition": {
             "floor": "one",
             "scene": 1,
