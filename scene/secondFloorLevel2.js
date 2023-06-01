@@ -7,11 +7,18 @@ class secondFloorLevel2 extends Base {
 
         this.monsterHP = 6;
 
+        
+
+        this.showEnemyHp = this.showMonsterHP(this.monsterHP);
+
         this.giantRage = false;
 
         this.currentAction;
 
-        initializeLocal();
+        if (saveData == {}) {
+            
+            quickSaveData();
+        }
 
         if(saveData.player.sword == 1)
         {
@@ -76,6 +83,8 @@ You see, this may be the mysterious power of the sword that the Guardian speaks 
     judgeChoice() {
         /* console.log(`当前玩家选项为：${this.player_choice}`);
         console.log(`当前场景回合数：${this.scene_turn}`); */
+        
+
         if (this.player_choice != "") {
             if (this.giantRage == false && this.scene_turn == 1) {
                 this.action1();
@@ -101,6 +110,8 @@ You see, this may be the mysterious power of the sword that the Guardian speaks 
             else if (this.scene_turn % 2 == 1) {
                 this.action3();
             }
+            this.showHp.setText(saveData.player.hp);
+            this.showEnemyHp.setText(this.monsterHP);
             this.scene_turn++;
         }
     }
@@ -111,7 +122,10 @@ You see, this may be the mysterious power of the sword that the Guardian speaks 
             
             this.rotateOutAndMakeNewCard("giant");
             saveData.elf = true;
-            this.changeText(this.eventText, dataPath.battleText1 + this.monsterHP + saveData.player.hp);
+            this.showHp.setAlpha(1);
+            this.showEnemyHp.setAlpha(1);
+
+            this.changeText(this.eventText, dataPath.battleText1);
 
             this.left_choice_text = dataPath.left2;
             this.right_choice_text = dataPath.right2;
@@ -134,11 +148,11 @@ You see, this may be the mysterious power of the sword that the Guardian speaks 
 
             if (this.monsterHP == 3) { this.giantRage = true; this.scene_turn = 1; this.action4(); return; }
 
-            this.changeText(this.eventText, dataPath.battleText2 + this.monsterHP +saveData.player.hp);
+            this.changeText(this.eventText, dataPath.battleText2);
             this.shakeTween(this.cameras.main);
         }
         else{
-            this.changeText(this.eventText, dataPath.battleText3 + this.monsterHP + saveData.player.hp);
+            this.changeText(this.eventText, dataPath.battleText3);
         }
 
         this.currentAction = "action2";
@@ -160,10 +174,10 @@ You see, this may be the mysterious power of the sword that the Guardian speaks 
 
             if (this.monsterHP == 3) { this.giantRage = true; this.scene_turn = 1; this.action4();return; }
 
-            this.changeText(this.eventText, dataPath.battleText4 + this.monsterHP + saveData.player.hp);
+            this.changeText(this.eventText, dataPath.battleText4);
         }
         else{
-            this.changeText(this.eventText, dataPath.battleText5 + this.monsterHP + saveData.player.hp);
+            this.changeText(this.eventText, dataPath.battleText5);
         }
 
         this.currentAction = "action3";
@@ -185,23 +199,25 @@ You see, this may be the mysterious power of the sword that the Guardian speaks 
     //初始暴怒行为，根据前一场景决定文本，本行为为攻击
     action4() {
 
+        this.input.enabled = false;
+
         if(this.currentAction == "action3")
         {
             if (this.player_choice == "left") {  
-                this.changeText(this.eventText, dataPath.battleText6 + this.monsterHP + saveData.player.hp);
+                this.changeText(this.eventText, dataPath.battleText6);
                 this.shakeTween(this.cameras.main);
             }
             else{
-                this.changeText(this.eventText, dataPath.battleText7 + this.monsterHP + saveData.player.hp);
+                this.changeText(this.eventText, dataPath.battleText7);
             }
         }
         else
         {
             if (this.player_choice == "left") {  
-                this.changeText(this.eventText, dataPath.battleText8 + this.monsterHP + saveData.player.hp);
+                this.changeText(this.eventText, dataPath.battleText8);
             }
             else{
-                this.changeText(this.eventText, dataPath.battleText9 + this.monsterHP + saveData.player.hp);
+                this.changeText(this.eventText, dataPath.battleText9);
             }
         }
 
@@ -210,7 +226,8 @@ You see, this may be the mysterious power of the sword that the Guardian speaks 
         });
 
         this.time.delayedCall(3500, () => {
-            this.eventCard(dataPath["eventCard2"],2000);
+            this.input.enabled = true;
+            this.eventCard(dataPath["eventCard2"]);
         });
         
         
@@ -228,11 +245,11 @@ You see, this may be the mysterious power of the sword that the Guardian speaks 
         if (this.player_choice == "left") { 
             this.monsterHP--; 
             saveData.player.hp-= 2; 
-            this.changeText(this.eventText, dataPath.battleText6 + this.monsterHP + saveData.player.hp);
+            this.changeText(this.eventText, dataPath.battleText6);
             this.shakeTween(this.cameras.main);
         }
         else{
-            this.changeText(this.eventText, dataPath.battleText7 + this.monsterHP + saveData.player.hp);
+            this.changeText(this.eventText, dataPath.battleText7);
         }
 
         this.currentAction = "action5";
@@ -251,10 +268,10 @@ You see, this may be the mysterious power of the sword that the Guardian speaks 
     action6() {
         if (this.player_choice == "left") { 
             this.monsterHP--; 
-            this.changeText(this.eventText, dataPath.battleText8 + this.monsterHP + saveData.player.hp);
+            this.changeText(this.eventText, dataPath.battleText8);
         }
         else{
-            this.changeText(this.eventText, dataPath.battleText9 + this.monsterHP + saveData.player.hp);
+            this.changeText(this.eventText, dataPath.battleText9);
         }
 
         this.currentAction = "action6";
@@ -274,11 +291,11 @@ You see, this may be the mysterious power of the sword that the Guardian speaks 
         if (this.player_choice == "left") { 
             this.monsterHP--; 
             saveData.player.hp-=2;
-            this.changeText(this.eventText, dataPath.battleText6 + this.monsterHP + saveData.player.hp);
+            this.changeText(this.eventText, dataPath.battleText6);
             this.shakeTween(this.cameras.main);
         }
         else{
-            this.changeText(this.eventText, dataPath.battleText7 + this.monsterHP + saveData.player.hp);
+            this.changeText(this.eventText, dataPath.battleText7);
         }
 
         this.currentAction = "action7";
@@ -306,12 +323,14 @@ You see, this may be the mysterious power of the sword that the Guardian speaks 
         this.rotateOutAndMakeNewCard("card1");
         this.changeText(this.eventText, dataPath.battleText10);
 
+        if(saveData.player.hp < 0)
+        {
+            saveData.player.hp = 0;
+        }
+
         this.time.delayedCall(3000, () => {
-            if(saveData.player.sword == 0)
-            {
-                saveData.player.sword++;
-                this.scene.restart();
-            }
+            saveData.player.sword++;
+            this.scene.restart();
         })
     }
 }

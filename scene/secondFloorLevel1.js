@@ -7,7 +7,10 @@ class secondFloorLevel1 extends Base {
     onEnter() {
 
 
-        initializeLocal();
+        if (saveData == {}) {
+            
+            quickSaveData();
+        }
 
         this.left_choice_text = dataPath.left
         this.right_choice_text = dataPath.right
@@ -36,4 +39,5 @@ class secondFloorLevel1 extends Base {
             this.gotoScene("floor two level 2");
         })    
     }
+
 }
