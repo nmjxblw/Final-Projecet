@@ -6,42 +6,30 @@ class thirdFloorLevel5 extends Base {
     }
 
     onEnter() {
-        //坏结局
-        this.left_choice_text = dataPath.left1;
-        this.right_choice_text = dataPath.right1;
+        //真结局
+        this.left_choice_text = dataPath.left;
+        this.right_choice_text = dataPath.right;
 
-        this.card.setTexture("player");
+        this.card.setTexture("sword");
+
+        this.cardSpotLight(true);
 
         this.eventCard(dataPath.eventCard1);
-        
-        this.textChange()
+        this.changeText(this.eventText, dataPath[`eventText${this.scene_turn}`]);
+
+        this.dragrotate(this.card);
     }
 
     judgeChoice() {
-        if(this.scene_turn == 1){
-            
-        }
-        else if(this.scene_turn == 2){
-            
-        }
-        else if(this.scene_turn == 3){
-            
-        }
-        else if(this.scene_turn == 4){
-            
-        }
-        else if(this.scene_turn == 5){
-            
-        }
-        else if(this.scene_turn == 6){
-            
-        }
         this.scene_turn++;
+        this.action();
     }
 
-    card
-
     action() {
-
+        this.stopSpotLight = true;
+        this.changeText(this.eventText, dataPath[`eventText${this.scene_turn}`]);
+        var sowrd_turn = [3, 10, 11];
+        var dragon_turn = [6, 7, 8, 9, 12, 13];
+        var guardian_turn = [14, 15, 16, 17];
     }
 }

@@ -82,6 +82,7 @@ class thirdFloorLevel2 extends Base {
             if (this.enemy_berserk) {
                 //狂暴情况下，龙的攻击为吐火，且伤害为3
                 saveData.player.hp -= 3;
+                this.shakeTween(this.cameras.main);
                 this.changeText(this.eventText, "You took 3 damges!\nAnd you dealt 1 damge!");
                 //玩家血量小于等于0，挑战失败
                 if (saveData.player.hp <= 0) {
@@ -100,6 +101,7 @@ class thirdFloorLevel2 extends Base {
             else {
                 //非狂暴情况下为攻击，伤害为2
                 saveData.player.hp -= 2;
+                this.shakeTween(this.cameras.main);
                 this.changeText(this.eventText, "You took 2 damges!\nAnd you dealt 1 damge!");
                 //玩家血量小于等于0，挑战失败
                 if (saveData.player.hp <= 0) {
@@ -134,6 +136,7 @@ class thirdFloorLevel2 extends Base {
                 if (!saveData.player.shield && Phaser.Math.Between(1, 100) <= 50) {
                     //无盾且躲避失败
                     saveData.player.hp -= 3;
+                    this.shakeTween(this.cameras.main);
                     this.changeText(this.eventText, "You didn't dodge the fireball!\nYou took 3 damges.");
                     //玩家血量小于0，挑战失败
                     if (saveData.player.hp <= 0) {
@@ -226,6 +229,7 @@ class thirdFloorLevel2 extends Base {
             //判断玩家掉血情况
             //龙的攻击为吐火，且伤害为3
             saveData.player.hp -= 3;
+            this.shakeTween(this.cameras.main);
             this.changeText(this.eventText, "You took 3 damges!\nAnd you dealt 1 damge!");
             //玩家血量小于等于0，挑战失败
             if (saveData.player.hp <= 0) {
@@ -264,6 +268,7 @@ class thirdFloorLevel2 extends Base {
             if (!saveData.player.shield && Phaser.Math.Between(1, 100) <= 50) {
                 //无盾且躲避失败
                 saveData.player.hp -= 3;
+                this.shakeTween(this.cameras.main);
                 this.changeText(this.eventText, "You didn't dodge the fireball!\nYou took 3 damges!");
                 //玩家血量小于0，挑战失败
                 if (saveData.player.hp <= 0) {
