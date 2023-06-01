@@ -13,13 +13,51 @@ class secondFloorLevel2 extends Base {
 
         initializeLocal();
 
-        this.card.setTexture("elf");
+        if(saveData.player.sword == 1)
+        {
+            this.changeText(this.eventText, `After the great pain, with a burst of light, you find that the pain is gone.
 
+You open your eyes and find yourself back at the moment meet the Giant`);
+        this.input.enabled = false;
+        this.card.setTexture("sword");
 
-        this.left_choice_text = dataPath.left1
-        this.right_choice_text = dataPath.right1
+        this.time.delayedCall(5000, () => {
+            this.changeText(this.eventText, `You don't know what's happening, 
+when you find the sword in your hand is shining with a strange light
 
-        this.changeText(this.eventText, dataPath.eventText1);
+You see, this may be the mysterious power of the sword that the Guardian speaks of`);   
+        })
+
+        this.time.delayedCall(10000, () => {
+            
+            this.input.enabled = true;
+            this.changeText(this.eventText, `With the experience of the last time, this time you will not repeat the same mistake`);   
+        })
+
+            this.left_choice_text = dataPath.left1
+            this.right_choice_text = dataPath.right1
+    
+            this.input.enabled = false;
+    
+            this.time.delayedCall(13000, () => {
+                this.card.setTexture("elf");
+                this.changeText(this.eventText, dataPath.eventText1);
+            })
+
+           
+        }
+
+        else
+        {
+            this.card.setTexture("elf");
+
+            this.left_choice_text = dataPath.left1
+            this.right_choice_text = dataPath.right1
+
+            this.changeText(this.eventText, dataPath.eventText1);
+        }
+
+        
         
         this.dragrotate(this.card);
 
@@ -260,9 +298,14 @@ class secondFloorLevel2 extends Base {
 
     actionLose() {
         this.rotateOutAndMakeNewCard("card1");
-        this.changeText(this.eventText, "你挂了……");
+        this.changeText(this.eventText, dataPath.battleText10);
 
-        this.left_choice_text = "离开";
-        this.right_choice_text = "离开";
+        this.time.delayedCall(3000, () => {
+            if(saveData.player.sword == 0)
+            {
+                saveData.player.sword++;
+                this.scene.restart();
+            }
+        })
     }
 }

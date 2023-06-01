@@ -8,7 +8,7 @@ class secondFloorLevel3 extends Base {
 
         initializeLocal();
 
-        console.log(saveData.player.sword)
+        console.log(saveData.player.sword);
 
         if(saveData.player.sword == 1)
         {
@@ -51,7 +51,6 @@ You see, this may be the mysterious power of the sword that the Guardian speaks 
                 this.input.enabled = true;
             })
         }
-
         else
         {
             this.card.setTexture("elf");
@@ -99,10 +98,11 @@ You see, this may be the mysterious power of the sword that the Guardian speaks 
             {
                 this.action3();
             }
-            else
+            else if(this.scene_turn == 4)
             {
-                this.gotoScene("floor three level 1");
+                this.action4();
             }
+            
             
         }
         this.scene_turn++;
@@ -148,16 +148,14 @@ You see, this may be the mysterious power of the sword that the Guardian speaks 
         }
         else
         {
+            saveData.player.sword++;
             this.changeText(this.eventText, dataPath.eventText8);
             this.input.enabled = false;
 
             this.rotateOutAndMakeNewCard("card1");
             this.time.delayedCall(3000, () => {
-                if(saveData.player.sword == false)
-                {
-                    saveData.player.sword++;
-                    this.scene.restart();
-                }
+                
+                this.scene.restart();
             })
         }
 
@@ -170,11 +168,9 @@ You see, this may be the mysterious power of the sword that the Guardian speaks 
             this.changeText(this.eventText, dataPath.eventText9);
             this.input.enabled = false;
     
-            this.time.delayedCall(3000, () => {
+            this.time.delayedCall(5000, () => {
                 this.input.enabled = true;
-                this.changeText(this.eventText, dataPath.eventText10);
-                
-                
+                this.changeText(this.eventText, dataPath.eventText10);  
             })
 
             this.rotateOutAndMakeNewCard("card1");
@@ -184,17 +180,21 @@ You see, this may be the mysterious power of the sword that the Guardian speaks 
         }
         else
         {
+            saveData.player.sword++;
             this.changeText(this.eventText, dataPath.eventText8);
             this.input.enabled = false;
 
             this.rotateOutAndMakeNewCard("card1");
             this.time.delayedCall(3000, () => {
-                if(saveData.player.sword == 0)
-                {
-                    saveData.player.sword++;
-                    this.scene.restart();
-                }
+                
+                this.scene.restart();
             })
         }
+    }
+
+    action4()
+    {
+        this.rotateOutAndMakeNewCard("card1");
+        this.gotoScene("floor three level 1");
     }
 }
