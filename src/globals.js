@@ -8,6 +8,7 @@ let gameData;//游戏数据（关卡数值和其他信息，在'../json/InGameDa
 let dataPath;//数据路径定义，具体路径在base的shortCut中定义
 let transitionDuration = 1000;//过渡时间1s
 let death = false;
+let cureent;
 //全局函数
 //加载存档
 function loadSaveData() {
