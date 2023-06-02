@@ -5,13 +5,6 @@ class firstFloorLevel3 extends Base {
         super("floor one level 3", "skeleton")
     }
 
-    exPreload(){
-        this.load.image("mob","card1.png");
-        this.load.image("card1", "card1.png");
-        this.load.image("card2", "card2.png");
-
-    }
-
     onEnter(){
         
         this.mobhp = 3;
@@ -20,7 +13,7 @@ class firstFloorLevel3 extends Base {
         this.changeText(this.eventText, `The skeleton is moving towards you`);
         this.left_choice_text = "Attack";
         this.right_choice_text = "Dodge";
-        this.card = this.createCard("mob");
+        
         this.dragrotate(this.card); 
     }
 

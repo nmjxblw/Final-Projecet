@@ -3,18 +3,11 @@ class firstFloorLevel1 extends Base {
         super("floor one level 1", "guardian")
     }
 
-    exPreload(){
-        this.load.image("guardian","guardian_with_mask.png");
-        this.load.image("card1", "card1.png");
-        this.load.image("card2", "card2.png");
-
-    }
-
     onEnter(){
 
         this.left_choice_text = dataPath.left;
         this.right_choice_text = dataPath.right;
-        this.card = this.createCard("guardian");        
+        this.card.setTextrue("guardian_with_mask");        
         this.changeText(this.eventText, dataPath.eventText);
         
         this.time.delayedCall(500, () => {
@@ -36,7 +29,7 @@ class firstFloorLevel1 extends Base {
     }
 
     judgeChoice(){
-        this.rotateOutAndMakeNewCard("guardian");
+        this.rotateOutAndMakeNewCard("guardian_with_mask");
         this.gotoScene("floor one level 2");
     }
 }
