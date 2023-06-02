@@ -41,6 +41,7 @@ class firstFloorLevel3 extends Base {
                 this.rotateOutAndMakeNewCard("skeleton");
                 saveData.player.hp-=1;
                 this.mobhp -=1;
+                this.shakeTween(this.cameras.main);
                 this.changeText(this.eventText, dataPath.eventText2);
             }
             else {

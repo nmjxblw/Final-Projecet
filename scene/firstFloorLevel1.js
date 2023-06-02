@@ -25,9 +25,9 @@ class firstFloorLevel1 extends Base {
         this.time.delayedCall(9000, () => {
             this.changeText(this.eventText, dataPath.eventText3);
             this.eventCard(dataPath.eventCard);
+            this.label = true;
         });
 
-        this.label = true;
         this.stopSpotLight = true;
         this.dragrotate(this.card);
 
