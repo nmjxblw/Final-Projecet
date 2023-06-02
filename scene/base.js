@@ -147,6 +147,20 @@ class Base extends GameScene {
             "card1")
             .setOrigin(0.5)
             .setDepth(1)
+
+        //创建一个显示角色生命值的文本
+        this.showHp = this.add.text(this.w * 0.33, this.h * 0.09, saveData.player.hp)
+            .setColor("#ff0000")
+            .setFontSize(50)
+            .setDepth(3)
+            .setAlpha(0);
+
+        
+
+        
+
+
+        
         this.onEnter();
 
 
@@ -783,7 +797,20 @@ class Base extends GameScene {
         });
     }
 
+    //调用此函数创建一个显示怪物血量的文本
+    showMonsterHP(hp)
+    {
+        let temp = this.add.text(this.w * 0.65, this.h * 0.09, hp)
+            .setColor("#ff0000")
+            .setFontSize(50)
+            .setDepth(3)
+            .setAlpha(0);
+
+        return temp
+    }
+
     update() {
+        
     }
 
     shortCut1() { }

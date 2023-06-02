@@ -5,10 +5,12 @@ class secondFloorLevel3 extends Base {
 
     onEnter() {
 
-
-        initializeLocal();
-
-        console.log(saveData.player.sword);
+        if (saveData == {}) {
+            
+            quickSaveData();
+        }
+        
+        
 
         if(saveData.player.sword == 1)
         {
@@ -27,7 +29,7 @@ You see, this may be the mysterious power of the sword that the Guardian speaks 
 
         this.time.delayedCall(10000, () => {
             
-            this.input.enabled = true;
+            
             this.changeText(this.eventText, `With the experience of the last time, this time you will not repeat the same mistake`);   
         })
 
@@ -47,8 +49,14 @@ You see, this may be the mysterious power of the sword that the Guardian speaks 
             })
     
             this.time.delayedCall(19000, () => {
-                this.changeText(this.eventText, dataPath.eventText3);
                 this.input.enabled = true;
+                this.changeText(this.eventText, dataPath.eventText3);
+                this.eventCard(`When you die, the power of the sword will resurrect you.`);
+                
+                this.time.delayedCall(3500, () => {
+                    this.eventCard(`You will be reborn at the beginning of the current scene.`);
+                });
+                
             })
         }
         else
@@ -149,6 +157,7 @@ You see, this may be the mysterious power of the sword that the Guardian speaks 
         else
         {
             saveData.player.sword++;
+            console.log(saveData);
             this.changeText(this.eventText, dataPath.eventText8);
             this.input.enabled = false;
 
