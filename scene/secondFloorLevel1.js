@@ -35,6 +35,9 @@ class secondFloorLevel1 extends Base {
 
     action1() {
         this.rotateOutAndMakeNewCard("elf");
+        
+        this.openDoor.play();
+
         this.time.delayedCall(1000, () => {
             this.gotoScene("floor two level 2");
         })    
