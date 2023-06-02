@@ -22,12 +22,11 @@ class GameScene extends Phaser.Scene {
     }
 
     preload() {
-        this.load.path = "./assets/";
-        this.load.image("gear", "gear.png");
-        this.load.json("gameData", "../json/InGameData.json");
-        this.load.audio('doorOpen', 'doorOpen.ogg');
-        this.load.audio('unlock', 'unlock.ogg');
-        this.load.audio("chestCreak","chestCreak.wav")
+        this.load.image("gear", "assets/gear.png");
+        this.load.json("gameData", "json/InGameData.json");
+        this.load.audio('doorOpen', 'assets/doorOpen.ogg');
+        this.load.audio('unlock', 'assets/unlock.ogg');
+        this.load.audio("chestCreak","assets/chestCreak.wav")
 
         this.exPreload();
     }

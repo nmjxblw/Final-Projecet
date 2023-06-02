@@ -1,23 +1,23 @@
 class Base extends GameScene {
 
     exPreload() {
-        this.load.image("background","background.jpg")
-        this.load.image("card1", "card1.png");
-        this.load.image("card2", "card2.png");
-        this.load.image("testPoint", "testpoint.png");
-        this.load.image("elf", "elf.png");
-        this.load.image("player", "player.jpg");
-        this.load.image("sword", "sword.png");
-        this.load.image("guardian_off_mask", "guardian_off_mask.png");
-        this.load.image("guardian_with_mask", "guardian_with_mask.png");
-        this.load.image("giant", "giant.png");
-        this.load.image("dragon_normal", "dragon_normal.png");
-        this.load.image("dragon_berserk", "dragon_berserk.png");
-        this.load.image("men", "men.png");
+        this.load.image("background","assets/background.jpg")
+        this.load.image("card1", "assets/card1.png");
+        this.load.image("card2", "assets/card2.png");
+        this.load.image("testPoint", "assets/testpoint.png");
+        this.load.image("elf", "assets/elf.png");
+        this.load.image("player", "assets/player.jpg");
+        this.load.image("sword", "assets/sword.png");
+        this.load.image("guardian_off_mask", "assets/guardian_off_mask.png");
+        this.load.image("guardian_with_mask", "assets/guardian_with_mask.png");
+        this.load.image("giant", "assets/giant.png");
+        this.load.image("dragon_normal", "assets/dragon_normal.png");
+        this.load.image("dragon_berserk", "assets/dragon_berserk.png");
+        this.load.image("men", "assets/men.png");
         //暂用card1代替
-        this.load.image("maze", "card1.png");
-        this.load.image("door", "card1.png");
-        this.load.image("skeleton", "card1.png");
+        this.load.image("maze", "assets/card1.png");
+        this.load.image("door", "assets/card1.png");
+        this.load.image("skeleton", "assets/card1.png");
         
     }
 
