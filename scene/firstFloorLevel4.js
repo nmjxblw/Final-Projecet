@@ -3,13 +3,6 @@ class firstFloorLevel4 extends Base {
         super("floor one level 4", "maze");
     }
 
-    exPreload(){
-        this.load.image("maze","card1.png");
-        this.load.image("card1", "card1.png");
-        this.load.image("card2", "card2.png");
-
-    }
-
     onEnter(){
         this.changeText(this.eventText, "The maze");
         this.left_choice_text = "enter the maze";

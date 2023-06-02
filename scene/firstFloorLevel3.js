@@ -5,16 +5,9 @@ class firstFloorLevel3 extends Base {
         super("floor one level 3", "skeleton")
     }
 
-    exPreload(){
-        this.load.image("mob","card1.png");
-        this.load.image("card1", "card1.png");
-        this.load.image("card2", "card2.png");
-
-    }
-
     onEnter(){
         initializeLocal();
-        
+
         this.mobhp = 3;
         this.currentAction;
         initializeLocal(); 

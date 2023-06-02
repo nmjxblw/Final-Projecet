@@ -3,6 +3,9 @@
     "//注": "Josn文件不支持用纯数字做key",
     "floor": {
         "one": {
+            "level0": {
+                "eventCard1":"Once upon a time, there is a land filled with magic and mysterious elements, and within it, there is a dungeon full of mystery. "
+            },
             "level1": {
                 "right": "...",
                 "left": "Got it",

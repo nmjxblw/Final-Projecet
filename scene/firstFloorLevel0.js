@@ -1,6 +1,13 @@
 class firstFloorLevel1 extends Base {
     constructor(){
-        super("floor one level 1", "guardian")
+        super("floor one level 0", "intro")
+    }
+
+    exPreload(){
+        this.load.image("background","card1.png");
+        this.load.image("card1", "card1.png");
+        this.load.image("card2", "card2.png");
+
     }
 
     onEnter(){
