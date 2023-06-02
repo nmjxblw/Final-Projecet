@@ -1,6 +1,7 @@
 class secondFloorLevel3 extends Base {
     constructor(){
         super("floor two level 3","Open Treasure Chest")
+        currentPosition = this.sceneKey;
     }
 
     onEnter() {
@@ -8,81 +9,25 @@ class secondFloorLevel3 extends Base {
         if (saveData == {}) {
             
             quickSaveData();
-        }
-        
-        
+        }      
 
-        if(saveData.player.sword == 1)
-        {
-            this.changeText(this.eventText, `After the great pain, with a burst of light, you find that the pain is gone.
 
-You open your eyes and find yourself back at the moment after you defeated the giant`);
+        this.card.setTexture("elf");
+        this.left_choice_text = dataPath.left1
+        this.right_choice_text = dataPath.right1
+
         this.input.enabled = false;
-        this.card.setTexture("sword");
+        this.changeText(this.eventText, dataPath.eventText1);
 
-        this.time.delayedCall(5000, () => {
-            this.changeText(this.eventText, `You don't know what's happening, 
-when you find the sword in your hand is shining with a strange light
-
-You see, this may be the mysterious power of the sword that the Guardian speaks of`);   
+        this.time.delayedCall(3000, () => {
+            
+            this.changeText(this.eventText, dataPath.eventText2);
         })
 
-        this.time.delayedCall(10000, () => {
-            
-            
-            this.changeText(this.eventText, `With the experience of the last time, this time you will not repeat the same mistake`);   
+        this.time.delayedCall(6000, () => {
+            this.changeText(this.eventText, dataPath.eventText3);
+            this.input.enabled = true;
         })
-
-            this.left_choice_text = dataPath.left1
-            this.right_choice_text = dataPath.right1
-    
-            this.input.enabled = false;
-    
-            this.time.delayedCall(13000, () => {
-                this.card.setTexture("elf");
-                this.changeText(this.eventText, dataPath.eventText1);
-            })
-
-            this.time.delayedCall(16000, () => {
-                this.card.setTexture("elf");
-                this.changeText(this.eventText, dataPath.eventText2);
-            })
-    
-            this.time.delayedCall(19000, () => {
-                this.input.enabled = true;
-                this.changeText(this.eventText, dataPath.eventText3);
-                this.eventCard(`When you die, the power of the sword will resurrect you.`);
-                
-                this.time.delayedCall(3500, () => {
-                    this.eventCard(`You will be reborn at the beginning of the current scene.`);
-                });
-                
-            })
-        }
-        else
-        {
-            this.card.setTexture("elf");
-            this.left_choice_text = dataPath.left1
-            this.right_choice_text = dataPath.right1
-    
-            this.input.enabled = false;
-            this.changeText(this.eventText, dataPath.eventText1);
-    
-            this.time.delayedCall(3000, () => {
-                
-                this.changeText(this.eventText, dataPath.eventText2);
-            })
-    
-            this.time.delayedCall(6000, () => {
-                this.changeText(this.eventText, dataPath.eventText3);
-                this.input.enabled = true;
-            })
-        }
-
-        
-
-
-
         
 
         this.dragrotate(this.card);
@@ -150,13 +95,14 @@ You see, this may be the mysterious power of the sword that the Guardian speaks 
             this.changeText(this.eventText, dataPath.eventText7);
             this.rotateOutAndMakeNewCard("card1");
 
+            this.unlock.play();
+
             this.left_choice_text = dataPath.left2;
             this.right_choice_text = dataPath.right2;
 
         }
         else
         {
-            saveData.player.sword++;
             console.log(saveData);
             this.changeText(this.eventText, dataPath.eventText8);
             this.input.enabled = false;
@@ -164,7 +110,7 @@ You see, this may be the mysterious power of the sword that the Guardian speaks 
             this.rotateOutAndMakeNewCard("card1");
             this.time.delayedCall(3000, () => {
                 
-                this.scene.restart();
+                this.gotoScene("floor four level 1")
             })
         }
 
@@ -176,6 +122,12 @@ You see, this may be the mysterious power of the sword that the Guardian speaks 
         {
             this.changeText(this.eventText, dataPath.eventText9);
             this.input.enabled = false;
+
+            this.unlock.play();
+
+            this.time.delayedCall(3000, () => {
+                this.chestCreak.play();
+            })
     
             this.time.delayedCall(5000, () => {
                 this.input.enabled = true;
@@ -189,14 +141,13 @@ You see, this may be the mysterious power of the sword that the Guardian speaks 
         }
         else
         {
-            saveData.player.sword++;
             this.changeText(this.eventText, dataPath.eventText8);
             this.input.enabled = false;
 
             this.rotateOutAndMakeNewCard("card1");
             this.time.delayedCall(3000, () => {
                 
-                this.scene.restart();
+                this.gotoScene("floor four level 1")
             })
         }
     }

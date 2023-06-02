@@ -30,6 +30,9 @@ class GameScene extends Phaser.Scene {
         this.load.path = "./assets/";
         this.load.image("gear", "gear.png");
         this.load.json("gameData", "../json/InGameData.json");
+        this.load.audio('doorOpen', 'doorOpen.ogg');
+        this.load.audio('unlock', 'unlock.ogg');
+        this.load.audio("chestCreak","chestCreak.wav")
 
         this.exPreload();
     }
@@ -49,6 +52,30 @@ class GameScene extends Phaser.Scene {
 
         //加载额外函数
         this.exCreate();
+
+        //开门音效
+        this.openDoor = this.sound.add(
+            'doorOpen', 
+            { 
+                loop: false,
+                rate: 0.5,
+            }
+        );
+
+        //解锁音效
+        this.unlock = this.sound.add(
+            'unlock', 
+            { 
+                loop: false,
+            }
+        );
+
+        this.chestCreak = this.sound.add(
+            'chestCreak', 
+            { 
+                loop: false,
+            }
+        );
     }
 
     //设置编写游戏时常用的数据
@@ -134,6 +161,15 @@ class GameScene extends Phaser.Scene {
         Timer = 0;
     }
 
+    update()
+    {
+        this.openDoor.volume = Volume;
+        this.unlock.volume = Volume;
+        this.chestCreak.volume = Volume;
+
+        this.exUpdate();
+    }
+
     //当子类没有ex函数时报错
     exCreate() {
         console.warn(`${this.sceneKey}没有设置exCreate()`);
@@ -146,6 +182,13 @@ class GameScene extends Phaser.Scene {
     exShortCut() {
         console.warn(`${this.sceneKey}没有设置exShortCut()`);
     }
+    
+    exUpdate()
+    {
+
+    }
+
+    
 }
 
 class SettingScene extends Phaser.Scene {
