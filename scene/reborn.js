@@ -4,6 +4,8 @@ class reborn extends Base {
     }
 
     onEnter() {
+        console.log("choice");
+        console.log(currentPosition);
         saveData.player.sword++;
         saveData.player.hp = 5;
         this.input.enabled = false;
@@ -31,7 +33,7 @@ class reborn extends Base {
             });
 
             this.dragrotate(this.card);
-
+        
         }
         else {
             console.log(currentPosition);

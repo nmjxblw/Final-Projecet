@@ -13,6 +13,8 @@ class firstFloorLevel3 extends Base {
     }
 
     onEnter(){
+        initializeLocal();
+        
         this.mobhp = 3;
         this.currentAction;
         initializeLocal(); 

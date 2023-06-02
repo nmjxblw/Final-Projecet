@@ -1,6 +1,7 @@
 class Base extends GameScene {
 
     exPreload() {
+        this.load.image("background","background.jpg")
         this.load.image("card1", "card1.png");
         this.load.image("card2", "card2.png");
         this.load.image("testPoint", "testpoint.png");
@@ -93,8 +94,10 @@ class Base extends GameScene {
         this.cameras.main.setBackgroundColor('#000');
         this.cameras.main.fadeIn(transitionDuration, 0, 0, 0);
 
-        this.background1 = this.add.rectangle(this.w * 0.5, this.h * 0.5, 650, 900, 0xF0E68C);
+        this.background1 = this.add.rectangle(this.w * 0.5, this.h * 0.5, 650, 900, 0x9EB1B4);
         this.background1.setDepth(1);
+
+        this.backgroundImage = this.add.image(0,0,"background").setOrigin(0).setDepth(-1);
 
 
         //设置文本框，在用户互动后再设置其他参数
