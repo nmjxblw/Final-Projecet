@@ -11,7 +11,7 @@ class reborn extends Base {
         this.input.enabled = false;
         if (saveData.player.sword == 1) {
             this.card.setTexture("player");
-            this.label = false;
+            this.card.label = false;
             this.left_choice_text = "I got it.";
             this.right_choice_text = "Ok...";
             //this.changeText("You will be reborn.");
@@ -27,7 +27,6 @@ class reborn extends Base {
                     this.time.delayedCall(3000, () => {
                         this.card.dragable = true;
                         this.card.label = true;
-                        this.input.enabled = true;
                     });
                 });
             });

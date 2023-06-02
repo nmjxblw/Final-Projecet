@@ -29,7 +29,7 @@ class firstFloorLevel5 extends Base{
         this.left_choice_text = "heads left";
         this.right_choice_text = "heads right";
 
-        this.card.setTexture("maze");
+        this.card.setTexture("fork");
         this.dragrotate(this.card);
 
         this.scene_turn = 1;
