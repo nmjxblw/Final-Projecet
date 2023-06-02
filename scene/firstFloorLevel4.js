@@ -8,7 +8,7 @@ class firstFloorLevel4 extends Base {
         this.left_choice_text = "enter the maze";
         this.right_choice_text = "enter the maze";
 
-        this.card = this.createCard("maze");
+        this.card.setTextrue("maze");
         this.dragrotate(this.card);
     }
 

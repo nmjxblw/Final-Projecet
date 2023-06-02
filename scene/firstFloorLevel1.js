@@ -29,7 +29,7 @@ class firstFloorLevel1 extends Base {
     }
 
     judgeChoice(){
-        this.rotateOutAndMakeNewCard("guardian");
+        this.rotateOutAndMakeNewCard("guardian_with_mask");
         this.gotoScene("floor one level 2");
     }
 }
