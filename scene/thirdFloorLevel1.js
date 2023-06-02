@@ -9,18 +9,18 @@ class thirdFloorLevel1 extends Base {
         this.left_choice_text = dataPath["left"];
         this.right_choice_text = dataPath["right"];
 
-        this.createEventText(dataPath["eventText"]);
+        this.changeText(this.eventText, dataPath.eventText1);
 
-        //this.card.setTexture("door");
+        this.card.setTexture("gate");
 
         this.card.label = false;
 
-        this.time.delayedCall(500, () => {
-            this.eventCard(dataPath["eventCard1"]);
+        this.time.delayedCall(4000, () => {
+            this.changeText(this.eventText, dataPath.eventText2);
         });
 
-        this.time.delayedCall(3500, () => {
-            this.eventCard(dataPath["eventCard2"]);
+        this.time.delayedCall(8000, () => {
+            this.changeText(this.eventText, dataPath.eventText3);
             this.card.label = true;
         });
 
@@ -32,7 +32,7 @@ class thirdFloorLevel1 extends Base {
     }
 
     action() {
-        this.rotateOutAndMakeNewCard("door");
+        this.rotateOutAndMakeNewCard("gate");
         this.gotoScene("floor three level 2")
     }
 }

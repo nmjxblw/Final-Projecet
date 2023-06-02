@@ -66,9 +66,9 @@
             "level1": {
                 "right": "Push the door",
                 "left": "Pull the door",
-                "eventText": "At the gate...",
-                "eventCard1": "When you are standing in front of the door towards the next floor...",
-                "eventCard2": "You feel a strong power behind the door."
+                "eventText1": "When you are standing in front of the door towards the next floor...",
+                "eventText2": "You feel a strong power behind the door.",
+                "eventText3": "At the gate..."
             },
             "level2": {
                 "enemy": {
@@ -105,14 +105,14 @@
                 },
                 "right": "*CLANK*\n(block with the sword)",
                 "left": "*CLANG*\n(block with the sword)",
-                "eventCard1": "After a hard-fought battle, you defeat the dragon.",
-                "eventCard2": "The dragon slowly descends.",
-                "eventCard3": "Its eyes are filled with unwillingness.",
-                "eventText1": "Dragon: I will curse you, \nthat you will be as chaotic, cruel, \nand merciless as me.",
-                "eventText2": "Dragon: I will give you all my power, \nand make you become just like me.",
-                "eventText3": "The dragon's curse heads toward you, \nand you choose to...",
-                "eventText4": "A faint light emanated from the sword...",
-                "eventText5": "A strong light emanated from the sword!"
+                "eventText1": "After a hard-fought battle, you defeat the dragon.",
+                "eventText2": "The dragon slowly descends.",
+                "eventText3": "Its eyes are filled with unwillingness.",
+                "eventText4": "Dragon: I will curse you, \nthat you will be as chaotic, cruel, \nand merciless as me.",
+                "eventText5": "Dragon: I will give you all my power, \nand make you become just like me.",
+                "eventText6": "The dragon's curse heads toward you, \nand you choose to...",
+                "eventText7": "A faint light emanated from the sword...",
+                "eventText8": "A strong light emanated from the sword!"
             },
             "level4": {
                 "right1": "(Continue...)",

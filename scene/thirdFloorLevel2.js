@@ -6,9 +6,6 @@ class thirdFloorLevel2 extends Base {
     }
 
     onEnter() {
-        //initializeLocal();
-        console.log(saveData);
-        console.log(currentPosition);
 
         //先初始化第一轮的左右选项
         this.left_choice_text = dataPath.left1;
@@ -26,18 +23,20 @@ class thirdFloorLevel2 extends Base {
 
         //播放事件卡片
         this.time.delayedCall(500, () => {
-            this.eventCard(dataPath.eventCard1);
+            this.changeText(this.eventText, dataPath.eventCard1);
         });
 
         this.time.delayedCall(3500, () => {
-            this.eventCard(dataPath.eventCard2);
+            this.changeText(this.eventText, dataPath.eventCard2);
         });
 
         this.time.delayedCall(6500, () => {
-            this.eventCard(dataPath.eventCard3);
-            this.changeText(this.eventText, dataPath.eventText1);
-            this.card.label = true;
-        })
+            this.changeText(this.eventText, dataPath.eventCard3);
+            this.time.delayedCall(3000, () => {
+                this.changeText(this.eventText, dataPath.eventText1);
+                this.card.label = true;
+            });
+        });
 
         //设置拖动效果
         this.dragrotate(this.card);
@@ -68,13 +67,7 @@ class thirdFloorLevel2 extends Base {
         else {
             this.action3();
         }
-        this.showHp.setText(saveData.player.hp);
-        this.showEnemyHp.setText(this.enemy_hp);
         this.scene_turn++;
-        if (saveData != {}) {
-            saveData.player.currentPosition.scene_turn = this.scene_turn;
-        }
-        //console.log(saveData);
     }
 
     action1() {
