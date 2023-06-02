@@ -4,32 +4,37 @@ class firstFloorLevel1 extends Base {
     }
 
     onEnter(){
-
+        this.label = false;
         this.left_choice_text = dataPath.left;
         this.right_choice_text = dataPath.right;
         this.card.setTexture("guardian_off_mask");      
         this.changeText(this.eventText, dataPath.eventText);
-        
-        this.time.delayedCall(500, () => {
-            this.eventCard(dataPath.eventCard1);
+        this.time.delayedCall(3000, () => {
+            this.changeText(this.eventText, dataPath.eventText1);
         });
 
-        this.time.delayedCall(3500, () => {
-            this.eventCard(dataPath.eventCard2);
+
+        this.time.delayedCall(6000, () => {
+            this.cardReset("sword");
+            this.stopSpotLight = false;
+            this.cardSpotLight();
+            this.changeText(this.eventText, dataPath.eventText2);;
         });
     
 
-        this.time.delayedCall(6500, () => {
-            this.eventCard(dataPath.eventCard3, 1000);
+        this.time.delayedCall(9000, () => {
+            this.changeText(this.eventText, dataPath.eventText3);
+            this.eventCard(dataPath.eventCard);
         });
-    
-    
+
+        this.label = true;
+        this.stopSpotLight = true;
         this.dragrotate(this.card);
 
     }
 
     judgeChoice(){
-        this.rotateOutAndMakeNewCard("guardian_with_mask");
+        this.rotateOutAndMakeNewCard("card1");
         this.gotoScene("floor one level 2");
     }
 }
