@@ -8,7 +8,7 @@ class firstFloorLevel2 extends Base {
         this.changeText(this.eventText,`You have arrived at the first floor of the dungeon.\nImmediately, you are attacked by a monster.`);
         this.left_choice_text = "Attack the monster";
         this.right_choice_text = "Attack the monster";
-        this.card.setTextrue("door");
+        this.card.setTexture("door");
         this.dragrotate(this.card); 
     }
 
