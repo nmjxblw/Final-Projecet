@@ -47,7 +47,8 @@
                 "battleText9": "The giant did not attack you\n\nGiant are preparing for next action",
                 "battleText10": "You failed to defeat the giant\n\nYou died",
                 "eventCard1": "When some powerful enemies are continuously attacked will enter the rage state.",
-                "eventCard2": "You cannot judge the actions of enemies in a state of rage."
+                "eventCard2": "You cannot judge the actions of enemies in a state of rage.",
+                "eventCard3": "The giant entered the rage state"
             },
             "level3": {
                 "left1": "Find the treasure chest",

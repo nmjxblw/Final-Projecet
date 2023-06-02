@@ -14,6 +14,7 @@ class Base extends GameScene {
         this.load.image("dragon_normal", "dragon_normal.png");
         this.load.image("dragon_berserk", "dragon_berserk.png");
         this.load.image("men", "men.png");
+        
     }
 
     exShortCut() {
@@ -812,7 +813,7 @@ class Base extends GameScene {
         return temp
     }
 
-    update() {
+    exUpdate() {
         
     }
 
