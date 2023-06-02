@@ -14,6 +14,10 @@ class Base extends GameScene {
         this.load.image("dragon_normal", "dragon_normal.png");
         this.load.image("dragon_berserk", "dragon_berserk.png");
         this.load.image("men", "men.png");
+        //暂用card1代替
+        this.load.image("maze", "card1.png");
+        this.load.image("door", "card1.png");
+        this.load.image("skeleton", "card1.png");
         
     }
 

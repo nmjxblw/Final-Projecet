@@ -23,13 +23,6 @@ class firstFloorLevel5 extends Base{
         super("floor one level 5", "fork");
     }
 
-    exPreload(){
-        this.load.image("fork","card1.png");
-        this.load.image("card1", "card1.png");
-        this.load.image("card2", "card2.png");
-
-    }
-
     onEnter(){
 
         this.changeText(this.eventText, "You find a fork in the road.");
@@ -50,7 +43,7 @@ class firstFloorLevel5 extends Base{
 
 
     enter_maze(x, choice){
-        this.rotateOutAndMakeNewCard("fork");
+        this.rotateOutAndMakeNewCard("maze");
         if(x==1){
             if(choice=="left"){
                 this.changeText(this.eventText, dataPath.eventText);
