@@ -10,6 +10,9 @@ class Base extends GameScene {
         this.load.image("guardian_off_mask", "guardian_off_mask.png");
         this.load.image("guardian_with_mask", "guardian_with_mask.png");
         this.load.image("giant", "giant.png");
+        this.load.image("dragon_normal", "dragon_normal.png");
+        this.load.image("dragon_berserk", "dragon_berserk.png");
+        this.load.image("men", "men.png");
     }
 
     exShortCut() {
@@ -70,7 +73,7 @@ class Base extends GameScene {
 
         //记录当前场景的回合数
         this.scene_turn = 1;
-        if (saveData != {}) {
+        if (saveData != {} && typeof saveData != 'undefined' && saveData) {
             saveData.player.currentPosition.scene_turn = this.scene_turn;
         }
 
@@ -95,7 +98,7 @@ class Base extends GameScene {
 
         //设置文本框，在用户互动后再设置其他参数
         this.cardText = this.add.text(0, 0, "")
-            .setColor("#000")
+            .setColor("#e7b5dd")
             .setAlpha(0)
             .setOrigin(0.5)
             .setDepth(4)
@@ -477,7 +480,7 @@ class Base extends GameScene {
         });
 
         this.time.delayedCall(1000, () => {
-            this.card.dragable = true;
+            this.card.dragable = this.card.label;
         });
     }
 
@@ -687,7 +690,7 @@ class Base extends GameScene {
         var twinklingAlphaA = a ? a : 0;
         var twinklingAlphaB = b ? b : 1;
         var repeatTime = r ? r : -1;
-        this.card.dragable = repeatTime <= 0 ? true : false;
+        this.card.dragable = repeatTime <= 0 ? this.card.label : false;
         this.card.alpha = twinklingAlphaA;
         this.tweens.add({
             targets: this.card,

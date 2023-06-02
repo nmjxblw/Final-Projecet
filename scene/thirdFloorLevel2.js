@@ -2,12 +2,14 @@ class thirdFloorLevel2 extends Base {
     constructor() {
         //当前场景为第三层龙
         super("floor three level 2", "the dragon")
+        currentPosition = this.sceneKey;
     }
 
     onEnter() {
-        quickSaveData();
+        //initializeLocal();
         console.log(saveData);
-        
+        console.log(currentPosition);
+
         //先初始化第一轮的左右选项
         this.left_choice_text = dataPath.left1;
         //根据玩家是否有盾牌来切换防御词条
@@ -18,7 +20,7 @@ class thirdFloorLevel2 extends Base {
         //加载敌人狂暴状态
         this.enemy_berserk = dataPath.enemy.berserk;
         //设置卡片的图案
-        this.card.setTexture(dataPath.enemy.name);
+        this.card.setTexture("dragon_normal");
         //设置卡片不可转动
         this.card.label = false;
 
@@ -46,12 +48,14 @@ class thirdFloorLevel2 extends Base {
             this.action4();
         }
         else if (this.enemy_hp <= 0) {
-            this.rotateOutAndMakeNewCard("card1");
+            this.rotateOutAndMakeNewCard("player");
             this.gotoScene("floor three level 3");
+            return;
         }
         else if (saveData.player.hp <= 0) {
-            this.rotateOutAndMakeNewCard("card1");
-            this.gotoScene("floor three level 1");
+            this.rotateOutAndMakeNewCard("player");
+            this.gotoScene("floor four level 1");
+            return;
         }
         //根据回合数判断行动
         else if (this.scene_turn % 3 == 1) {
@@ -71,7 +75,6 @@ class thirdFloorLevel2 extends Base {
     }
 
     action1() {
-        this.rotateOutAndMakeNewCard(dataPath.enemy.name);
         //根据玩家的选择先判断龙是否掉血
         //玩家上个选择是攻击，龙的上个行为为攻击/吐火
         if (this.player_choice == "left") {
@@ -85,12 +88,18 @@ class thirdFloorLevel2 extends Base {
                 this.changeText(this.eventText, "You took 3 damges!\nAnd you dealt 1 damge!");
                 //玩家血量小于等于0，挑战失败
                 if (saveData.player.hp <= 0) {
-                    this.lost();
+                    this.card.dargable = false;
+                    this.time.delayedCall(1000, () => {
+                        this.lost();
+                    });
                     return;
                 }
                 //敌人血量小于等于0，挑战成功
                 if (this.enemy_hp <= 0) {
-                    this.win();
+                    this.card.dargable = false;
+                    this.time.delayedCall(1000, () => {
+                        this.win();
+                    });
                     return;
                 }
                 this.time.delayedCall(2000, () => {
@@ -104,12 +113,18 @@ class thirdFloorLevel2 extends Base {
                 this.changeText(this.eventText, "You took 2 damges!\nAnd you dealt 1 damge!");
                 //玩家血量小于等于0，挑战失败
                 if (saveData.player.hp <= 0) {
-                    this.lost();
+                    this.card.dargable = false;
+                    this.time.delayedCall(1000, () => {
+                        this.lost();
+                    });
                     return;
                 }
                 //敌人血量小于等于0，挑战成功
                 if (this.enemy_hp <= 0) {
-                    this.win();
+                    this.card.dargable = false;
+                    this.time.delayedCall(1000, () => {
+                        this.win();
+                    });
                     return;
                 }
                 this.time.delayedCall(2000, () => {
@@ -139,7 +154,10 @@ class thirdFloorLevel2 extends Base {
                     this.changeText(this.eventText, "You didn't dodge the fireball!\nYou took 3 damges.");
                     //玩家血量小于0，挑战失败
                     if (saveData.player.hp <= 0) {
-                        this.lost();
+                        this.card.dargable = false;
+                        this.time.delayedCall(1000, () => {
+                            this.lost();
+                        });
                         return;
                     }
                 }
@@ -166,10 +184,16 @@ class thirdFloorLevel2 extends Base {
                 });
             }
         }
+
+        if (!this.enemy_berserk) {
+            this.rotateOutAndMakeNewCard("dragon_normal");
+        }
+        else {
+            this.rotateOutAndMakeNewCard("dragon_berserk");
+        }
     }
 
     action2() {
-        this.rotateOutAndMakeNewCard(dataPath.enemy.name);
         //根据玩家的选择先判断龙是否掉血
         //玩家上个选择是攻击，龙的上个行为为移动
         if (this.player_choice == "left") {
@@ -177,7 +201,10 @@ class thirdFloorLevel2 extends Base {
             this.changeText(this.eventText, "You dealt 1 damge!");
             //敌人血量小于等于0，挑战成功
             if (this.enemy_hp <= 0) {
-                this.win();
+                this.card.dargable = false;
+                this.time.delayedCall(1000, () => {
+                    this.win();
+                });
                 return;
             }
             if (this.enemy_berserk) {
@@ -216,10 +243,16 @@ class thirdFloorLevel2 extends Base {
                 this.changeText(this.eventText, dataPath.eventText3);
             });
         }
+
+        if (!this.enemy_berserk) {
+            this.rotateOutAndMakeNewCard("dragon_normal");
+        }
+        else {
+            this.rotateOutAndMakeNewCard("dragon_berserk");
+        }
     }
 
     action3() {
-        this.rotateOutAndMakeNewCard(dataPath.enemy.name);
         //根据玩家的选择先判断龙是否掉血
         //玩家上个选择是攻击，龙的上个行为为吐火
         if (this.player_choice == "left") {
@@ -232,12 +265,18 @@ class thirdFloorLevel2 extends Base {
             this.changeText(this.eventText, "You took 3 damges!\nAnd you dealt 1 damge!");
             //玩家血量小于等于0，挑战失败
             if (saveData.player.hp <= 0) {
-                this.lost();
+                this.card.dargable = false;
+                this.time.delayedCall(1000, () => {
+                    this.lost();
+                });
                 return;
             }
             //敌人血量小于等于0，挑战成功
             if (this.enemy_hp <= 0) {
-                this.win();
+                this.card.dargable = false;
+                this.time.delayedCall(1000, () => {
+                    this.win();
+                });
                 return;
             }
             if (this.enemy_berserk) {
@@ -260,7 +299,7 @@ class thirdFloorLevel2 extends Base {
                 this.time.delayedCall(3000, () => { this.elf_scene(); });
             }
         }
-        //玩家上个选择是攻击，龙的上个行为为吐火
+        //玩家上个选择是防御，龙的上个行为为吐火
         else {
             //攻击方式为吐火
             //判断玩家是否有盾
@@ -294,12 +333,19 @@ class thirdFloorLevel2 extends Base {
                 });
             }
         }
+
+        if (!this.enemy_berserk) {
+            this.rotateOutAndMakeNewCard("dragon_normal");
+        }
+        else {
+            this.rotateOutAndMakeNewCard("dragon_berserk");
+        }
     }
 
     //加载精灵退场后画面
     action4() {
         this.from_elf_scene = false;
-        this.rotateOutAndMakeNewCard(dataPath.enemy.name);
+        this.rotateOutAndMakeNewCard("dragon_berserk");
         this.changeText(this.eventText, dataPath.eventText9);
         this.left_choice_text = dataPath.left1;
         this.right_choice_text = dataPath.right1[this.def_type];
@@ -340,6 +386,7 @@ class thirdFloorLevel2 extends Base {
         this.time.delayedCall(1000, () => {
             this.rotateOutAndMakeNewCard("player");
             this.changeText(this.eventText, "You win.");
+            this.card.dargable = true;
         });
         this.left_choice_text = "I got this...";
         this.right_choice_text = "I got this!!!";
@@ -350,6 +397,7 @@ class thirdFloorLevel2 extends Base {
         this.time.delayedCall(1000, () => {
             this.rotateOutAndMakeNewCard("player");
             this.changeText(this.eventText, "You lost.");
+            this.card.dargable = true;
         });
         this.left_choice_text = "wait...";
         this.right_choice_text = "what?!";
