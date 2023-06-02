@@ -7,13 +7,13 @@ class secondFloorLevel2 extends Base {
 
         this.monsterHP = 6;
 
-        
-
         this.showEnemyHp = this.showMonsterHP(this.monsterHP);
 
         this.giantRage = false;
 
         this.currentAction;
+
+        console.log(saveData.player.currentPosition);
 
         if (saveData == {}) {
             
