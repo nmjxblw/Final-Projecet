@@ -7,11 +7,6 @@ class secondFloorLevel1 extends Base {
     onEnter() {
 
 
-        if (saveData == {}) {
-            
-            quickSaveData();
-        }
-
         this.left_choice_text = dataPath.left
         this.right_choice_text = dataPath.right
 
@@ -35,6 +30,9 @@ class secondFloorLevel1 extends Base {
 
     action1() {
         this.rotateOutAndMakeNewCard("elf");
+        
+        this.openDoor.play();
+
         this.time.delayedCall(1000, () => {
             this.gotoScene("floor two level 2");
         })    

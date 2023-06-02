@@ -6,16 +6,14 @@ class firstFloorLevel3 extends Base {
     }
 
     onEnter(){
-        initializeLocal();
-
+        
         this.mobhp = 3;
         this.currentAction;
-        initializeLocal(); 
         this.scene_turn = 1;
         this.changeText(this.eventText, `The skeleton is moving towards you`);
         this.left_choice_text = "Attack";
         this.right_choice_text = "Dodge";
-        this.card = this.createCard("mob");
+        this.card.setTexture("skeleton");
         this.dragrotate(this.card); 
     }
 
@@ -23,7 +21,7 @@ class firstFloorLevel3 extends Base {
         console.log(`turn ${this.scene_turn}`);
         if (this.player_choice != ""){
                 console.log(`turn=${this.scene_turn} choice=${this.player_choice} `);
-                this.rotateOutAndMakeNewCard(this.card, "card1");
+                this.rotateOutAndMakeNewCard("skeleton");
                 this.resettext(this.scene_turn);
                 this.damagecalc_textchange(this.scene_turn, this.player_choice);
                 this.scene_turn++;
@@ -49,24 +47,24 @@ class firstFloorLevel3 extends Base {
     damagecalc_textchange(num, choice){
         if(num%2 == 0){
             if(choice=="left") {
-                this.rotateOutAndMakeNewCard("mob");
+                this.rotateOutAndMakeNewCard("skeleton");
                 saveData.player.hp-=1;
                 this.mobhp -=1;
                 this.changeText(this.eventText, `You took 1 damage!\nAnd you dealt 1 damage!`);
             }
             else {
-                this.rotateOutAndMakeNewCard("mob");
+                this.rotateOutAndMakeNewCard("skeleton");
                 this.changeText(this.eventText, `You dodged the attack!`);
             }
         }
         else{
             if(choice=="left") {
-                this.rotateOutAndMakeNewCard("mob");
+                this.rotateOutAndMakeNewCard("skeleton");
                 this.mobhp -=1;
                 this.changeText(this.eventText, `You dealt 1 damage!`);
             }
             else{
-                this.rotateOutAndMakeNewCard("mob");
+                this.rotateOutAndMakeNewCard("skeleton");
                 this.changeText(this.eventText, `Nothing happened.`);
             }
         }       

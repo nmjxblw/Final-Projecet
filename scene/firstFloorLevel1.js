@@ -4,11 +4,10 @@ class firstFloorLevel1 extends Base {
     }
 
     onEnter(){
-        initializeLocal();
 
         this.left_choice_text = dataPath.left;
         this.right_choice_text = dataPath.right;
-        this.card = this.createCard("guardian");        
+        this.card.setTexture("guardian_off_mask");      
         this.changeText(this.eventText, dataPath.eventText);
         
         this.time.delayedCall(500, () => {

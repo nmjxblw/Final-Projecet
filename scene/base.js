@@ -17,8 +17,8 @@ class Base extends GameScene {
         //暂用card1代替
         this.load.image("maze", "card1.png");
         this.load.image("door", "card1.png");
-        this.load.image("mob", "card1.png");
-        this.load.image("maze", "card1.png");
+        this.load.image("skeleton", "card1.png");
+        
     }
 
     exShortCut() {
@@ -817,7 +817,7 @@ class Base extends GameScene {
         return temp
     }
 
-    update() {
+    exUpdate() {
         
     }
 
