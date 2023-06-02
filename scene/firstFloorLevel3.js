@@ -13,11 +13,9 @@ class firstFloorLevel3 extends Base {
     }
 
     onEnter(){
-        initializeLocal();
         
         this.mobhp = 3;
         this.currentAction;
-        initializeLocal(); 
         this.scene_turn = 1;
         this.changeText(this.eventText, `The skeleton is moving towards you`);
         this.left_choice_text = "Attack";

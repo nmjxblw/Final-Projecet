@@ -11,6 +11,13 @@ class title extends GameScene {
 
     exCreate() {
 
+        this.input.keyboard.on('keydown', (event) => {
+                console.log('keydown event', event);
+                if (event.key == '1') {
+                    this.scene.start('floor two level 1');
+                }
+            });
+
         this.cameras.main.fadeIn(1000, 0, 0, 0);
 
         var titleText = this.add.text(

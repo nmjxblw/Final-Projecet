@@ -1,16 +1,11 @@
 class secondFloorLevel3 extends Base {
     constructor(){
         super("floor two level 3","Open Treasure Chest")
-        currentPosition = this.sceneKey;
     }
 
     onEnter() {
 
-        if (saveData == {}) {
-            
-            quickSaveData();
-        }      
-
+        currentPosition ="floor two level 3";
 
         this.card.setTexture("elf");
         this.left_choice_text = dataPath.left1

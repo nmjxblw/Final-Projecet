@@ -28,7 +28,8 @@ const game = new Phaser.Game({
         firstFloorLevel4,
         firstFloorLevel5,
         secondFloorLevel1,
-       
+        secondFloorLevel2,
+        secondFloorLevel3,
         thirdFloorLevel1,
         thirdFloorLevel2,
         thirdFloorLevel3,
