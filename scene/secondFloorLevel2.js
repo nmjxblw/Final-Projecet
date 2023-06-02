@@ -287,8 +287,6 @@ class secondFloorLevel2 extends Base {
         this.rotateOutAndMakeNewCard("giant");
         this.changeText(this.eventText, dataPath.eventText2);
 
-        this.card.label = false;
-
         this.left_choice_text = dataPath.left3;
         this.right_choice_text = dataPath.right3;
     }
