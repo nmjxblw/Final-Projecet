@@ -13,7 +13,13 @@
             },
             "level2": {},
             "level3": {},
-            "level4": {}
+            "level4": {},
+            "level5": {
+                "eventText": "You do not face any obstacles. You continue forward.",
+                "eventCard1":"You fell into a trap. You are dead.",
+                "eventCard2":"you get camped by a group of monsters. You are dead.",
+                "eventCard3":" You accidentally activated a switch that fires an arrow behind you. You are shot. You are dead."
+            }
         },
         "two": {
             "level1": {
