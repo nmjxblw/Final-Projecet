@@ -11,6 +11,13 @@ class title extends GameScene {
 
     exCreate() {
 
+        this.input.keyboard.on('keydown', (event) => {
+                console.log('keydown event', event);
+                if (event.key == '1') {
+                    this.scene.start('floor two level 1');
+                }
+            });
+
         this.cameras.main.fadeIn(1000, 0, 0, 0);
 
         var titleText = this.add.text(
@@ -42,7 +49,7 @@ class title extends GameScene {
             .on("pointerup", () => {
                 this.cameras.main.fade(1000, 0, 0, 0);
                 this.time.delayedCall(1000, () => {
-                    this.scene.start("floor three level 1");
+                    this.scene.start("floor one level 1");
                 });
             });
 

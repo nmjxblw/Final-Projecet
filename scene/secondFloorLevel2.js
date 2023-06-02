@@ -1,11 +1,13 @@
 class secondFloorLevel2 extends Base {
     constructor(){
         super("floor two level 2","battle with the giant")
-        currentPosition = this.sceneKey;
+        
     }
 
     onEnter() {
 
+        currentPosition ="floor two level 2";
+        console.log(currentPosition);
         this.monsterHP = 6;
 
         this.showEnemyHp = this.showMonsterHP(this.monsterHP);
@@ -14,21 +16,10 @@ class secondFloorLevel2 extends Base {
 
         this.currentAction;
 
-        console.log(saveData.player.currentPosition);
-
-        
-
-        if (saveData == {}) {
-            
-            quickSaveData();
-        }
-
         if(typeof this.showEvent == "undefined")
         {
             this.showEvent = false;
         }
-
-        console.log(saveData.player)
 
         this.card.setTexture("elf");
 
@@ -296,7 +287,7 @@ class secondFloorLevel2 extends Base {
         this.rotateOutAndMakeNewCard("giant");
         this.changeText(this.eventText, dataPath.eventText2);
 
-        this.input.label = false;
+        this.card.label = false;
 
         this.left_choice_text = dataPath.left3;
         this.right_choice_text = dataPath.right3;

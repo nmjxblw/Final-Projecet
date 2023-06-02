@@ -11,7 +11,6 @@ class firstFloorLevel1 extends Base {
     }
 
     onEnter(){
-        initializeLocal();
 
         this.left_choice_text = dataPath.left;
         this.right_choice_text = dataPath.right;

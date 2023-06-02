@@ -7,7 +7,6 @@ class thirdFloorLevel5 extends Base {
 
     onEnter() {
         //真结局
-        initializeLocal();
         this.left_choice_text = dataPath.left1;
         this.right_choice_text = dataPath.right1;
 
