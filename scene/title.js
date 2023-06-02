@@ -42,7 +42,7 @@ class title extends GameScene {
             .on("pointerup", () => {
                 this.cameras.main.fade(1000, 0, 0, 0);
                 this.time.delayedCall(1000, () => {
-                    this.scene.start("floor three level 1");
+                    this.scene.start("floor one level 1");
                 });
             });
 
