@@ -51,7 +51,7 @@ class thirdFloorLevel5 extends Base {
             }
         }
         else if (dragon_turn.includes(this.scene_turn)) {
-            this.rotateOutAndMakeNewCard("dragon");
+            this.rotateOutAndMakeNewCard("dragon_normal");
             if (this.scene_turn == 8) {
                 this.card.dragable = false;
                 this.cardTwinkling("sword", 250, 0, 1, 4);

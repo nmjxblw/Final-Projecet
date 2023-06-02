@@ -17,20 +17,23 @@ const game = new Phaser.Game({
         }
     },
     ////scene: [baseBattle],
-    scene: [secondFloorLevel1,secondFloorLevel2,secondFloorLevel3],
-    //  scene: [
-    //     // thirdFloorLevel1,
-    //      thirdFloorLevel2,
-    //      //thirdFloorLevel3,
-    //      //thirdFloorLevel4,
-    //  ],
-    // scene: [
-    //     firstFloorLevel1,
-    //     firstFloorLevel2,
-    //     firstFloorLevel3,
-    //     firstFloorLevel4,
-    //     firstFloorLevel5
-    // ],
+    //scene: [secondFloorLevel3],
+    scene: [
+        // firstFloorLevel1,
+        // firstFloorLevel2,
+        // firstFloorLevel3,
+        // firstFloorLevel4,
+        // firstFloorLevel5,
+        openning,
+        warnning,
+        title,
+        thirdFloorLevel1,
+        thirdFloorLevel2,
+        thirdFloorLevel3,
+        thirdFloorLevel4,
+        thirdFloorLevel5,
+        reborn,
+    ],
     backgroundColor: 0x000000,
     title: "Game",
 });

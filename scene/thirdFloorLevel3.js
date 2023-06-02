@@ -11,7 +11,7 @@ class thirdFloorLevel3 extends Base {
         this.right_choice_text = dataPath.right;
 
         this.card.label = false;
-        this.card.setTexture(dataPath.enemy.name);
+        this.card.setTexture("dragon_berserk");
 
         this.eventCard(dataPath.eventCard1);
 
@@ -48,7 +48,7 @@ class thirdFloorLevel3 extends Base {
         this.shakeTween(this.cameras.main);
         this.card.label = false;
         this.rotateOutAndMakeNewCard("sword");
-        if (!saveData.player.sword) {
+        if (saveData.player.sword >= 1) {
             this.cardSpotLight();
             this.changeText(this.eventText, dataPath.eventText4);
             this.time.delayedCall(3000, () => {

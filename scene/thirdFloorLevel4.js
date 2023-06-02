@@ -49,7 +49,7 @@ class thirdFloorLevel4 extends Base {
             }
         }
         else if (dragon_turn.includes(this.scene_turn)) {
-            this.rotateOutAndMakeNewCard("dragon");
+            this.rotateOutAndMakeNewCard("dragon_normal");
         }
         else if (guardian_turn.includes(this.scene_turn)) {
             this.rotateOutAndMakeNewCard("guardian_with_mask");
