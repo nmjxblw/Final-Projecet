@@ -53,6 +53,7 @@ class thirdFloorLevel2 extends Base {
             return;
         }
         else if (saveData.player.hp <= 0) {
+            saveData.player.hp == 0;
             this.rotateOutAndMakeNewCard("player");
             this.gotoScene("floor four level 1");
             return;
@@ -67,6 +68,8 @@ class thirdFloorLevel2 extends Base {
         else {
             this.action3();
         }
+        this.showHp.setText(saveData.player.hp);
+        this.showEnemyHp.setText(this.enemy_hp);
         this.scene_turn++;
         if (saveData != {}) {
             saveData.player.currentPosition.scene_turn = this.scene_turn;
