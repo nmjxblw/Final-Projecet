@@ -16,7 +16,7 @@ class secondFloorLevel3 extends Base {
         this.left_choice_text = dataPath.left1
         this.right_choice_text = dataPath.right1
 
-        this.input.enabled = false;
+        this.card.label = false;
         this.changeText(this.eventText, dataPath.eventText1);
 
         this.time.delayedCall(3000, () => {
@@ -26,7 +26,7 @@ class secondFloorLevel3 extends Base {
 
         this.time.delayedCall(6000, () => {
             this.changeText(this.eventText, dataPath.eventText3);
-            this.input.enabled = true;
+            this.card.label = true;
         })
         
 
@@ -65,11 +65,11 @@ class secondFloorLevel3 extends Base {
         if (this.player_choice == "left")
         {
             this.changeText(this.eventText, dataPath.eventText5);
-            this.input.enabled = false;
+            this.card.label = false;
             this.rotateOutAndMakeNewCard("card1");
 
             this.time.delayedCall(3000, () => {
-                this.input.enabled = true;
+                this.card.label = true;
                 this.changeText(this.eventText, dataPath.eventText6);
             })
 
@@ -105,7 +105,7 @@ class secondFloorLevel3 extends Base {
         {
             console.log(saveData);
             this.changeText(this.eventText, dataPath.eventText8);
-            this.input.enabled = false;
+            this.card.label = false;
 
             this.rotateOutAndMakeNewCard("card1");
             this.time.delayedCall(3000, () => {
@@ -121,7 +121,7 @@ class secondFloorLevel3 extends Base {
         if(this.player_choice == "left")
         {
             this.changeText(this.eventText, dataPath.eventText9);
-            this.input.enabled = false;
+            this.card.label = false;
 
             this.unlock.play();
 
@@ -130,7 +130,7 @@ class secondFloorLevel3 extends Base {
             })
     
             this.time.delayedCall(5000, () => {
-                this.input.enabled = true;
+                this.card.label = true;
                 this.changeText(this.eventText, dataPath.eventText10);  
             })
 
@@ -142,7 +142,7 @@ class secondFloorLevel3 extends Base {
         else
         {
             this.changeText(this.eventText, dataPath.eventText8);
-            this.input.enabled = false;
+            this.card.label = false;
 
             this.rotateOutAndMakeNewCard("card1");
             this.time.delayedCall(3000, () => {

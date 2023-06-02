@@ -164,7 +164,7 @@ class secondFloorLevel2 extends Base {
     //初始暴怒行为，根据前一场景决定文本，本行为为攻击
     action4() {
 
-        this.input.enabled = false;
+        this.input.label = false;
 
         if(this.currentAction == "action3")
         {
@@ -195,7 +195,7 @@ class secondFloorLevel2 extends Base {
             });
     
             this.time.delayedCall(3500, () => {
-                this.input.enabled = true;
+                this.input.label = true;
                 this.eventCard(dataPath["eventCard2"]);
             });
 
@@ -204,7 +204,7 @@ class secondFloorLevel2 extends Base {
         else
         {
             this.time.delayedCall(500, () => {
-                this.input.enabled = true;
+                this.input.label = true;
                 this.eventCard(dataPath["eventCard3"]);
             });
         }
@@ -296,7 +296,7 @@ class secondFloorLevel2 extends Base {
         this.rotateOutAndMakeNewCard("giant");
         this.changeText(this.eventText, dataPath.eventText2);
 
-        this.input.enabled = false;
+        this.input.label = false;
 
         this.left_choice_text = dataPath.left3;
         this.right_choice_text = dataPath.right3;
@@ -311,7 +311,7 @@ class secondFloorLevel2 extends Base {
             saveData.player.hp = 0;
         }
 
-        this.input.enabled = false;
+        this.input.label = false;
 
         this.time.delayedCall(3000, () => {
             this.gotoScene("floor four level 1")
