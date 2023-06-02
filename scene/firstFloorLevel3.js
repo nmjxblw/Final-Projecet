@@ -10,9 +10,10 @@ class firstFloorLevel3 extends Base {
         this.mobhp = 3;
         this.currentAction;
         this.scene_turn = 1;
-        this.changeText(this.eventText, `The skeleton is moving towards you`);
-        this.left_choice_text = "Attack";
-        this.right_choice_text = "Dodge";
+        this.changeText(this.eventText, dataPath.eventText1);
+        this.left_choice_text = dataPath.left;
+        this.right_choice_text = dataPath.right;
+        this.eventCard(dataPath.eventCard);
         this.card.setTexture("skeleton");
         this.dragrotate(this.card); 
     }

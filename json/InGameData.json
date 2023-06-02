@@ -9,13 +9,25 @@
             "level1": {
                 "right": "...",
                 "left": "Got it",
+                "eventCard": "Drag the card to continue.",
                 "eventText": "You have arrived at the dungeon.\nIn front of you, a guardian appears with a sword.",
-                "eventCard1": "Congrats on completing the trial of the great sword.",
-                "eventCard2": "I will now let you handle the responsibility of obtaining it.",
-                "eventCard3": "Remember, the great sword comes with fascinating power, but it would only activate during times of danger."
+                "eventText1": "Guardian: \nCongrats on completing the trial of the great sword.",
+                "eventText2": "Guardian: \nI will now let you handle the responsibility of obtaining it.",
+                "eventText3": "Guardian: \nRemember, the great sword comes with fascinating power, but it would only activate during times of danger."
             },
-            "level2": {},
-            "level3": {},
+            "level2": {
+                "left":"Attack the monster",
+                "right":"Attack the monster",
+                "eventText":"You have arrived at the first floor of the dungeon.\nImmediately, you are attacked by a monster."
+            },
+            "level3": {
+                "left":"Attack",
+                "right":"Dodge",
+                "eventText1":"The skeleton is moving towards you.",
+                "eventText2":"The skeleton is moving towards you.",
+                "eventText3":"The skeleton is moving towards you.",
+                "eventCard": "Drag the card to make a move."
+            },
             "level4": {},
             "level5": {
                 "eventText": "You do not face any obstacles. You continue forward.",
