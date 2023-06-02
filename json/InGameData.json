@@ -10,10 +10,10 @@
                 "right": "...",
                 "left": "Got it",
                 "eventCard": "Drag the card to continue.",
-                "eventText": "You have arrived at the dungeon.\nIn front of you, a guardian appears with a sword.",
-                "eventText1": "Guardian: \nCongrats on completing the trial of the great sword.",
-                "eventText2": "Guardian: \nI will now let you handle the responsibility of obtaining it.",
-                "eventText3": "Guardian: \nRemember, the great sword comes with fascinating power, but it would only activate during times of danger."
+                "eventText": "You have arrived at the dungeon.\n\nIn front of you, a guardian appears with a sword.",
+                "eventText1": "Guardian: \n\nCongrats on completing the trial of the great sword.",
+                "eventText2": "Guardian: \n\nI will now let you handle the responsibility of obtaining it.",
+                "eventText3": "Guardian: \n\nRemember, the great sword comes with fascinating power, but it would only activate during times of danger."
             },
             "level2": {
                 "left":"Attack the monster",
@@ -24,9 +24,12 @@
                 "left":"Attack",
                 "right":"Dodge",
                 "eventText1":"The skeleton is moving towards you.",
-                "eventText2":"The skeleton is moving towards you.",
-                "eventText3":"The skeleton is moving towards you.",
-                "eventCard": "Drag the card to make a move."
+                "eventText2":"You took 1 damage!\n\nAnd you dealt 1 damage!\n\nThe skeleton is moving towards you.",
+                "eventText3":"You dodged the attack!\n\nThe skeleton is moving towards you.",
+                "eventText4":"You dealt 1 damage!\n\nThe skeleton is trying to attack you",
+                "eventText5":"Nothing happened.\n\nThe skeleton is trying to attack you",
+                "eventCard": "Drag the card to make a move.",
+                "eventCard1": "You have defeated the skeleton."
             },
             "level4": {},
             "level5": {

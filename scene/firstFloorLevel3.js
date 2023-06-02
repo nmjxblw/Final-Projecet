@@ -23,7 +23,6 @@ class firstFloorLevel3 extends Base {
         if (this.player_choice != ""){
                 console.log(`turn=${this.scene_turn} choice=${this.player_choice} `);
                 this.rotateOutAndMakeNewCard("skeleton");
-                this.resettext(this.scene_turn);
                 this.damagecalc_textchange(this.scene_turn, this.player_choice);
                 this.scene_turn++;
                 if(this.mobhp<=0){
@@ -36,47 +35,37 @@ class firstFloorLevel3 extends Base {
         }
     }
 
-    resettext(num){
-        if(num%2 != 0){
-            this.changeText(this.eventText, `The skeleton is moving towards you`);
-        }
-        else{
-            this.changeText(this.eventText, `The skeleton is trying to attack you`);
-        }
-    }
-
     damagecalc_textchange(num, choice){
         if(num%2 == 0){
             if(choice=="left") {
                 this.rotateOutAndMakeNewCard("skeleton");
                 saveData.player.hp-=1;
                 this.mobhp -=1;
-                this.changeText(this.eventText, `You took 1 damage!\nAnd you dealt 1 damage!`);
+                this.changeText(this.eventText, dataPath.eventText2);
             }
             else {
                 this.rotateOutAndMakeNewCard("skeleton");
-                this.changeText(this.eventText, `You dodged the attack!`);
+                this.changeText(this.eventText, dataPath.eventText3);
             }
         }
         else{
             if(choice=="left") {
                 this.rotateOutAndMakeNewCard("skeleton");
                 this.mobhp -=1;
-                this.changeText(this.eventText, `You dealt 1 damage!`);
+                this.changeText(this.eventText, dataPath.eventText4);
             }
             else{
                 this.rotateOutAndMakeNewCard("skeleton");
-                this.changeText(this.eventText, `Nothing happened.`);
+                this.changeText(this.eventText, dataPath.eventText5);
             }
         }       
     }
 
     win(){
-        this.changeText(this.eventText, "you win");
-        this.left_choice_text = "next";
-        this.right_choice_text = "next";
-        console.log("win");
-        this.gotoScene("floor one level 4");
+        this.eventCard(dataPath.eventCard1);
+        this.time.delayedCall(3000, () => {
+            this.gotoScene("floor one level 4");
+        });
     }
 
     lost() {
