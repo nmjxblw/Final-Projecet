@@ -3,17 +3,20 @@
     "//注": "Josn文件不支持用纯数字做key",
     "floor": {
         "one": {
-            "level0": {
-                "eventCard1":"Once upon a time, there is a land filled with magic and mysterious elements, and within it, there is a dungeon full of mystery. "
-            },
             "level1": {
                 "right": "...",
                 "left": "Got it",
-                "eventCard": "Drag the card to continue.",
-                "eventText": "You have arrived at the dungeon.\n\nIn front of you, a guardian appears with a sword.",
-                "eventText1": "Guardian: \n\nCongrats on completing the trial of the great sword.",
-                "eventText2": "Guardian: \n\nI will now let you handle the responsibility of obtaining it.",
-                "eventText3": "Guardian: \n\nRemember, the great sword comes with fascinating power, but it would only activate during times of danger."
+                "eventCard": "Drag the card sideways to continue.",
+                "eventText1":"Once upon a time, there is a land filled with magic and mysterious elements, and within it, there is a dungeon full of mystery. ",
+                "eventText2":"A powerful dragon lives within the dungeon and would bring tragedy to the world once every few years.",
+                "eventText3":"However, as a prophecy tells, one day a brave man would come with the great sword full of unexplainable power, and they would use it to defeat the dragon.",
+                "eventText4":"You are an adventurer.\n\nYour hometown is destroyed by the dragon during the previous attack.",
+                "eventText5":"As you see the fire burn through your hometown, you are filled with sorrow and anger, and you swear to defeat the dragon with the great sword from the prophecy.",
+                "eventText6":"After great effort, you finally arrived at the dungeon where the dragon lives.",
+                "eventText7": "In front of you, a guardian appears with a sword.",
+                "eventText8": "Guardian: Congrats on completing the trial of the great sword.",
+                "eventText9": "Guardian: I will now let you handle the responsibility of obtaining it.",
+                "eventText10": "Guardian: Remember, the great sword comes with fascinating power, but it would only activate during times of danger."
             },
             "level2": {
                 "left":"Attack the monster",
@@ -28,7 +31,7 @@
                 "eventText3":"You dodged the attack!\n\nThe skeleton is moving towards you.",
                 "eventText4":"You dealt 1 damage!\n\nThe skeleton is trying to attack you",
                 "eventText5":"Nothing happened.\n\nThe skeleton is trying to attack you",
-                "eventCard": "Drag the card to make a move.",
+                "eventCard": "Drag the card sideways to make a move.",
                 "eventCard1": "You have defeated the skeleton."
             },
             "level4": {},
@@ -183,7 +186,7 @@
                 "eventText8": "You decide to use the sword to cure the dragon.",
                 "eventText9": "Something miraculous happens!",
                 "eventText10": "After a while, the person gets up.",
-                "eventText11": "Men:So... this is it. I am the one who destroyed my own hometown.",
+                "eventText11": "Men: So... this is it. I am the one who destroyed my own hometown.",
                 "eventText12": "You are shocked. \nThe person looks exactly like you.",
                 "eventText13": "Men: Hello, future me...",
                 "eventText14": "You start talking to him.",
