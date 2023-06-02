@@ -8,12 +8,12 @@ class firstFloorLevel4 extends Base {
         this.left_choice_text = "enter the maze";
         this.right_choice_text = "enter the maze";
 
-        this.card.setTextrue("maze");
+        this.card.setTexture("maze");
         this.dragrotate(this.card);
     }
 
     judgeChoice(){
-        this.rotateOutAndMakeNewCard("giant");
+        this.rotateOutAndMakeNewCard("maze");
         this.gotoScene("floor one level 5");
     }
 }
@@ -36,7 +36,7 @@ class firstFloorLevel5 extends Base{
         this.left_choice_text = "heads left";
         this.right_choice_text = "heads right";
 
-        this.card = this.createCard("fork");
+        this.card.setTexture("fork");
         this.dragrotate(this.card);
 
         this.scene_turn = 1;
