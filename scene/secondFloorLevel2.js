@@ -7,10 +7,13 @@ class secondFloorLevel2 extends Base {
     onEnter() {
 
         currentPosition ="floor two level 2";
-        console.log(currentPosition);
-        this.monsterHP = 6;
 
-        this.showEnemyHp = this.showMonsterHP(this.monsterHP);
+        //加载敌人血量
+        this.enemy_hp = 6;
+        this.enemy_max_hp = 6;
+        this.showHp();
+
+        
 
         this.giantRage = false;
 
@@ -45,7 +48,7 @@ class secondFloorLevel2 extends Base {
             if (this.giantRage == false && this.scene_turn == 1) {
                 this.action1();
             }
-            else if (this.monsterHP <= 0) {
+            else if (this.enemy_hp <= 0) {
                 this.rotateOutAndMakeNewCard("elf");
                 this.time.delayedCall(1000, () => {
                     this.gotoScene("floor two level 3");
@@ -66,8 +69,7 @@ class secondFloorLevel2 extends Base {
             else if (this.scene_turn % 2 == 1) {
                 this.action3();
             }
-            this.showHp.setText(saveData.player.hp);
-            this.showEnemyHp.setText(this.monsterHP);
+            
             this.scene_turn++;
         }
     }
@@ -78,8 +80,7 @@ class secondFloorLevel2 extends Base {
             
             this.rotateOutAndMakeNewCard("giant");
             saveData.elf = true;
-            this.showHp.setAlpha(1);
-            this.showEnemyHp.setAlpha(1);
+            
 
             this.changeText(this.eventText, dataPath.battleText1);
 
@@ -99,10 +100,11 @@ class secondFloorLevel2 extends Base {
     //前一行为为攻击，本行为为移动
     action2() {
         if (this.player_choice == "left") { 
-            this.monsterHP--;
+            this.enemy_hp--;
             saveData.player.hp-= 2; 
+            this.renewHp();
 
-            if (this.monsterHP == 3) { this.giantRage = true; this.scene_turn = 1; this.action4(); return; }
+            if (this.enemy_hp == 3) { this.giantRage = true; this.scene_turn = 1; this.action4(); return; }
 
             this.changeText(this.eventText, dataPath.battleText2);
             this.shakeTween(this.cameras.main);
@@ -126,9 +128,10 @@ class secondFloorLevel2 extends Base {
     //前一行为移动，本行为为攻击
     action3() {
         if (this.player_choice == "left") { 
-            this.monsterHP--; 
+            this.enemy_hp--; 
+            this.renewHp();
 
-            if (this.monsterHP == 3) { this.giantRage = true; this.scene_turn = 1; this.action4();return; }
+            if (this.enemy_hp == 3) { this.giantRage = true; this.scene_turn = 1; this.action4();return; }
 
             this.changeText(this.eventText, dataPath.battleText4);
         }
@@ -205,7 +208,7 @@ class secondFloorLevel2 extends Base {
         
         
         if (saveData.player.hp <= 0) { this.actionLose();; return; }
-        if (this.monsterHP < 1) { this.actionWin(); return; }
+        if (this.enemy_hp < 1) { this.actionWin(); return; }
         
         this.rotateOutAndMakeNewCard("giant");
         
@@ -215,8 +218,9 @@ class secondFloorLevel2 extends Base {
     //前一行为为攻击，本行为为移动
     action5() {
         if (this.player_choice == "left") { 
-            this.monsterHP--; 
+            this.enemy_hp--; 
             saveData.player.hp-= 2; 
+            this.renewHp();
             this.changeText(this.eventText, dataPath.battleText6);
             this.shakeTween(this.cameras.main);
         }
@@ -229,7 +233,7 @@ class secondFloorLevel2 extends Base {
 
         
         if (saveData.player.hp <= 0) { this.actionLose(); return; }
-        if (this.monsterHP < 1) { this.actionWin(); return; }
+        if (this.enemy_hp < 1) { this.actionWin(); return; }
         
         this.rotateOutAndMakeNewCard("giant");
         
@@ -239,7 +243,8 @@ class secondFloorLevel2 extends Base {
     //前一行为为移动，本行为为攻击
     action6() {
         if (this.player_choice == "left") { 
-            this.monsterHP--; 
+            this.enemy_hp--; 
+            this.renewHp();
             this.changeText(this.eventText, dataPath.battleText8);
         }
         else{
@@ -251,7 +256,7 @@ class secondFloorLevel2 extends Base {
 
         
         if (saveData.player.hp <= 0) { this.actionLose(); return; }
-        if (this.monsterHP < 1) { this.actionWin(); return; }
+        if (this.enemy_hp < 1) { this.actionWin(); return; }
         
         this.rotateOutAndMakeNewCard("giant");
         
@@ -261,8 +266,9 @@ class secondFloorLevel2 extends Base {
     //前一行为为攻击，本行为为攻击
     action7() {
         if (this.player_choice == "left") { 
-            this.monsterHP--; 
+            this.enemy_hp--; 
             saveData.player.hp-=2;
+            this.renewHp();
             this.changeText(this.eventText, dataPath.battleText6);
             this.shakeTween(this.cameras.main);
         }
@@ -275,7 +281,7 @@ class secondFloorLevel2 extends Base {
 
         
         if (saveData.player.hp <= 0) { this.actionLose(); return; }
-        if (this.monsterHP < 1) { this.actionWin(); return; }
+        if (this.enemy_hp < 1) { this.actionWin(); return; }
         
         this.rotateOutAndMakeNewCard("giant");
         
@@ -298,7 +304,9 @@ class secondFloorLevel2 extends Base {
         if(saveData.player.hp < 0)
         {
             saveData.player.hp = 0;
+            
         }
+        this.renewHp();
 
         this.card.label = false;
 
