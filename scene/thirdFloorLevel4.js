@@ -59,7 +59,7 @@ class thirdFloorLevel4 extends Base {
             }
             else if (this.scene_turn == 17) {
                 this.card.label = false
-                this.eventCard(dataPath.eventCard2, 5000);
+                this.eventCard(dataPath.eventCard2, 2000);
                 this.time.delayedCall(5000, () => {
                     this.eventCard(dataPath.eventCard3);
                     this.cameras.main.fade(5000, 0, 0, 0);

@@ -15,7 +15,6 @@ class Base extends GameScene {
         this.load.image("maze", "assets/cardback.png");
         this.load.image("gate", "assets/gate.png");
         this.load.image("skul", "assets/skul.png");
-
     }
 
     exShortCut() {

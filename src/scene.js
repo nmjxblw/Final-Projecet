@@ -19,6 +19,7 @@ const game = new Phaser.Game({
     ////scene: [baseBattle],
     //scene: [secondFloorLevel3],
     scene: [ 
+        debug_scene,
         // openning,
         // warnning,
         // title,
@@ -36,6 +37,7 @@ const game = new Phaser.Game({
         thirdFloorLevel4,
         thirdFloorLevel5,
         reborn,
+        credit
     ],
     backgroundColor: 0x000000,
     title: "Game",
