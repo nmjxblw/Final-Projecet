@@ -38,6 +38,8 @@ class thirdFloorLevel2 extends Base {
             this.time.delayedCall(3000, () => {
                 this.changeText(this.eventText, dataPath.eventText1);
                 this.card.label = true;
+                this.card.dargable = true;
+                this.battleMusicD.play();
             });
         });
 

@@ -6,6 +6,12 @@ class secondFloorLevel2 extends Base {
 
     onEnter() {
 
+        if (bgm && bgm.isPlaying) {
+            bgm.stop();
+            console.log(1);
+          }
+        
+
         currentPosition ="floor two level 2";
 
         //加载敌人血量

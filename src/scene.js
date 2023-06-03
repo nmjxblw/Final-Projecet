@@ -7,36 +7,27 @@ const game = new Phaser.Game({
         width: 1920,
         height: 1080
     },
-    physics: {
-        default: 'matter',
-        matter: {
-            gravity: {
-                y: 0
-            },
-            debug: true
-        }
-    },
     ////scene: [baseBattle],
-    //scene: [secondFloorLevel3],
-    scene: [ 
-        // openning,
-        // warnning,
-        // title,
-        // firstFloorLevel1,
-        // firstFloorLevel2,
-        // firstFloorLevel3,
-        // firstFloorLevel4,
-        // firstFloorLevel5,
-        // secondFloorLevel1,
-        // secondFloorLevel2,
-        // secondFloorLevel3,
-        thirdFloorLevel1,
-        thirdFloorLevel2,
-        thirdFloorLevel3,
-        thirdFloorLevel4,
-        thirdFloorLevel5,
-        reborn,
-    ],
+    scene: [secondFloorLevel1,secondFloorLevel2,secondFloorLevel3,reborn],
+    // scene: [ 
+    //     // openning,
+    //     // warnning,
+    //     // title,
+    //     // firstFloorLevel1,
+    //     // firstFloorLevel2,
+    //     // firstFloorLevel3,
+    //     // firstFloorLevel4,
+    //     // firstFloorLevel5,
+    //     // secondFloorLevel1,
+    //     // secondFloorLevel2,
+    //     // secondFloorLevel3,
+    //     thirdFloorLevel1,
+    //     thirdFloorLevel2,
+    //     thirdFloorLevel3,
+    //     thirdFloorLevel4,
+    //     thirdFloorLevel5,
+    //     reborn,
+    // ],
     backgroundColor: 0x000000,
     title: "Game",
 });
