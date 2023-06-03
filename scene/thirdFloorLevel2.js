@@ -5,8 +5,9 @@ class thirdFloorLevel2 extends Base {
     }
 
     onEnter() {
+        //加载敌人血量
+        this.enemy_hp = dataPath.enemy.hp;
         this.enemy_max_hp = dataPath.enemy.hp;
-        this.enemy_hp = this.enemy_max_hp;
         this.showHp();
 
         currentPosition = "floor three level 2";
@@ -15,8 +16,7 @@ class thirdFloorLevel2 extends Base {
         //根据玩家是否有盾牌来切换防御词条
         this.def_type = saveData.player.shield ? "shield" : "no_shield";
         this.right_choice_text = dataPath.right1[this.def_type];
-        //加载敌人血量
-        this.enemy_hp = dataPath.enemy.hp;
+
         //加载敌人狂暴状态
         this.enemy_berserk = dataPath.enemy.berserk;
         //设置卡片的图案
