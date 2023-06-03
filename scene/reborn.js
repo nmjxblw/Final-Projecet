@@ -4,11 +4,9 @@ class reborn extends Base {
     }
 
     onEnter() {
-        console.log("choice");
         console.log(currentPosition);
         saveData.player.sword++;
         saveData.player.hp = 5;
-        this.input.enabled = false;
         if (saveData.player.sword == 1) {
             this.card.setTexture("player");
             this.card.label = false;

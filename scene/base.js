@@ -1,12 +1,10 @@
 class Base extends GameScene {
 
     exPreload() {
-        this.load.image("background","assets/background.jpg")
-        this.load.image("card1", "assets/card1.png");
-        this.load.image("card2", "assets/card2.png");
-        this.load.image("testPoint", "assets/testpoint.png");
+        this.load.image("background", "assets/background.jpg")
+        this.load.image("cardback", "assets/cardback.png");
         this.load.image("elf", "assets/elf.png");
-        this.load.image("player", "assets/player.jpg");
+        this.load.image("player", "assets/player.png");
         this.load.image("sword", "assets/sword.png");
         this.load.image("guardian_off_mask", "assets/guardian_off_mask.png");
         this.load.image("guardian_with_mask", "assets/guardian_with_mask.png");
@@ -14,11 +12,10 @@ class Base extends GameScene {
         this.load.image("dragon_normal", "assets/dragon_normal.png");
         this.load.image("dragon_berserk", "assets/dragon_berserk.png");
         this.load.image("men", "assets/men.png");
-        //暂用card1代替
-        this.load.image("maze", "assets/card1.png");
-        this.load.image("door", "assets/card1.png");
-        this.load.image("skeleton", "assets/card1.png");
-        
+        this.load.image("maze", "assets/cardback.png");
+        this.load.image("gate", "assets/gate.png");
+        this.load.image("skul", "assets/skul.png");
+
     }
 
     exShortCut() {
@@ -87,7 +84,14 @@ class Base extends GameScene {
         dataPath = gameData.floor[`${this.floor}`][`level${this.level}`];
 
         //创建可拖动卡片
-        this.card = this.createCard("card1");
+        this.card = this.createCard("cardback");
+
+        //显示玩家血量和怪物血量
+        this.enemy_hp = 0;
+        this.show_enemy_hp = 0;
+        this.enemy_max_hp = this.enemy_hp;
+
+        this.show_player_hp = 0;
     }
 
     exCreate() {
@@ -98,7 +102,7 @@ class Base extends GameScene {
         this.background1 = this.add.rectangle(this.w * 0.5, this.h * 0.5, 650, 900, 0x9EB1B4);
         this.background1.setDepth(1);
 
-        this.backgroundImage = this.add.image(0,0,"background").setOrigin(0).setDepth(-1);
+        this.backgroundImage = this.add.image(0, 0, "background").setOrigin(0).setDepth(-1);
 
 
         //设置文本框，在用户互动后再设置其他参数
@@ -149,23 +153,10 @@ class Base extends GameScene {
         this.deck = this.add.sprite(
             this.cardCenterPoint.x,
             this.cardCenterPoint.y,
-            "card1")
+            "cardback")
             .setOrigin(0.5)
             .setDepth(1)
 
-        //创建一个显示角色生命值的文本
-        this.showHp = this.add.text(this.w * 0.33, this.h * 0.09, saveData.player.hp)
-            .setColor("#ff0000")
-            .setFontSize(50)
-            .setDepth(3)
-            .setAlpha(0);
-
-        
-
-        
-
-
-        
         this.onEnter();
 
 
@@ -173,12 +164,8 @@ class Base extends GameScene {
     }
 
     onEnter() {
-        //console.warn(`${this.sceneKey}没有设置onEnter()`);
     }
 
-    eventload() {
-
-    }
 
     gotoScene(key) {
         this.cameras.main.fade(this.transitionDuration, 0, 0, 0);
@@ -187,16 +174,6 @@ class Base extends GameScene {
         });
     }
 
-
-    showtitle(Levelname) {
-        this.title = this.add.text(this.w / 2, 30, Levelname,
-            {
-                font: "28px Arial",
-                color: "#ffffff",
-            });
-        this.title.setOrigin(0.5);
-        this.title.setDepth(2);
-    }
 
     //创建卡片，第一个参数为卡片使用的图片名称，第二个参数为卡片的标签
     createCard(name) {
@@ -472,7 +449,7 @@ class Base extends GameScene {
 
     //模拟卡牌翻面效果，同时改变卡面图案
     cardReset(new_texture) {
-        this.card.setTexture("card1");
+        this.card.setTexture("cardback");
         this.card.angle = 0;
         this.rotatePoint.x = this.initialRotatePointX;
         this.rotatePoint.y = this.initialRotatePointY;
@@ -803,8 +780,7 @@ class Base extends GameScene {
     }
 
     //调用此函数创建一个显示怪物血量的文本
-    showMonsterHP(hp)
-    {
+    showMonsterHP(hp) {
         let temp = this.add.text(this.w * 0.65, this.h * 0.09, hp)
             .setColor("#ff0000")
             .setFontSize(50)
@@ -814,8 +790,164 @@ class Base extends GameScene {
         return temp
     }
 
+    showHp() {
+        //显示玩家血量文本
+        this.show_player_hp = saveData.player.hp;
+        this.player_hp_text = this.add.text(
+            this.cx - 275,
+            this.h * 0.125,
+            saveData.player.hp
+        )
+            .setColor(`#${this.color(saveData.player.hp / 5)}`)
+            .setFontSize(30)
+            .setOrigin(0.5)
+            .setDepth(3)
+            .setAlpha(1);
+
+        //创建玩家血条
+        this.hp_bar1 = this.add.graphics().setDepth(3);
+        this.hp_bar1.lineStyle(10, 0x00ff00);
+
+        this.hp_bar1.beginPath();
+        this.hp_bar1.arc(
+            this.player_hp_text.x,
+            this.player_hp_text.y,
+            30,
+            Math.PI * 3 / 2,
+            2 * Math.PI * saveData.player.hp / 5 + Math.PI * 3 / 2,
+            false);
+        this.hp_bar1.strokePath();
+
+        //为血条增加闪烁效果
+        this.hp_bar_twinkling1 = this.tweens.add({
+            targets: this.hp_bar1,
+            alpha: 0,
+            duration: 500,
+            yoyo: true,
+            repeat: -1
+        })
+            .pause();
+
+        //为敌人创建血条
+        this.show_enemy_hp = this.enemy_max_hp;
+        this.enemy_hp_text = this.add.text(
+            this.cx + 275,
+            this.player_hp_text.y,
+            this.enemy_hp
+        )
+            .setColor(`#${this.color(1)}`)
+            .setFontSize(30)
+            .setOrigin(0.5)
+            .setDepth(3)
+            .setAlpha(1);
+
+        //创建敌人血条
+        this.hp_bar2 = this.add.graphics().setDepth(3);
+        this.hp_bar2.lineStyle(10, 0x00ff00);
+
+        this.hp_bar2.beginPath();
+        this.hp_bar2.arc(
+            this.enemy_hp_text.x,
+            this.enemy_hp_text.y,
+            30,
+            Math.PI * 3 / 2,
+            2 * Math.PI * this.show_enemy_hp / this.enemy_max_hp + Math.PI * 3 / 2,
+            false);
+        this.hp_bar2.strokePath();
+
+        //为血条增加闪烁效果
+        this.hp_bar_twinkling2 = this.tweens.add({
+            targets: this.hp_bar2,
+            alpha: 0,
+            duration: 500,
+            yoyo: true,
+            repeat: -1
+        })
+            .pause();
+    }
+
+    renewHp() {
+        //先设置文本变化
+        this.player_hp_text.setText(`${saveData.player.hp}`)
+            .setColor(`#${this.color(saveData.player.hp / 5)}`);
+        this.enemy_hp_text.setText(`${this.enemy_hp}`)
+            .setColor(`#${this.color(this.enemy_hp / this.enemy_max_hp)}`);;
+
+        this.hp_change1 = (saveData.player.hp - this.show_player_hp) / 50;
+        this.hp_change2 = (this.enemy_hp - this.show_enemy_hp) / 50;
+
+        this.time.addEvent({
+            delay: 10,
+            callback: () => {
+                this.hp_bar1.clear();
+                this.hp_bar2.clear();
+
+                this.show_player_hp = this.show_player_hp + this.hp_change1 > 0 ? this.show_player_hp + this.hp_change1 : 0;
+                this.show_player_hp = this.show_player_hp < 5 ? this.show_player_hp : 5;
+
+                this.show_enemy_hp = this.show_enemy_hp + this.hp_change2 > 0 ? this.show_enemy_hp + this.hp_change2 : 0;
+                this.show_enemy_hp = this.show_enemy_hp < this.enemy_max_hp ? this.show_enemy_hp : this.enemy_max_hp;
+
+                this.hp_bar1.lineStyle(10, `0x${this.color(this.show_player_hp / 5)}`);
+                this.hp_bar2.lineStyle(10, `0x${this.color(this.show_enemy_hp / this.enemy_max_hp)}`);
+
+                this.hp_bar1.beginPath();
+                this.hp_bar1.arc(
+                    this.player_hp_text.x,
+                    this.player_hp_text.y,
+                    30,
+                    Math.PI * 3 / 2,
+                    this.show_player_hp / 5 * Math.PI * 2 + Math.PI * 3 / 2,
+                    false
+                );
+
+                this.hp_bar1.strokePath();
+
+                this.hp_bar1.setDepth(3);
+
+                this.hp_bar2.beginPath();
+                this.hp_bar2.arc(
+                    this.enemy_hp_text.x,
+                    this.enemy_hp_text.y,
+                    30,
+                    Math.PI * 3 / 2,
+                    this.show_enemy_hp / this.enemy_max_hp * Math.PI * 2 + Math.PI * 3 / 2,
+                    false
+                );
+
+                this.hp_bar2.strokePath();
+
+                this.hp_bar2.setDepth(3);
+            },
+            callbackScope: this,
+            repeat: 49,
+        });
+
+        if (saveData.player.hp <= 2) {
+            this.hp_bar_twinkling1.play();
+        }
+        else {
+            this.hp_bar1.alpha = 1;
+            this.hp_bar_twinkling1.pause();
+        }
+
+        if (this.enemy_hp / this.enemy_max_hp <= 1 / 3) {
+            this.hp_bar_twinkling2.play();
+        }
+        else {
+            this.hp_bar2.alpha = 1;
+            this.hp_bar_twinkling2.pause();
+        }
+    }
+
+    color(p) {
+        var red = Math.round(255 * (1 - p));
+        var green = Math.round(255 * p);
+        return red.toString(16).padStart(2, '0') + green.toString(16).padStart(2, '0') + "00";
+    }
+
     exUpdate() {
-        
+
     }
 
     shortCut1() { }
