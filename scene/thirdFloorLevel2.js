@@ -39,6 +39,7 @@ class thirdFloorLevel2 extends Base {
                 this.changeText(this.eventText, dataPath.eventText1);
                 this.card.label = true;
                 this.card.dargable = true;
+                this.battleMusicD.play();
             });
         });
 

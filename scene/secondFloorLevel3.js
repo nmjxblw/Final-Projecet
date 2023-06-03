@@ -7,9 +7,13 @@ class secondFloorLevel3 extends Base {
 
         currentPosition ="floor two level 3";
 
+        this.bgm.play();
+
         this.card.setTexture("elf");
         this.left_choice_text = dataPath.left1
         this.right_choice_text = dataPath.right1
+
+        
 
         this.card.label = false;
         this.changeText(this.eventText, dataPath.eventText1);
@@ -59,13 +63,18 @@ class secondFloorLevel3 extends Base {
     action1() {
         if (this.player_choice == "left")
         {
-            this.changeText(this.eventText, dataPath.eventText5);
             this.card.label = false;
-            this.rotateOutAndMakeNewCard("card1");
+            this.changeText(this.eventText, dataPath.eventText5);
+            this.rotateOutAndMakeNewCard("chest");
+
+            
 
             this.time.delayedCall(3000, () => {
                 this.card.label = true;
+                this.card.dragable = true;
                 this.changeText(this.eventText, dataPath.eventText6);
+                this.time.delayedCall(1000, () =>{console.log(this.card)})
+                
             })
 
             this.left_choice_text = dataPath.left2;
@@ -76,7 +85,7 @@ class secondFloorLevel3 extends Base {
         {
             this.changeText(this.eventText, dataPath.eventText4);
 
-            this.rotateOutAndMakeNewCard("card1");
+            this.rotateOutAndMakeNewCard("gate");
             this.time.delayedCall(3000, () => {
                 this.gotoScene("floor three level 1");
             })
@@ -88,7 +97,7 @@ class secondFloorLevel3 extends Base {
         if (this.player_choice == "left")
         {
             this.changeText(this.eventText, dataPath.eventText7);
-            this.rotateOutAndMakeNewCard("card1");
+            this.rotateOutAndMakeNewCard("chest");
 
             this.unlock.play();
 
@@ -102,7 +111,7 @@ class secondFloorLevel3 extends Base {
             this.changeText(this.eventText, dataPath.eventText8);
             this.card.label = false;
 
-            this.rotateOutAndMakeNewCard("card1");
+            this.rotateOutAndMakeNewCard("chest");
             this.time.delayedCall(3000, () => {
                 
                 this.gotoScene("floor four level 1")
@@ -126,10 +135,11 @@ class secondFloorLevel3 extends Base {
     
             this.time.delayedCall(5000, () => {
                 this.card.label = true;
+                this.card.dragable = true;
                 this.changeText(this.eventText, dataPath.eventText10);  
             })
 
-            this.rotateOutAndMakeNewCard("card1");
+            this.rotateOutAndMakeNewCard("chest");
     
             this.left_choice_text = dataPath.left3;
             this.right_choice_text = dataPath.right3;
@@ -139,7 +149,7 @@ class secondFloorLevel3 extends Base {
             this.changeText(this.eventText, dataPath.eventText8);
             this.card.label = false;
 
-            this.rotateOutAndMakeNewCard("card1");
+            this.rotateOutAndMakeNewCard("gate");
             this.time.delayedCall(3000, () => {
                 
                 this.gotoScene("floor four level 1")
@@ -149,7 +159,7 @@ class secondFloorLevel3 extends Base {
 
     action4()
     {
-        this.rotateOutAndMakeNewCard("card1");
+        this.rotateOutAndMakeNewCard("gate");
         this.gotoScene("floor three level 1");
     }
 }

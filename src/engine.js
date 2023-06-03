@@ -27,49 +27,28 @@ class GameScene extends Phaser.Scene {
         this.load.audio('doorOpen', 'assets/doorOpen.ogg');
         this.load.audio('unlock', 'assets/unlock.ogg');
         this.load.audio("chestCreak","assets/chestCreak.wav")
+        this.load.audio("peacefulPlace","assets/peacefulPlace.ogg")
+        this.load.audio("battleThemeA","assets/battleThemeA.mp3")
+        this.load.audio("theLastEncounter", "assets/TheLastEncounter.wav")
 
         this.exPreload();
     }
 
     create() {
 
-        this.graphics = this.add.graphics();
+         //设置编写游戏时常用的数据
+         this.setShortCut();
 
-        //设置编写游戏时常用的数据
-        this.setShortCut();
+         //调用加载游戏内UI函数
+         this.loadUI();
+ 
+         //加载计时器函数，当访问场景时自动计时，离开当前场景后清零
+         this.loadTimer();
+ 
+         //加载额外函数
+         this.exCreate()
 
-        //调用加载游戏内UI函数
-        this.loadUI();
 
-        //加载计时器函数，当访问场景时自动计时，离开当前场景后清零
-        this.loadTimer();
-
-        //加载额外函数
-        this.exCreate();
-
-        //开门音效
-        this.openDoor = this.sound.add(
-            'doorOpen', 
-            { 
-                loop: false,
-                rate: 0.5,
-            }
-        );
-
-        //解锁音效
-        this.unlock = this.sound.add(
-            'unlock', 
-            { 
-                loop: false,
-            }
-        );
-
-        this.chestCreak = this.sound.add(
-            'chestCreak', 
-            { 
-                loop: false,
-            }
-        );
     }
 
     //设置编写游戏时常用的数据
@@ -85,6 +64,58 @@ class GameScene extends Phaser.Scene {
 
         //获得json中的数据,并存储
         gameData = this.cache.json.get('gameData');
+
+        //开门音效
+        this.openDoor = this.sound.add(
+            'doorOpen', 
+            { 
+                loop: false,
+                rate: 0.5,
+            }
+        );
+        
+        //解锁音效
+        this.unlock = this.sound.add(
+            'unlock', 
+            { 
+                loop: false,
+            }
+        );
+
+        //打开宝箱音效
+        this.chestCreak = this.sound.add(
+            'chestCreak', 
+            { 
+                loop: false,
+            }
+        );
+
+        //背景音乐
+        this.bgm = this.sound.add(
+            'peacefulPlace', 
+            { 
+                loop: true,
+            }
+        );
+
+        
+
+        //战斗音乐（龙）
+        this.battleMusicD = this.sound.add(
+            'battleThemeA', 
+            { 
+                loop: true,
+            }
+        );
+
+        //战斗音乐（普通）
+        this.battleMusicN = this.sound.add(
+            'theLastEncounter', 
+            { 
+                loop: true,
+            }
+        );
+
 
         //更多的shortcut
         this.exShortCut();
@@ -160,6 +191,9 @@ class GameScene extends Phaser.Scene {
         this.openDoor.volume = Volume;
         this.unlock.volume = Volume;
         this.chestCreak.volume = Volume;
+        this.bgm.volume = Volume * 0.5;
+        this.battleMusicD.volume = Volume * 0.5;
+        this.battleMusicN.volume = Volume * 0.5;
 
         this.exUpdate();
     }

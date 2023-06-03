@@ -10,6 +10,7 @@ let dataPath;//数据路径定义，具体路径在base的shortCut中定义
 let transitionDuration = 1000;//过渡时间1s
 let death = false;
 let currentPosition;
+let bgm;
 //全局函数
 //加载存档
 function loadSaveData() {
@@ -113,3 +114,24 @@ function quickSaveData() {
             console.error('发生错误:', error);
         });
 }
+
+class AudioManager {
+    constructor(scene) {
+      this.scene = scene;
+      this.bgm = null;
+    }
+
+    createBGM(key){
+        this.bgm = this.scene.sound.add(key, { loop: true });
+    }
+  
+    playBGM(key) {
+        this.bgm.play();
+    }
+  
+    stopBGM() {
+      if (this.bgm && this.bgm.isPlaying) {
+        this.bgm.stop();
+      }
+    }
+  }
