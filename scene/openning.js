@@ -8,7 +8,7 @@ class openning extends Phaser.Scene {
         this.cameras.main.fadeIn(1000, 0, 0, 0);
         this.cameras.main.setBackgroundColor(0xf0f0f0);
 
-        loadSaveData();
+        quickSaveData();
 
         var cx = this.cameras.main.centerX;
         var cy = this.cameras.main.centerY;

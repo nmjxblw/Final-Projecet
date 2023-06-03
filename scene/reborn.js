@@ -4,7 +4,7 @@ class reborn extends Base {
     }
 
     onEnter() {
-        console.log(currentPosition);
+        //console.log(currentPosition);
         saveData.player.sword++;
         saveData.player.hp = 5;
         if (saveData.player.sword == 1) {
@@ -33,7 +33,7 @@ class reborn extends Base {
         
         }
         else {
-            console.log(currentPosition);
+            //console.log(currentPosition);
             this.scene.start(currentPosition);
         }
     }

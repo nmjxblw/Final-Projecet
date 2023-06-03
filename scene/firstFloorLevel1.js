@@ -4,6 +4,7 @@ class firstFloorLevel1 extends Base {
     }
 
     onEnter(){
+        console.log("floor three level 1");
         this.label = false;
         this.left_choice_text = dataPath.left;
         this.right_choice_text = dataPath.right;
