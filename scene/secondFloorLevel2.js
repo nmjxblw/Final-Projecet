@@ -6,12 +6,8 @@ class secondFloorLevel2 extends Base {
 
     onEnter() {
 
-        if (bgm && bgm.isPlaying) {
-            bgm.stop();
-            console.log(1);
-          }
+        this.scene1 = this.scene.get('floor two level 1');
         
-
         currentPosition ="floor two level 2";
 
         //加载敌人血量
@@ -57,6 +53,7 @@ class secondFloorLevel2 extends Base {
             else if (this.enemy_hp <= 0) {
                 this.rotateOutAndMakeNewCard("elf");
                 this.time.delayedCall(1000, () => {
+                    this.battleMusicN.stop();
                     this.gotoScene("floor two level 3");
                 })
             }
@@ -83,7 +80,12 @@ class secondFloorLevel2 extends Base {
     action1() {
         if (this.player_choice == "left")
         {
+            this.scene1.bgm.stop()
+            this.time.delayedCall(1000, () => {
+                this.battleMusicN.play();
+            })
             
+
             this.rotateOutAndMakeNewCard("giant");
             saveData.elf = true;
             
@@ -304,7 +306,7 @@ class secondFloorLevel2 extends Base {
     }
 
     actionLose() {
-        this.rotateOutAndMakeNewCard("card1");
+        this.rotateOutAndMakeNewCard("giant");
         this.changeText(this.eventText, dataPath.battleText10);
 
         if(saveData.player.hp < 0)
@@ -317,7 +319,8 @@ class secondFloorLevel2 extends Base {
         this.card.label = false;
 
         this.time.delayedCall(3000, () => {
-            this.gotoScene("floor four level 1")
+            this.battleMusicN.stop();
+            this.gotoScene("floor four level 1");
         })
     }
 }

@@ -8,7 +8,7 @@ const game = new Phaser.Game({
         height: 1080
     },
     ////scene: [baseBattle],
-    scene: [secondFloorLevel1,secondFloorLevel2,secondFloorLevel3,reborn],
+    scene: [debug_scene,secondFloorLevel1,secondFloorLevel2,secondFloorLevel3,reborn],
     // scene: [ 
     //     // openning,
     //     // warnning,

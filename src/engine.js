@@ -90,13 +90,15 @@ class GameScene extends Phaser.Scene {
             }
         );
 
-        //背景音乐1
-        bgm = this.sound.add(
+        //背景音乐
+        this.bgm = this.sound.add(
             'peacefulPlace', 
             { 
                 loop: true,
             }
         );
+
+        
 
         //战斗音乐（龙）
         this.battleMusicD = this.sound.add(
@@ -189,7 +191,9 @@ class GameScene extends Phaser.Scene {
         this.openDoor.volume = Volume;
         this.unlock.volume = Volume;
         this.chestCreak.volume = Volume;
-        bgm.volume = Volume * 0.5;
+        this.bgm.volume = Volume * 0.5;
+        this.battleMusicD.volume = Volume * 0.5;
+        this.battleMusicN.volume = Volume * 0.5;
 
         this.exUpdate();
     }
