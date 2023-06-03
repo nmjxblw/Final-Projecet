@@ -114,3 +114,24 @@ function quickSaveData() {
             console.error('发生错误:', error);
         });
 }
+
+class AudioManager {
+    constructor(scene) {
+      this.scene = scene;
+      this.bgm = null;
+    }
+
+    createBGM(key){
+        this.bgm = this.scene.sound.add(key, { loop: true });
+    }
+  
+    playBGM(key) {
+        this.bgm.play();
+    }
+  
+    stopBGM() {
+      if (this.bgm && this.bgm.isPlaying) {
+        this.bgm.stop();
+      }
+    }
+  }

@@ -7,7 +7,7 @@ class secondFloorLevel3 extends Base {
 
         currentPosition ="floor two level 3";
 
-        
+        this.bgm.play();
 
         this.card.setTexture("elf");
         this.left_choice_text = dataPath.left1
