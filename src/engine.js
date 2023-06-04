@@ -26,9 +26,9 @@ class GameScene extends Phaser.Scene {
         this.load.json("gameData", "json/InGameData.json");
         this.load.audio('doorOpen', 'assets/doorOpen.ogg');
         this.load.audio('unlock', 'assets/unlock.ogg');
-        this.load.audio("chestCreak","assets/chestCreak.wav")
-        this.load.audio("peacefulPlace","assets/peacefulPlace.ogg")
-        this.load.audio("battleThemeA","assets/battleThemeA.mp3")
+        this.load.audio("chestCreak", "assets/chestCreak.wav")
+        this.load.audio("peacefulPlace", "assets/peacefulPlace.ogg")
+        this.load.audio("battleThemeA", "assets/battleThemeA.mp3")
         this.load.audio("theLastEncounter", "assets/TheLastEncounter.wav")
 
         this.exPreload();
@@ -36,17 +36,17 @@ class GameScene extends Phaser.Scene {
 
     create() {
 
-         //设置编写游戏时常用的数据
-         this.setShortCut();
+        //设置编写游戏时常用的数据
+        this.setShortCut();
 
-         //调用加载游戏内UI函数
-         this.loadUI();
- 
-         //加载计时器函数，当访问场景时自动计时，离开当前场景后清零
-         this.loadTimer();
- 
-         //加载额外函数
-         this.exCreate()
+        //调用加载游戏内UI函数
+        this.loadUI();
+
+        //加载计时器函数，当访问场景时自动计时，离开当前场景后清零
+        this.loadTimer();
+
+        //加载额外函数
+        this.exCreate()
 
 
     }
@@ -67,52 +67,61 @@ class GameScene extends Phaser.Scene {
 
         //开门音效
         this.openDoor = this.sound.add(
-            'doorOpen', 
-            { 
+            'doorOpen',
+            {
                 loop: false,
                 rate: 0.5,
             }
         );
-        
+
         //解锁音效
         this.unlock = this.sound.add(
-            'unlock', 
-            { 
+            'unlock',
+            {
                 loop: false,
             }
         );
 
         //打开宝箱音效
         this.chestCreak = this.sound.add(
-            'chestCreak', 
-            { 
+            'chestCreak',
+            {
                 loop: false,
             }
         );
 
         //背景音乐
         this.bgm = this.sound.add(
-            'peacefulPlace', 
-            { 
+            'peacefulPlace',
+            {
                 loop: true,
+                volume: 0.5 * Volume,
+                fadeIn: 1000,
+                fadeOut: 1000,
             }
         );
 
-        
+
 
         //战斗音乐（龙）
         this.battleMusicD = this.sound.add(
-            'battleThemeA', 
-            { 
+            'battleThemeA',
+            {
                 loop: true,
+                volume: 0.5 * Volume,
+                fadeIn: 1000,
+                fadeOut: 1000,
             }
         );
 
         //战斗音乐（普通）
         this.battleMusicN = this.sound.add(
-            'theLastEncounter', 
-            { 
+            'theLastEncounter',
+            {
                 loop: true,
+                volume: 0.5 * Volume,
+                fadeIn: 1000,
+                fadeOut: 1000,
             }
         );
 
@@ -150,11 +159,13 @@ class GameScene extends Phaser.Scene {
 
                 //如果setting不存在则创建并插入setting场景
                 if (!this.scene.get("setting")) {
-                    this.scene.add("setting", SettingScene, true, { currentScene: this.sceneKey, });
+                    console.log(this.scene);
+                    this.scene.add("setting", SettingScene, true, { currentScene: this.scene, });
                 }
                 else {
                     //如果setting场景存在，则直接访问setting
-                    this.scene.launch("setting", { currentScene: this.sceneKey });
+                    console.log(this.scene);
+                    this.scene.launch("setting", { currentScene: this.scene });
                 }
             });
 
@@ -186,18 +197,6 @@ class GameScene extends Phaser.Scene {
         Timer = 0;
     }
 
-    update()
-    {
-        this.openDoor.volume = Volume;
-        this.unlock.volume = Volume;
-        this.chestCreak.volume = Volume;
-        this.bgm.volume = Volume * 0.5;
-        this.battleMusicD.volume = Volume * 0.5;
-        this.battleMusicN.volume = Volume * 0.5;
-
-        this.exUpdate();
-    }
-
     //当子类没有ex函数时报错
     exCreate() {
         console.warn(`${this.sceneKey}没有设置exCreate()`);
@@ -210,19 +209,18 @@ class GameScene extends Phaser.Scene {
     exShortCut() {
         console.warn(`${this.sceneKey}没有设置exShortCut()`);
     }
-    
-    exUpdate()
-    {
+
+    exUpdate() {
 
     }
 
-    
+
 }
 
 class SettingScene extends Phaser.Scene {
 
     init(data) {
-        this.currentScene = data.currentScene || "";
+        this.currentScene = data.currentScene || null;
     }
 
     create(data) {
@@ -289,7 +287,7 @@ class SettingScene extends Phaser.Scene {
                 }
                 else {
                     this.cameras.main.fade(500, 0, 0, 0);
-                    this.scene.stop(data.currentScene);
+                    this.scene.stop(data.currentScene.key);
                     this.scene.start("title");
                 }
             });
@@ -325,6 +323,7 @@ class SettingScene extends Phaser.Scene {
 
             this.VolumeBar.setPosition(dragX, this.cy + 50);
             Volume = (dragX - this.cx + 100) / 200;
+            game.sound.volume = Volume;
             this.VolumeText.setText(`Volume:${Math.floor(Volume * 100)}%`);
         });
 
@@ -340,6 +339,7 @@ class SettingScene extends Phaser.Scene {
             }
 
             Volume = (this.VolumeBar.x - this.cx + 100) / 200;
+            game.sound.volume = Volume;
             this.VolumeText.setText(`Volume:${Math.floor(Volume * 100)}%`);
         });
 
@@ -362,14 +362,14 @@ class SettingScene extends Phaser.Scene {
             })
             .on("pointerup", () => {
                 this.scene.stop("setting");
-                this.scene.resume(data.currentScene);
+                this.scene.resume(data.currentScene.key);
             });
 
         //当玩家点击菜单外时自动关闭菜单
         this.input.on("pointerup", (pointer) => {
             if (!this.backgroundBound.getBounds().contains(pointer.x, pointer.y)) {
                 this.scene.stop("setting");
-                this.scene.resume(data.currentScene);
+                this.scene.resume(data.currentScene.key);
             }
         });
     }

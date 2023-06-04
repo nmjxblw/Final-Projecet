@@ -13,7 +13,7 @@ class thirdFloorLevel2 extends Base {
         }
 
         this.scene1.bgm.stop();
-        this.battleMusicD.play();
+        this.battleMusicD.play({ fadeIn: 1000 });
 
         //加载敌人血量
         this.enemy_hp = dataPath.enemy.hp;

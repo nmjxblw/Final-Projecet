@@ -8,7 +8,7 @@ class firstFloorLevel3 extends Base {
     onEnter(){
         this.scene1 = this.scene.get('floor one level 2');
         this.scene1.bgm.stop();
-        this.battleMusicN.play();
+        this.battleMusicN.play({fadeIn:1000});
 
         this.enemy_hp = dataPath.enemy.hp;
         this.enemy_max_hp = dataPath.enemy.hp;
