@@ -8,9 +8,9 @@ const game = new Phaser.Game({
         height: 1080
     },
     scene: [
-        debug_scene,
-        //openning,
-        //warnning,
+        // debug_scene,
+        openning,
+        warnning,
         title,
         firstFloorLevel1,
         firstFloorLevel2,
