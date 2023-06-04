@@ -3,12 +3,17 @@ class openning extends Phaser.Scene {
         super("openning");
     }
 
+    preload() {
+        this.load.json("saveData", "json/SaveData.json");
+    }
+
     create() {
+
+        saveData = this.cache.json.get('saveData');
+        console.log(saveData);
 
         this.cameras.main.fadeIn(1000, 0, 0, 0);
         this.cameras.main.setBackgroundColor(0xf0f0f0);
-
-        quickSaveData();
 
         var cx = this.cameras.main.centerX;
         var cy = this.cameras.main.centerY;
