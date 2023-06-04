@@ -89,8 +89,8 @@
                 "eventText6": "For the first lock, you choose to click:",
                 "eventText7": "You clicked the right switch and the first lock opened.\n\nFor the second lock, you choose to click:",
                 "eventText8": "As you click, the treasure chest suddenly explodes. \n\nYou are dead.",
-                "eventText9": "You clicked the right switch and both locks are open.\n\nYou have obtained a shield from a treasure chest that contains mysterious powers.",
-                "eventText10": "Now, it's time to head to the next level."
+                "eventText9": "You clicked the right switch and both locks are open.",
+                "eventText10": "You have obtained a shield from a treasure chest that contains mysterious powers.\n\nNow, it's time to head to the next level."
             }
         },
         "three": {

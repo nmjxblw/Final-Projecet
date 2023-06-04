@@ -7,6 +7,7 @@ class secondFloorLevel2 extends Base {
     onEnter() {
 
         this.scene1 = this.scene.get('floor one level 4');
+        console.log(this.scene1);
 
         currentPosition = "floor two level 2";
 
@@ -79,7 +80,11 @@ class secondFloorLevel2 extends Base {
     //初始行为，如果选择帮助为为移动，选择无视进入下一层
     action1() {
         if (this.player_choice == "left") {
-            this.scene1.bgm.stop();
+            if(typeof this.scene1 == "undefined")
+            {
+                this.scene1.bgm.stop();
+            }
+            
             this.time.delayedCall(1000, () => {
                 this.battleMusicN.play();
             })

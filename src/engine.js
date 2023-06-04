@@ -23,6 +23,7 @@ class GameScene extends Phaser.Scene {
 
     preload() {
         this.load.image("gear", "assets/gear.png");
+        this.load.image("background2", "assets/Game cover image.png");
         this.load.json("gameData", "json/InGameData.json");
         this.load.audio('doorOpen', 'assets/doorOpen.ogg');
         this.load.audio('unlock', 'assets/unlock.ogg');
@@ -105,7 +106,7 @@ class GameScene extends Phaser.Scene {
             'peacefulPlace',
             {
                 loop: true,
-                volume: 0.5,
+                volume: 0.2,
                 fadeIn: 1000,
                 fadeOut: 1000,
             }
@@ -118,7 +119,7 @@ class GameScene extends Phaser.Scene {
             'battleThemeA',
             {
                 loop: true,
-                volume: 0.5,
+                volume: 0.2,
                 fadeIn: 1000,
                 fadeOut: 1000,
             }
@@ -129,7 +130,7 @@ class GameScene extends Phaser.Scene {
             'theLastEncounter',
             {
                 loop: true,
-                volume: 0.5,
+                volume: 0.2,
                 fadeIn: 1000,
                 fadeOut: 1000,
             }

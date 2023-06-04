@@ -11,6 +11,8 @@ class title extends GameScene {
 
     exCreate() {
 
+        this.backgroundImage = this.add.image(0, 0, "background2").setOrigin(0).setDepth(-1);
+
         this.input.keyboard.on('keydown', (event) => {
                 console.log('keydown event', event);
                 if (event.key == '1') {
