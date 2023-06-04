@@ -158,6 +158,10 @@ class Base extends GameScene {
             .setOrigin(0.5)
             .setDepth(1)
 
+        //控制卡牌提示音的变量
+        this.rightAllow = true;
+        this.leftAllow = true;
+
         this.keyInput();
 
         this.onEnter();
@@ -261,10 +265,10 @@ class Base extends GameScene {
 
             //以锚点为坐标原点，向上和向右为正方向，判断鼠标与y轴的夹角绝对值是否大于30度，如果是则将角度设为30度且方向相同
             if (this.angleBetweenRotatePoint > Math.PI / 6) {
-                this.angleBetweenRotatePoint = Math.PI / 6;
+                this.angleBetweenRotatePoint = Math.PI / 6;               
             }
             else if (this.angleBetweenRotatePoint < - Math.PI / 6) {
-                this.angleBetweenRotatePoint = - Math.PI / 6;
+                this.angleBetweenRotatePoint = - Math.PI / 6;            
             }
 
             //设置卡片文本位移，使得卡片文本显示时不超过卡片范围。
@@ -315,6 +319,25 @@ class Base extends GameScene {
             else if (this.angleBetweenRotatePoint <= -5 / 180 * Math.PI) {
                 choice = this.left_choice_text;
             }
+
+            
+
+            //卡牌拖动音效
+            if (this.angleBetweenRotatePoint > Phaser.Math.DegToRad(20) && this.angleBetweenRotatePoint < Phaser.Math.DegToRad(21) && this.rightAllow) {
+                this.rightAllow = false;
+                this.cardSound.play();
+                this.time.delayedCall(3000, () => {
+                    this.rightAllow = true;
+                })
+            }
+            else if (this.angleBetweenRotatePoint < Phaser.Math.DegToRad(-20) && this.angleBetweenRotatePoint > Phaser.Math.DegToRad(-21) && this.leftAllow) {
+                this.leftAllow = false;
+                this.cardSound.play();
+                this.time.delayedCall(3000, () => {
+                    this.leftAllow = true;
+                })
+            }
+
             //设置文本内容和透明度
             this.cardText.setText(choice).setAlpha(alphaD);
 
