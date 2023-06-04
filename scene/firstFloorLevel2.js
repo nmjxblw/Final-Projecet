@@ -4,16 +4,16 @@ class firstFloorLevel2 extends Base {
     }
 
     onEnter(){
-
+        this.bgm.play();
         this.changeText(this.eventText, dataPath.eventText);
         this.left_choice_text = dataPath.left;
         this.right_choice_text = dataPath.right;
-        this.card.setTexture("door");
+        this.card.setTexture("gate");
         this.dragrotate(this.card); 
     }
 
     judgeChoice(){
-        this.rotateOutAndMakeNewCard("door");
+        this.rotateOutAndMakeNewCard("gate");
         this.gotoScene("floor one level 3");
     }
 }

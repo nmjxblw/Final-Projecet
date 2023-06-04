@@ -6,8 +6,14 @@ class firstFloorLevel3 extends Base {
     }
 
     onEnter(){
-        
-        this.mobhp = 3;
+        this.scene1 = this.scene.get('floor one level 2');
+        this.scene1.bgm.stop();
+        this.battleMusicN.play();
+
+        this.enemy_hp = dataPath.enemy.hp;
+        this.enemy_max_hp = dataPath.enemy.hp;
+        this.showHp();
+
         this.currentAction;
         this.scene_turn = 1;
         this.changeText(this.eventText, dataPath.eventText1);
@@ -25,7 +31,7 @@ class firstFloorLevel3 extends Base {
                 this.rotateOutAndMakeNewCard("skeleton");
                 this.damagecalc_textchange(this.scene_turn, this.player_choice);
                 this.scene_turn++;
-                if(this.mobhp<=0){
+                if(this.enemy_hp<=0){
                     console.log("win");
                     this.win();
                 }
@@ -40,9 +46,10 @@ class firstFloorLevel3 extends Base {
             if(choice=="left") {
                 this.rotateOutAndMakeNewCard("skeleton");
                 saveData.player.hp-=1;
-                this.mobhp -=1;
+                this.enemy_hp -=1;
                 this.shakeTween(this.cameras.main);
                 this.changeText(this.eventText, dataPath.eventText2);
+                this.renewHp();
             }
             else {
                 this.rotateOutAndMakeNewCard("skeleton");
@@ -52,8 +59,9 @@ class firstFloorLevel3 extends Base {
         else{
             if(choice=="left") {
                 this.rotateOutAndMakeNewCard("skeleton");
-                this.mobhp -=1;
+                this.enemy_hp -=1;
                 this.changeText(this.eventText, dataPath.eventText4);
+                this.renewHp();
             }
             else{
                 this.rotateOutAndMakeNewCard("skeleton");
@@ -65,6 +73,7 @@ class firstFloorLevel3 extends Base {
     win(){
         this.eventCard(dataPath.eventCard1);
         this.time.delayedCall(3000, () => {
+            this.battleMusicN.stop();
             this.gotoScene("floor one level 4");
         });
     }
@@ -74,6 +83,7 @@ class firstFloorLevel3 extends Base {
         this.left_choice_text = "next";
         this.right_choice_text = "next";
         console.log("lost");
+        this.battleMusicN.stop();
         this.gotoScene("floor one level 2");
     }
 }

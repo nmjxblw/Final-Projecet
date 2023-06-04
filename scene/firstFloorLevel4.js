@@ -4,6 +4,8 @@ class firstFloorLevel4 extends Base {
     }
 
     onEnter(){
+        this.bgm.play();
+
         this.changeText(this.eventText, "The maze");
         this.left_choice_text = "enter the maze";
         this.right_choice_text = "enter the maze";
@@ -24,7 +26,7 @@ class firstFloorLevel5 extends Base{
     }
 
     onEnter(){
-
+        this.scene4 = this.scene.get('floor one level 4');
         this.changeText(this.eventText, "You find a fork in the road.");
         this.left_choice_text = "heads left";
         this.right_choice_text = "heads right";
@@ -89,6 +91,7 @@ class firstFloorLevel5 extends Base{
     }
 
     lose(){
+        this.scene4.bgm.stop();
         currentPosition = "floor one level 4";
         console.log(currentPosition);
         console.log("lose");

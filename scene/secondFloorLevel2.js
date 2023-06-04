@@ -6,8 +6,8 @@ class secondFloorLevel2 extends Base {
 
     onEnter() {
 
-        this.scene1 = this.scene.get('floor two level 1');
-
+        this.scene1 = this.scene.get('floor one level 4');
+        
         currentPosition ="floor two level 2";
 
         //加载敌人血量

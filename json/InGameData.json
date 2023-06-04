@@ -24,6 +24,9 @@
                 "eventText":"You have arrived at the first floor of the dungeon.\nImmediately, you are attacked by a monster."
             },
             "level3": {
+                "enemy":{
+                    "hp":3
+                },
                 "left":"Attack",
                 "right":"Dodge",
                 "eventText1":"The skeleton is moving towards you.",
