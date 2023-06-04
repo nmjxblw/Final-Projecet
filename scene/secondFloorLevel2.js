@@ -14,8 +14,7 @@ class secondFloorLevel2 extends Base {
         this.enemy_hp = 6;
         this.enemy_max_hp = 6;
         this.showHp();
-
-
+        this.renewHp();
 
         this.giantRage = false;
 

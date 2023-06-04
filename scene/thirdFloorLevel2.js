@@ -19,6 +19,7 @@ class thirdFloorLevel2 extends Base {
         this.enemy_hp = dataPath.enemy.hp;
         this.enemy_max_hp = dataPath.enemy.hp;
         this.showHp();
+        this.renewHp();
 
         currentPosition = "floor three level 2";
         //先初始化第一轮的左右选项
