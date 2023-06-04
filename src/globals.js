@@ -9,7 +9,6 @@ let dataPath;//数据路径定义，具体路径在base的shortCut中定义
 let transitionDuration = 1000;//过渡时间1s
 let death = false;
 let currentPosition;
-let bgm;
 //全局函数
 //快速访问js
 function quickSaveData() {

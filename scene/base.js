@@ -16,6 +16,7 @@ class Base extends GameScene {
         this.load.image("gate", "assets/gate.png");
         this.load.image("skeleton", "assets/skul.png");
         this.load.image("chest", "assets/chest.png");
+        this.load.image("shield", "assets/shield.png");
 
     }
 
