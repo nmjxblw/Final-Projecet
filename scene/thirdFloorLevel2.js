@@ -5,6 +5,13 @@ class thirdFloorLevel2 extends Base {
     }
 
     onEnter() {
+        if(saveData.elf){
+            this.scene1 = this.scene1.get("floor two level 3");
+        }
+        else{
+            //this.scene1 = this.scene1.get("")
+        }
+
         //加载敌人血量
         this.enemy_hp = dataPath.enemy.hp;
         this.enemy_max_hp = dataPath.enemy.hp;

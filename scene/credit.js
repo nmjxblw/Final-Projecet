@@ -59,9 +59,8 @@ class credit extends GameScene {
             .setFontSize(100);
 
         let soundText2 = this.add.text(
-            soundText1.x + 25,
-            soundText1.y + 25,
-            ""
+            soundText1.x + 300,
+            soundText1.y + 250,``
         )
             .setOrigin(0.5)
             .setFontFamily("Gabriola")
