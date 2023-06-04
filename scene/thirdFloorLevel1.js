@@ -22,6 +22,7 @@ class thirdFloorLevel1 extends Base {
         this.time.delayedCall(8000, () => {
             this.changeText(this.eventText, dataPath.eventText3);
             this.card.label = true;
+            this.card.dragable = true;
         });
 
         this.dragrotate(this.card);
@@ -32,6 +33,8 @@ class thirdFloorLevel1 extends Base {
     }
 
     action() {
+        this.card.label = false;
+        this.openDoor.play();
         this.rotateOutAndMakeNewCard("gate");
         this.gotoScene("floor three level 2")
     }

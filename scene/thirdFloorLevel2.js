@@ -5,12 +5,15 @@ class thirdFloorLevel2 extends Base {
     }
 
     onEnter() {
-        if(saveData.elf){
-            this.scene1 = this.scene1.get("floor two level 3");
+        if (saveData.elf) {
+            this.scene1 = this.scene.get("floor two level 3");
         }
-        else{
-            //this.scene1 = this.scene1.get("")
+        else {
+            this.scene1 = this.scene.get("floor one level 4");
         }
+
+        this.scene1.bgm.stop();
+        this.battleMusicD.play();
 
         //加载敌人血量
         this.enemy_hp = dataPath.enemy.hp;
@@ -46,7 +49,6 @@ class thirdFloorLevel2 extends Base {
                 this.changeText(this.eventText, dataPath.eventText1);
                 this.card.label = true;
                 this.card.dargable = true;
-                this.battleMusicD.play();
             });
         });
 
@@ -398,13 +400,15 @@ class thirdFloorLevel2 extends Base {
         this.time.delayedCall(12000, () => {
             this.cardReset("player");
             this.card.label = true;
+            this.card.dragable = true;
         });
         this.scene_turn--;
     }
 
     win() {
+        this.rotateOutAndMakeNewCard("player");
         this.time.delayedCall(1000, () => {
-            this.rotateOutAndMakeNewCard("player");
+            this.battleMusicD.stop();
             this.changeText(this.eventText, "You win.");
             this.card.dargable = true;
         });
@@ -414,8 +418,9 @@ class thirdFloorLevel2 extends Base {
     }
 
     lost() {
+        this.rotateOutAndMakeNewCard("player");
         this.time.delayedCall(1000, () => {
-            this.rotateOutAndMakeNewCard("player");
+            this.battleMusicD.stop();
             this.changeText(this.eventText, "You lost.");
             this.card.dargable = true;
         });

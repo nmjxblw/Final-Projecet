@@ -64,6 +64,8 @@ class thirdFloorLevel4 extends Base {
                     this.eventCard(dataPath.eventCard3);
                     this.cameras.main.fade(5000, 0, 0, 0);
                     this.time.delayedCall(5000, () => {
+                        this.scene1 = this.scene.get('floor three level 3');
+                        this.scene1.bgm.stop();
                         this.scene.start("credit");
                     });
                 });

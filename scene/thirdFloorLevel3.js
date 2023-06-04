@@ -6,32 +6,33 @@ class thirdFloorLevel3 extends Base {
 
     onEnter() {
 
+        this.bgm.play();
         this.left_choice_text = dataPath.left;
         this.right_choice_text = dataPath.right;
 
         this.card.label = false;
         this.card.setTexture("dragon_berserk");
 
-        this.eventCard(dataPath.eventCard1);
+        this.changeText(this.eventText, dataPath.eventText1);
 
         this.time.delayedCall(3000, () => {
-            this.eventCard(dataPath.eventCard2);
-        });
-
-        this.time.delayedCall(6000, () => {
-            this.eventCard(dataPath.eventCard3);
-        });
-
-        this.time.delayedCall(9000, () => {
-            this.changeText(this.eventText, dataPath.eventText1);
-        });
-
-        this.time.delayedCall(12000, () => {
             this.changeText(this.eventText, dataPath.eventText2);
         });
 
-        this.time.delayedCall(15000, () => {
+        this.time.delayedCall(6000, () => {
             this.changeText(this.eventText, dataPath.eventText3);
+        });
+
+        this.time.delayedCall(9000, () => {
+            this.changeText(this.eventText, dataPath.eventText4);
+        });
+
+        this.time.delayedCall(12000, () => {
+            this.changeText(this.eventText, dataPath.eventText5);
+        });
+
+        this.time.delayedCall(15000, () => {
+            this.changeText(this.eventText, dataPath.eventText6);
             this.card.dragable = true;
             this.card.label = true;
         });

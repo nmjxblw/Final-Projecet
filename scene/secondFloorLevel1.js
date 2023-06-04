@@ -1,7 +1,7 @@
 class secondFloorLevel1 extends Base {
-    constructor(){
+    constructor() {
         //第一层结束后的大门，打开进入第二层
-        super("floor two level 1","open the gate of first floor")
+        super("floor two level 1", "open the gate of first floor")
     }
 
     onEnter() {
@@ -31,13 +31,14 @@ class secondFloorLevel1 extends Base {
     }
 
     action1() {
+        this.card.label = false;
         this.rotateOutAndMakeNewCard("elf");
-        
+
         this.openDoor.play();
 
         this.time.delayedCall(1000, () => {
             this.gotoScene("floor two level 2");
-        })    
+        })
     }
 
 }

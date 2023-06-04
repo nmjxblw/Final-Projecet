@@ -32,10 +32,12 @@ class firstFloorLevel3 extends Base {
                 this.damagecalc_textchange(this.scene_turn, this.player_choice);
                 this.scene_turn++;
                 if(this.enemy_hp<=0){
+                    this.card.label = false;
                     console.log("win");
                     this.win();
                 }
                 else if (saveData.player.hp <= 0) {
+                    this.card.label = false;
                     this.lose();
                 }
         }

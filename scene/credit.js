@@ -59,13 +59,19 @@ class credit extends GameScene {
             .setFontSize(100);
 
         let soundText2 = this.add.text(
-            soundText1.x + 300,
-            soundText1.y + 250,``
+            this.cx,
+            soundText1.y + 250,
+            `doorOpen.ogg    -Made by Kenny, 50 RPG sound effects
+chestCreak.wav  -Made by spookymodem, Open Chest
+unlock.ogg -Made by StarNinjas, 4 Door Closes
+peacefulPlace.ogg -Made by Alexandr Zhelanov, Peaceful Place
+TheLastEncounter.wav -Made by Matthew Pablo, RPG Battle Theme - "The Last Encounter"
+battleThemeA.mp3 -Made by cynicmusic, Battle Theme A`
         )
             .setOrigin(0.5)
             .setFontFamily("Gabriola")
             .setFontSize(50)
-            .setWordWrapWidth(750);
+            .setWordWrapWidth(1500);
 
 
         let backText = this.add.text(

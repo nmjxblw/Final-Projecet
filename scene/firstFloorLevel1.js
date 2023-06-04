@@ -4,14 +4,14 @@ class firstFloorLevel1 extends Base {
     }
 
     onEnter(){
-        console.log("floor three level 1");
+        //console.log("floor three level 1");
         this.left_choice_text = dataPath.left;
         this.right_choice_text = dataPath.right;
 
         this.changeText(this.eventText, dataPath.eventText1);
         this.card.setTexture("dragon_normal");
-        // this.card.label = false;
-        // this.card.dragable = false;
+        this.card.label = false;
+
         this.time.delayedCall(4000, () => {
             this.changeText(this.eventText, dataPath.eventText2);
         });
@@ -45,7 +45,7 @@ class firstFloorLevel1 extends Base {
         this.time.delayedCall(32000, () => {
             this.cardReset("sword");
             this.stopSpotLight = false;
-            this.cardSpotLight();
+            this.cardSpotLight(true);
             this.changeText(this.eventText, dataPath.eventText9);;
         });
     
@@ -57,8 +57,6 @@ class firstFloorLevel1 extends Base {
             this.eventCard(dataPath.eventCard);
             this.card.label = true;
             this.card.dragable = true;
-            this.label = true;
-            this.stopSpotLight = true;
         });
         this.dragrotate(this.card);
     }

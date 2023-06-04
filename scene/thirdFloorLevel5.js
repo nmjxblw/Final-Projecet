@@ -67,7 +67,7 @@ class thirdFloorLevel5 extends Base {
         else if (men_turn.includes(this.scene_turn)) {
             this.rotateOutAndMakeNewCard("men");
             if (this.scene_turn == 12) {
-                this.card.dragable = false;
+                this.card.label = false;
                 this.time.delayedCall(2000, () => {
                     this.tweens.add({
                         targets: this.card,
@@ -78,6 +78,7 @@ class thirdFloorLevel5 extends Base {
                         oncomplete: () => {
                             this.time.delayedCall(2000, () => {
                                 this.card.setTexture("player");
+                                this.card.label = true;
                                 this.card.dragable = true;
                             });
                         },
@@ -106,13 +107,14 @@ class thirdFloorLevel5 extends Base {
                 });
                 this.time.delayedCall(4000, () => {
                     this.card.label = true;
+                    this.card.dragable = true;
                 })
             }
         }
         else if (guardian_off_mask_turn.includes(this.scene_turn)) {
             this.rotateOutAndMakeNewCard("guardian_off_mask");
             if (this.scene_turn == 35) {
-                this.card.dragable = false;
+                this.card.label = false;
                 this.tweens.chain({
                     targets: this.card,
                     tweens: [
@@ -153,6 +155,7 @@ class thirdFloorLevel5 extends Base {
                         {
                             oncomplete: () => {
                                 this.card.dragable = true;
+                                this.card.label = true;
                             }
                         }
                     ]
@@ -170,6 +173,8 @@ class thirdFloorLevel5 extends Base {
                     this.eventCard(dataPath.eventCard3);
                     this.cameras.main.fade(5000, 0, 0, 0);
                     this.time.delayedCall(5000, () => {
+                        this.scene1 = this.scene.get('floor three level 3');
+                        this.scene1.bgm.stop();
                         this.scene.start("credit");
                     });
                 });
