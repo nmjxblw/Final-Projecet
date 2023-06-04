@@ -6,7 +6,10 @@ class firstFloorLevel3 extends Base {
     }
 
     onEnter(){
-        
+        this.scene1 = this.scene.get('floor one level 2');
+        this.scene1.bgm.stop();
+        this.battleMusicN.play();
+
         this.enemy_hp = dataPath.enemy.hp;
         this.enemy_max_hp = dataPath.enemy.hp;
         this.showHp();
@@ -70,6 +73,7 @@ class firstFloorLevel3 extends Base {
     win(){
         this.eventCard(dataPath.eventCard1);
         this.time.delayedCall(3000, () => {
+            this.battleMusicN.stop();
             this.gotoScene("floor one level 4");
         });
     }
@@ -79,6 +83,7 @@ class firstFloorLevel3 extends Base {
         this.left_choice_text = "next";
         this.right_choice_text = "next";
         console.log("lost");
+        this.battleMusicN.stop();
         this.gotoScene("floor one level 2");
     }
 }

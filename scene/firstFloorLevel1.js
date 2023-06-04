@@ -4,16 +4,14 @@ class firstFloorLevel1 extends Base {
     }
 
     onEnter(){
-        //bgm.play();
-
         console.log("floor three level 1");
         this.left_choice_text = dataPath.left;
         this.right_choice_text = dataPath.right;
 
         this.changeText(this.eventText, dataPath.eventText1);
         this.card.setTexture("dragon_normal");
-        this.card.label = false;
-        this.card.dragable = false;
+        // this.card.label = false;
+        // this.card.dragable = false;
         this.time.delayedCall(4000, () => {
             this.changeText(this.eventText, dataPath.eventText2);
         });

@@ -4,7 +4,7 @@ class firstFloorLevel2 extends Base {
     }
 
     onEnter(){
-
+        this.bgm.play();
         this.changeText(this.eventText, dataPath.eventText);
         this.left_choice_text = dataPath.left;
         this.right_choice_text = dataPath.right;
