@@ -30,6 +30,7 @@ class GameScene extends Phaser.Scene {
         this.load.audio("peacefulPlace","assets/peacefulPlace.ogg")
         this.load.audio("battleThemeA","assets/battleThemeA.mp3")
         this.load.audio("theLastEncounter", "assets/TheLastEncounter.wav")
+        this.load.audio("cardSound", "assets/mixkit-game-ball-tap-2073.wav")
 
         this.exPreload();
     }
@@ -85,6 +86,14 @@ class GameScene extends Phaser.Scene {
         //打开宝箱音效
         this.chestCreak = this.sound.add(
             'chestCreak', 
+            { 
+                loop: false,
+            }
+        );
+        
+         //卡牌判定音效
+         this.cardSound = this.sound.add(
+            'cardSound', 
             { 
                 loop: false,
             }
@@ -191,9 +200,9 @@ class GameScene extends Phaser.Scene {
         this.openDoor.volume = Volume;
         this.unlock.volume = Volume;
         this.chestCreak.volume = Volume;
-        this.bgm.volume = Volume * 0.5;
-        this.battleMusicD.volume = Volume * 0.5;
-        this.battleMusicN.volume = Volume * 0.5;
+        this.bgm.volume = Volume * 0.3;
+        this.battleMusicD.volume = Volume * 0.3;
+        this.battleMusicN.volume = Volume * 0.3;
 
         this.exUpdate();
     }
