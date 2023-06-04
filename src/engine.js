@@ -143,7 +143,6 @@ class GameScene extends Phaser.Scene {
     //加载游戏UI
     loadUI() {
 
-        //console.log(this.gameData.title);
 
         //放置设置按钮并具有如下功能：1.返回游戏 2.返回标题 3.转到游戏设置 4.全屏（可选：5.保存进度 6.加载进度） 
         this.settingGear = this.add.sprite(
@@ -162,19 +161,16 @@ class GameScene extends Phaser.Scene {
                 this.gearSpin.pause();
             })
             .on('pointerup', () => {
-                //console.log(this.sceneKey);
 
                 //暂停当前场景并跳转至setting场景，
                 this.scene.pause(this.sceneKey);
 
                 //如果setting不存在则创建并插入setting场景
                 if (!this.scene.get("setting")) {
-                    console.log(this.scene);
                     this.scene.add("setting", SettingScene, true, { currentScene: this.scene, });
                 }
                 else {
                     //如果setting场景存在，则直接访问setting
-                    console.log(this.scene);
                     this.scene.launch("setting", { currentScene: this.scene });
                 }
             });
@@ -197,7 +193,6 @@ class GameScene extends Phaser.Scene {
             callback: () => {
                 if (this.scene.isActive(this.sceneKey)) {
                     Timer += 1;
-                    //console.log(`已在${this.sceneKey}待机了${Timer}秒`);
                 }
             },
             callbackScope: this,
@@ -234,7 +229,6 @@ class SettingScene extends Phaser.Scene {
     }
 
     create(data) {
-
         this.cx = this.cameras.main.centerX;
         this.cy = this.cameras.main.centerY;
 
@@ -298,6 +292,7 @@ class SettingScene extends Phaser.Scene {
                 else {
                     this.cameras.main.fade(500, 0, 0, 0);
                     this.scene.stop(data.currentScene.key);
+                    game.sound.stopAll();
                     this.scene.start("title");
                 }
             });
