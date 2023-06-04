@@ -158,6 +158,8 @@ class Base extends GameScene {
             .setOrigin(0.5)
             .setDepth(1)
 
+        this.keyInput();
+
         this.onEnter();
 
 
@@ -949,6 +951,33 @@ class Base extends GameScene {
 
     exUpdate() {
 
+    }
+
+    keyInput()
+    {
+        this.input.keyboard.on('keydown', (event) =>
+        {
+            if (event.key === '=') 
+            {
+                saveData.player.hp++;
+                this.renewHp();
+
+            }
+            else if(event.key === '-')
+            {
+                this.enemy_hp--;
+                this.renewHp();
+            }
+            else if(event.key === '0')
+            {
+                this.gotoScene("floor three level 5");
+            }
+            else if(event.key === '9')
+            {
+                this.gotoScene("floor three level 4");
+            }
+
+        });
     }
 
     shortCut1() { }

@@ -113,7 +113,7 @@ class secondFloorLevel3 extends Base {
 
             this.rotateOutAndMakeNewCard("chest");
             this.time.delayedCall(3000, () => {
-                
+                this.bgm.stop()
                 this.gotoScene("floor four level 1")
             })
         }
@@ -126,6 +126,8 @@ class secondFloorLevel3 extends Base {
         {
             this.changeText(this.eventText, dataPath.eventText9);
             this.card.label = false;
+
+            saveData.player.shield = true;
 
             this.unlock.play();
 
@@ -151,7 +153,7 @@ class secondFloorLevel3 extends Base {
 
             this.rotateOutAndMakeNewCard("gate");
             this.time.delayedCall(3000, () => {
-                
+                this.bgm.stop();
                 this.gotoScene("floor four level 1")
             })
         }
@@ -162,4 +164,6 @@ class secondFloorLevel3 extends Base {
         this.rotateOutAndMakeNewCard("gate");
         this.gotoScene("floor three level 1");
     }
+
+    
 }

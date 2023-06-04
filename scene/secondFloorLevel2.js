@@ -7,7 +7,7 @@ class secondFloorLevel2 extends Base {
     onEnter() {
 
         this.scene1 = this.scene.get('floor two level 1');
-        
+
         currentPosition ="floor two level 2";
 
         //加载敌人血量
@@ -36,6 +36,8 @@ class secondFloorLevel2 extends Base {
         this.dragrotate(this.card);
 
         this.scene_turn = 1;
+
+        
 
 
     }
@@ -80,7 +82,7 @@ class secondFloorLevel2 extends Base {
     action1() {
         if (this.player_choice == "left")
         {
-            this.scene1.bgm.stop()
+            this.scene1.bgm.stop();
             this.time.delayedCall(1000, () => {
                 this.battleMusicN.play();
             })
