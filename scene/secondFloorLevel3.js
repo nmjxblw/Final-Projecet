@@ -150,7 +150,7 @@ class secondFloorLevel3 extends Base {
     }
 
     action4() {
-        this.card.label = fasle;
+        this.card.label = false;
         this.rotateOutAndMakeNewCard("gate");
         this.gotoScene("floor three level 1");
     }
