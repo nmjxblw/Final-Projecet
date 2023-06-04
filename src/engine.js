@@ -90,12 +90,13 @@ class GameScene extends Phaser.Scene {
                 loop: false,
             }
         );
-        
-         //卡牌判定音效
-         this.cardSound = this.sound.add(
-            'cardSound', 
-            { 
+
+        //卡牌判定音效
+        this.cardSound = this.sound.add(
+            'cardSound',
+            {
                 loop: false,
+                volume: 0.5,
             }
         );
 
@@ -104,7 +105,7 @@ class GameScene extends Phaser.Scene {
             'peacefulPlace',
             {
                 loop: true,
-                volume: 0.5 * Volume,
+                volume: 0.5,
                 fadeIn: 1000,
                 fadeOut: 1000,
             }
@@ -117,7 +118,7 @@ class GameScene extends Phaser.Scene {
             'battleThemeA',
             {
                 loop: true,
-                volume: 0.5 * Volume,
+                volume: 0.5,
                 fadeIn: 1000,
                 fadeOut: 1000,
             }
@@ -128,7 +129,7 @@ class GameScene extends Phaser.Scene {
             'theLastEncounter',
             {
                 loop: true,
-                volume: 0.5 * Volume,
+                volume: 0.5,
                 fadeIn: 1000,
                 fadeOut: 1000,
             }
