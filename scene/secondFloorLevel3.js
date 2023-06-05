@@ -122,7 +122,7 @@ class secondFloorLevel3 extends Base {
             this.unlock.play();
 
             this.time.delayedCall(3000, () => {
-                
+
                 this.chestCreak.play();
             })
 
@@ -130,7 +130,7 @@ class secondFloorLevel3 extends Base {
                 this.card.label = true;
                 this.card.dragable = true;
                 this.changeText(this.eventText, dataPath.eventText10);
-                this.rotateOutAndMakeNewCard("shield");
+                this.cardReset("shield");
             })
 
             this.rotateOutAndMakeNewCard("chest");
