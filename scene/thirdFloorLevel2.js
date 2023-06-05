@@ -29,6 +29,9 @@ class thirdFloorLevel2 extends Base {
         //设置卡片不可转动
         this.card.label = false;
 
+        //设置精灵是否帮助
+        this.elf_help = saveData.elf;
+
         //播放事件卡片
         this.time.delayedCall(500, () => {
             this.changeText(this.eventText, dataPath.eventCard1);
@@ -146,7 +149,7 @@ class thirdFloorLevel2 extends Base {
                 this.enemy_berserk = true;
             }
             //判断是否触发精灵事件
-            if (saveData.elf && this.enemy_hp <= 5) {
+            if (this.elf_help && this.enemy_hp <= 5) {
                 this.time.delayedCall(3000, () => { this.elf_scene(); });
             }
         }
@@ -235,7 +238,7 @@ class thirdFloorLevel2 extends Base {
                 this.enemy_berserk = true;
             }
             //判断是否触发精灵事件
-            if (saveData.elf && this.enemy_hp <= 5) {
+            if (this.elf_help && this.enemy_hp <= 5) {
                 this.time.delayedCall(3000, () => { this.elf_scene(); });
             }
 
@@ -309,7 +312,7 @@ class thirdFloorLevel2 extends Base {
                 this.enemy_berserk = true;
             }
             //判断是否触发精灵事件
-            if (saveData.elf && this.enemy_hp <= 5) {
+            if (this.elf_help && this.enemy_hp <= 5) {
                 this.time.delayedCall(3000, () => { this.elf_scene(); });
             }
         }
@@ -369,7 +372,7 @@ class thirdFloorLevel2 extends Base {
 
     //加载精灵登场画面
     elf_scene() {
-        saveData.elf = false;
+        this.elf_help = false;
         this.from_elf_scene = true
         this.cardReset("elf");
         this.card.label = false;
