@@ -7,7 +7,7 @@ class firstFloorLevel0 extends GameScene {
 
         this.cameras.main.fadeIn(transitionDuration, 0, 0, 0);
         //设置背景图片
-        this.backgroundImage = this.add.image(0, 0, "background3").setOrigin(0).setDepth(-1);
+        this.backgroundImage = this.add.image(0, 0, "background3").setOrigin(0).setDepth(-1).setAlpha(1);
 
         //设置文本框
         this.subtitleBackground = this.add.rectangle(
@@ -23,9 +23,9 @@ class firstFloorLevel0 extends GameScene {
         this.subtitle = this.add.text(
             this.subtitleBackground.x,
             this.subtitleBackground.y,
-            "",
-            0xffffff
+            ""
         )
+            .setColor("#ffffff")
             .setOrigin(0.5)
             .setDepth(4)
             .setFontSize(50)
