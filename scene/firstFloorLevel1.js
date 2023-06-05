@@ -8,12 +8,14 @@ class firstFloorLevel1 extends Base {
         this.left_choice_text = dataPath.left;
         this.right_choice_text = dataPath.right;
 
+        saveData.player.hp = 5;
+
         this.changeText(this.eventText, dataPath.eventText6);
         this.card.setTexture("player");
         this.card.label = false;
 
         //设置背景图片
-        this.backgroundImage = this.add.image(0, 0, "background3").setOrigin(0).setDepth(-1);
+        this.backgroundImage = this.add.image(0, 0, "background2").setOrigin(0).setDepth(-1);
 
         this.time.delayedCall(4000, () => {
             this.cardReset("guardian_with_mask");        

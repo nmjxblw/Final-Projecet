@@ -30,7 +30,7 @@ class title extends GameScene {
         var titleText = this.add.text(
             this.cx,
             this.cy - 300,
-            "Game Title"
+            "Eternal Dragon"
         )
             .setOrigin(0.5)
             .setColor("#ffffff")
