@@ -5,14 +5,8 @@ class thirdFloorLevel2 extends Base {
     }
 
     onEnter() {
-        if (saveData.elf) {
-            this.scene1 = this.scene.get("floor two level 3");
-        }
-        else {
-            this.scene1 = this.scene.get("floor one level 4");
-        }
-
-        this.scene1.bgm.stop();
+        game.sound.stopAll();
+        
         this.battleMusicD.play({ fadeIn: 1000 });
 
         //加载敌人血量

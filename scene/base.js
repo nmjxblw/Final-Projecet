@@ -12,11 +12,12 @@ class Base extends GameScene {
         this.load.image("dragon_normal", "assets/dragon_normal.png");
         this.load.image("dragon_berserk", "assets/dragon_berserk.png");
         this.load.image("men", "assets/men.png");
-        this.load.image("maze", "assets/cardback.png");
+        this.load.image("maze", "assets/Fork in the road.png");
         this.load.image("gate", "assets/gate.png");
         this.load.image("skeleton", "assets/skul.png");
         this.load.image("chest", "assets/chest.png");
         this.load.image("shield", "assets/shield.png");
+        this.load.image("dragon_attacks_village", "assets/Dragon_attacks_village.png");
 
     }
 
@@ -36,7 +37,7 @@ class Base extends GameScene {
             this.h + 25,
             10,
             0xffffff)
-            .setAlpha(1);
+            .setAlpha(0);
 
         //标记旋转锚点的初始位置，以便于复位
         this.initialRotatePointX = this.rotatePoint.x;
@@ -50,7 +51,7 @@ class Base extends GameScene {
             this.h + 25 - this.cardH * 0.75,
             10,
             0xffff00)
-            .setAlpha(0.8);
+            .setAlpha(0);
 
         //同样的，记录卡片的初始位置
         this.initialCardCenterX = this.cardCenterPoint.x;
@@ -124,7 +125,7 @@ class Base extends GameScene {
             this.cardText.y,
             10,
             0xff00ff)
-            .setAlpha(0.5);
+            .setAlpha(0);
 
         //设置卡牌文本背景位置、大小以及深度（位于文本下方）
         this.cardTextBackground = this.add.rectangle(

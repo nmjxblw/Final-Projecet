@@ -52,16 +52,40 @@ class thirdFloorLevel5 extends Base {
         else if (dragon_turn.includes(this.scene_turn)) {
             this.rotateOutAndMakeNewCard("dragon_normal");
             if (this.scene_turn == 8) {
-                this.card.dragable = false;
-                this.cardTwinkling("sword", 250, 0, 1, 4);
-                this.time.delayedCall(4000, () => {
+                this.card.label = false;
+                this.tweens.add({
+                    targets: this.card,
+                    duration: 500,
+                    alpha: 0,
+                    yoyo: true,
+                    repeat: false,
+                    oncomplete: () => {
+                        this.card.setTexture("sword");
+                    }
+                });
+                this.time.delayedCall(2000, () => {
                     this.card.dragable = true;
+                    this.card.label = true;
                 });
             }
             if (this.scene_turn == 9) {
                 this.stopSpotLight = false;
                 this.cardSpotLight(true);
                 this.cardTwinkling("men", 250, 0, 1, 6);
+            }
+            if (this.scene_turn == 20) {
+                this.backgroundImage.setDepth(-2);
+                this.DAV = this.add.image(0, 0, "dragon_attacks_village").setOrigin(0).setDepth(-1).setAlpha(0);
+                this.tweens.add({
+                    targets: this.DAV,
+                    duration: 500,
+                    alpha: 1
+                });
+                this.tweens.add({
+                    targets: this.background1,
+                    duration: 500,
+                    alpha: 0
+                });
             }
         }
         else if (men_turn.includes(this.scene_turn)) {
@@ -173,8 +197,7 @@ class thirdFloorLevel5 extends Base {
                     this.eventCard(dataPath.eventCard3);
                     this.cameras.main.fade(5000, 0, 0, 0);
                     this.time.delayedCall(5000, () => {
-                        this.scene1 = this.scene.get("floor three level 3");
-                        this.scene1.bgm.stop({fadeOut:1000});
+                        game.sound.stopAll();
                         this.scene.start("credit");
                     });
                 });
@@ -182,6 +205,18 @@ class thirdFloorLevel5 extends Base {
         }
         else {
             this.rotateOutAndMakeNewCard("player");
+            if (this.scene_turn == 21) {
+                this.tweens.add({
+                    targets: this.DAV,
+                    alpha: 0,
+                    duration: 500,
+                });
+                this.tweens.add({
+                    targets: this.background1,
+                    alpha: 1,
+                    duration: 500,
+                });
+            }
         }
     }
 }

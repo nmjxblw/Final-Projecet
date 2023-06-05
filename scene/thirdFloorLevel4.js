@@ -50,9 +50,37 @@ class thirdFloorLevel4 extends Base {
         }
         else if (dragon_turn.includes(this.scene_turn)) {
             this.rotateOutAndMakeNewCard("dragon_normal");
+            if (this.scene_turn == 13) {
+                this.backgroundImage.setDepth(-2);
+                this.DAV = this.add.image(0, 0, "dragon_attacks_village").setOrigin(0).setDepth(-1).setAlpha(0);
+                this.tweens.add({
+                    targets: this.DAV,
+                    duration: 500,
+                    alpha: 1
+                });
+                this.tweens.add({
+                    targets: this.background1,
+                    duration: 500,
+                    alpha: 0
+                });
+            }
         }
         else if (guardian_turn.includes(this.scene_turn)) {
             this.rotateOutAndMakeNewCard("guardian_with_mask");
+            if (this.scene_turn == 14) {
+                this.tweens.add({
+                    targets: this.background1,
+                    alpha: 1,
+                    duration: 500,
+                });
+            }
+            if (this.scene_turn == 15) {
+                this.tweens.add({
+                    targets: this.DAV,
+                    alpha: 0,
+                    duration: 500,
+                });
+            }
             if (this.scene_turn == 16) {
                 this.left_choice_text = dataPath.left2;
                 this.right_choice_text = dataPath.right2;
@@ -64,8 +92,7 @@ class thirdFloorLevel4 extends Base {
                     this.eventCard(dataPath.eventCard3);
                     this.cameras.main.fade(5000, 0, 0, 0);
                     this.time.delayedCall(5000, () => {
-                        this.scene1 = this.scene.get("floor three level 3");
-                        this.scene1.bgm.stop({fadeOut:1000});
+                        game.sound.stopAll();
                         this.scene.start("credit");
                     });
                 });
