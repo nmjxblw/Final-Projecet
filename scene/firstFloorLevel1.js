@@ -8,56 +8,39 @@ class firstFloorLevel1 extends Base {
         this.left_choice_text = dataPath.left;
         this.right_choice_text = dataPath.right;
 
-        this.changeText(this.eventText, dataPath.eventText1);
-        this.card.setTexture("dragon_normal");
+        this.changeText(this.eventText, dataPath.eventText6);
+        this.card.setTexture("player");
         this.card.label = false;
 
+        //设置背景图片
+        this.backgroundImage = this.add.image(0, 0, "background3").setOrigin(0).setDepth(-1);
+
         this.time.delayedCall(4000, () => {
-            this.changeText(this.eventText, dataPath.eventText2);
-        });
-
-        this.time.delayedCall(8000, () => {
-            this.changeText(this.eventText, dataPath.eventText3);
-        });
-
-        this.time.delayedCall(12000, () => {
-            this.changeText(this.eventText, dataPath.eventText4);
-            this.cardReset("player");
-        });
-
-        this.time.delayedCall(16000, () => {
-            this.changeText(this.eventText, dataPath.eventText5);
-        });
-
-        this.time.delayedCall(20000, () => {
-            this.changeText(this.eventText, dataPath.eventText6);
-        });
-
-        this.time.delayedCall(24000, () => {
             this.cardReset("guardian_with_mask");        
             this.changeText(this.eventText, dataPath.eventText7);
         });
 
-        this.time.delayedCall(28000, () => {
+        this.time.delayedCall(8000, () => {
             this.changeText(this.eventText, dataPath.eventText8);
         });
 
-        this.time.delayedCall(32000, () => {
+        this.time.delayedCall(12000, () => {
             this.cardReset("sword");
             this.stopSpotLight = false;
             this.cardSpotLight(true);
-            this.changeText(this.eventText, dataPath.eventText9);;
+            this.changeText(this.eventText, dataPath.eventText9);
         });
-    
-        this.time.delayedCall(36000, () => {
+
+        this.time.delayedCall(16000, () => {
             this.changeText(this.eventText, dataPath.eventText10);
         });
 
-        this.time.delayedCall(40000, () => {
+        this.time.delayedCall(20000, () => {
             this.eventCard(dataPath.eventCard);
             this.card.label = true;
             this.card.dragable = true;
         });
+
         this.dragrotate(this.card);
     }
 

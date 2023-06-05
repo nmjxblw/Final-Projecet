@@ -80,10 +80,7 @@ class secondFloorLevel2 extends Base {
     //初始行为，如果选择帮助为为移动，选择无视进入下一层
     action1() {
         if (this.player_choice == "left") {
-            if(typeof this.scene1 == "undefined")
-            {
-                this.scene1.bgm.stop();
-            }
+            game.sound.stopAll();
             
             this.time.delayedCall(1000, () => {
                 this.battleMusicN.play();
@@ -116,6 +113,7 @@ class secondFloorLevel2 extends Base {
             saveData.player.hp -= 2;
             this.renewHp();
 
+            if (this.enemy_hp < 1) { this.actionWin(); return; }
             if (this.enemy_hp == 3) { this.giantRage = true; this.scene_turn = 1; this.action4(); return; }
 
             this.changeText(this.eventText, dataPath.battleText2);
@@ -143,6 +141,7 @@ class secondFloorLevel2 extends Base {
             this.enemy_hp--;
             this.renewHp();
 
+            if (this.enemy_hp < 1) { this.actionWin(); return; }
             if (this.enemy_hp == 3) { this.giantRage = true; this.scene_turn = 1; this.action4(); return; }
 
             this.changeText(this.eventText, dataPath.battleText4);

@@ -7,6 +7,7 @@ class reborn extends Base {
         //console.log(currentPosition);
         saveData.player.sword++;
         saveData.player.hp = 5;
+        game.sound.stopAll();
         if (saveData.player.sword == 1) {
             this.card.setTexture("player");
             this.card.label = false;

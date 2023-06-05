@@ -41,7 +41,7 @@ class credit extends GameScene {
         let artText2 = this.add.text(
             artText1.x + 300,
             artText1.y + 250,
-            "By Guixiang Li\nThe treasure, skeletal soldier and gateimages are from Ai drawing.\n(https://hotpot.ai/art-generator)\nKey words:\nA 2D-style treasure chest with two keyholes.\nA 2D gate that embodies the style of a dungeon.\nAn illustration of a skeletal soldier."
+            "By Guixiang Li\nThe treasure, shield skeletal soldier and gateimages are from Ai drawing.\n(https://hotpot.ai/art-generator)\nKey words:\nA 2D-style treasure chest with two keyholes.\nA 2D gate that embodies the style of a dungeon.\nAn illustration of a skeletal soldier.\nA Silver White shield"
         )
             .setOrigin(0.5)
             .setFontFamily("Gabriola")
@@ -60,11 +60,13 @@ class credit extends GameScene {
 
         let soundText2 = this.add.text(
             this.cx,
-            soundText1.y + 250,
+            soundText1.y + 225,
             `doorOpen.ogg    -Made by Kenny, 50 RPG sound effects
 chestCreak.wav  -Made by spookymodem, Open Chest
 unlock.ogg -Made by StarNinjas, 4 Door Closes
 peacefulPlace.ogg -Made by Alexandr Zhelanov, Peaceful Place
+Menu_loop.mp3 -Made by Alexandr Zhelanov, Theme Menu
+mixkit-game-ball-tap-2073.wav -Found on mixkit.co
 TheLastEncounter.wav -Made by Matthew Pablo, RPG Battle Theme - "The Last Encounter"
 battleThemeA.mp3 -Made by cynicmusic, Battle Theme A`
         )

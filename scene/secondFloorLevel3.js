@@ -106,7 +106,6 @@ class secondFloorLevel3 extends Base {
 
             this.rotateOutAndMakeNewCard("chest");
             this.time.delayedCall(3000, () => {
-                this.bgm.stop()
                 this.gotoScene("floor four level 1")
             })
         }
@@ -145,7 +144,6 @@ class secondFloorLevel3 extends Base {
 
             this.rotateOutAndMakeNewCard("gate");
             this.time.delayedCall(3000, () => {
-                this.bgm.stop();
                 this.gotoScene("floor four level 1")
             })
         }
