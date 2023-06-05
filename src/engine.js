@@ -33,6 +33,7 @@ class GameScene extends Phaser.Scene {
         this.load.audio("battleThemeA", "assets/battleThemeA.mp3")
         this.load.audio("theLastEncounter", "assets/TheLastEncounter.wav")
         this.load.audio("cardSound", "assets/mixkit-game-ball-tap-2073.wav")
+        this.load.audio("The Fall of Arcana", "assets/The Fall of Arcana.mp3")
 
         this.exPreload();
     }
@@ -140,6 +141,17 @@ class GameScene extends Phaser.Scene {
        //主菜单bgm
        this.bgm2 = this.sound.add(
         'Menu_loop',
+        {
+            loop: true,
+            volume: 0.2,
+            fadeIn: 1000,
+            fadeOut: 1000,
+        }
+    );
+
+    //开场bgm
+    this.bgm3 = this.sound.add(
+        'The Fall of Arcana',
         {
             loop: true,
             volume: 0.2,

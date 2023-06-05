@@ -6,7 +6,7 @@ class firstFloorLevel4 extends Base {
     onEnter(){
         this.bgm.play({fadeIn:1000});
 
-        this.changeText(this.eventText, "The maze");
+        this.changeText(this.eventText, "You move on and come across a maze");
         this.left_choice_text = "enter the maze";
         this.right_choice_text = "enter the maze";
 

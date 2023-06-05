@@ -5,6 +5,9 @@ class firstFloorLevel0 extends GameScene {
 
     exCreate() {
 
+        game.sound.stopAll();
+        this.bgm3.play();
+
         this.cameras.main.fadeIn(transitionDuration, 0, 0, 0);
         //设置背景图片
         this.backgroundImage = this.add.image(0, 0, "background3").setOrigin(0).setDepth(-1).setAlpha(1);

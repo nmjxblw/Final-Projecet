@@ -67,12 +67,13 @@ unlock.ogg -Made by StarNinjas, 4 Door Closes
 peacefulPlace.ogg -Made by Alexandr Zhelanov, Peaceful Place
 Menu_loop.mp3 -Made by Alexandr Zhelanov, Theme Menu
 mixkit-game-ball-tap-2073.wav -Found on mixkit.co
+The Fall of Arcana -Made by Matthew Pablo, The Fall of Arcana (Epic Game Theme Music)
 TheLastEncounter.wav -Made by Matthew Pablo, RPG Battle Theme - "The Last Encounter"
 battleThemeA.mp3 -Made by cynicmusic, Battle Theme A`
         )
             .setOrigin(0.5)
             .setFontFamily("Gabriola")
-            .setFontSize(50)
+            .setFontSize(45)
             .setWordWrapWidth(1500);
 
 
