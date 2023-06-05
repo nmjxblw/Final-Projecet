@@ -24,11 +24,13 @@ class GameScene extends Phaser.Scene {
     preload() {
         this.load.image("gear", "assets/gear.png");
         this.load.image("background2", "assets/Game cover image.png");
+        this.load.image("background3", "assets/Dragon attacks village.png");
         this.load.json("gameData", "json/InGameData.json");
         this.load.audio('doorOpen', 'assets/doorOpen.ogg');
         this.load.audio('unlock', 'assets/unlock.ogg');
         this.load.audio("chestCreak", "assets/chestCreak.wav")
         this.load.audio("peacefulPlace", "assets/peacefulPlace.ogg")
+        this.load.audio("Menu_loop", "assets/Menu_loop.mp3")
         this.load.audio("battleThemeA", "assets/battleThemeA.mp3")
         this.load.audio("theLastEncounter", "assets/TheLastEncounter.wav")
         this.load.audio("cardSound", "assets/mixkit-game-ball-tap-2073.wav")
@@ -135,6 +137,17 @@ class GameScene extends Phaser.Scene {
                 fadeOut: 1000,
             }
         );
+
+       //主菜单bgm
+       this.bgm2 = this.sound.add(
+        'Menu_loop',
+        {
+            loop: true,
+            volume: 0.2,
+            fadeIn: 1000,
+            fadeOut: 1000,
+        }
+    );
 
 
         //更多的shortcut

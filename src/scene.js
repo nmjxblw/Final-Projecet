@@ -12,6 +12,7 @@ const game = new Phaser.Game({
         openning,
         warnning,
         title,
+        firstFloorLevel0,
         firstFloorLevel1,
         firstFloorLevel2,
         firstFloorLevel3,
