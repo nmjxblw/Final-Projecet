@@ -5,7 +5,7 @@ class thirdFloorLevel3 extends Base {
     }
 
     onEnter() {
-
+        game.sound.stopAll();
         this.bgm.play();
         this.left_choice_text = dataPath.left;
         this.right_choice_text = dataPath.right;
