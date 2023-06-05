@@ -8,7 +8,7 @@ const game = new Phaser.Game({
         height: 1080
     },
     scene: [
-        //debug_scene,
+        debug_scene,
         openning,
         warnning,
         title,

@@ -1,117 +1,121 @@
 class firstFloorLevel0 extends GameScene {
-    constructor(){
+    constructor() {
         super("floor one level 0", "intro")
     }
 
-    exCreate(){
+    exCreate() {
 
         this.cameras.main.fadeIn(transitionDuration, 0, 0, 0);
         //设置背景图片
         this.backgroundImage = this.add.image(0, 0, "background3").setOrigin(0).setDepth(-1);
 
         //设置文本框
-        this.add.rectangle(0, 0, 1920, 1080, 0x000000).setOrigin(0).setDepth(1).setAlpha(0.5);
+        this.subtitleBackground = this.add.rectangle(
+            this.cx,
+            this.cy,
+            this.cx,
+            500,
+            0xffffff)
+            .setOrigin(0.5)
+            .setDepth(1)
+            .setAlpha(0.3);
 
-        //文本
-        this.Text1 = this.add.text(this.w * 0.05, this.h * 0.1, `Once upon a time, there is a land filled with magic and mysterious elements, 
-        
-        
-and within it, there is a dungeon full of mystery. `)
-            .setColor("#ffffff")
-            .setOrigin(0)
+        this.subtitle = this.add.text(
+            this.subtitleBackground.x,
+            this.subtitleBackground.y,
+            "",
+            0xffffff
+        )
+            .setOrigin(0.5)
             .setDepth(4)
-            .setFontSize(30)
+            .setFontSize(50)
             .setFontFamily("Century Gothic")
-            .setAlpha(0)   
-        
-
-        this.Text2 = this.add.text(this.w * 0.05, this.h * 0.3, `A powerful dragon lives within the dungeon and would bring tragedy to the world once every few years.`)
-            .setColor("#ffffff")
-            .setOrigin(0)
-            .setDepth(4)
-            .setFontSize(30)
-            .setFontFamily("Century Gothic")
+            .setWordWrapWidth(this.cx)
             .setAlpha(0)
+            .setLineSpacing(20);
 
-        this.Text3 = this.add.text(this.w * 0.05, this.h * 0.4, `However, as a prophecy tells, one day a brave man would come with the great sword full of unexplainable power, 
-        
 
-and they would use it to defeat the dragon.`)
-            .setColor("#ffffff")
-            .setOrigin(0)
-            .setDepth(4)
-            .setFontSize(30)
-            .setFontFamily("Century Gothic")
-            .setAlpha(0) 
+        this.playSub = this.tweens.chain({
+            targets: this.subtitle,
+            tweens: [
+                {
+                    oncomplete: () => {
+                        this.subtitle.setText("     Once upon a time, there is a land filled with magic and mysterious elements,and within it, there is a dungeon full of mystery.")
+                            .setAlpha(1);
+                    },
+                },
+                {
+                    alpha: 1,
+                    duration: 8000,
+                },
+                {
+                    alpha: 0,
+                    duration: 500,
+                },
+                {
+                    alpha: 1,
+                    duration: 500,
+                    oncomplete: () => {
+                        this.subtitle.setText("     A powerful dragon lives within the dungeon and would bring tragedy to the world once every few years.");
+                    }
+                },
+                {
+                    alpha: 1,
+                    duration: 8000,
+                },
+                {
+                    alpha: 0,
+                    duration: 500,
+                },
+                {
+                    alpha: 1,
+                    duration: 500,
+                    oncomplete: () => {
+                        this.subtitle.setText("     However, as a prophecy tells, one day a brave man would come with the great sword full of unexplainable power, and they would use it to defeat the dragon.");
+                    }
+                },
+                {
+                    alpha: 1,
+                    duration: 8000,
+                },
+                {
+                    alpha: 0,
+                    duration: 500,
+                },
+                {
+                    alpha: 1,
+                    duration: 500,
+                    oncomplete: () => {
+                        this.subtitle.setText("     You are an adventurer. Your hometown is destroyed by the dragon during the previous attack.");
+                    }
+                },
+                {
+                    alpha: 1,
+                    duration: 8000,
+                },
+                {
+                    alpha: 0,
+                    duration: 500,
+                },
+                {
+                    alpha: 1,
+                    duration: 500,
+                    oncomplete: () => {
+                        this.subtitle.setText("     As you see the fire burn through your hometown, you are filled with sorrow and anger, and you swear to defeat the dragon with the great sword from the prophecy.");
+                    }
+                },
+            ],
+        });
 
-        this.Text4 = this.add.text(this.w * 0.05, this.h * 0.6, `You are an adventurer. Your hometown is destroyed by the dragon during the previous attack.`)
-            .setColor("#ffffff")
-            .setOrigin(0)
-            .setDepth(4)
-            .setFontSize(30)
-            .setFontFamily("Century Gothic")
-            .setAlpha(0) 
-
-        this.Text5 = this.add.text(this.w * 0.05, this.h * 0.7, `As you see the fire burn through your hometown, you are filled with sorrow and anger, 
-        
-
-and you swear to defeat the dragon with the great sword from the prophecy.`)
-            .setColor("#ffffff")
-            .setOrigin(0)
-            .setDepth(4)
-            .setFontSize(30)
-            .setFontFamily("Century Gothic")
-            .setAlpha(0) 
-
-        this.tweens.add({
-                targets: this.Text1,
-                alpha: 1,
-                delay: 1000,
-                duration: 1500,
-                ease: 'Linear',
-            });
-
-        this.tweens.add({
-                targets: this.Text2,
-                alpha: 1,
-                delay: 4000,
-                duration: 1500,
-                ease: 'Linear',
-            });
-
-        this.tweens.add({
-                targets: this.Text3,
-                alpha: 1,
-                delay: 7000,
-                duration: 1500,
-                ease: 'Linear',
-            });
-
-        this.tweens.add({
-                targets: this.Text4,
-                alpha: 1,
-                delay: 10000,
-                duration: 1500,
-                ease: 'Linear',
-            });
-
-        this.tweens.add({
-                targets: this.Text5,
-                alpha: 1,
-                delay: 13000,
-                duration: 1500,
-                ease: 'Linear',
-            });
-
-        this.time.delayedCall(40000, () => {
+        this.time.delayedCall(50000, () => {
             this.cameras.main.fade(500, 0, 0, 0);
             this.time.delayedCall(500, () => { this.scene.start("floor one level 1") });
         });
-    
+
         this.input.on("pointerdown", () => {
             this.cameras.main.fade(500, 0, 0, 0);
             this.time.delayedCall(500, () => { this.scene.start("floor one level 1") });
         });
 
-}
+    }
 }

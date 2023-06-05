@@ -23,12 +23,13 @@ class warnning extends GameScene {
 
         this.warnningContent = this.add.text(
             this.cx,
-            this.cy, `This game contains fantasy, violence and other elements.\n If you feel uncomfortable, please exit the game.`
+            this.cy, `This game contains fantasy, violence and other elements.\nIf you feel uncomfortable, please exit the game.`
         )
             .setOrigin(0.5)
             .setColor("#ffffff")
             .setFontSize(75)
-            .setFontFamily('Gabriola');;
+            .setFontFamily('Gabriola')
+            .setLineSpacing(20);
 
 
         this.time.delayedCall(8000, () => {

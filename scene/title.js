@@ -4,6 +4,7 @@ class title extends GameScene {
     }
 
     exPreload() {
+        this.load.image("background2", "assets/Game cover image.png");
         //this.load.audio("titleBGM","titleBGM.mp3");
     }
 
