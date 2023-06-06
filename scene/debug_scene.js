@@ -4,12 +4,12 @@ class debug_scene extends Phaser.Scene {
     }
 
     preload() {
-        this.load.json("saveData", "json/SaveData.json");
+        // this.load.json("saveData", "json/SaveData.json");
     }
 
     create() {
-        saveData = this.cache.json.get('saveData');
-        console.log(saveData);
+        // saveData = this.cache.json.get('saveData');
+        loadSaveData();
         console.log(this.scene.manager.getAt(1).sys.config);
         this.scene.start(this.scene.manager.getAt(1).sys.config);
     }

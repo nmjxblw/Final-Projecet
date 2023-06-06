@@ -138,27 +138,27 @@ class GameScene extends Phaser.Scene {
             }
         );
 
-       //主菜单bgm
-       this.bgm2 = this.sound.add(
-        'Menu_loop',
-        {
-            loop: true,
-            volume: 0.2,
-            fadeIn: 1000,
-            fadeOut: 1000,
-        }
-    );
+        //主菜单bgm
+        this.bgm2 = this.sound.add(
+            'Menu_loop',
+            {
+                loop: true,
+                volume: 0.2,
+                fadeIn: 1000,
+                fadeOut: 1000,
+            }
+        );
 
-    //开场bgm
-    this.bgm3 = this.sound.add(
-        'The Fall of Arcana',
-        {
-            loop: true,
-            volume: 0.2,
-            fadeIn: 1000,
-            fadeOut: 1000,
-        }
-    );
+        //开场bgm
+        this.bgm3 = this.sound.add(
+            'The Fall of Arcana',
+            {
+                loop: true,
+                volume: 0.2,
+                fadeIn: 1000,
+                fadeOut: 1000,
+            }
+        );
 
 
         //更多的shortcut
@@ -189,6 +189,7 @@ class GameScene extends Phaser.Scene {
 
                 //暂停当前场景并跳转至setting场景，
                 this.scene.pause(this.sceneKey);
+                console.log(saveData.volume);
 
                 //如果setting不存在则创建并插入setting场景
                 if (!this.scene.get("setting")) {
@@ -316,6 +317,7 @@ class SettingScene extends Phaser.Scene {
                 }
                 else {
                     this.cameras.main.fade(500, 0, 0, 0);
+                    writeSaveData();
                     this.scene.stop(data.currentScene.key);
                     game.sound.stopAll();
                     this.scene.start("title");
@@ -326,7 +328,7 @@ class SettingScene extends Phaser.Scene {
         this.VolumeText = this.add.text(
             this.cx,
             this.cy - 50,
-            `Volume:${Math.floor(Volume * 100)}%`
+            `Volume:${Math.floor(saveData.volume * 100)}%`
         )
             .setColor("#000000")
             .setOrigin(0.5)
@@ -336,9 +338,9 @@ class SettingScene extends Phaser.Scene {
 
         //设置音量调节栏
         this.VolumeSlider = this.add.rectangle(this.cx, this.cy + 50, 250, 12.5).setFillStyle(0x444444).setOrigin(0.5).setInteractive();
-        this.VolumeBar = this.add.rectangle(200 * Volume + this.cx - 100, this.cy + 50, 20, 40).setFillStyle(0x444444).setOrigin(0.5);
+        this.VolumeBar = this.add.rectangle(200 * saveData.volume + this.cx - 100, this.cy + 50, 20, 40).setFillStyle(0x444444).setOrigin(0.5);
         //音量设置公式
-        Volume = (this.VolumeBar.x - this.cx + 100) / 200;
+        saveData.volume = (this.VolumeBar.x - this.cx + 100) / 200;
 
         this.VolumeBar.setInteractive({ draggable: true });
         this.input.setDraggable(this.VolumeBar);
@@ -352,9 +354,9 @@ class SettingScene extends Phaser.Scene {
             }
 
             this.VolumeBar.setPosition(dragX, this.cy + 50);
-            Volume = (dragX - this.cx + 100) / 200;
-            game.sound.volume = Volume;
-            this.VolumeText.setText(`Volume:${Math.floor(Volume * 100)}%`);
+            saveData.volume = (dragX - this.cx + 100) / 200;
+            game.sound.volume = saveData.volume;
+            this.VolumeText.setText(`Volume:${Math.floor(saveData.volume * 100)}%`);
         });
 
         this.VolumeSlider.on("pointerdown", (pointer) => {
@@ -368,9 +370,9 @@ class SettingScene extends Phaser.Scene {
                 this.VolumeBar.x = pointer.x;
             }
 
-            Volume = (this.VolumeBar.x - this.cx + 100) / 200;
-            game.sound.volume = Volume;
-            this.VolumeText.setText(`Volume:${Math.floor(Volume * 100)}%`);
+            saveData.volume = (this.VolumeBar.x - this.cx + 100) / 200;
+            game.sound.volume = saveData.volume;
+            this.VolumeText.setText(`Volume:${Math.floor(saveData.volume * 100)}%`);
         });
 
         //设置返回按钮
@@ -391,6 +393,7 @@ class SettingScene extends Phaser.Scene {
                 this.BackGame.setText(`Back`).setAlpha(0.8).setScale(1).setColor("#000000");
             })
             .on("pointerup", () => {
+                writeSaveData();
                 this.scene.stop("setting");
                 this.scene.resume(data.currentScene.key);
             });
@@ -398,9 +401,12 @@ class SettingScene extends Phaser.Scene {
         //当玩家点击菜单外时自动关闭菜单
         this.input.on("pointerup", (pointer) => {
             if (!this.backgroundBound.getBounds().contains(pointer.x, pointer.y)) {
+                writeSaveData();
                 this.scene.stop("setting");
                 this.scene.resume(data.currentScene.key);
             }
         });
+
+
     }
 }

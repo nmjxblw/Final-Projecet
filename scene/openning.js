@@ -4,14 +4,12 @@ class openning extends Phaser.Scene {
     }
 
     preload() {
-        this.load.json("saveData", "json/SaveData.json");
+        
     }
 
     create() {
 
-        saveData = this.cache.json.get('saveData');
-
-        game.sound.volume = Volume;
+        game.sound.volume = saveData.volume;
 
         this.cameras.main.fadeIn(1000, 0, 0, 0);
         this.cameras.main.setBackgroundColor(0xf0f0f0);
