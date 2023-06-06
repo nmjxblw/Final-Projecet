@@ -25,13 +25,13 @@ class GameScene extends Phaser.Scene {
         this.load.image("gear", "assets/gear.png");
         this.load.image("background3", "assets/Dragon_attacks_village.png");
         this.load.json("gameData", "json/InGameData.json");
-        this.load.audio('doorOpen', 'assets/doorOpen.ogg');
-        this.load.audio('unlock', 'assets/unlock.ogg');
+        this.load.audio('doorOpen', 'assets/doorOpen.mp3');
+        this.load.audio('unlock', 'assets/unlock.mp3');
         this.load.audio("chestCreak", "assets/chestCreak.wav")
-        this.load.audio("peacefulPlace", "assets/peacefulPlace.ogg")
+        this.load.audio("peacefulPlace", "assets/peacefulPlace.mp3")
         this.load.audio("Menu_loop", "assets/Menu_loop.mp3")
         this.load.audio("battleThemeA", "assets/battleThemeA.mp3")
-        this.load.audio("theLastEncounter", "assets/TheLastEncounter.wav")
+        this.load.audio("theLastEncounter", "assets/TheLastEncounter.mp3")
         this.load.audio("cardSound", "assets/mixkit-game-ball-tap-2073.wav")
         this.load.audio("The Fall of Arcana", "assets/The Fall of Arcana.mp3")
 
