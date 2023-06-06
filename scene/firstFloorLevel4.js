@@ -51,6 +51,7 @@ class firstFloorLevel5 extends Base{
                 this.changeText(this.eventText, dataPath.eventText);
             }
             else{
+                this.card.label = false;
                 this.eventCard(dataPath.eventCard1);
                 this.time.delayedCall(3000, () => {
                     this.lose();
@@ -62,6 +63,7 @@ class firstFloorLevel5 extends Base{
                 this.changeText(this.eventText, dataPath.eventText);
             }
             else{
+                this.card.label = false;
                 this.eventCard(dataPath.eventCard2);
                 this.time.delayedCall(3000, () => {
                     this.lose();
@@ -74,6 +76,7 @@ class firstFloorLevel5 extends Base{
                 this.win();
             }
             else{
+                this.card.label = false;
                 this.eventCard(dataPath.eventCard3);
                 this.time.delayedCall(3000, () => {
                     this.lose();

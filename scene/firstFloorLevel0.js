@@ -115,9 +115,14 @@ class firstFloorLevel0 extends GameScene {
             this.time.delayedCall(500, () => { this.scene.start("floor one level 1") });
         });
 
-        this.input.on("pointerdown", () => {
-            this.cameras.main.fade(500, 0, 0, 0);
-            this.time.delayedCall(500, () => { this.scene.start("floor one level 1") });
+        this.input.on('pointerdown', (pointer) => {
+            if (pointer.leftButtonDown()) {
+                // 判断点击的不是齿轮
+                if (!this.settingGear.getBounds().contains(pointer.x, pointer.y)) {
+                    this.cameras.main.fade(500, 0, 0, 0);
+                    this.time.delayedCall(500, () => { this.scene.start("floor one level 1") });
+                }
+            }
         });
 
     }
