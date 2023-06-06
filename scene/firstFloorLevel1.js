@@ -4,11 +4,17 @@ class firstFloorLevel1 extends Base {
     }
 
     onEnter(){
+
+        //赋予初始值
+        saveData.player.hp = 5;
+        saveData.player.sword = 0;
+        saveData.player.shield = false;
+        saveData.player.Elf = false;
+        writeSaveData();
+
         //console.log("floor three level 1");
         this.left_choice_text = dataPath.left;
         this.right_choice_text = dataPath.right;
-
-        saveData.player.hp = 5;
 
         this.changeText(this.eventText, dataPath.eventText6);
         this.card.setTexture("player");
