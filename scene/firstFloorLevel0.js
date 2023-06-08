@@ -9,8 +9,9 @@ class firstFloorLevel0 extends GameScene {
         this.bgm3.play();
 
         this.cameras.main.fadeIn(transitionDuration, 0, 0, 0);
-        //设置背景图片
-        this.backgroundImage = this.add.image(0, 0, "background3").setOrigin(0).setDepth(-1).setAlpha(1);
+
+        //设置背景
+        this.backgroundVideo = this.add.video(0, 0, "background3").setOrigin(0).setDepth(-1).play(true);
 
         //设置文本框
         this.subtitleBackground = this.add.rectangle(

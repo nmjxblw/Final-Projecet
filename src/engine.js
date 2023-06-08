@@ -23,7 +23,7 @@ class GameScene extends Phaser.Scene {
 
     preload() {
         this.load.image("gear", "assets/gear.png");
-        this.load.image("background3", "assets/Dragon_attacks_village.png");
+        this.load.video("background3", "assets/Dragon_attacks_village.mp4");
         this.load.json("gameData", "json/InGameData.json");
         this.load.audio('doorOpen', 'assets/doorOpen.mp3');
         this.load.audio('unlock', 'assets/unlock.mp3');
