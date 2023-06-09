@@ -16,6 +16,7 @@ class title extends GameScene {
         this.backgroundImage = this.add.image(0, 0, "background2").setOrigin(0).setDepth(-1);
         
         //播放背景音乐
+        game.sound.stopAll();
         this.bgm2.play();
 
         this.input.keyboard.on('keydown', (event) => {
