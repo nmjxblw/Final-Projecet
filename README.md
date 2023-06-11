@@ -51,13 +51,13 @@ We used the code to create a small star that pops up from the top of the screen 
 
 - [contributor credits] 
 
-   Guixiang Li - Backup Production Lead
+Guixiang Li - Backup Production Lead
    
-   Yuanxiao Wu - Testing Lead
+Yuanxiao Wu - Testing Lead
    
-   Zexuan Li- Production Lead
+Zexuan Li- Production Lead
    
-   Zhuo Chen - Technology Lead
+Zhuo Chen - Technology Lead
 
 
 
