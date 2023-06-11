@@ -1,7 +1,7 @@
 # Final-Projecet
 - [main game] 
 
-  [nmjxblw.github.io/Final-Projecet/](https://nmjxblw.github.io/Final-Projecet/)
+https://nmjxblw.github.io/Final-Projecet/
 
 - [prototypes] 
 
