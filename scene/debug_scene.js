@@ -10,7 +10,7 @@ class debug_scene extends Phaser.Scene {
     create() {
         // saveData = this.cache.json.get('saveData');
         loadSaveData();
-        this.time.delayedCall(100, () => {
+        this.time.delayedCall(1000, () => {
             console.log(this.scene.manager.getAt(1).sys.config);
             this.scene.start(this.scene.manager.getAt(1).sys.config);
         });
