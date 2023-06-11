@@ -29,23 +29,23 @@ The plot of our game is a plot about the eternal cycle. In the dungeon, the main
 
 We store most of our game text in a file called InGameData.json and the player's state and volume settings in a file called SaveData.json.
 
-![image.png](https://canvas.ucsc.edu/users/88780/files/7492786/preview?verifier=CVTfHEwKd4FQqDy7rDLa2ShKFWtkHFw6fDiSntz7)
+![image1.png](https://drive.google.com/uc?export=view&id=1Q8r9enkY8J_GqNCImorBLxcDL9cBmFMf)
 
-![image.png](https://canvas.ucsc.edu/users/88780/files/7492791/preview?verifier=iVjvBQ1bgjdlza6Oe7CdMrrTByS2NwS7RWdWjeos)
+![image2.png](https://drive.google.com/uc?export=view&id=1ArYTvUnIibhl8dKCpSnTDoAtpDlPtEXt)
 
 **Advanced visual assets:**
 
 In the game background introduction scene, we used a video as the background of our scene.
 
-![image.png](https://canvas.ucsc.edu/users/88780/files/7492798/preview?verifier=BvIXS9Eb4vvYf9mvvM3ZTyMcpT7aFLIuUWVdsCG4)
+![image.png](https://drive.google.com/uc?export=view&id=1Ah3owg0Ltb_fj14gJ3_EUWvcCPA-Zbhr)
 
 **Procedural graphics:**
 
 We used the code to create a small star that pops up from the top of the screen along with the event card.
 
-![image.png](https://canvas.ucsc.edu/users/88780/files/7492807/preview?verifier=OYgNqemACbs9v70jAbEuYEKfz06wYyqpHXG7Q5WU)
+![image.png](https://drive.google.com/uc?export=view&id=14H1RWfVSJA2adMvqN8KRYI_D-yD4vfK1)
 
-![image.png](https://canvas.ucsc.edu/users/88780/files/7492812/preview?verifier=4857hoUIP0G4eJ3Ng6zJbhqsW3WWGDcijsOLvM7N)
+![image.png](https://drive.google.com/uc?export=view&id=1aehodOOlIG-Ge9W8vbB6zYO1dnbsrLin)
 
 
 
