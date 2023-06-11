@@ -1,7 +1,7 @@
 # Final-Projecet
 - [main game] 
 
-  [nmjxblw.github.io/Final-Projecet/](https://nmjxblw.github.io/Final-Projecet/)
+https://nmjxblw.github.io/Final-Projecet/
 
 - [prototypes] 
 
@@ -51,10 +51,13 @@ We used the code to create a small star that pops up from the top of the screen 
 
 - [contributor credits] 
 
-   Guixiang Li - Backup Production Lead
-   Yuanxiao Wu - Testing Lead
-   Zexuan Li- Production Lead
-   Zhuo Chen - Technology Lead
+Guixiang Li - Backup Production Lead
+   
+Yuanxiao Wu - Testing Lead
+   
+Zexuan Li- Production Lead
+   
+Zhuo Chen - Technology Lead
 
 
 
@@ -79,12 +82,22 @@ A Silver White shield
 Sounds Source:
 
 doorOpen.ogg    -Made by Kenny, 50 RPG sound effects
+
 chestCreak.wav  -Made by spookymodem, Open Chest
+
 unlock.ogg -Made by StarNinjas, 4 Door Closes
+
 peacefulPlace.ogg -Made by Alexandr Zhelanov, Peaceful Place
+
 Menu_loop.mp3 -Made by Alexandr Zhelanov, Theme Menu
+
 mixkit-game-ball-tap-2073.wav -Found on mixkit.co
+
 The Fall of Arcana -Made by Matthew Pablo, The Fall of Arcana (Epic Game Theme Music)
+
 TheLastEncounter.wav -Made by Matthew Pablo, RPG Battle Theme - "The Last Encounter"
+
 battleThemeA.mp3 -Made by cynicmusic, Battle Theme A
+
+
 
