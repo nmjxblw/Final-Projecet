@@ -14,7 +14,7 @@ class secondFloorLevel1 extends Base {
     this.dragrotate(this.card);
   }
 
-  //Determine whether the player has made a choice
+  //Determine player choice
   judgeChoice() {
     if (this.player_choice != "") {
       this.goToLevel2();
