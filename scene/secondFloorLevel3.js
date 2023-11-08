@@ -13,17 +13,22 @@ class secondFloorLevel3 extends Base {
         this.left_choice_text = dataPath.left1
         this.right_choice_text = dataPath.right1
 
+        this.normalDelayTime = 1000;
+        this.slowDelayTime = 3000;
+        this.slowerDelayTime = 5000;
+        this.slowestDelayTime = 6000;
+
 
 
         this.card.label = false;
         this.changeText(this.eventText, dataPath.eventText1);
 
-        this.time.delayedCall(3000, () => {
+        this.time.delayedCall(this.slowDelayTime, () => {
 
             this.changeText(this.eventText, dataPath.eventText2);
         })
 
-        this.time.delayedCall(6000, () => {
+        this.time.delayedCall(this.slowestDelayTime, () => {
             this.changeText(this.eventText, dataPath.eventText3);
             this.card.label = true;
         })
@@ -33,23 +38,28 @@ class secondFloorLevel3 extends Base {
 
         this.scene_turn = 1;
 
+        this.determineFindChest = 1;
+        this.determineChestLock1 = 2;
+        this.determineChestLock2 = 3;
+        this.determineChestOpen = 4;
+
 
     }
 
-    //递归函数，用于实现while loop
+    //Determine player choice
     judgeChoice() {
         if (this.player_choice != "") {
-            if (this.scene_turn == 1) {
-                this.action1();
+            if (this.scene_turn == this.determineFindChest) {
+                this.beforeHeadingToChest();
             }
-            else if (this.scene_turn == 2) {
-                this.action2();
+            else if (this.scene_turn == this.determineChestLock1) {
+                this.openTheChestLock1();
             }
-            else if (this.scene_turn == 3) {
-                this.action3();
+            else if (this.scene_turn == this.determineChestLock2) {
+                this.openTheChestLock2();
             }
-            else if (this.scene_turn == 4) {
-                this.action4();
+            else if (this.scene_turn == this.determineChestOpen) {
+                this.openedTheChest();
             }
 
 
@@ -57,19 +67,17 @@ class secondFloorLevel3 extends Base {
         this.scene_turn++;
     }
 
-    action1() {
+    beforeHeadingToChest() {
         if (this.player_choice == "left") {
             this.card.label = false;
             this.changeText(this.eventText, dataPath.eventText5);
             this.rotateOutAndMakeNewCard("chest");
 
-
-
-            this.time.delayedCall(3000, () => {
+            this.time.delayedCall(this.slowDelayTime, () => {
                 this.card.label = true;
                 this.card.dragable = true;
                 this.changeText(this.eventText, dataPath.eventText6);
-                this.time.delayedCall(1000, () => { console.log(this.card) })
+                this.time.delayedCall(this.normalDelayTime, () => { console.log(this.card) })
 
             })
 
@@ -82,13 +90,13 @@ class secondFloorLevel3 extends Base {
             this.changeText(this.eventText, dataPath.eventText4);
 
             this.rotateOutAndMakeNewCard("gate");
-            this.time.delayedCall(3000, () => {
+            this.time.delayedCall(this.slowDelayTime, () => {
                 this.gotoScene("floor three level 1");
             })
         }
 
     }
-    action2() {
+    openTheChestLock1() {
         if (this.player_choice == "left") {
             this.changeText(this.eventText, dataPath.eventText7);
             this.rotateOutAndMakeNewCard("chest");
@@ -105,14 +113,14 @@ class secondFloorLevel3 extends Base {
             this.card.label = false;
 
             this.rotateOutAndMakeNewCard("chest");
-            this.time.delayedCall(3000, () => {
+            this.time.delayedCall(this.slowDelayTime, () => {
                 this.gotoScene("floor four level 1")
             })
         }
 
     }
 
-    action3() {
+    openTheChestLock2() {
         if (this.player_choice == "left") {
             this.changeText(this.eventText, dataPath.eventText9);
             this.card.label = false;
@@ -121,12 +129,12 @@ class secondFloorLevel3 extends Base {
 
             this.unlock.play();
 
-            this.time.delayedCall(3000, () => {
+            this.time.delayedCall(this.slowDelayTime, () => {
 
                 this.chestCreak.play();
             })
 
-            this.time.delayedCall(5000, () => {
+            this.time.delayedCall(this.slowerDelayTime, () => {
                 this.card.label = true;
                 this.card.dragable = true;
                 this.changeText(this.eventText, dataPath.eventText10);
@@ -143,13 +151,13 @@ class secondFloorLevel3 extends Base {
             this.card.label = false;
 
             this.rotateOutAndMakeNewCard("gate");
-            this.time.delayedCall(3000, () => {
+            this.time.delayedCall(this.slowDelayTime, () => {
                 this.gotoScene("floor four level 1")
             })
         }
     }
 
-    action4() {
+    openedTheChest() {
         this.card.label = false;
         this.rotateOutAndMakeNewCard("gate");
         this.gotoScene("floor three level 1");
