@@ -82,12 +82,12 @@ class secondFloorLevel2 extends Base {
       ) {
         this.ragingGiantAttackAgain();
       } else if (
-        this.scene_turn % normalBattleLoop ==
+        this.scene_turn % this.normalBattleLoop ==
         this.giantMovementBehavior
       ) {
         this.giantMovement();
       } else if (
-        this.scene_turn % normalBattleLoop ==
+        this.scene_turn % this.normalBattleLoop ==
         this.giantAttackBehavior
       ) {
         this.giantAttack();
@@ -221,7 +221,7 @@ class secondFloorLevel2 extends Base {
       });
 
       this.slowDelaytime = 3500;
-      this.time.delayedCall(slowDelaytime, () => {
+      this.time.delayedCall(this.slowDelaytime, () => {
         this.card.label = true;
         this.eventCard(dataPath["eventCard2"]);
       });
