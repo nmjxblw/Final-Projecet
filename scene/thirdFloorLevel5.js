@@ -16,17 +16,6 @@ class thirdFloorLevel5 extends Base {
         this.changeText(this.eventText, dataPath[`eventText${this.scene_turn}`]);
 
         this.dragrotate(this.card);
-
-        this.input.keyboard.on("keyup", (event) => {
-            if (event.key === "q") {
-                console.log("26");
-                this.scene_turn = 26;
-            }
-            if (event.key === "w") {
-                console.log("34");
-                this.scene_turn = 34;
-            }
-        });
     }
 
     judgeChoice() {

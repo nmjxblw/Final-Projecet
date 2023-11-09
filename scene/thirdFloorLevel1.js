@@ -1,6 +1,6 @@
 class thirdFloorLevel1 extends Base {
     constructor() {
-        //当前场景为第三层大门前
+        //current scene name
         super("floor three level 1", "at the door")
     }
 
@@ -15,11 +15,15 @@ class thirdFloorLevel1 extends Base {
 
         this.card.label = false;
 
-        this.time.delayedCall(4000, () => {
+        //magic number for the time
+        const firstTimeTrigger = 4000;
+        const secondTimeTrigger = 8000;
+
+        this.time.delayedCall(firstTimeTrigger, () => {
             this.changeText(this.eventText, dataPath.eventText2);
         });
 
-        this.time.delayedCall(8000, () => {
+        this.time.delayedCall(secondTimeTrigger, () => {
             this.changeText(this.eventText, dataPath.eventText3);
             this.card.label = true;
             this.card.dragable = true;

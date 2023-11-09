@@ -21,10 +21,10 @@ class thirdFloorLevel4 extends Base {
 
     judgeChoice() {
         this.scene_turn++;
-        this.action()
+        this.turnDisplay()
     }
 
-    action() {
+    turnDisplay() {
         var sowrd_turn = [3, 10, 11];
         var dragon_turn = [6, 7, 8, 9, 12, 13];
         var guardian_turn = [14, 15, 16, 17];

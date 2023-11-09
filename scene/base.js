@@ -22,8 +22,9 @@ class Base extends GameScene {
     }
 
     exShortCut() {
-        this.s = this.game.config.width * 0.01;
-        //假定卡牌大小为400*600
+        const shrinkValue = 0.01; 
+        this.s = this.game.config.width * shrinkValue;
+        //card setting, width and height
         this.cardW = 400;
         this.cardH = 600;
 
@@ -802,7 +803,7 @@ class Base extends GameScene {
     }
 
     showHp() {
-        //显示玩家血量文本
+        //display player hp
         this.show_player_hp = saveData.player.hp;
         this.player_hp_text = this.add.text(
             this.cx - 275,
@@ -971,6 +972,9 @@ class Base extends GameScene {
             else if (event.key === '-') {
                 this.enemy_hp--;
                 this.renewHp();
+            }
+            else if (event.key === '3') {
+                this.gotoScene("floor three level 1");
             }
             else if (event.key === '0') {
                 this.gotoScene("floor three level 5");

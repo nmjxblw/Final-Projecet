@@ -20,7 +20,7 @@ function loadSaveData() {
             response.json()
                 .then((jsonData) => {
                     //2.如果没有localStorage则从saveData.json中复制数据再赋值
-                    if (typeof saveData === 'undefined' || !saveData || saveData === {}) {
+                    if (typeof saveData === 'undefined' || !saveData ) {
                         //console.log("检测到saveData为空");
                         //console.log("当前jsonData为:");
                         //console.log(jsonData);
@@ -44,7 +44,7 @@ function loadSaveData() {
 function writeSaveData() {
     //console.log("已调用writeSaveData()");
     //1.先检测saveData是否赋值
-    if (typeof saveData === 'undefined' || !saveData || saveData === {}) {
+    if (typeof saveData === 'undefined' || !saveData) {
         console.warn(`正在调用写入存档函数,saveData未赋值!调用加载存档函数为saveData赋值。`);
         //调用加载存档函数为saveData赋值
         loadSaveData();

@@ -15,23 +15,29 @@ class thirdFloorLevel3 extends Base {
 
         this.changeText(this.eventText, dataPath.eventText1);
 
-        this.time.delayedCall(3000, () => {
+        const first_time_trigger = 3000;
+        const second_time_trigger = 6000;
+        const third_time_trigger = 9000;
+        const fourth_time_trigger = 12000;
+        const fifth_time_trigger = 15000;
+
+        this.time.delayedCall(first_time_trigger, () => {
             this.changeText(this.eventText, dataPath.eventText2);
         });
 
-        this.time.delayedCall(6000, () => {
+        this.time.delayedCall(second_time_trigger, () => {
             this.changeText(this.eventText, dataPath.eventText3);
         });
 
-        this.time.delayedCall(9000, () => {
+        this.time.delayedCall(fourth_time_trigger, () => {
             this.changeText(this.eventText, dataPath.eventText4);
         });
 
-        this.time.delayedCall(12000, () => {
+        this.time.delayedCall(fourth_time_trigger, () => {
             this.changeText(this.eventText, dataPath.eventText5);
         });
 
-        this.time.delayedCall(15000, () => {
+        this.time.delayedCall(fifth_time_trigger, () => {
             this.changeText(this.eventText, dataPath.eventText6);
             this.card.dragable = true;
             this.card.label = true;
@@ -41,17 +47,19 @@ class thirdFloorLevel3 extends Base {
     }
 
     judgeChoice() {
-        this.action();
+        this.goToEnd();
     }
 
-    action() {
+    gotToEnd() {
         this.shakeTween(this.cameras.main);
         this.card.label = false;
         this.rotateOutAndMakeNewCard("sword");
-        if (saveData.player.sword >= 1) {
+        const max_sword = 1;
+        const three_seconds = 3000;
+        if (saveData.player.sword >= max_sword) {
             this.cardSpotLight();
             this.changeText(this.eventText, dataPath.eventText4);
-            this.time.delayedCall(3000, () => {
+            this.time.delayedCall(three_seconds, () => {
                 this.gotoScene("floor three level 4");
                 this.stopSpotLight = false;
             });
@@ -59,7 +67,7 @@ class thirdFloorLevel3 extends Base {
         else {
             this.cardSpotLight(true);
             this.changeText(this.eventText, dataPath.eventText5);
-            this.time.delayedCall(3000, () => {
+            this.time.delayedCall(three_seconds, () => {
                 this.gotoScene("floor three level 5");
                 this.stopSpotLight = false;
             });
