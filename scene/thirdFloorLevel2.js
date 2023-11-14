@@ -18,10 +18,10 @@ class thirdFloorLevel2 extends Base {
 
     currentPosition = "floor three level 2";
     //initialize the left choice text
-    this.left_choice_text = dataPath.left[0];
+    this.left_choice_text = this.left_choice_text_iterator.next().value;
     //then the right choice text
     this.def_type = saveData.player.shield ? "shield" : "no_shield";
-    this.right_choice_text = dataPath.right[0][this.def_type];
+    this.right_choice_text = this.right_choice_text_iterator.next().value[this.def_type];
 
     //load enemy state
     this.enemy_berserk = dataPath.enemy.berserk;
@@ -38,17 +38,17 @@ class thirdFloorLevel2 extends Base {
     const second_time_trigger = 3500;
     const third_time_trigger = 6500;
     this.time.delayedCall(first_time_trigger, () => {
-      this.changeText(this.eventText, dataPath.eventCard1);
+      this.changeText(this.eventText, this.eventCardIterator.next().value);
     });
 
     this.time.delayedCall(second_time_trigger, () => {
-      this.changeText(this.eventText, dataPath.eventCard2);
+      this.changeText(this.eventText, this.eventCardIterator.next().value);
     });
 
     this.time.delayedCall(third_time_trigger, () => {
-      this.changeText(this.eventText, dataPath.eventCard3);
+      this.changeText(this.eventText, this.eventCardIterator.next().value);
       this.time.delayedCall(this.three_seconds, () => {
-        this.changeText(this.eventText, dataPath.eventText1);
+        this.changeText(this.eventText, dataPath.eventText[this.dragon_attack_turn_text_index]);
         this.card.label = true;
         this.card.dargable = true;
       });
@@ -73,6 +73,19 @@ class thirdFloorLevel2 extends Base {
     this.min_pick = 1;
     this.max_pick = 100;
     this.half_of_range = 50;
+    this.left_choice_text_iterator = dataPath.left[Symbol.iterator]();
+    this.right_choice_text_iterator = dataPath.right[Symbol.iterator]();
+    this.eventCardIterator = dataPath.eventCard[Symbol.iterator]();
+    this.dragon_attack_turn_text_index = 0;
+    this.dragon_attack_berserk_turn_text_index = 6;
+    this.dragon_move_turn_text_index = 1;
+    this.dragon_move_berserk_turn_text_index = 7;
+    this.dragon_fire_ball_turn_text_index = 2;
+    this.elf_first_worlds_text_index = 3;
+    this.elf_second_worlds_text_index = 4;
+    this.dragon_attack_elf_text_index = 5;
+    this.elf_shoot_event_card_index = 4;
+    this.dragon_berserk_event_card_index = 5;
   }
 
   judgeChoice() {
@@ -136,7 +149,7 @@ class thirdFloorLevel2 extends Base {
           return;
         }
         this.time.delayedCall(this.two_seconds, () => {
-          this.changeText(this.eventText, dataPath.eventText7);
+          this.changeText(this.eventText, dataPath.eventText[this.dragon_attack_berserk_turn_text_index]);
         });
       } else {
         //non berserker, player take 2 damage
@@ -164,11 +177,11 @@ class thirdFloorLevel2 extends Base {
           return;
         }
         this.time.delayedCall(this.two_seconds, () => {
-          this.changeText(this.eventText, dataPath.eventText2);
+          this.changeText(this.eventText, dataPath.eventText[this.dragon_fire_ball_turn_text_index]);
         });
       }
       if (this.enemy_hp <= this.enemy_berserk_hp && !this.enemy_berserk) {
-        this.eventCard(dataPath.eventCard6);
+        this.eventCard(dataPath.eventCard[this.dragon_berserk_event_card_index]);
         this.enemy_berserk = true;
       }
       //elf event
@@ -216,7 +229,7 @@ class thirdFloorLevel2 extends Base {
         this.time.delayedCall(this.two_seconds, () => {
           this.changeText(
             this.eventText,
-            dataPath.eventText7 + "\nWhat are you going to do next?"
+            dataPath.eventText[this.dragon_attack_berserk_turn_text_index] + "\nWhat are you going to do next?"
           );
         });
       } else {
@@ -227,7 +240,7 @@ class thirdFloorLevel2 extends Base {
           this.changeText(this.eventText, "You dodged the attack.");
         }
         this.time.delayedCall(this.two_seconds, () => {
-          this.changeText(this.eventText, dataPath.eventText2);
+          this.changeText(this.eventText, dataPath.eventText[this.dragon_fire_ball_turn_text_index]);
         });
       }
     }
@@ -255,16 +268,16 @@ class thirdFloorLevel2 extends Base {
         this.time.delayedCall(this.two_seconds, () => {
           this.changeText(
             this.eventText,
-            dataPath.eventText8 + "\nWhat are you going to do next?"
+            dataPath.eventText[this.dragon_move_berserk_turn_text_index] + "\nWhat are you going to do next?"
           );
         });
       } else {
         this.time.delayedCall(this.two_seconds, () => {
-          this.changeText(this.eventText, dataPath.eventText3);
+          this.changeText(this.eventText, dataPath.eventText[this.dragon_move_turn_text_index]);
         });
       }
       if (this.enemy_hp <= this.enemy_berserk_hp && !this.enemy_berserk) {
-        this.eventCard(dataPath.eventCard6);
+        this.eventCard(dataPath.eventCard[this.dragon_berserk_event_card_index]);
         this.enemy_berserk = true;
       }
       if (this.elf_help && this.enemy_hp <= this.enemy_berserk_hp) {
@@ -281,12 +294,12 @@ class thirdFloorLevel2 extends Base {
       this.time.delayedCall(this.two_seconds, () => {
         this.changeText(
           this.eventText,
-          dataPath.eventText8 + "\nWhat are you going to do next?"
+          dataPath.eventText[this.dragon_move_berserk_turn_text_index] + "\nWhat are you going to do next?"
         );
       });
     } else {
       this.time.delayedCall(this.two_seconds, () => {
-        this.changeText(this.eventText, dataPath.eventText3);
+        this.changeText(this.eventText, dataPath.eventText[this.dragon_move_turn_text_index]);
       });
     }
 
@@ -328,16 +341,16 @@ class thirdFloorLevel2 extends Base {
         this.time.delayedCall(this.two_seconds, () => {
           this.changeText(
             this.eventText,
-            dataPath.eventText7 + "\nWhat are you going to do next?"
+            dataPath.eventText[this.dragon_attack_berserk_turn_text_index] + "\nWhat are you going to do next?"
           );
         });
       } else {
         this.time.delayedCall(this.two_seconds, () => {
-          this.changeText(this.eventText, dataPath.eventText1);
+          this.changeText(this.eventText, dataPath.eventText[this.dragon_attack_turn_text_index]);
         });
       }
       if (this.enemy_hp <= this.enemy_berserk_hp && !this.enemy_berserk) {
-        this.eventCard(dataPath.eventCard6);
+        this.eventCard(dataPath.eventCard[this.dragon_berserk_event_card_index]);
         this.enemy_berserk = true;
       }
       if (this.elf_help && this.enemy_hp <= this.enemy_berserk_hp) {
@@ -371,12 +384,12 @@ class thirdFloorLevel2 extends Base {
         this.time.delayedCall(this.two_seconds, () => {
           this.changeText(
             this.eventText,
-            dataPath.eventText7 + "\nWhat are you going to do next?"
+            dataPath.eventText[this.dragon_attack_berserk_turn_text_index] + "\nWhat are you going to do next?"
           );
         });
       } else {
         this.time.delayedCall(this.two_seconds, () => {
-          this.changeText(this.eventText, dataPath.eventText1);
+          this.changeText(this.eventText, dataPath.eventText[this.dragon_attack_turn_text_index]);
         });
       }
     }
@@ -393,8 +406,8 @@ class thirdFloorLevel2 extends Base {
     this.from_elf_scene = false;
     this.rotateOutAndMakeNewCard("dragon_berserk");
     this.changeText(this.eventText, dataPath.eventText9);
-    this.left_choice_text = dataPath.left1;
-    this.right_choice_text = dataPath.right1[this.def_type];
+    this.left_choice_text = dataPath.left[1];
+    this.right_choice_text = dataPath.right[1][this.def_type];
   }
 
   //load elf event
@@ -407,18 +420,18 @@ class thirdFloorLevel2 extends Base {
     this.right_choice_text = dataPath.right2;
 
     this.time.delayedCall(this.one_second, () => {
-      this.changeText(this.eventText, dataPath.eventText4);
+      this.changeText(this.eventText, dataPath.eventText[this.elf_first_worlds_text_index]);
     });
     this.time.delayedCall(this.four_seconds, () => {
-      this.changeText(this.eventText, dataPath.eventText5);
+      this.changeText(this.eventText, dataPath.eventText[this.elf_second_worlds_text_index]);
     });
     this.time.delayedCall(this.seven_seconds, () => {
-      this.eventCard(dataPath.eventCard5);
+      this.eventCard(dataPath.eventCard[this.elf_shoot_event_card_index]);
       this.enemy_hp -= this.player_attack_damage;
       this.renewHp();
     });
     this.time.delayedCall(this.ten_seconds, () => {
-      this.changeText(this.eventText, dataPath.eventText6);
+      this.changeText(this.eventText, dataPath.eventText[this.dragon_attack_elf_text_index]);
     });
 
     this.time.delayedCall(this.twelve_seconds, () => {

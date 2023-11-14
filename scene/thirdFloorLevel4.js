@@ -30,7 +30,7 @@ class thirdFloorLevel4 extends Base {
         var guardian_turn = [14, 15, 16, 17];
 
         this.stopSpotLight = true;
-        this.changeText(this.eventText, dataPath[`eventText${this.scene_turn}`]);
+        this.changeText(this.eventText, dataPath.eventText[`${this.scene_turn}`]);
         if (sowrd_turn.includes(this.scene_turn)) {
             this.rotateOutAndMakeNewCard("sword");
             if (this.scene_turn == 3) {

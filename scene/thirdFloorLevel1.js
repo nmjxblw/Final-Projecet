@@ -9,7 +9,7 @@ class thirdFloorLevel1 extends Base {
         this.left_choice_text = dataPath["left"];
         this.right_choice_text = dataPath["right"];
 
-        const eventTextIterator = dataPath.eventText.entries();
+        const eventTextIterator = dataPath.eventText[Symbol.iterator]();
         this.changeText(this.eventText, eventTextIterator.next().value);
 
         this.card.setTexture("gate");
