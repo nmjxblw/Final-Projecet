@@ -18,10 +18,10 @@ class thirdFloorLevel2 extends Base {
 
     currentPosition = "floor three level 2";
     //initialize the left choice text
-    this.left_choice_text = dataPath.left1;
+    this.left_choice_text = dataPath.left[0];
     //then the right choice text
     this.def_type = saveData.player.shield ? "shield" : "no_shield";
-    this.right_choice_text = dataPath.right1[this.def_type];
+    this.right_choice_text = dataPath.right[0][this.def_type];
 
     //load enemy state
     this.enemy_berserk = dataPath.enemy.berserk;
@@ -438,7 +438,6 @@ class thirdFloorLevel2 extends Base {
     });
     this.left_choice_text = "I got this...";
     this.right_choice_text = "I got this!!!";
-    console.log("win");
   }
 
   lost() {
@@ -450,6 +449,5 @@ class thirdFloorLevel2 extends Base {
     });
     this.left_choice_text = "wait...";
     this.right_choice_text = "what?!";
-    console.log("lost");
   }
 }

@@ -9,7 +9,8 @@ class thirdFloorLevel1 extends Base {
         this.left_choice_text = dataPath["left"];
         this.right_choice_text = dataPath["right"];
 
-        this.changeText(this.eventText, dataPath.eventText1);
+        const eventTextIterator = dataPath.eventText.entries();
+        this.changeText(this.eventText, eventTextIterator.next().value);
 
         this.card.setTexture("gate");
 
@@ -20,11 +21,11 @@ class thirdFloorLevel1 extends Base {
         const secondTimeTrigger = 8000;
 
         this.time.delayedCall(firstTimeTrigger, () => {
-            this.changeText(this.eventText, dataPath.eventText2);
+            this.changeText(this.eventText, eventTextIterator.next().value);
         });
 
         this.time.delayedCall(secondTimeTrigger, () => {
-            this.changeText(this.eventText, dataPath.eventText3);
+            this.changeText(this.eventText, eventTextIterator.next().value);
             this.card.label = true;
             this.card.dragable = true;
         });
