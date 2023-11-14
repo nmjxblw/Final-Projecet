@@ -29,10 +29,10 @@ class secondFloorLevel2 extends Base {
 
     this.card.setTexture("elf");
 
-    this.left_choice_text = dataPath.left1;
-    this.right_choice_text = dataPath.right1;
+    this.left_choice_text = dataPath.left[0];
+    this.right_choice_text = dataPath.right[0];
 
-    this.changeText(this.eventText, dataPath.eventText1);
+    this.changeText(this.eventText, dataPath.eventText[0]);
 
     this.dragrotate(this.card);
 
@@ -108,10 +108,10 @@ class secondFloorLevel2 extends Base {
       this.rotateOutAndMakeNewCard("giant");
       saveData.elf = true;
 
-      this.changeText(this.eventText, dataPath.battleText1);
+      this.changeText(this.eventText, dataPath.battleText[0]);
 
-      this.left_choice_text = dataPath.left2;
-      this.right_choice_text = dataPath.right2;
+      this.left_choice_text = dataPath.left[1];
+      this.right_choice_text = dataPath.right[1];
     } else {
       this.card.label = false;
       this.rotateOutAndMakeNewCard("gate");
@@ -124,7 +124,7 @@ class secondFloorLevel2 extends Base {
   giantMovement() {
     if (this.player_choice == "left") {
       this.enemy_hp -= this.playerAttackDamage;
-      saveData.player.hp -= giantAttackDamage;
+      saveData.player.hp -= this.giantAttackDamage;
       this.renewHp();
 
       if (this.enemy_hp <= 0) {
@@ -138,10 +138,10 @@ class secondFloorLevel2 extends Base {
         return;
       }
 
-      this.changeText(this.eventText, dataPath.battleText2);
+      this.changeText(this.eventText, dataPath.battleText[1]);
       this.shakeTween(this.cameras.main);
     } else {
-      this.changeText(this.eventText, dataPath.battleText3);
+      this.changeText(this.eventText, dataPath.battleText[2]);
     }
 
     this.currentAction = "giantMovement";
@@ -155,8 +155,8 @@ class secondFloorLevel2 extends Base {
 
     this.rotateOutAndMakeNewCard("giant");
 
-    this.left_choice_text = dataPath.left2;
-    this.right_choice_text = dataPath.right2;
+    this.left_choice_text = dataPath.left[1];
+    this.right_choice_text = dataPath.right[1];
   }
   //The previous behavior is movement, this behavior is attack
   giantAttack() {
@@ -175,9 +175,9 @@ class secondFloorLevel2 extends Base {
         return;
       }
 
-      this.changeText(this.eventText, dataPath.battleText4);
+      this.changeText(this.eventText, dataPath.battleText[3]);
     } else {
-      this.changeText(this.eventText, dataPath.battleText5);
+      this.changeText(this.eventText, dataPath.battleText[4]);
     }
 
     this.currentAction = "giantAttack";
@@ -190,8 +190,8 @@ class secondFloorLevel2 extends Base {
 
     this.rotateOutAndMakeNewCard("giant");
 
-    this.left_choice_text = dataPath.left2;
-    this.right_choice_text = dataPath.right2;
+    this.left_choice_text = dataPath.left[1];
+    this.right_choice_text = dataPath.right[1];
   }
   //The initial violent behavior, the text is determined based on the previous behavior, this behavior is an attack
   giantRages() {
@@ -199,38 +199,37 @@ class secondFloorLevel2 extends Base {
 
     if (this.currentAction == "giantAttack") {
       if (this.player_choice == "left") {
-        this.changeText(this.eventText, dataPath.battleText6);
+        this.changeText(this.eventText, dataPath.battleText[5]);
         this.shakeTween(this.cameras.main);
       } else {
-        this.changeText(this.eventText, dataPath.battleText7);
+        this.changeText(this.eventText, dataPath.battleText[6]);
       }
     } else {
       if (this.player_choice == "left") {
-        this.changeText(this.eventText, dataPath.battleText8);
+        this.changeText(this.eventText, dataPath.battleText[7]);
       } else {
-        this.changeText(this.eventText, dataPath.battleText9);
+        this.changeText(this.eventText, dataPath.battleText[8]);
       }
     }
 
     console.log(this.showEvent);
-
     if (this.showEvent == false) {
       this.fastDelaytime = 500;
       this.time.delayedCall(this.fastDelaytime, () => {
-        this.eventCard(dataPath["eventCard1"]);
+        this.eventCard(dataPath.eventCard[0]);
       });
 
       this.slowDelaytime = 3500;
       this.time.delayedCall(this.slowDelaytime, () => {
         this.card.label = true;
-        this.eventCard(dataPath["eventCard2"]);
+        this.eventCard(dataPath.eventCard[1]);
       });
 
       this.showEvent = true;
     } else {
       this.time.delayedCall(fastDelaytime, () => {
         this.card.label = true;
-        this.eventCard(dataPath["eventCard3"]);
+        this.eventCard(dataPath.eventCard[2]);
       });
     }
     console.log(this.showEvent);
@@ -246,19 +245,19 @@ class secondFloorLevel2 extends Base {
 
     this.rotateOutAndMakeNewCard("giant");
 
-    this.left_choice_text = dataPath.left2;
-    this.right_choice_text = dataPath.right2;
+    this.left_choice_text = dataPath.left[1];
+    this.right_choice_text = dataPath.right[1];
   }
   //The previous behavior is an attack, and this behavior is a move.
   ragingGiantMovement() {
     if (this.player_choice == "left") {
       this.enemy_hp -= this.playerAttackDamage;
-      saveData.player.hp -= giantAttackDamage;
+      saveData.player.hp -= this.giantAttackDamage;
       this.renewHp();
-      this.changeText(this.eventText, dataPath.battleText6);
+      this.changeText(this.eventText, dataPath.battleText[5]);
       this.shakeTween(this.cameras.main);
     } else {
-      this.changeText(this.eventText, dataPath.battleText7);
+      this.changeText(this.eventText, dataPath.battleText[6]);
     }
 
     this.currentAction = "ragingGiantMovement";
@@ -275,17 +274,17 @@ class secondFloorLevel2 extends Base {
 
     this.rotateOutAndMakeNewCard("giant");
 
-    this.left_choice_text = dataPath.left2;
-    this.right_choice_text = dataPath.right2;
+    this.left_choice_text = dataPath.left[1];
+    this.right_choice_text = dataPath.right[1];
   }
   //The previous behavior is movement and this behavior is attack.
   ragingGiantAttack() {
     if (this.player_choice == "left") {
       this.enemy_hp -= this.playerAttackDamage;
       this.renewHp();
-      this.changeText(this.eventText, dataPath.battleText8);
+      this.changeText(this.eventText, dataPath.battleText[7]);
     } else {
-      this.changeText(this.eventText, dataPath.battleText9);
+      this.changeText(this.eventText, dataPath.battleText[8]);
     }
 
     this.currentAction = "ragingGiantAttack";
@@ -302,19 +301,19 @@ class secondFloorLevel2 extends Base {
 
     this.rotateOutAndMakeNewCard("giant");
 
-    this.left_choice_text = dataPath.left2;
-    this.right_choice_text = dataPath.right2;
+    this.left_choice_text = dataPath.left[1];
+    this.right_choice_text = dataPath.right[1];
   }
   //The previous behavior is an attack, this behavior is an attack.
   ragingGiantAttackAgain() {
     if (this.player_choice == "left") {
       this.enemy_hp -= this.playerAttackDamage;
-      saveData.player.hp -= giantAttackDamage;
+      saveData.player.hp -= this.giantAttackDamage;
       this.renewHp();
-      this.changeText(this.eventText, dataPath.battleText6);
+      this.changeText(this.eventText, dataPath.battleText[5]);
       this.shakeTween(this.cameras.main);
     } else {
-      this.changeText(this.eventText, dataPath.battleText7);
+      this.changeText(this.eventText, dataPath.battleText[6]);
     }
 
     this.currentAction = "ragingGiantAttackAgain";
@@ -331,21 +330,21 @@ class secondFloorLevel2 extends Base {
 
     this.rotateOutAndMakeNewCard("giant");
 
-    this.left_choice_text = dataPath.left2;
-    this.right_choice_text = dataPath.right2;
+    this.left_choice_text = dataPath.left[1];
+    this.right_choice_text = dataPath.right[1];
   }
 
   actionWin() {
     this.rotateOutAndMakeNewCard("giant");
-    this.changeText(this.eventText, dataPath.eventText2);
+    this.changeText(this.eventText, dataPath.eventText[1]);
 
-    this.left_choice_text = dataPath.left3;
-    this.right_choice_text = dataPath.right3;
+    this.left_choice_text = dataPath.left[2];
+    this.right_choice_text = dataPath.right[2];
   }
 
   actionLose() {
     this.rotateOutAndMakeNewCard("giant");
-    this.changeText(this.eventText, dataPath.battleText10);
+    this.changeText(this.eventText, dataPath.battleText[9]);
 
     if (saveData.player.hp < 0) {
       saveData.player.hp = 0;
