@@ -76,16 +76,18 @@
                     "Coming to the second level, you see a Elf hunter being chased by a giant and you choose: ",
                     "Congratulations! You have defeated the giant!"
                 ],
-                "battleText1": "Giants ready to attack.",
-                "battleText2": "The giant hit you for 2 points of damage.\n\nYou hit the giant for 1 point of damage\n\nGiant ready to move.",
-                "battleText3": "You dodged the giant's attack.\n\nGiant ready to move.",
-                "battleText4": "You hit the giant for 1 point of damage.\n\nGiant ready to attack.",
-                "battleText5": "The giant did not attack you.\n\nGiant ready to attack.",
-                "battleText6": "The giant hit you for 2 points of damage.\n\nYou hit the giant for 1 point of damage.\n\nGiant are preparing for next action.",
-                "battleText7": "You dodged the giant's attack.\n\nGiant are preparing for next action",
-                "battleText8": "You hit the giant for 1 point of damage.\n\nGiant are preparing for next action.",
-                "battleText9": "The giant did not attack you.\n\nGiant are preparing for next action.",
-                "battleText10": "You failed to defeat the giant.\n\nYou are dead.",
+                "battleText": [
+                    "Giants ready to attack.",
+                    "The giant hit you for 2 points of damage.\n\nYou hit the giant for 1 point of damage\n\nGiant ready to move.",
+                    "You dodged the giant's attack.\n\nGiant ready to move.",
+                    "You hit the giant for 1 point of damage.\n\nGiant ready to attack.",
+                    "The giant did not attack you.\n\nGiant ready to attack.",
+                    "The giant hit you for 2 points of damage.\n\nYou hit the giant for 1 point of damage.\n\nGiant are preparing for next action.",
+                    "You dodged the giant's attack.\n\nGiant are preparing for next action",
+                    "You hit the giant for 1 point of damage.\n\nGiant are preparing for next action.",
+                    "The giant did not attack you.\n\nGiant are preparing for next action.",
+                    "You failed to defeat the giant.\n\nYou are dead."
+                ],
                 "eventCard": [
                     "When some powerful enemies are continuously attacked will enter the rage state.",
                     "You cannot judge the actions of enemies in a state of rage.",

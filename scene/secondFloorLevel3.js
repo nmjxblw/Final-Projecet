@@ -9,8 +9,8 @@ class secondFloorLevel3 extends Base {
     this.bgm.play();
 
     this.card.setTexture("elf");
-    this.left_choice_text = dataPath.left1;
-    this.right_choice_text = dataPath.right1;
+    this.left_choice_text = dataPath.left[0];
+    this.right_choice_text = dataPath.right[0];
 
     this.normalDelayTime = 1000;
     this.slowDelayTime = 3000;
@@ -18,14 +18,14 @@ class secondFloorLevel3 extends Base {
     this.slowestDelayTime = 6000;
 
     this.card.label = false;
-    this.changeText(this.eventText, dataPath.eventText1);
+    this.changeText(this.eventText, dataPath.eventText[0]);
 
     this.time.delayedCall(this.slowDelayTime, () => {
-      this.changeText(this.eventText, dataPath.eventText2);
+      this.changeText(this.eventText, dataPath.eventText[1]);
     });
 
     this.time.delayedCall(this.slowestDelayTime, () => {
-      this.changeText(this.eventText, dataPath.eventText3);
+      this.changeText(this.eventText, dataPath.eventText[2]);
       this.card.label = true;
     });
 
@@ -58,23 +58,23 @@ class secondFloorLevel3 extends Base {
   beforeHeadingToChest() {
     if (this.player_choice == "left") {
       this.card.label = false;
-      this.changeText(this.eventText, dataPath.eventText5);
+      this.changeText(this.eventText, dataPath.eventText[4]);
       this.rotateOutAndMakeNewCard("chest");
 
       this.time.delayedCall(this.slowDelayTime, () => {
         this.card.label = true;
         this.card.dragable = true;
-        this.changeText(this.eventText, dataPath.eventText6);
+        this.changeText(this.eventText, dataPath.eventText[5]);
         this.time.delayedCall(this.normalDelayTime, () => {
           console.log(this.card);
         });
       });
 
-      this.left_choice_text = dataPath.left2;
-      this.right_choice_text = dataPath.right2;
+      this.left_choice_text = dataPath.left[1];
+      this.right_choice_text = dataPath.right[1];
     } else {
       this.card.label = false;
-      this.changeText(this.eventText, dataPath.eventText4);
+      this.changeText(this.eventText, dataPath.eventText[3]);
 
       this.rotateOutAndMakeNewCard("gate");
       this.time.delayedCall(this.slowDelayTime, () => {
@@ -84,16 +84,16 @@ class secondFloorLevel3 extends Base {
   }
   openTheChestLock1() {
     if (this.player_choice == "left") {
-      this.changeText(this.eventText, dataPath.eventText7);
+      this.changeText(this.eventText, dataPath.eventText[6]);
       this.rotateOutAndMakeNewCard("chest");
 
       this.unlock.play();
 
-      this.left_choice_text = dataPath.left2;
-      this.right_choice_text = dataPath.right2;
+      this.left_choice_text = dataPath.left[1];
+      this.right_choice_text = dataPath.right[1];
     } else {
       console.log(saveData);
-      this.changeText(this.eventText, dataPath.eventText8);
+      this.changeText(this.eventText, dataPath.eventText[7]);
       this.card.label = false;
 
       this.rotateOutAndMakeNewCard("chest");
@@ -105,7 +105,7 @@ class secondFloorLevel3 extends Base {
 
   openTheChestLock2() {
     if (this.player_choice == "left") {
-      this.changeText(this.eventText, dataPath.eventText9);
+      this.changeText(this.eventText, dataPath.eventText[8]);
       this.card.label = false;
 
       saveData.player.shield = true;
@@ -119,16 +119,16 @@ class secondFloorLevel3 extends Base {
       this.time.delayedCall(this.slowerDelayTime, () => {
         this.card.label = true;
         this.card.dragable = true;
-        this.changeText(this.eventText, dataPath.eventText10);
+        this.changeText(this.eventText, dataPath.eventText[9]);
         this.cardReset("shield");
       });
 
       this.rotateOutAndMakeNewCard("chest");
 
-      this.left_choice_text = dataPath.left3;
-      this.right_choice_text = dataPath.right3;
+      this.left_choice_text = dataPath.left[2];
+      this.right_choice_text = dataPath.right[2];
     } else {
-      this.changeText(this.eventText, dataPath.eventText8);
+      this.changeText(this.eventText, dataPath.eventText[7]);
       this.card.label = false;
 
       this.rotateOutAndMakeNewCard("gate");
