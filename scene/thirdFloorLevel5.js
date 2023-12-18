@@ -13,20 +13,9 @@ class thirdFloorLevel5 extends Base {
         this.card.setTexture("player");
 
         this.eventCard(dataPath.eventCard1);
-        this.changeText(this.eventText, dataPath[`eventText${this.scene_turn}`]);
+        this.changeText(this.eventText, dataPath.eventText[`${this.scene_turn}`]);
 
         this.dragrotate(this.card);
-
-        this.input.keyboard.on("keyup", (event) => {
-            if (event.key === "q") {
-                console.log("26");
-                this.scene_turn = 26;
-            }
-            if (event.key === "w") {
-                console.log("34");
-                this.scene_turn = 34;
-            }
-        });
     }
 
     judgeChoice() {
@@ -36,7 +25,7 @@ class thirdFloorLevel5 extends Base {
 
     action() {
         this.stopSpotLight = true;
-        this.changeText(this.eventText, dataPath[`eventText${this.scene_turn}`]);
+        this.changeText(this.eventText, dataPath.eventText[`${this.scene_turn}`]);
         var sowrd_turn = [4, 23, 24];
         var dragon_turn = [6, 7, 8, 9, 19, 20];
         var men_turn = [10, 11, 12, 13, 15, 16, 17, 18, 22]
@@ -187,8 +176,8 @@ class thirdFloorLevel5 extends Base {
             }
 
             else if (this.scene_turn == 40) {
-                this.left_choice_text = dataPath.left2;
-                this.right_choice_text = dataPath.right2;
+                this.left_choice_text = dataPath.left[1];
+                this.right_choice_text = dataPath.right[1];
             }
             else if (this.scene_turn == 41) {
                 this.card.label = false;
