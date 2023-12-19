@@ -6,7 +6,7 @@ class firstFloorLevel2 extends Base {
     onEnter(){
         game.sound.stopAll();
         this.bgm.play();
-        this.changeText(this.eventText, dataPath.eventText);
+        this.changeText(this.eventText, dataPath.eventText[0]);
         this.left_choice_text = dataPath.left;
         this.right_choice_text = dataPath.right;
         this.card.setTexture("gate");

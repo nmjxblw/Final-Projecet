@@ -16,18 +16,18 @@ class firstFloorLevel3 extends Base {
 
         this.currentAction;
         this.scene_turn = 1;
-        this.changeText(this.eventText, dataPath.eventText1);
+        this.changeText(this.eventText, dataPath.eventText[0]);
         this.left_choice_text = dataPath.left;
         this.right_choice_text = dataPath.right;
-        this.eventCard(dataPath.eventCard);
+        this.eventCard(dataPath.eventCard[0]);
         this.card.setTexture("skeleton");
         this.dragrotate(this.card); 
     }
 
     judgeChoice(){
-        console.log(`turn ${this.scene_turn}`);
+        //console.log(`turn ${this.scene_turn}`);
         if (this.player_choice != ""){
-                console.log(`turn=${this.scene_turn} choice=${this.player_choice} `);
+                //console.log(`turn=${this.scene_turn} choice=${this.player_choice} `);
                 this.rotateOutAndMakeNewCard("skeleton");
                 this.damagecalc_textchange(this.scene_turn, this.player_choice);
                 this.scene_turn++;
@@ -50,30 +50,30 @@ class firstFloorLevel3 extends Base {
                 saveData.player.hp-=1;
                 this.enemy_hp -=1;
                 this.shakeTween(this.cameras.main);
-                this.changeText(this.eventText, dataPath.eventText2);
+                this.changeText(this.eventText, dataPath.eventText[1]);
                 this.renewHp();
             }
             else {
                 this.rotateOutAndMakeNewCard("skeleton");
-                this.changeText(this.eventText, dataPath.eventText3);
+                this.changeText(this.eventText, dataPath.eventText[2]);
             }
         }
         else{
             if(choice=="left") {
                 this.rotateOutAndMakeNewCard("skeleton");
                 this.enemy_hp -=1;
-                this.changeText(this.eventText, dataPath.eventText4);
+                this.changeText(this.eventText, dataPath.eventText[3]);
                 this.renewHp();
             }
             else{
                 this.rotateOutAndMakeNewCard("skeleton");
-                this.changeText(this.eventText, dataPath.eventText5);
+                this.changeText(this.eventText, dataPath.eventText[4]);
             }
         }       
     }
 
     win(){
-        this.eventCard(dataPath.eventCard1);
+        this.eventCard(dataPath.eventCard[0]);
         this.time.delayedCall(3000, () => {
             this.battleMusicN.stop();
             this.gotoScene("floor one level 4");
