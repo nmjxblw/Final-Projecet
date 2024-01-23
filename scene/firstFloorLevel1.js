@@ -16,7 +16,7 @@ class firstFloorLevel1 extends Base {
         this.left_choice_text = dataPath.left;
         this.right_choice_text = dataPath.right;
 
-        this.changeText(this.eventText, dataPath.eventText6);
+        this.changeText(this.eventText, dataPath.eventText[5]);
         this.card.setTexture("player");
         this.card.label = false;
 
@@ -25,26 +25,26 @@ class firstFloorLevel1 extends Base {
 
         this.time.delayedCall(4000, () => {
             this.cardReset("guardian_with_mask");        
-            this.changeText(this.eventText, dataPath.eventText7);
+            this.changeText(this.eventText, dataPath.eventText[6]);
         });
 
         this.time.delayedCall(8000, () => {
-            this.changeText(this.eventText, dataPath.eventText8);
+            this.changeText(this.eventText, dataPath.eventText[7]);
         });
 
         this.time.delayedCall(12000, () => {
             this.cardReset("sword");
             this.stopSpotLight = false;
             this.cardSpotLight(true);
-            this.changeText(this.eventText, dataPath.eventText9);
+            this.changeText(this.eventText, dataPath.eventText[8]);
         });
 
         this.time.delayedCall(16000, () => {
-            this.changeText(this.eventText, dataPath.eventText10);
+            this.changeText(this.eventText, dataPath.eventText[9]);
         });
 
         this.time.delayedCall(20000, () => {
-            this.eventCard(dataPath.eventCard);
+            this.eventCard(dataPath.eventCard[0]);
             this.card.label = true;
             this.card.dragable = true;
         });
