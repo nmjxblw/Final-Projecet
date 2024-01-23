@@ -1,283 +1,358 @@
 {
-    "floor": {
-        "one": {
-            "level1": {
-                "right": "...",
-                "left": "Got it",
-                "eventCard": [
-                    "Drag the card sideways to continue."
-                ],
-                "eventText": [
-                    "Once upon a time, there is a land filled with magic and mysterious elements, and within it, there is a dungeon full of mystery. ",
-                    "A powerful dragon lives within the dungeon and would bring tragedy to the world once every few years.",
-                    "However, as a prophecy tells, one day a brave man would come with the great sword full of unexplainable power, and they would use it to defeat the dragon.",
-                    "You are an adventurer.\n\nYour hometown is destroyed by the dragon during the previous attack.",
-                    "As you see the fire burn through your hometown, you are filled with sorrow and anger, and you swear to defeat the dragon with the great sword from the prophecy.",
-                    "After great effort, you finally obtained the great sword",
-                    "In front of you, a guardian appears with the sword.",
-                    "Guardian: Congrats on completing the trial of the great sword.",
-                    "Guardian: I will now let you handle the responsibility of obtaining it.",
-                    "Guardian: Remember, the great sword comes with fascinating power, but it would only activate during times of danger."
-                ]
-            },
-            "level2": {
-                "left": "Attack the monster",
-                "right": "Attack the monster",
-                "eventText": [
-                    "You have arrived at the first floor of the dungeon.\nImmediately, you are attacked by a monster."
-                ]
-            },
-            "level3": {
-                "enemy": {
-                    "hp": 3
-                },
-                "left": "Attack",
-                "right": "Dodge",
-                "eventText": [
-                    "The skeleton is moving towards you.",
-                    "You took 1 damage!\n\nAnd you dealt 1 damage!\n\nThe skeleton is moving towards you.",
-                    "You dodged the attack!\n\nThe skeleton is moving towards you.",
-                    "You dealt 1 damage!\n\nThe skeleton is trying to attack you.",
-                    "Nothing happened.\n\nThe skeleton is trying to attack you."
-                ],
-                "eventCard": [
-                    "Drag the card sideways to make a move.",
-                    "You have defeated the skeleton."
-                ]
-            },
-            "level4": {},
-            "level5": {
-                "eventText": "You do not face any obstacles. You continue forward.",
-                "eventCard": [
-                    "You fell into a trap. You are dead.",
-                    "you get camped by a group of monsters. You are dead.",
-                    " You accidentally activated a switch that fires an arrow behind you. You are shot. You are dead."
-                ]
-            }
-        },
-        "two": {
-            "level1": {
-                "right": "Open the Gate",
-                "left": "Open the Gate",
-                "eventText": "At the gate\n\nA monster's roar came from behind the gate."
-            },
-            "level2": {
-                "left": [
-                    "Help him",
-                    "Attack",
-                    "Leaving the fight"
-                ],
-                "right": [
-                    "While he lures the giant away to the next level.",
-                    "Dodge",
-                    "Leaving the fight"
-                ],
-                "eventText": [
-                    "Coming to the second level, you see a Elf hunter being chased by a giant and you choose: ",
-                    "Congratulations! You have defeated the giant!"
-                ],
-                "battleText": [
-                    "Giants ready to attack.",
-                    "The giant hit you for 2 points of damage.\n\nYou hit the giant for 1 point of damage\n\nGiant ready to move.",
-                    "You dodged the giant's attack.\n\nGiant ready to move.",
-                    "You hit the giant for 1 point of damage.\n\nGiant ready to attack.",
-                    "The giant did not attack you.\n\nGiant ready to attack.",
-                    "The giant hit you for 2 points of damage.\n\nYou hit the giant for 1 point of damage.\n\nGiant are preparing for next action.",
-                    "You dodged the giant's attack.\n\nGiant are preparing for next action",
-                    "You hit the giant for 1 point of damage.\n\nGiant are preparing for next action.",
-                    "The giant did not attack you.\n\nGiant are preparing for next action.",
-                    "You failed to defeat the giant.\n\nYou are dead."
-                ],
-                "eventCard": [
-                    "When some powerful enemies are continuously attacked will enter the rage state.",
-                    "You cannot judge the actions of enemies in a state of rage.",
-                    "The giant entered the rage state"
-                ]
-            },
-            "level3": {
-                "left": [
-                    "Look for the treasure chest",
-                    "Click the switch on the left",
-                    "Go to the next level"
-                ],
-                "right": [
-                    "Go to the next level",
-                    "Click the switch on the right",
-                    "Go to the next level"
-                ],
-                "eventText": [
-                    "Elf: Thank you for saving my life.\n\nTo repay you for your help, let me tell you a secret.",
-                    "Elf: There is a mysterious treasure chest hidden here, and I happen to know its location.\n\nThis is the address of the treasure chest.",
-                    "Elf: Of course, you can also not believe me and go directly to the next level\n\nYou choose:",
-                    "Elf: Okay, but I'll repay you in other ways for your help.",
-                    "You follow the hunter's guide and come to a treasure chest.\n\nBut the treasure chest has two locks on it, and each lock has two switches.",
-                    "For the first lock, you choose to click:",
-                    "You clicked the right switch and the first lock opened.\n\nFor the second lock, you choose to click:",
-                    "As you click, the treasure chest suddenly explodes. \n\nYou are dead.",
-                    "You clicked the right switch and both locks are open.",
-                    "You have obtained a shield from a treasure chest that contains mysterious powers.\n\nNow, it's time to head to the next level."
-                ]
-            }
-        },
-        "three": {
-            "level1": {
-                "right": "Push the door",
-                "left": "Pull the door",
-                "eventText": [
-                    "When you are standing in front of the door towards the next floor...",
-                    "You feel a strong power behind the door.",
-                    "At the gate..."
-                ]
-            },
-            "level2": {
-                "enemy": {
-                    "name": "dragon",
-                    "hp": 10,
-                    "berserk": false
-                },
-                "right": [
-                    {
-                        "shield": "Shield Defense",
-                        "no_shield": "Dodge"
-                    },
-                    "*SIGH*"
-                ],
-                "left": [
-                    "Attack",
-                    "Well..."
-                ],
-                "eventCard": [
-                    "You arrive at the last floor of the dungeon...",
-                    "...and see a dragon spiraling in the sky.",
-                    "Without a second thought, you head towards the dragon...",
-                    "The dragon becomes furious. \nIt is more likely to attack you now.",
-                    "The elf shot an arrow at the dragon and attracted dragon's attention.",
-                    "The dragon is going berserk, you cannot tell what it is doing"
-                ],
-                "eventText": [
-                    "The dragon is trying to attack.",
-                    "The dragon is trying to move toward you.",
-                    "The dragon is trying to spit fire.",
-                    "Elf: I cannot believe you are brave enough to challenge the dragon.",
-                    "Elf: As you saved my life, I will come to help you now",
-                    "The dragon attacks the elf. The elf faints.",
-                    "The dragon spit fire at you at last action.",
-                    "The dragon moved toward you at last action.",
-                    "The dragon stares at you with anger in its eyes."
-                ]
-            },
-            "level3": {
-                "enemy": {
-                    "name": "dragon"
-                },
-                "right": "*CLANK*\n(block with the sword)",
-                "left": "*CLANG*\n(block with the sword)",
-                "eventText": [
-                    "After a hard-fought battle, you defeat the dragon.",
-                    "The dragon slowly descends.",
-                    "Its eyes are filled with unwillingness.",
-                    "Dragon: I will curse you, \nthat you will be as chaotic, cruel, \nand merciless as me.",
-                    "Dragon: I will give you all my power, \nand make you become just like me.",
-                    "The dragon's curse heads toward you, \nand you choose to...",
-                    "A faint light emanated from the sword...",
-                    "A strong light emanated from the sword!"
-                ]
-            },
-            "level4": {
-                "right": [
-                    "(Continue...)",
-                    "Continue the time loop..."
-                ],
-                "left": [
-                    "(Continue...)",
-                    "Continue the time loop..."
-                ],
-                "eventCard": [
-                    "Ending:\nThe Curse",
-                    "Bad Ending",
-                    "Thanks for Playing"
-                ],
-                "eventText": [
-                    "You try to block the curse with the power of the sword...",
-                    "...but the curse is too strong",
-                    "The power within the sword emptied.",
-                    "The curse gets into your body.",
-                    "You feel your body start changing drastically. \nYou fainted.",
-                    "When you are awake again, you find yourself turning into a dragon.",
-                    "Your brain starts to become foggy and unlogical.",
-                    "You realize you are slowly losing your mind.",
-                    "Before you lost all your consciousness...",
-                    "...you used the last bit of the power within the sword...",
-                    " ...to transport yourself within the turbulence of time to avoid dangering the world.",
-                    "What you did not expect is that the turbulence brought you to the past.",
-                    "Without consciousness, you destroyed your hometown...",
-                    "The guardian appears in the past timeline...",
-                    " ...picking up the sword that got transported back.",
-                    "Guardian: Looks like this timeline has failed...",
-                    "Guardian: Looks like this timeline has failed..."
-                ]
-            },
-            "level5": {
-                "right": [
-                    "(Continue...)",
-                    "Finally..."
-                ],
-                "left": [
-                    "(Continue...)",
-                    "My future..."
-                ],
-                "eventCard": [
-                    "Ending:\nThe Truth",
-                    "True Ending",
-                    "Thanks for Playing"
-                ],
-                "eventText": [
-                    "You try to block the curse with the power of the sword...",
-                    "Even though the curse is strong... ",
-                    "You overcome the curse ...",
-                    "...since you have not used the power of the sword yet.",
-                    "You defended yourself from the curse...",
-                    "The dragon looks at you with disbelief and fascination.",
-                    "You realize that the dragon is what it is due to the curse.",
-                    "You decide to use the sword to cure the dragon.",
-                    "Something miraculous happens!",
-                    "After a while, the person gets up.",
-                    "Men: So... this is it. I am the one who destroyed my own hometown.",
-                    "You are shocked. \nThe person looks exactly like you.",
-                    "Men: Hello, future me...",
-                    "You start talking to him.",
-                    "You realize that he shares similar experiences with you. ",
-                    "The only difference is that he used the power of the sword to revive himself within the dungeon...",
-                    "...which caused him to not be able to defend the curse from the dragon.",
-                    "The curse turned him into a dragon and made him go insane.",
-                    "The turbulence of time transported him back to the past...",
-                    "...and he unconsciously destroyed his hometown.",
-                    "However, after discussion, you two realize a problem.",
-                    "Because you saved him in this timeline...",
-                    "...and no sword is transported back to the past.",
-                    "In this case, where did your own sword come from?",
-                    "In this moment, the guardian appears.",
-                    "Guardian: looks like there are a lot of questions I need to answer.",
-                    "He takes off his mask and reveals his face.",
-                    "You two are shocked. The guardian looks exactly the same as you two.",
-                    "Guardian: that's right, I am you two on a different timeline.",
-                    "He looks at the men who once was a dragon.",
-                    "Guardian: I am the future you.",
-                    "Guardian: To protect the logic behind the time loop, afterward, you will return to the past with the sword.",
-                    "Guardian: You will keep giving away the sword to yourself in different timelines...",
-                    "Guardian: ...until the timeline that breaks the loop comes.",
-                    "He hands the sword to the men.",
-                    "Guardian: my journey has ended, but yours has just begun.",
-                    "Then, the guardian looks at you.",
-                    "Guardian: About you, the special one amongst all of us...",
-                    "Guardian: ...the one who broke the time loop, you still have infinite possibilities.",
-                    "Guardian: Go, go find your new future ahead of you.",
-                    "True Ending: The Truth"
-                ]
-            }
-        },
-        "four": {
-            "level1": {}
-        }
-    }
+  "floor": [
+    [
+      {
+        "eventText": [
+          "Once upon a time, there is a land filled with magic and mysterious elements, and within it, there is a dungeon full of mystery. ",
+          "A powerful dragon lives within the dungeon and would bring tragedy to the world once every few years.",
+          "However, as a prophecy tells, one day a brave man would come with the great sword full of unexplainable power, and they would use it to defeat the dragon.",
+          "You are an adventurer.\n\nYour hometown is destroyed by the dragon during the previous attack.",
+          "As you see the fire burn through your hometown, you are filled with sorrow and anger, and you swear to defeat the dragon with the great sword from the prophecy.",
+          "After great effort, you finally arrived at the dungeon where the dragon lives.",
+          "In front of you, a guardian appears with a sword.",
+          "Guardian: Congrats on completing the trial of the great sword.",
+          "Guardian: I will now let you handle the responsibility of obtaining it.",
+          "Guardian: Remember, the great sword comes with fascinating power, but it would only activate during times of danger."
+        ],
+        "battleText": [],
+        "eventCard": [
+          "Drag the card sideways to continue."
+        ],
+        "enemy": [],
+        "right": [
+          "..."
+        ],
+        "left": [
+          "Got it"
+        ]
+      },
+      {
+        "eventText": [
+          "You have arrived at the first floor of the dungeon.\nImmediately, you are attacked by a monster."
+        ],
+        "battleText": [],
+        "eventCard": [],
+        "enemy": [],
+        "right": [
+          "Attack the monster"
+        ],
+        "left": [
+          "Attack the monster"
+        ]
+      },
+      {
+        "eventText": [
+          "The skeleton is moving towards you.",
+          "You took 1 damage!\n\nAnd you dealt 1 damage!\n\nThe skeleton is moving towards you.",
+          "You dodged the attack!\n\nThe skeleton is moving towards you.",
+          "You dealt 1 damage!\n\nThe skeleton is trying to attack you.",
+          "Nothing happened.\n\nThe skeleton is trying to attack you."
+        ],
+        "battleText": [],
+        "eventCard": [
+          "Drag the card sideways to make a move.",
+          "You have defeated the skeleton."
+        ],
+        "enemy": [
+          {
+            "hp": 3
+          }
+        ],
+        "right": [
+          "Dodge"
+        ],
+        "left": [
+          "Attack"
+        ]
+      },
+      {
+        "eventText": [],
+        "battleText": [],
+        "eventCard": [],
+        "enemy": [],
+        "right": [],
+        "left": []
+      },
+      {
+        "eventText": [
+          "You do not face any obstacles. You continue forward."
+        ],
+        "battleText": [],
+        "eventCard": [
+          "You fell into a trap. You are dead.",
+          "you get camped by a group of monsters. You are dead.",
+          " You accidentally activated a switch that fires an arrow behind you. You are shot. You are dead."
+        ],
+        "enemy": [],
+        "right": [],
+        "left": []
+      }
+    ],
+    [
+      {
+        "eventText": [
+          "At the gate\n\nA monster's roar came from behind the gate."
+        ],
+        "battleText": [],
+        "eventCard": [],
+        "enemy": [],
+        "right": [
+          "Open the Gate"
+        ],
+        "left": [
+          "Open the Gate"
+        ]
+      },
+      {
+        "eventText": [
+          "Coming to the second level, you see a Elf hunter being chased by a giant and you choose: ",
+          "Congratulations! You have defeated the giant!"
+        ],
+        "battleText": [
+          "Giants ready to attack.",
+          "The giant hit you for 2 points of damage.\n\nYou hit the giant for 1 point of damage\n\nGiant ready to move.",
+          "You dodged the giant's attack.\n\nGiant ready to move.",
+          "You hit the giant for 1 point of damage.\n\nGiant ready to attack.",
+          "The giant did not attack you.\n\nGiant ready to attack.",
+          "The giant hit you for 2 points of damage.\n\nYou hit the giant for 1 point of damage.\n\nGiant are preparing for next action.",
+          "You dodged the giant's attack.\n\nGiant are preparing for next action",
+          "You hit the giant for 1 point of damage.\n\nGiant are preparing for next action.",
+          "The giant did not attack you.\n\nGiant are preparing for next action.",
+          "You failed to defeat the giant.\n\nYou are dead."
+        ],
+        "eventCard": [
+          "When some powerful enemies are continuously attacked will enter the rage state.",
+          "You cannot judge the actions of enemies in a state of rage.",
+          "The giant entered the rage state"
+        ],
+        "enemy": [],
+        "right": [
+          "While he lures the giant away to the next level.",
+          "Dodge",
+          "Leaving the fight"
+        ],
+        "left": [
+          "Help him",
+          "Attack",
+          "Leaving the fight"
+        ]
+      },
+      {
+        "eventText": [
+          "Elf: Thank you for saving my life.\n\nTo repay you for your help, let me tell you a secret.",
+          "Elf: There is a mysterious treasure chest hidden here, and I happen to know its location.\n\nThis is the address of the treasure chest.",
+          "Elf: Of course, you can also not believe me and go directly to the next level\n\nYou choose:",
+          "Elf: Okay, but I'll repay you in other ways for your help.",
+          "You follow the hunter's guide and come to a treasure chest.\n\nBut the treasure chest has two locks on it, and each lock has two switches.",
+          "For the first lock, you choose to click:",
+          "You clicked the right switch and the first lock opened.\n\nFor the second lock, you choose to click:",
+          "As you click, the treasure chest suddenly explodes. \n\nYou are dead.",
+          "You clicked the right switch and both locks are open.",
+          "You have obtained a shield from a treasure chest that contains mysterious powers.\n\nNow, it's time to head to the next level."
+        ],
+        "battleText": [],
+        "eventCard": [],
+        "enemy": [],
+        "right": [
+          "Go to the next level",
+          "Click the switch on the right",
+          "Go to the next level"
+        ],
+        "left": [
+          "Look for the treasure chest",
+          "Click the switch on the left",
+          "Go to the next level"
+        ]
+      }
+    ],
+    [
+      {
+        "eventText": [
+          "When you are standing in front of the door towards the next floor...",
+          "You feel a strong power behind the door.",
+          "At the gate..."
+        ],
+        "battleText": [],
+        "eventCard": [],
+        "enemy": [],
+        "right": [
+          "Push the door"
+        ],
+        "left": [
+          "Pull the door"
+        ]
+      },
+      {
+        "eventText": [
+          "The dragon is trying to attack.",
+          "The dragon is trying to move toward you.",
+          "The dragon is trying to spit fire.",
+          "Elf: I cannot believe you are brave enough to challenge the dragon.",
+          "Elf: As you saved my life, I will come to help you now",
+          "The dragon attacks the elf. The elf faints.",
+          "The dragon spit fire at you at last action.",
+          "The dragon moved toward you at last action.",
+          "The dragon stares at you with anger in its eyes."
+        ],
+        "battleText": [],
+        "eventCard": [
+          "You arrive at the last floor of the dungeon...",
+          "...and see a dragon spiraling in the sky.",
+          "Without a second thought, you head towards the dragon...",
+          "The dragon becomes furious. \nIt is more likely to attack you now.",
+          "The elf shot an arrow at the dragon and attracted dragon's attention.",
+          "The dragon is going berserk, you cannot tell what it is doing"
+        ],
+        "enemy": [
+          {
+            "name": "dragon",
+            "hp": 10,
+            "berserk": false
+          }
+        ],
+        "right": [
+          {
+            "shield": "Shield Defense",
+            "no_shield": "Dodge"
+          },
+          "*SIGH*"
+        ],
+        "left": [
+          "Attack",
+          "Well..."
+        ]
+      },
+      {
+        "eventText": [
+          "After a hard-fought battle, you defeat the dragon.",
+          "The dragon slowly descends.",
+          "Its eyes are filled with unwillingness.",
+          "Dragon: I will curse you, \nthat you will be as chaotic, cruel, \nand merciless as me.",
+          "Dragon: I will give you all my power, \nand make you become just like me.",
+          "The dragon's curse heads toward you, \nand you choose to...",
+          "A faint light emanated from the sword...",
+          "A strong light emanated from the sword!"
+        ],
+        "battleText": [],
+        "eventCard": [],
+        "enemy": [
+          {
+            "name": "dragon"
+          }
+        ],
+        "right": [
+          "*CLANK*\n(block with the sword)"
+        ],
+        "left": [
+          "*CLANG*\n(block with the sword)"
+        ]
+      },
+      {
+        "eventText": [
+          "You try to block the curse with the power of the sword...",
+          "...but the curse is too strong",
+          "The power within the sword emptied.",
+          "The curse gets into your body.",
+          "You feel your body start changing drastically. \nYou fainted.",
+          "When you are awake again, you find yourself turning into a dragon.",
+          "Your brain starts to become foggy and unlogical.",
+          "You realize you are slowly losing your mind.",
+          "Before you lost all your consciousness...",
+          "...you used the last bit of the power within the sword...",
+          " ...to transport yourself within the turbulence of time to avoid dangering the world.",
+          "What you did not expect is that the turbulence brought you to the past.",
+          "Without consciousness, you destroyed your hometown...",
+          "The guardian appears in the past timeline...",
+          " ...picking up the sword that got transported back.",
+          "Guardian: Looks like this timeline has failed...",
+          "Guardian: Looks like this timeline has failed..."
+        ],
+        "battleText": [],
+        "eventCard": [
+          "Ending:\nThe Curse",
+          "Bad Ending",
+          "Thanks for Playing"
+        ],
+        "enemy": [],
+        "right": [
+          "(Continue...)",
+          "Continue the time loop..."
+        ],
+        "left": [
+          "(Continue...)",
+          "Continue the time loop..."
+        ]
+      },
+      {
+        "eventText": [
+          "You try to block the curse with the power of the sword...",
+          "Even though the curse is strong... ",
+          "You overcome the curse ...",
+          "...since you have not used the power of the sword yet.",
+          "You defended yourself from the curse...",
+          "The dragon looks at you with disbelief and fascination.",
+          "You realize that the dragon is what it is due to the curse.",
+          "You decide to use the sword to cure the dragon.",
+          "Something miraculous happens!",
+          "After a while, the person gets up.",
+          "Men: So... this is it. I am the one who destroyed my own hometown.",
+          "You are shocked. \nThe person looks exactly like you.",
+          "Men: Hello, future me...",
+          "You start talking to him.",
+          "You realize that he shares similar experiences with you. ",
+          "The only difference is that he used the power of the sword to revive himself within the dungeon...",
+          "...which caused him to not be able to defend the curse from the dragon.",
+          "The curse turned him into a dragon and made him go insane.",
+          "The turbulence of time transported him back to the past...",
+          "...and he unconsciously destroyed his hometown.",
+          "However, after discussion, you two realize a problem.",
+          "Because you saved him in this timeline...",
+          "...and no sword is transported back to the past.",
+          "In this case, where did your own sword come from?",
+          "In this moment, the guardian appears.",
+          "Guardian: looks like there are a lot of questions I need to answer.",
+          "He takes off his mask and reveals his face.",
+          "You two are shocked. The guardian looks exactly the same as you two.",
+          "Guardian: that's right, I am you two on a different timeline.",
+          "He looks at the men who once was a dragon.",
+          "Guardian: I am the future you.",
+          "Guardian: To protect the logic behind the time loop, afterward, you will return to the past with the sword.",
+          "Guardian: You will keep giving away the sword to yourself in different timelines...",
+          "Guardian: ...until the timeline that breaks the loop comes.",
+          "He hands the sword to the men.",
+          "Guardian: my journey has ended, but yours has just begun.",
+          "Then, the guardian looks at you.",
+          "Guardian: About you, the special one amongst all of us...",
+          "Guardian: ...the one who broke the time loop, you still have infinite possibilities.",
+          "Guardian: Go, go find your new future ahead of you.",
+          "True Ending: The Truth"
+        ],
+        "battleText": [],
+        "eventCard": [
+          "Ending:\nThe Truth",
+          "True Ending",
+          "Thanks for Playing"
+        ],
+        "enemy": [],
+        "right": [
+          "(Continue...)",
+          "Finally..."
+        ],
+        "left": [
+          "(Continue...)",
+          "My future..."
+        ]
+      }
+    ],
+    [
+      {
+        "eventText": [],
+        "battleText": [],
+        "eventCard": [],
+        "enemy": [],
+        "right": [],
+        "left": []
+      }
+    ]
+  ]
 }

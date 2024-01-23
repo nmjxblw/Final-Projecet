@@ -85,7 +85,9 @@ class Base extends GameScene {
         this.player_choice = "";
 
         //定义文本路径设置的快捷路径
-        dataPath = gameData.floor[`${this.floor}`][`level${this.level}`];
+        //dataPath = gameData.floor[`${this.floor}`][`level${this.level}`];
+        console.log(this.floor, this.level)
+        dataPath = gameData.floor[this.englishNumberToArabicNumber(this.floor) - 1][this.level - 1];
 
         //创建可拖动卡片
         this.card = this.createCard("cardback");
@@ -987,4 +989,17 @@ class Base extends GameScene {
     }
 
     shortCut1() { }
+
+    englishNumberToArabicNumber(englishNumber) {
+        const numbers = {
+            'zero': 0,
+            'one': 1,
+            'two': 2,
+            'three': 3,
+            'four': 4,
+        };
+    
+        return numbers[englishNumber.toLowerCase()] || 'Invalid number';
+    }
+
 }

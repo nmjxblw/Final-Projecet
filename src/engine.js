@@ -18,7 +18,7 @@ class GameScene extends Phaser.Scene {
                 this.floor = a[i];
             }
         }
-        this.level = parseInt(key.replace(/[^0-9]/ig, ""));
+        this.level = parseInt((/level\s*(\d+)/i.exec(key) || [])[1], 10);
     }
 
     preload() {
